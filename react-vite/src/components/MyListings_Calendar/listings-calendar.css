@@ -35,3 +35,29 @@
     padding: 1px 5px;
 }
 
+#booking-title-btn{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: start;
+    column-gap: 10px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.booking-input{
+    display: flex;
+    flex-direction: row;
+    border: 2px solid yellowgreen;
+}
+
+.start-end-title{
+    padding: 0px;
+    margin: 0px;
+}
+
+#add-booking-btn{
+    padding: 3px 10px;
+    height: 50%;
+}
+
