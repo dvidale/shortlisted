@@ -1,4 +1,8 @@
 import './listings-calendar.css'
+import { FaPlusCircle } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { useState } from 'react';
 
 function BookingsPanel({user_bookings}){
 
@@ -9,13 +13,33 @@ function BookingsPanel({user_bookings}){
         year: 'numeric'
     }).format(new Date(date))
 
+} 
 
-    } 
+const [bookingStart, setBookingStart] = useState('')
+const [bookingEnd, setBookingEnd] = useState('')
 
+const submitHandler = (e) =>{
 
+    e.preventDefault();
+
+}
     return(
         <>
-        <h3>Start - End</h3>
+      
+    <h2 className='booking-title-btn'>My Busy Days</h2> 
+  
+        <h3 className="start-end-title">Start - End</h3>
+    <div className='booking-input' > 
+    <form id="add-booking-form" className={'show-booking-form'} method='POST' onSubmit={submitHandler}>
+        <label htmlFor="booking-start">
+            <DatePicker id='booking-start' selected={bookingStart} onChange={ bookingStart => setBookingStart(bookingStart)}/>
+            </label>
+            <label htmlFor="booking-end">
+            <DatePicker id='booking-end' selected={bookingEnd} onChange={ bookingEnd => setBookingEnd(bookingEnd)}  />
+            </label>
+    <button id="submit-booking" type='submit' ><FaPlusCircle /></button>
+    </form>
+            </div >
         {user_bookings && Object.keys(user_bookings).length > 0 && Object.values(user_bookings).map( booking => (
         <>
         <div className='cal-box'>
