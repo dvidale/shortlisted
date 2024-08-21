@@ -1,1 +1,21 @@
 /* TODO: Add sitewide styles */
+:root{
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+#site-wide-grid-container{
+    /* border: 2px dotted orange; */
+    display: grid;
+    grid-template-columns: 5% 90% 5%;
+    grid-template-rows: auto auto auto 200px;
+    justify-content: center;
+    grid-auto-flow: row;
+    grid-row-gap: 50px;
+    grid-column-gap: 0px;
+    margin-top: 30px;
+}
