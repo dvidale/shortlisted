@@ -5,7 +5,7 @@ __pycache__/
 .DS_Store
 .vscode/
 __pycache__
-.instance/
+instance/dev.db
 # comment these out if you're using dev containers or GH actions
 # # .github
 # .docker
