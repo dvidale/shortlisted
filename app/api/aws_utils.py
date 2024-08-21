@@ -40,7 +40,7 @@ def upload_file_to_s3(file, acl="public-read"):
         print({"errors": str(e)})
         return {"errors": str(e)}
     
-    print(">>>original_filename", file.filename)
+    
     return {"url": f"{S3_LOCATION}{file.filename}"}
 
 
