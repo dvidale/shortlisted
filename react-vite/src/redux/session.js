@@ -1,6 +1,7 @@
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
+
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
@@ -9,6 +10,12 @@ const setUser = (user) => ({
 const removeUser = () => ({
   type: REMOVE_USER
 });
+
+
+
+/* -------------
+* THUNKS
+----------*/
 
 export const thunkAuthenticate = () => async (dispatch) => {
 	const response = await fetch("/api/auth/");
@@ -57,6 +64,7 @@ export const thunkSignup = (user) => async (dispatch) => {
     return { server: "Something went wrong. Please try again" }
   }
 };
+
 
 export const thunkLogout = () => async (dispatch) => {
   await fetch("/api/auth/logout");
