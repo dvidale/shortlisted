@@ -12,4 +12,4 @@ class Referral(db.Model):
     shortlist_id= db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shortlists.id')))
     referrer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')) )
     reffered_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')) )
-    date_referred = db.Column(db.DateTime, nullable=False, default=datetime.now(datetime.UTC))
+    date_referred = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now())

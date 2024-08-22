@@ -9,10 +9,7 @@ from .location import Location
 
 from .connection import Connection
 
-from .user_job_title import user_job_titles
-from .user_industry import user_industries
-from .user_genre import user_genres
-from .user_location import user_locations
+
 from .shortlist import Shortlist
 from .referral import Referral
 from .booking import Booking

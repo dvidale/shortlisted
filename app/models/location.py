@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from . import user_locations
+from .user_location import user_locations
 
 class Location(db.Model):
     __tablename__ = 'locations'

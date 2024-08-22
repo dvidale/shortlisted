@@ -2,7 +2,10 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 import datetime
-from . import user_job_titles, user_industries, user_locations, user_genres
+from .user_job_title import user_job_titles
+from .user_industry import user_industries
+from .user_genre import user_genres
+from .user_location import user_locations
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -18,8 +21,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_img_url = db.Column(db.String(255))
-    createdAt = db.Column(db.DateTime, nullable=False, default=datetime.now(datetime.UTC))
-    updatedAt = db.Column(db.DateTime, nullable=False, default=datetime.now(datetime.UTC), onupdate=datetime.now(datetime.UTC))
+    createdAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now())
+    updatedAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
 
     job_titles = db.relationship('Job_Title', secondary = user_job_titles, back_populates='users')
 

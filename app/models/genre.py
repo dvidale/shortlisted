@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from . import user_genres
+from .user_genre import user_genres
 
 class Genre(db.Model):
     __tablename__ = 'genres'

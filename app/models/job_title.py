@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA
-from . import user_job_titles
+from .user_job_title import user_job_titles
 
 class Job_Title(db.Model):
     __tablename__ = 'job_titles'
