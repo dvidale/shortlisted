@@ -11,5 +11,5 @@ class Comment(db.Model):
     shortlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shortlists.id')), nullable=False)
     commenter_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     text = db.Column(db.String(255), nullable = False)
-    createdAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now())
-    updatedAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
+    createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
+    updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())

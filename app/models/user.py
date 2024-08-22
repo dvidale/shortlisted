@@ -21,8 +21,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_img_url = db.Column(db.String(255))
-    createdAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now())
-    updatedAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
+    createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
+    updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
     job_titles = db.relationship('Job_Title', secondary = user_job_titles, back_populates='users')
 
