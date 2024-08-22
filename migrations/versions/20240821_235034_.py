@@ -8,6 +8,11 @@ Create Date: 2024-08-21 23:50:34.800784
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
+
 
 # revision identifiers, used by Alembic.
 revision = '194aff989770'
@@ -23,16 +28,31 @@ def upgrade():
     sa.Column('genre_name', sa.String(length=50), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE genres SET SCHEMA {SCHEMA};")
+
+
     op.create_table('industry_areas',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('industry_area', sa.String(length=100), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE industry_areas SET SCHEMA {SCHEMA};")
+
+
     op.create_table('job_titles',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('job_title', sa.String(length=50), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE job_titles SET SCHEMA {SCHEMA};")
+
+
     op.create_table('locations',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('city', sa.String(length=50), nullable=False),
@@ -40,6 +60,11 @@ def upgrade():
     sa.Column('country', sa.String(length=50), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE locations SET SCHEMA {SCHEMA};")
+
+
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('first_name', sa.String(length=50), nullable=False),
@@ -55,6 +80,11 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
+
     op.create_table('connections',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
@@ -67,6 +97,11 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE connections SET SCHEMA {SCHEMA};")
+
+
     op.create_table('shortlists',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
@@ -88,18 +123,33 @@ def upgrade():
     sa.ForeignKeyConstraint(['location_id'], ['locations.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE shortlists SET SCHEMA {SCHEMA};")
+
     op.create_table('user_genres',
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('genre_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['genre_id'], ['genres.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], )
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE user_genres SET SCHEMA {SCHEMA};")
+
+
     op.create_table('user_industries',
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('industry_area_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['industry_area_id'], ['industry_areas.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], )
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE user_industries SET SCHEMA {SCHEMA};")
+
+
+
     op.create_table('user_job_titles',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('job_title_id', sa.Integer(), nullable=False),
@@ -107,12 +157,21 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'job_title_id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE user_job_titles SET SCHEMA {SCHEMA};")
+
     op.create_table('user_locations',
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('location_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['location_id'], ['locations.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], )
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE user_locations SET SCHEMA {SCHEMA};")
+
+
     op.create_table('bookings',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
@@ -125,6 +184,11 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE bookings SET SCHEMA {SCHEMA};")
+
+
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('shortlist_id', sa.Integer(), nullable=False),
@@ -136,6 +200,12 @@ def upgrade():
     sa.ForeignKeyConstraint(['shortlist_id'], ['shortlists.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+
+
+
     op.create_table('referrals',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('shortlist_id', sa.Integer(), nullable=True),
@@ -147,6 +217,10 @@ def upgrade():
     sa.ForeignKeyConstraint(['shortlist_id'], ['shortlists.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE referrals SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 
