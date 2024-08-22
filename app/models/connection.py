@@ -12,5 +12,5 @@ class Connection(db.Model):
     connected_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')) )
     connection_type = db.Column(db.String(50), nullable=False)
     connection_context = db.Column(db.String(100), nullable=False)
-    createdAt = db.Column(db.DateTime, nullable=False, default=datetime.now(datetime.UTC))
-    updatedAt = db.Column(db.DateTime, nullable=False, default=datetime.now(datetime.UTC), onupdate=datetime.now(datetime.UTC))
+    createdAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now())
+    updatedAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())

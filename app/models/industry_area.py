@@ -1,5 +1,5 @@
 from .db import db, environment, SCHEMA
-from . import user_industries
+from .user_industry import user_industries
 
 class Industry_Area(db.Model):
     __tablename__ = 'industry_areas'

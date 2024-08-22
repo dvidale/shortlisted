@@ -9,7 +9,7 @@ class Comment(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     shortlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shortlists.id')), nullable=False)
-    commenter_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('commenter.id')), nullable=False)
+    commenter_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     text = db.Column(db.String(255), nullable = False)
-    createdAt = db.Column(db.DateTime, nullable=False, default=datetime.now(datetime.UTC))
-    updatedAt = db.Column(db.DateTime, nullable=False, default=datetime.now(datetime.UTC), onupdate=datetime.now(datetime.UTC))
+    createdAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now())
+    updatedAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
