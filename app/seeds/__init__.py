@@ -2,10 +2,12 @@ from flask.cli import AppGroup
 from app.models.db import db, environment, SCHEMA
 
 from .users import seed_users, undo_users
+from .connections import seed_connections, undo_connections
 from .job_titles import seed_job_titles,undo_job_titles
 from .industry_areas import seed_industry_areas, undo_industry_areas
 from .genres import seed_genres,undo_genres
 from .locations import seed_locations, undo_locations
+from .bookings import seed_bookings, undo_bookings
 
 from .user_job_titles import seed_user_job_titles, undo_user_job_titles
 from .user_industries import seed_user_industries, undo_user_industries
@@ -32,16 +34,20 @@ def seed():
         undo_user_genres()
         undo_user_industries()
         undo_user_job_titles()
+        undo_bookings()
         undo_locations()
         undo_genres()
         undo_industry_areas()
         undo_job_titles()
+        undo_connections()
         undo_users()
     seed_users()
+    seed_connections()
     seed_job_titles()
     seed_industry_areas()
     seed_genres()
     seed_locations()
+    seed_bookings()
     seed_user_job_titles()
     seed_user_industries()
     seed_user_genres()

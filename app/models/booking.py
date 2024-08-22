@@ -12,5 +12,5 @@ class Booking(db.Model):
     shortlist_id= db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shortlists.id')))
     start_date = db.Column(db.DateTime, nullable = False)
     end_date = db.Column(db.DateTime, nullable = False)
-    createdAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now())
-    updatedAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
+    createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
+    updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())

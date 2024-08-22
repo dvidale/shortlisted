@@ -19,6 +19,6 @@ class Shortlist(db.Model):
     end_date = db.Column(db.DateTime, nullable = True)
     optional_img = db.Column(db.String(255))
     created_by_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')) )
-    createdAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now())
-    updatedAt = db.Column(db.TIMESTAMP(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
+    createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
+    updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
     
