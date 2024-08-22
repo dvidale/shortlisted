@@ -1,103 +1,55 @@
-from app.models import db, user_job_title, environment, SCHEMA
+from app.models import db,  environment, SCHEMA, User, Job_Title
+
+
 from sqlalchemy.sql import text
 
 
 # Adds a demo user, you can add other users here if you want
 def seed_user_job_titles():
-    
-    John = user_job_title(
-        user_id=4,
-        job_title_id=1  # Editor
-    )
+    # Fetch users and job titles from the database
+    john = User.query.get(4)
+    jane = User.query.get(5)
+    michael = User.query.get(6)
+    emily = User.query.get(7)
+    david = User.query.get(8)
+    sarah = User.query.get(9)
+    chris = User.query.get(10)
+    laura = User.query.get(11)
+    joshua = User.query.get(12)
+    olivia = User.query.get(13)
 
-    John_2 = user_job_title(
-        user_id=4,
-        job_title_id=2  # Assistant Editor
-    )
+    editor = Job_Title.query.get(1)
+    assistant_editor = Job_Title.query.get(2)
 
-    Jane = user_job_title(
-        user_id=5,
-        job_title_id=2  # Assistant Editor
-    )
+    # Associate job titles with users
+    john.job_titles.append(editor)  # John - Editor
+    john.job_titles.append(assistant_editor)  # John - Assistant Editor
 
-    Jane_2 = user_job_title(
-        user_id=5,
-        job_title_id=1  # Editor
-    )
+    jane.job_titles.append(assistant_editor)  # Jane - Assistant Editor
+    jane.job_titles.append(editor)  # Jane - Editor
 
-    Michael = user_job_title(
-        user_id=6,
-        job_title_id=1  # Editor
-    )
+    michael.job_titles.append(editor)  # Michael - Editor
+    michael.job_titles.append(assistant_editor)  # Michael - Assistant Editor
 
-    Michael_2 = user_job_title(
-        user_id=6,
-        job_title_id=2  # Assistant Editor
-    )
+    emily.job_titles.append(assistant_editor)  # Emily - Assistant Editor
+    emily.job_titles.append(editor)  # Emily - Editor
 
-    Emily = user_job_title(
-        user_id=7,
-        job_title_id=2  # Assistant Editor
-    )
+    david.job_titles.append(editor)  # David - Editor
+    david.job_titles.append(assistant_editor)  # David - Assistant Editor
 
-    Emily_2 = user_job_title(
-        user_id=7,
-        job_title_id=1  # Editor
-    )
+    sarah.job_titles.append(assistant_editor)  # Sarah - Assistant Editor
 
-    David = user_job_title(
-        user_id=8,
-        job_title_id=1  # Editor
-    )
+    chris.job_titles.append(editor)  # Chris - Editor
 
-    David_2 = user_job_title(
-        user_id=8,
-        job_title_id=2  # Assistant Editor
-    )
+    laura.job_titles.append(assistant_editor)  # Laura - Assistant Editor
 
-    Sarah = user_job_title(
-        user_id=9,
-        job_title_id=2  # Assistant Editor
-    )
+    joshua.job_titles.append(editor)  # Joshua - Editor
 
-    Chris = user_job_title(
-        user_id=10,
-        job_title_id=1  # Editor
-    )
+    olivia.job_titles.append(assistant_editor)  # Olivia - Assistant Editor
 
-    Laura = user_job_title(
-        user_id=11,
-        job_title_id=2  # Assistant Editor
-    )
-
-    Joshua = user_job_title(
-        user_id=12,
-        job_title_id=1  # Editor
-    )
-
-    Olivia = user_job_title(
-        user_id=13,
-        job_title_id=2  # Assistant Editor
-    )
-
-    db.session.add(John)
-    db.session.add(John_2)
-    db.session.add(Jane)
-    db.session.add(Jane_2)
-    db.session.add(Michael)
-    db.session.add(Michael_2)
-    db.session.add(Emily)
-    db.session.add(Emily_2)
-    db.session.add(David)
-    db.session.add(David_2)
-    db.session.add(Sarah)
-    db.session.add(Chris)
-    db.session.add(Laura)
-    db.session.add(Joshua)
-    db.session.add(Olivia)
-
-    
+    # Commit the changes to the database
     db.session.commit()
+
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
@@ -108,8 +60,8 @@ def seed_user_job_titles():
 # it will reset the primary keys for you as well.
 def undo_user_job_titles():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.job_titles RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.user_job_titles RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute(text("DELETE FROM job_titles"))
+        db.session.execute(text("DELETE FROM user_job_titles"))
         
     db.session.commit()
