@@ -1,8 +1,8 @@
-"""create all additional tables
+"""initial migration
 
-Revision ID: 194aff989770
-Revises: ffdc0a98111c
-Create Date: 2024-08-21 23:50:34.800784
+Revision ID: 9568e8d2d110
+Revises: 
+Create Date: 2024-08-22 22:09:19.502841
 
 """
 from alembic import op
@@ -12,11 +12,9 @@ import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
-
-
 # revision identifiers, used by Alembic.
-revision = '194aff989770'
-down_revision = 'ffdc0a98111c'
+revision = '9568e8d2d110'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -32,7 +30,6 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE genres SET SCHEMA {SCHEMA};")
 
-
     op.create_table('industry_areas',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('industry_area', sa.String(length=100), nullable=False),
@@ -42,7 +39,6 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE industry_areas SET SCHEMA {SCHEMA};")
 
-
     op.create_table('job_titles',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('job_title', sa.String(length=50), nullable=False),
@@ -51,7 +47,6 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE job_titles SET SCHEMA {SCHEMA};")
-
 
     op.create_table('locations',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -65,6 +60,7 @@ def upgrade():
         op.execute(f"ALTER TABLE locations SET SCHEMA {SCHEMA};")
 
 
+
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('first_name', sa.String(length=50), nullable=False),
@@ -74,8 +70,8 @@ def upgrade():
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('profile_img_url', sa.String(length=255), nullable=True),
-    sa.Column('createdAt', sa.TIMESTAMP(timezone=True), nullable=False),
-    sa.Column('updatedAt', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=False),
+    sa.Column('updatedAt', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -91,8 +87,8 @@ def upgrade():
     sa.Column('connected_id', sa.Integer(), nullable=True),
     sa.Column('connection_type', sa.String(length=50), nullable=False),
     sa.Column('connection_context', sa.String(length=100), nullable=False),
-    sa.Column('createdAt', sa.TIMESTAMP(timezone=True), nullable=False),
-    sa.Column('updatedAt', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=False),
+    sa.Column('updatedAt', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['connected_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -100,7 +96,6 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE connections SET SCHEMA {SCHEMA};")
-
 
     op.create_table('shortlists',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -114,8 +109,8 @@ def upgrade():
     sa.Column('end_date', sa.DateTime(), nullable=True),
     sa.Column('optional_img', sa.String(length=255), nullable=True),
     sa.Column('created_by_id', sa.Integer(), nullable=True),
-    sa.Column('createdAt', sa.TIMESTAMP(timezone=True), nullable=False),
-    sa.Column('updatedAt', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=False),
+    sa.Column('updatedAt', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['created_by_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['genre_id'], ['genres.id'], ),
     sa.ForeignKeyConstraint(['industry_area_id'], ['industry_areas.id'], ),
@@ -137,7 +132,6 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE user_genres SET SCHEMA {SCHEMA};")
 
-
     op.create_table('user_industries',
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('industry_area_id', sa.Integer(), nullable=True),
@@ -147,7 +141,6 @@ def upgrade():
 
     if environment == "production":
         op.execute(f"ALTER TABLE user_industries SET SCHEMA {SCHEMA};")
-
 
 
     op.create_table('user_job_titles',
@@ -171,15 +164,14 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE user_locations SET SCHEMA {SCHEMA};")
 
-
     op.create_table('bookings',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('shortlist_id', sa.Integer(), nullable=True),
     sa.Column('start_date', sa.DateTime(), nullable=False),
     sa.Column('end_date', sa.DateTime(), nullable=False),
-    sa.Column('createdAt', sa.TIMESTAMP(timezone=True), nullable=False),
-    sa.Column('updatedAt', sa.TIMESTAMP(timezone=True), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=False),
+    sa.Column('updatedAt', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['shortlist_id'], ['shortlists.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -188,32 +180,12 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE bookings SET SCHEMA {SCHEMA};")
 
-
-    op.create_table('comments',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('shortlist_id', sa.Integer(), nullable=False),
-    sa.Column('commenter_id', sa.Integer(), nullable=False),
-    sa.Column('text', sa.String(length=255), nullable=False),
-    sa.Column('createdAt', sa.TIMESTAMP(timezone=True), nullable=False),
-    sa.Column('updatedAt', sa.TIMESTAMP(timezone=True), nullable=False),
-    sa.ForeignKeyConstraint(['commenter_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['shortlist_id'], ['shortlists.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
-
-
-
     op.create_table('referrals',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('shortlist_id', sa.Integer(), nullable=True),
-    sa.Column('referrer_id', sa.Integer(), nullable=True),
-    sa.Column('reffered_id', sa.Integer(), nullable=True),
-    sa.Column('date_referred', sa.TIMESTAMP(timezone=True), nullable=False),
-    sa.ForeignKeyConstraint(['referrer_id'], ['users.id'], ),
-    sa.ForeignKeyConstraint(['reffered_id'], ['users.id'], ),
+    sa.Column('referred_id', sa.Integer(), nullable=True),
+    sa.Column('date_referred', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['referred_id'], ['users.id'], ),
     sa.ForeignKeyConstraint(['shortlist_id'], ['shortlists.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -221,13 +193,30 @@ def upgrade():
     if environment == "production":
         op.execute(f"ALTER TABLE referrals SET SCHEMA {SCHEMA};")
 
+    op.create_table('comments',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('shortlist_id', sa.Integer(), nullable=False),
+    sa.Column('commenter_id', sa.Integer(), nullable=False),
+    sa.Column('referral_id', sa.Integer(), nullable=False),
+    sa.Column('text', sa.String(length=255), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=False),
+    sa.Column('updatedAt', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['commenter_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['referral_id'], ['referrals.id'], ),
+    sa.ForeignKeyConstraint(['shortlist_id'], ['shortlists.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE comments SET SCHEMA {SCHEMA};")
+
     # ### end Alembic commands ###
 
 
 def downgrade():
     # ### commands auto generated by Alembic - please adjust! ###
-    op.drop_table('referrals')
     op.drop_table('comments')
+    op.drop_table('referrals')
     op.drop_table('bookings')
     op.drop_table('user_locations')
     op.drop_table('user_job_titles')
