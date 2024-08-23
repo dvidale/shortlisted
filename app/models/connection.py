@@ -14,3 +14,7 @@ class Connection(db.Model):
     connection_context = db.Column(db.String(100), nullable=False)
     createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
+
+    initiator = db.relationship('User', foreign_keys='Connection.user_id', back_populates='connections_initiated')
+
+    receiver = db.relationship('User', foreign_keys='Connection.connected_id', back_populates='connections_received')

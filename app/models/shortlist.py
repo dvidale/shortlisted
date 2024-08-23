@@ -21,4 +21,6 @@ class Shortlist(db.Model):
     created_by_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')) )
     createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
+
+    referrals = db.relationship('Referral', cascade='all, delete-orphan')
     
