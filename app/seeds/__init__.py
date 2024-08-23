@@ -7,7 +7,11 @@ from .job_titles import seed_job_titles,undo_job_titles
 from .industry_areas import seed_industry_areas, undo_industry_areas
 from .genres import seed_genres,undo_genres
 from .locations import seed_locations, undo_locations
+from .shortlists import seed_shortlists, undo_shortlists
 from .bookings import seed_bookings, undo_bookings
+from .referrals import seed_referrals, undo_referrals
+from .comments import seed_comments, undo_comments
+
 
 from .user_job_titles import seed_user_job_titles, undo_user_job_titles
 from .user_industries import seed_user_industries, undo_user_industries
@@ -30,11 +34,14 @@ def seed():
         # command, which will  truncate all tables prefixed with
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
+        undo_comments()
+        undo_referrals()
+        undo_bookings()
+        undo_shortlists() 
         undo_user_locations()
         undo_user_genres()
         undo_user_industries()
         undo_user_job_titles()
-        undo_bookings()
         undo_locations()
         undo_genres()
         undo_industry_areas()
@@ -47,11 +54,14 @@ def seed():
     seed_industry_areas()
     seed_genres()
     seed_locations()
-    seed_bookings()
     seed_user_job_titles()
     seed_user_industries()
     seed_user_genres()
     seed_user_locations()
+    seed_shortlists()
+    seed_bookings()
+    seed_referrals()
+    seed_comments()
 
     # Add other seed functions here
 
@@ -59,6 +69,10 @@ def seed():
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_comments()
+    undo_referrals()
+    undo_bookings()
+    undo_shortlists() 
     undo_user_locations()
     undo_user_genres()
     undo_user_industries()
@@ -67,5 +81,6 @@ def undo():
     undo_genres()
     undo_industry_areas()
     undo_job_titles()
+    undo_connections()
     undo_users()
     # Add other undo functions here

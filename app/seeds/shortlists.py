@@ -14,13 +14,13 @@ def seed_shortlists():
 
 # Create the Shortlist record using db.func.now() for timestamps
     shortlist = Shortlist(
-        title="LA Assistant Editors in TV Drama",
-        description="HBO is looking for AEs for the second season of a hit drama",
+        title="LA Assistant Editors for HBO Drama",
+        description="HBO is looking for AEs for the second season of a hit drama starting the second week in January",
         job_title_id=job_title_id,
         industry_area_id=industry_area_id,
         genre_id=genre_id,
         location_id=location_id,
-        start_date=datetime(2024, 10, 1),
+        start_date=datetime(2024, 1, 8),
         end_date=datetime(2025, 5, 31),
         optional_img=None,
         created_by_id=created_by_id,
@@ -42,7 +42,7 @@ def seed_shortlists():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_genres():
+def undo_shortlists():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.shortlists RESTART IDENTITY CASCADE;")
     else:
