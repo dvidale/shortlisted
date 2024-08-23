@@ -8,6 +8,7 @@ def seed_comments():
     john_comment = Comment(
     shortlist_id=1,
     commenter_id=4,
+    referral_id = 1,
     text='Hey Mike, this gig is right down your lane!',
     createdAt = db.func.now(),
     updatedAt = db.func.now()
@@ -15,6 +16,7 @@ def seed_comments():
     mike_comment = Comment(
     shortlist_id =1,
     commenter_id = 6,
+    referral_id = 1,
     text='This is so perfect! I come back in town the week before!',
     createdAt = db.func.now(),
     updatedAt = db.func.now()
