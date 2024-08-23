@@ -11,3 +11,6 @@ class Industry_Area(db.Model):
     industry_area = db.Column(db.String(100), nullable = False)
 
     users = db.relationship('User', secondary = user_industries, back_populates='industry_areas')
+
+    def get_industries(self):
+        return self.all()
