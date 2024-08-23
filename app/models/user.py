@@ -10,6 +10,7 @@ from .user_location import user_locations
 
 
 
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -60,6 +61,16 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def my_connections(self):
+        # return the user records for all the users who have any connection with the current user
+        
+        initiated = [User.query.get(connection.connected_id) for connection in self.connections_initiated]
+
+        received = [User.query.get(connection.user_id) for connection in self.connections_received]
+
+        connections_lst = [user.to_dict() for user in initiated + received]
+
+        return connections_lst
 
 
     def to_dict(self):

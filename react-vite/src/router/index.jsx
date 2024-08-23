@@ -3,6 +3,7 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import ProfileImageUploadForm from '../components/SignupFormPage/ProfileImgUploadForm.jsx';
+import SearchConnectionsForm from '../components/SearchConnectionsForm/SearchConnectionsForm.jsx';
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +12,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <>
-        <h1>Welcome!</h1>
+        <SearchConnectionsForm/>
         </>,
       },
       {
