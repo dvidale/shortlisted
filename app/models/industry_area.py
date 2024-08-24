@@ -12,5 +12,4 @@ class Industry_Area(db.Model):
 
     users = db.relationship('User', secondary = user_industries, back_populates='industry_areas')
 
-    def get_industries(self):
-        return self.all()
+  
