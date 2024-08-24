@@ -2,7 +2,7 @@ const CONNECTION_RESULTS = '/connections/CONNECTION_RESULTS'
 
 
 
-export const getConnections = (data) => {
+export const returnConnectionResults = (data) => {
 
     return{
         type: CONNECTION_RESULTS,
@@ -16,7 +16,7 @@ export const getConnections = (data) => {
 ---------------------*/
 
 
-export const searchConnections = (userId, formData) => async () =>{
+export const searchConnections = (userId, formData) => async (dispatch) =>{
 
     const url = `/api/connections/${userId}`
     const method = 'POST'
@@ -29,6 +29,8 @@ export const searchConnections = (userId, formData) => async () =>{
 
     if(response.ok){
         const data = await response.json()
+        
+        dispatch(returnConnectionResults(data))
         console.log(">>>> POST route return data in thunk:", data);
         return data
     }
@@ -38,14 +40,17 @@ export const searchConnections = (userId, formData) => async () =>{
       REDUCER
 ---------------------*/
 
-const initialState = { results: []}
+const initialState = { parameters: {}, results: []}
 
 const connectionsReducer = (state = initialState, action) =>{
     switch(action.type){
-        case CONNECTION_RESULTS:
-            return {
-                ...state, results: action.payload
-            };
+        
+        case CONNECTION_RESULTS:{
+            // const params = {...action.payload[1] }
+            const newState = {...state}
+            action.payload.forEach(result => newState.results.push(result))
+            return newState
+        }
         default:
             return state;
 

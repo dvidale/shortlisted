@@ -11,6 +11,7 @@ def search_connections(id):
     searchForm["csrf_token"].data = request.cookies["csrf_token"]
     
     location = searchForm.data['location']
+    print('>>>>>>>location:', location)
     industry_area = searchForm.data['industry_area']
     job_title = searchForm.data['job_title']
     genre = searchForm.data['genre']
@@ -23,11 +24,23 @@ def search_connections(id):
         print(">>>>>user_Network", user_network)
 
         # if a parameter is present add its filter to filter list, if not, add its anti-filter
-        location_matched = filter( lambda user: location in user['locations'], user_network)
+        location_matched = filter( lambda user: location[0] in user['locations'], user_network)
+
+        industry_matched = filter(lambda user: industry_area[0] in user['industry_areas'], location_matched)
+
+        job_title_matched = filter(lambda user: job_title[0] in user['job_title'], industry_matched)
+
+        print(">>>>>genre:", genre[0])
+
+        if(genre[0] != 'None'):
+
+            genre_matched = filter(lambda user: genre[0] in user['genres'], industry_matched)
+
+            return list(genre_matched)
 
         # unpack the filter list into a .filter_by method
 
-        search_results = location_matched
+        search_results = list(job_title_matched)
         print(">>>>>> search results", search_results)
         return search_results
 

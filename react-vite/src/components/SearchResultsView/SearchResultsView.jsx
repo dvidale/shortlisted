@@ -26,7 +26,12 @@ function SearchResultsView(){
         {/* {Search Parameters Here} */}
 
         {/*  Array.map of returned results tiles */}
-        {searchResults}
+        {searchResults.map( result =>{
+            return (
+            
+                <div key={result.id}>{result.first_name}</div>
+            )
+        })}
         </>
     )
 }
