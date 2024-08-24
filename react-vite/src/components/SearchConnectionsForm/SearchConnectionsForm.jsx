@@ -12,16 +12,17 @@ function SearchConnectionsForm(){
     const [industry_area, setIndustryArea] = useState('')
     const [ job_title, setJobTitle] = useState('')
     const [genre, setGenre] = useState('')
+    
     const [startDay, setStartDay] = useState('1')
     const [maxStartDay, setMaxStartDay] = useState('30')
-    const [startMonth, setStartMonth] = useState('')
+    const [startMonth, setStartMonth] = useState('1')
     const [startYear, setStartYear] = useState('2024')
-    const [start_date, setStartDate] = useState('1')
     const [endDay, setEndDay] = useState('1')
     const [maxEndDay, setMaxEndDay] = useState('30')
     const [endMonth, setEndMonth] = useState('1')
     const [endYear, setEndYear] = useState('2024')
-    
+
+    const [start_date, setStartDate] = useState('')
     const [end_date, setEndDate] = useState('')
 
 
@@ -64,9 +65,9 @@ function SearchConnectionsForm(){
             location,
             industry_area,
             job_title,
-            genre,
-            start_date,
-            end_date
+            genre
+            // start_date,
+            // end_date
         }
 
         dispatch(searchConnections(userId, JSON.stringify(formData)))
@@ -79,7 +80,7 @@ function SearchConnectionsForm(){
         <form id='search-connections' method='POST' onSubmit={submitHandler}>
 
         <label htmlFor="job-titles"></label>
-        <select name='job-titles' id='job-title-select' value={industry_area} onChange={e => setJobTitle(e.target.value)}>
+        <select name='job-titles' id='job-title-select' value={job_title} onChange={e => setJobTitle(e.target.value)}>
         <option value="">Job Title </option>
     <option value="Editor">Editor</option>
     <option value='Assistant Editor'>Assistant Editor</option>
@@ -96,13 +97,14 @@ function SearchConnectionsForm(){
         </select>
 
         <label htmlFor="genre"></label>
-        <select name='genres' id='genre-select' value={industry_area} onChange={e => setGenre(e.target.value)}>
+        <select name='genres' id='genre-select' value={genre} onChange={e => setGenre(e.target.value)}>
             <option value="">Genre</option>
             <option value="Drama">Drama</option>
-            <option value='Unscripted Television'>Unscripted Television</option>
-            <option value='Dramatic Film'>Dramatic Film</option>
-            <option value='Documentary'>Documentary</option>
-            <option value='Commercial'>Commercial</option>
+            <option value='Comedy'>Comedy</option>
+            <option value='Horror'>Horror</option>
+            <option value='Sci-Fi'>Sci-Fi</option>
+            <option value='Animation'>Animation</option>
+            <option value='Historical'>Historical</option>
         </select>
 
         <label htmlFor="location"></label>
@@ -116,7 +118,7 @@ function SearchConnectionsForm(){
 
         <p>Start Date</p>
         <label htmlFor="start_date_month"></label>
-        <input type="number" min='1' max='12' value={start_date} onChange={ e => setStartMonth(e.target.value)}/>
+        <input type="number" min='1' max='12' value={startMonth} onChange={ e => setStartMonth(e.target.value)}/>
 
         <label htmlFor="start_date_day"></label>
         <input type="number" min='1' max={maxStartDay} value={startDay} onChange={ e => setStartDay(e.target.value)}/>
