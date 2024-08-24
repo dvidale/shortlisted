@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
-import { buildShortlist } from "../../redux/connections";
+import { buildShortlist } from "../../redux/shortlists";
 
 function SearchConnectionsForm(){
 
@@ -76,7 +76,8 @@ function SearchConnectionsForm(){
 
 
     return(<>
-    
+
+    <h1>Build a Shortlist</h1>
         <form id='search-connections' method='POST' onSubmit={submitHandler}>
 
         <label htmlFor="job-titles"></label>
@@ -141,6 +142,7 @@ function SearchConnectionsForm(){
        <button id='submit' type="submit">Search</button>
 
         </form>
+    
 
       
     </>)

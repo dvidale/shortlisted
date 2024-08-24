@@ -37,6 +37,26 @@ export const buildShortlist = (userId, formData) => async (dispatch) =>{
     }
 }
 
+
+export const saveShortlist =(shortlistData) => async()=>{
+
+
+const url = `/api/shortlists/new`
+const method = 'POST'
+const headers = { 'Content-Type': 'application/json' };
+const body = shortlistData
+const options = {method, headers, body}
+
+const response = await fetch(url, options)
+
+const data = await response.json()
+console.log(">>>> data returned to save thunk:", data);
+
+return data
+
+
+}
+
 /*-------------------
       REDUCER
 ---------------------*/
