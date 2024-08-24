@@ -2,11 +2,11 @@ const CONNECTION_RESULTS = '/connections/CONNECTION_RESULTS'
 
 
 
-export const returnConnectionResults = (data) => {
+export const returnConnectionResults = (data,params) => {
 
     return{
         type: CONNECTION_RESULTS,
-        payload:data
+        payload:[data, params]
     }
 }
 
@@ -29,9 +29,9 @@ export const searchConnections = (userId, formData) => async (dispatch) =>{
 
     if(response.ok){
         const data = await response.json()
-        
-        dispatch(returnConnectionResults(data))
-        console.log(">>>> POST route return data in thunk:", data);
+        const params = await JSON.parse(formData)
+        dispatch(returnConnectionResults(data, params))
+        console.log(">>>> parsed form data in thunk:", params);
         return data
     }
 }
@@ -46,9 +46,10 @@ const connectionsReducer = (state = initialState, action) =>{
     switch(action.type){
         
         case CONNECTION_RESULTS:{
-            // const params = {...action.payload[1] }
+            
             const newState = {...state}
-            action.payload.forEach(result => newState.results.push(result))
+            newState['results'] = action.payload[0]
+            newState['parameters'] = action.payload[1]
             return newState
         }
         default:

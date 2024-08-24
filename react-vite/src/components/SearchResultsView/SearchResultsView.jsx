@@ -8,11 +8,22 @@ function SearchResultsView(){
     // some state slice of search results
     const searchResults = useSelector(state => state.connections.results)
 
+    const searchParams = useSelector(state => state.connections.parameters)
+
     // some value that holds the parameters just searched, maybe returned 
 
     return(
         <>
         <h1>Search Results</h1>
+        {/* {Search Parameters Here} */}
+       
+        <div>{searchParams.industry_area}</div>
+        <div>{searchParams.job_title}</div>
+        <div>{searchParams.location}</div>
+        
+
+
+
         <form>
             <input type='text' 
             name='shortlist-name' 
@@ -23,8 +34,7 @@ function SearchResultsView(){
         </form>
 
 
-        {/* {Search Parameters Here} */}
-
+        
         {/*  Array.map of returned results tiles */}
         {searchResults.map( result =>{
             return (
