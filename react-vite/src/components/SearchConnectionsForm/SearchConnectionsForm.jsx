@@ -11,7 +11,7 @@ function SearchConnectionsForm(){
     const [location, setLocation] = useState('')
     const [industry_area, setIndustryArea] = useState('')
     const [ job_title, setJobTitle] = useState('')
-    const [genre, setGenre] = useState('')
+    const [genre, setGenre] = useState(null)
     
     const [startDay, setStartDay] = useState('1')
     const [maxStartDay, setMaxStartDay] = useState('30')
@@ -98,7 +98,7 @@ function SearchConnectionsForm(){
 
         <label htmlFor="genre"></label>
         <select name='genres' id='genre-select' value={genre} onChange={e => setGenre(e.target.value)}>
-            <option value="">Genre</option>
+            <option value={null}>Genre</option>
             <option value="Drama">Drama</option>
             <option value='Comedy'>Comedy</option>
             <option value='Horror'>Horror</option>
