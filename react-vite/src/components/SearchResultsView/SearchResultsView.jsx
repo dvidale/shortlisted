@@ -1,25 +1,22 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
-
+import SearchDetails from "../SearchDetails/SearchDetails"
 function SearchResultsView(){
 
     const [shortlist_title, setShortlistTitle] = useState('')
 
     // some state slice of search results
-    const searchResults = useSelector(state => state.connections.results)
+    const searchResults = useSelector(state => state.shortlists.results)
 
-    const searchParams = useSelector(state => state.connections.parameters)
+    const searchParams = useSelector(state => state.shortlists.parameters)
 
     // some value that holds the parameters just searched, maybe returned 
 
     return(
         <>
         <h1>Search Results</h1>
-        {/* {Search Parameters Here} */}
-       
-        <div>{searchParams.industry_area}</div>
-        <div>{searchParams.job_title}</div>
-        <div>{searchParams.location}</div>
+       <SearchDetails params={searchParams}/>
+        
         
 
 

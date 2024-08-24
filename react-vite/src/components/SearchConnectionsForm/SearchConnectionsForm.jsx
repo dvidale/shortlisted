@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
-import { searchConnections } from "../../redux/connections";
+import { buildShortlist } from "../../redux/connections";
 
 function SearchConnectionsForm(){
 
@@ -70,7 +70,7 @@ function SearchConnectionsForm(){
             // end_date
         }
 
-        dispatch(searchConnections(userId, JSON.stringify(formData)))
+        dispatch(buildShortlist(userId, JSON.stringify(formData)))
     }
 
 
@@ -142,7 +142,7 @@ function SearchConnectionsForm(){
 
         </form>
 
-
+      
     </>)
 }
 
