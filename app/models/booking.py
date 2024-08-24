@@ -14,3 +14,5 @@ class Booking(db.Model):
     end_date = db.Column(db.DateTime, nullable = False)
     createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
+
+    user = db.relationship('User', backref='calendar')

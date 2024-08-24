@@ -4,6 +4,8 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import ProfileImageUploadForm from '../components/SignupFormPage/ProfileImgUploadForm.jsx';
 
+import HomeView from '../components/HomeView/HomeView.jsx';
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
@@ -11,7 +13,7 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <>
-        <h1>Welcome!</h1>
+        <HomeView/>
         </>,
       },
       {
