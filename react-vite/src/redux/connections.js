@@ -1,11 +1,11 @@
-const CONNECTION_RESULTS = '/connections/CONNECTION_RESULTS'
+const BUILD_SHORTLIST = '/shortlists/BUILD_SHORTLIST'
 
 
 
-export const returnConnectionResults = (data,params) => {
+export const buildAShortlist = (data,params) => {
 
     return{
-        type: CONNECTION_RESULTS,
+        type: BUILD_SHORTLIST,
         payload:[data, params]
     }
 }
@@ -16,7 +16,7 @@ export const returnConnectionResults = (data,params) => {
 ---------------------*/
 
 
-export const searchConnections = (userId, formData) => async (dispatch) =>{
+export const buildShortlist = (userId, formData) => async (dispatch) =>{
 
     const url = `/api/connections/${userId}`
     const method = 'POST'
@@ -26,11 +26,12 @@ export const searchConnections = (userId, formData) => async (dispatch) =>{
     const options = {method, headers, body}
 
     const response = await fetch(url,options)
-
+   
     if(response.ok){
         const data = await response.json()
         const params = await JSON.parse(formData)
-        dispatch(returnConnectionResults(data, params))
+        dispatch(buildAShortlist(data, params))
+         // TODO: refactor to pass the form data into Context so we can pass it straight from the component
         console.log(">>>> parsed form data in thunk:", params);
         return data
     }
@@ -39,13 +40,13 @@ export const searchConnections = (userId, formData) => async (dispatch) =>{
 /*-------------------
       REDUCER
 ---------------------*/
+// TODO: consider changing "results" to "search_results" for easier interpretation
+const initialState = { parameters: {}, results: [], saved_lists:{}}
 
-const initialState = { parameters: {}, results: []}
-
-const connectionsReducer = (state = initialState, action) =>{
+const shortlistsReducer = (state = initialState, action) =>{
     switch(action.type){
         
-        case CONNECTION_RESULTS:{
+        case BUILD_SHORTLIST:{
             
             const newState = {...state}
             newState['results'] = action.payload[0]
@@ -63,4 +64,4 @@ const connectionsReducer = (state = initialState, action) =>{
 }
 
 
-export default connectionsReducer;
+export default shortlistsReducer;
