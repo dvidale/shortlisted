@@ -7,7 +7,7 @@ import {
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import imgReducer from "./img-test";
-import shortlistsReducer from "./connections";
+import shortlistsReducer from "./shortlists";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
