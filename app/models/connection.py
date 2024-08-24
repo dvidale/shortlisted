@@ -18,3 +18,4 @@ class Connection(db.Model):
     initiator = db.relationship('User', foreign_keys='Connection.user_id', back_populates='connections_initiated')
 
     receiver = db.relationship('User', foreign_keys='Connection.connected_id', back_populates='connections_received')
+
