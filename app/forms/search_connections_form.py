@@ -10,7 +10,7 @@ class SearchConnectionsForm(FlaskForm):
     industry_area = SelectMultipleField('industry_area', validators=[DataRequired()], choices=['Scripted Television', 'Unscripted Television', 'Dramatic Film', 'Documentary', 'Commercial'])
     job_title = SelectMultipleField('job_title', validators=[DataRequired()], choices=['Editor','Assistant Editor'])
     genre = SelectMultipleField('genre', choices=['Drama','Comedy','Horror','Sci-Fi','Animation', 'Historical'])
-    start_date = DateTimeField('start_date', validators=[DataRequired()])
+    # start_date = DateTimeField('start_date', validators=[DataRequired()])
 
-    end_date = DateTimeField('end_date')
+    # end_date = DateTimeField('end_date')
 
