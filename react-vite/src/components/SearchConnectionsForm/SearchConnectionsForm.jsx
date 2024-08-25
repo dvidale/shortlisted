@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { buildShortlist } from "../../redux/shortlists";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-function SearchConnectionsForm(){
+function SearchConnectionsForm({user}){
 
     const dispatch = useDispatch();
-    const userId = useSelector( state => state.session.user.id)
+    
 
 
     const [location, setLocation] = useState(null)
@@ -34,7 +34,7 @@ function SearchConnectionsForm(){
             end_date: end_date ? end_date.toISOString() : null
         }
 
-        dispatch(buildShortlist(userId, JSON.stringify(formData)))
+        dispatch(buildShortlist(user.id, JSON.stringify(formData)))
     }
 
 

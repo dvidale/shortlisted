@@ -5,7 +5,7 @@ import { saveShortlist } from "../../redux/shortlists"
 
 
 
-function SearchResultsView(){
+function SearchResultsView({user}){
 
     const dispatch = useDispatch()
 
@@ -18,7 +18,7 @@ function SearchResultsView(){
 
     const searchParams = useSelector(state => state.shortlists.parameters)
 
-    const userId = useSelector(state => state.session.user.id)
+    
 
     
 
@@ -35,7 +35,7 @@ function SearchResultsView(){
             location: searchParams.location,
             start_date: searchParams.start_date,
             end_date: searchParams.end_date,
-            created_by:userId
+            created_by:user.id
         }
 
         dispatch(saveShortlist(JSON.stringify(shortlistData)))

@@ -1,5 +1,5 @@
 const BUILD_SHORTLIST = '/shortlists/BUILD_SHORTLIST'
-
+const GET_SHORTLISTS = '/shortlists/GET_SHORTLISTS'
 
 
 export const buildAShortlist = (data,params) => {
@@ -7,6 +7,14 @@ export const buildAShortlist = (data,params) => {
     return{
         type: BUILD_SHORTLIST,
         payload:[data, params]
+    }
+}
+
+export const getMyShortlists = (data) =>{
+
+    return {
+        type: GET_SHORTLISTS,
+        payload: data
     }
 }
 
@@ -57,6 +65,26 @@ return data
 
 }
 
+
+export const fetchShortlists = (id)=> async (dispatch) =>{
+
+const url = `/api/shortlists/my-shortlists/${id}`
+
+const response = await fetch(url)
+
+
+if(response.ok){
+    console.log(">>>> response in the fetch shortlists thunk", response);
+    const data = await response.json()
+    console.log(">>> data returned from get shortlists route:", data);
+    dispatch(getMyShortlists(data))
+    return data
+}
+
+
+
+}
+
 /*-------------------
       REDUCER
 ---------------------*/
@@ -72,6 +100,14 @@ const shortlistsReducer = (state = initialState, action) =>{
             newState['results'] = action.payload[0]
             newState['parameters'] = action.payload[1]
             return newState
+        }
+        case GET_SHORTLISTS:{
+            const newState = {...state}
+
+            action.payload.forEach( shortlist =>{
+                newState.saved_lists[shortlist.id] = shortlist
+            })
+            return newState;
         }
         default:
             return state;
