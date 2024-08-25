@@ -4,7 +4,7 @@ import SearchResultsView from "../SearchResultsView/SearchResultsView"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from 'react'
 import { fetchShortlists } from '../../redux/shortlists'
-import SingleShortlistView from "../SingleShortlistView/SingleShortlistView"
+
 import MyShortlists from "../MyShortlists/MyShortlists"
 
 
@@ -13,7 +13,7 @@ function HomeView(){
 
 const user = useSelector(state => state.session.user)
 
-const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
+
     
     useEffect(()=>{
 
@@ -34,12 +34,9 @@ const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
         </div>
         <div id="my-shortlists">
             
-            <MyShortlists saved_shortlists={saved_shortlists}/>
+            <MyShortlists/>
         </div>
-        <div id="single-shortlist-view">
-        <SingleShortlistView/>
-                 
-        </div>
+        
         
         </>):(<>
         

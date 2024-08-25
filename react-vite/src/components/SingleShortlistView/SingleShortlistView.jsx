@@ -5,16 +5,16 @@ import ShortlistCommentsFeed from "../ShortlistCommentsFeed/ShortlistCommentsFee
 import SearchDetails from "../SearchDetails/SearchDetails";
 
 
-function SingleShortlistView() {
+function SingleShortlistView({shortlistIdx}) {
   
-  const shortlist = useSelector((state) => state.shortlists.saved_lists[1]);
-
+  const shortlist = useSelector((state) => state.shortlists.saved_lists[shortlistIdx]);
 
   return (
     <>
+    <h2>Shortlist:</h2>
       {shortlist ? (
         <>
-          <h2>Shortlist:</h2>
+          
 
           <h1>{shortlist.title} </h1>
           <button>Edit</button>
@@ -23,7 +23,7 @@ function SingleShortlistView() {
 
           <div>Search Details</div>
           <SearchDetails params={shortlist} />
-          <ShortlistCommentsFeed />
+          <ShortlistCommentsFeed shortlist={shortlist} /> 
         </>
       ) : (
         <></>

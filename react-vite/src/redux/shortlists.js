@@ -30,7 +30,7 @@ export const buildShortlist = (userId, formData) => async (dispatch) =>{
     const method = 'POST'
     const headers = { 'Content-Type': 'application/json' };
     const body = formData
-    console.log(">>>> form_data in thunk:", formData);
+    // console.log(">>>> form_data in thunk:", formData);
     const options = {method, headers, body}
 
     const response = await fetch(url,options)
@@ -40,7 +40,7 @@ export const buildShortlist = (userId, formData) => async (dispatch) =>{
         const params = await JSON.parse(formData)
         dispatch(buildAShortlist(data, params))
          // TODO: refactor to pass the form data into Context so we can pass it straight from the component
-        console.log(">>>> parsed form data in thunk:", params);
+        // console.log(">>>> parsed form data in thunk:", params);
         return data
     }
 }
@@ -58,7 +58,7 @@ const options = {method, headers, body}
 const response = await fetch(url, options)
 
 const data = await response.json()
-console.log(">>>> data returned to save thunk:", data);
+// console.log(">>>> data returned to save thunk:", data);
 
 return data
 
@@ -74,9 +74,9 @@ const response = await fetch(url)
 
 
 if(response.ok){
-    console.log(">>>> response in the fetch shortlists thunk", response);
+    // console.log(">>>> response in the fetch shortlists thunk", response);
     const data = await response.json()
-    console.log(">>> data returned from get shortlists route:", data);
+    // console.log(">>> data returned from get shortlists route:", data);
     dispatch(getMyShortlists(data))
     return data
 }

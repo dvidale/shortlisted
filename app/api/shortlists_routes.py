@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from app.models import Shortlist, db, Job_Title, Genre, Industry_Area, Location
+from app.models import Shortlist, db, Job_Title, Referral, Genre, Industry_Area, Location
 from app.forms.save_shortlist_form import SaveShortlistForm
 import json
 from dateutil import parser
@@ -7,6 +7,7 @@ from datetime import datetime
 
 shortlists_routes = Blueprint('shortlists', __name__)
 
+# * SAVE A SHORTLIST
 @shortlists_routes.route('/new', methods=['POST'])
 def save_shortlists():
 
@@ -28,9 +29,6 @@ def save_shortlists():
 
     title = save_shortlist_form.data['title']
     description = save_shortlist_form.data['description']
-
-    
-
 
     if save_shortlist_form.validate_on_submit():
         
@@ -96,7 +94,25 @@ def getShortlists(id):
     ).all()
 
     # for shortlist in shortlist_query:
+    """
+    SELECT Referral.id, User.first_name, User.last_name 
+    FROM shortlists
+    JOIN referrals
+    WHERE (shortlist.id == referral.shortlist_id)
+    JOIN Users
+    WHERE (referral.referred_id == User.id)
 
-
+     """
     
+    referrals_query = db.session.scalars(
+        db.select(Referral).where(Referral.shortlist_id == id)
+    ).all()
+
+    print(">>>>00 referral query:", referrals_query)
+
+    referral_details = [ referral.with_details() for referral in  referrals_query ]
+
+    print(">>>00 referral details", referral_details)
+
+    print(">>>10 shortlist referral check:",[shortlist.single_view() for shortlist in shortlist_query] )
     return [shortlist.single_view() for shortlist in shortlist_query]
