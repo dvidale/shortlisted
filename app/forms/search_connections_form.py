@@ -11,6 +11,5 @@ class SearchConnectionsForm(FlaskForm):
     job_title = SelectMultipleField('job_title', validators=[DataRequired()], choices=['Editor','Assistant Editor'])
     genre = SelectMultipleField('genre', choices=['None','Drama','Comedy','Horror','Sci-Fi','Animation', 'Historical'])
     # start_date = DateTimeField('start_date', validators=[DataRequired()])
-
     # end_date = DateTimeField('end_date')
 

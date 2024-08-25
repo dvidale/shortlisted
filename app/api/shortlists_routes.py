@@ -2,6 +2,8 @@ from flask import Blueprint, request
 from app.models import Shortlist, db, Job_Title, Genre, Industry_Area, Location
 from app.forms.save_shortlist_form import SaveShortlistForm
 import json
+from dateutil import parser
+from datetime import datetime
 
 shortlists_routes = Blueprint('shortlists', __name__)
 
@@ -38,12 +40,16 @@ def save_shortlists():
     if save_shortlist_form.validate_on_submit():
         
         request_data = request.json
-    # .json turns request data into a dict
+        # .json turns request data into a dict
 
         job_title = request_data['job_title']
         industry_area = request_data['industry_area']
         genre = request_data['genre']
         location = request_data['location']
+        start_date = request_data['start_date']
+        startDateParsed = parser.parse(start_date)
+        print(">>> start date parsed:", isinstance(startDateParsed, datetime))
+        end_date = request_data['end_date']
         created_by = request_data['created_by']
 
         job_title_id = db.session.scalars(db.select(Job_Title.id).where(Job_Title.job_title == job_title)).first()
@@ -66,6 +72,8 @@ def save_shortlists():
             industry_area_id=industry_area_id,
             genre_id=genreId,
             location_id=locationId,
+            start_date=start_date,
+            end_date=end_date,
             created_by_id=created_by
         )
 
