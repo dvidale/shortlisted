@@ -37,9 +37,10 @@ const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
             <MyShortlists saved_shortlists={saved_shortlists}/>
         </div>
         <div id="single-shortlist-view">
-            <h1>Single Shortlist View</h1>
-        <SingleShortlistView/> 
+        <SingleShortlistView/>
+                 
         </div>
+        
         </>):(<>
         
        
