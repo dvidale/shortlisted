@@ -3,7 +3,9 @@ from datetime import datetime
 from app.models.industry_area import Industry_Area
 from app.models.job_title import Job_Title
 from app.models.genre import Genre
-
+from app.models.location import Location
+from app.models.referral import Referral
+from app.models.user import User
 
 class Shortlist(db.Model):
     __tablename__ = "shortlists"
@@ -58,6 +60,11 @@ class Shortlist(db.Model):
             "createdAt": self.createdAt,
             "updatedAt": self.updatedAt,
         }
+    
+    def referral_list(self):
+        return db.session.scalars(
+                db.select(Referral.referred_id, Referral.id).where(Referral.shortlist_id == self.id)
+            ).all()
 
     def single_view(self):
         return {
@@ -76,4 +83,12 @@ class Shortlist(db.Model):
             or db.session.scalars(
                 db.select(Genre.genre_name).where(Genre.id == self.genre_id)
             ).first(),
+            "start_date":self.start_date,
+            "end_date": self.end_date,
+            "location": db.session.scalars(
+                db.select(Location.city).where(Location.id == self.location_id)
+            ).first(),
+            "referrals": self.referral_list()
+            
+            
         }
