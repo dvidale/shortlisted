@@ -33,6 +33,8 @@ function SearchResultsView(){
             industry_area: searchParams.industry_area,
             genre: searchParams.genre,
             location: searchParams.location,
+            start_date: searchParams.start_date,
+            end_date: searchParams.end_date,
             created_by:userId
         }
 
