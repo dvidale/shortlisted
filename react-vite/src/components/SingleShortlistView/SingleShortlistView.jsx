@@ -19,6 +19,7 @@ function SingleShortlistView() {
           <h1>{shortlist.title} </h1>
           <button>Edit</button>
           <button>Delete</button>
+          <p>{shortlist.description}</p>
 
           <div>Search Details</div>
           <SearchDetails params={shortlist} />

@@ -95,5 +95,8 @@ def getShortlists(id):
         db.select(Shortlist).where(Shortlist.created_by_id == id)
     ).all()
 
+    # for shortlist in shortlist_query:
+
+
     
-    return [shortlist.to_dict() for shortlist in shortlist_query]
+    return [shortlist.single_view() for shortlist in shortlist_query]
