@@ -60,8 +60,9 @@ def search_connections(id):
             else:
                 
                 for booking in user['bookings']:
-                    print(">>>> user's current booking", booking)
                     bookingStart, bookingEnd = booking
+                    print(">>>> user's current booking", bookingStart, ", ", bookingEnd)
+                    print(">>>> job start date:", startDate)
                     if bookingStart < startDate < bookingEnd: #checks if start date falls in the middle of current booking
                             return False
                     if end_date != None:
@@ -79,13 +80,13 @@ def search_connections(id):
                         return True
     
         
-        avail_matched = filter(lambda user: availCheck(user), genre_matched)
+        # avail_matched = filter(lambda user: availCheck(user), genre_matched)
 
         
 
 
 
-        search_results = list(avail_matched)
+        search_results = list(genre_matched)
         print(">>>>>> search results", search_results)
         return search_results
 

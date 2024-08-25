@@ -10,11 +10,6 @@ shortlists_routes = Blueprint('shortlists', __name__)
 @shortlists_routes.route('/new', methods=['POST'])
 def save_shortlists():
 
-    
-
-    
-
-
 # write a route to collect the 
 # shortlist name
 # shortlist parameters
@@ -48,8 +43,9 @@ def save_shortlists():
         location = request_data['location']
         start_date = request_data['start_date']
         startDateParsed = parser.parse(start_date)
-        print(">>> start date parsed:", isinstance(startDateParsed, datetime))
+        # print(">>> start date parsed:", startDateParsed)
         end_date = request_data['end_date']
+        endDateParsed = parser.parse(end_date)
         created_by = request_data['created_by']
 
         job_title_id = db.session.scalars(db.select(Job_Title.id).where(Job_Title.job_title == job_title)).first()
@@ -72,12 +68,15 @@ def save_shortlists():
             industry_area_id=industry_area_id,
             genre_id=genreId,
             location_id=locationId,
-            start_date=start_date,
-            end_date=end_date,
+            start_date=startDateParsed,
+            end_date=endDateParsed,
             created_by_id=created_by
         )
 
         print(">>> newShortlist", newShortlist.to_dict()) 
+
+        db.session.add(newShortlist)
+        db.session.commit()
 
         return {'message': 'shortlist saved successfully'}
     
@@ -88,3 +87,13 @@ def save_shortlists():
 # shortlist_id
 # referred_id
 # date_referred
+
+
+@shortlists_routes.route('/my-shortlists/<int:id>')
+def getShortlists(id):
+    shortlist_query = db.session.scalars(
+        db.select(Shortlist).where(Shortlist.created_by_id == id)
+    ).all()
+
+    
+    return [shortlist.to_dict() for shortlist in shortlist_query]
