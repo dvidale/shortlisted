@@ -1,26 +1,35 @@
-import { useSelector } from "react-redux"
-import ShortlistCommentsFeed from '../ShortlistCommentsFeed'
-import SearchDetails from "../SearchDetails/SearchDetails"
+import "../../../src/index.css";
+import { useSelector} from "react-redux";
 
-function SingleShortlistView(){
+import ShortlistCommentsFeed from "../ShortlistCommentsFeed/ShortlistCommentsFeed";
+import SearchDetails from "../SearchDetails/SearchDetails";
 
-    const shortlist = useSelector(state => state.shortlists.saved_lists['id'])
 
-    return (
+function SingleShortlistView({shortlistIdx}) {
+  
+  const shortlist = useSelector((state) => state.shortlists.saved_lists[shortlistIdx]);
+
+  return (
+    <>
+    <h2>Shortlist:</h2>
+      {shortlist ? (
         <>
-        <div>Shortlist:</div>
+          
+ 
+          <h1>{shortlist.title} </h1>
+          <button>Edit</button>
+          <button>Delete</button>
+          <p>{shortlist.description}</p>
 
-        {shortlist.title}<button>Edit</button>
-        <button>Delete</button>
-
-        <div>Search Details</div>
-        <SearchDetails params={shortlist}/>
-        <ShortlistCommentsFeed/>
-
-
+          <div>Search Details</div>
+          <SearchDetails params={shortlist} />
+          <ShortlistCommentsFeed shortlist={shortlist} /> 
         </>
-    )
+      ) : (
+        <></>
+      )}
+    </>
+  );
 }
 
-
-export default SingleShortlistView
+export default SingleShortlistView;

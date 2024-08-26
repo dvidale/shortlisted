@@ -14,3 +14,8 @@ class Comment(db.Model):
     text = db.Column(db.String(255), nullable = False)
     createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
+
+
+    referrals = db.relationship('Referral', back_populates = 'comments')
+
+   

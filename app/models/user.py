@@ -41,7 +41,10 @@ class User(db.Model, UserMixin):
 
     connections_received = db.relationship('Connection', foreign_keys='Connection.connected_id', back_populates='receiver', cascade='all, delete-orphan')
 
-    shortlists = db.relationship('Shortlist', cascade='all, delete-orphan')
+    shortlists = db.relationship('Shortlist', cascade='all, delete-orphan', backref = 'users')
+
+    shortlistings = db.relationship('Shortlist',
+    secondary='referrals', back_populates='shortlist_referrals' )
 
     bookings = db.relationship('Booking', cascade='all, delete-orphan')
 
