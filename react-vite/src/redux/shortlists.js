@@ -1,6 +1,6 @@
 const BUILD_SHORTLIST = '/shortlists/BUILD_SHORTLIST'
 const GET_SHORTLISTS = '/shortlists/GET_SHORTLISTS'
-
+const UPDATE_SHORTLIST = '/shortlists/UPDATE_SHORTLIST'
 
 export const buildAShortlist = (data,params) => {
 
@@ -14,6 +14,14 @@ export const getMyShortlists = (data) =>{
 
     return {
         type: GET_SHORTLISTS,
+        payload: data
+    }
+}
+
+export const updateAShortlist = (data) =>{
+
+    return{
+        type: UPDATE_SHORTLIST,
         payload: data
     }
 }
@@ -85,6 +93,30 @@ if(response.ok){
 
 }
 
+
+export const updateShortlist = (id, formData) => async (dispatch) => {
+
+    const url = `/api/shortlists/${id}`
+    const method = 'PUT'
+    const headers = { 'Content-Type': 'application/json' };
+    const body = formData;
+    const options = {method, headers, body}
+
+    const response = await fetch(url, options)
+
+    if(response.ok){
+
+        const data = await response.json()
+        dispatch(updateAShortlist(data))
+
+        return data
+    }
+
+
+
+
+}
+
 /*-------------------
       REDUCER
 ---------------------*/
@@ -108,6 +140,13 @@ const shortlistsReducer = (state = initialState, action) =>{
                 newState.saved_lists[shortlist.id] = shortlist
             })
             return newState;
+        }
+        case UPDATE_SHORTLIST:{
+            const newState = {...state}
+            const shortlist = action.payload
+            newState.saved_lists[shortlist.id] = shortlist
+            return newState;
+
         }
         default:
             return state;
