@@ -15,6 +15,12 @@ const user = useSelector(state => state.session.user)
 
 const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
+const shortlists_state = useSelector(state => state.shortlists)
+
+if(shortlists_state){
+    console.log("shortlists state loaded");
+}
+ 
     
     useEffect(()=>{
         
@@ -24,6 +30,7 @@ const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
         
 
     },[dispatch, user])
+
 
 
 

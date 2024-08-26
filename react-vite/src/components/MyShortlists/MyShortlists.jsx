@@ -7,26 +7,29 @@ import { fetchShortlists } from '../../redux/shortlists'
 import SingleShortlistView from '../SingleShortlistView/SingleShortlistView'
 
 
-// !BUG - the shortlists do not load unless I manually force the state to re-render twice
+
 function MyShortlists({saved_shortlists}){
  
     const dispatch = useDispatch()
 
     // const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
-    const firstIdx = Object.keys(saved_shortlists)[0]
-    // console.log(">>> firstIdx:", firstIdx);
+    const firstIdx = saved_shortlists && Object.keys(saved_shortlists).length > 0 ? Object.keys(saved_shortlists)[0] : null;
+
+    // console.log(">>> firstIdx assigned:", firstIdx);
     const user = useSelector(state => state.session.user) 
- 
-     
   
-    const [shortlistIdx, setShortlistIdx]= useState(firstIdx)
+    const [shortlistIdx, setShortlistIdx]= useState(firstIdx || null)
+
+
+    // console.log(">>> firstIdx as default:", firstIdx);
+    // console.log(">>>> shortlistIdx from MyShortlists:", shortlistIdx);
 
     useEffect(()=>{
-
+        
         dispatch(fetchShortlists(user.id))
 
-    },[dispatch, user, saved_shortlists])
+    },[dispatch, user])
 
 
 
@@ -45,6 +48,7 @@ function MyShortlists({saved_shortlists}){
                             <button value={shortlist.id}
                             onClick={(e) => setShortlistIdx(e.target.value)}> 
                             {shortlist.title}</button>
+                            {/* {console.log(">>>> current shortlist in my-shortlist view:", shortlist)} */}
                       </div>
                        
         
