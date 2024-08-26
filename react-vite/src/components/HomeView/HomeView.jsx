@@ -13,7 +13,14 @@ function HomeView(){
 
 const user = useSelector(state => state.session.user)
 
+const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
+const shortlists_state = useSelector(state => state.shortlists)
+
+if(shortlists_state){
+    console.log("shortlists state loaded");
+}
+ 
     
     useEffect(()=>{
         
@@ -23,6 +30,7 @@ const user = useSelector(state => state.session.user)
         
 
     },[dispatch, user])
+
 
 
 
@@ -37,7 +45,7 @@ const user = useSelector(state => state.session.user)
         </div>
         <div id="my-shortlists">
             
-            <MyShortlists/>
+            <MyShortlists saved_shortlists={saved_shortlists}/>
         </div>
         
         

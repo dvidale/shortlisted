@@ -43,8 +43,14 @@ def save_shortlists():
         startDateParsed = parser.parse(start_date)
         # print(">>> start date parsed:", startDateParsed)
         end_date = request_data['end_date']
-        endDateParsed = parser.parse(end_date)
+        if(end_date != None):
+           endDateParsed = parser.parse(end_date)
+        else:
+            endDateParsed = None
         created_by = request_data['created_by']
+        referrals = request_data['referrals']
+
+        print(">>>>>> referrals entering save route", referrals)
 
         job_title_id = db.session.scalars(db.select(Job_Title.id).where(Job_Title.job_title == job_title)).first()
 
@@ -57,7 +63,7 @@ def save_shortlists():
         locationId = db.session.scalars( db.select(Location.id).where(Location.city == location)).first()
 
 
-        print(">>> data after queries", title, description, job_title_id, industry_area_id, genreId, locationId,created_by)
+        # print(">>> data after queries", title, description, job_title_id, industry_area_id, genreId, locationId,created_by)
         
         newShortlist = Shortlist(
             title= title,
@@ -71,21 +77,33 @@ def save_shortlists():
             created_by_id=created_by
         )
 
-        print(">>> newShortlist", newShortlist.to_dict()) 
+        # print(">>> newShortlist", newShortlist.to_dict()) 
 
         db.session.add(newShortlist)
         db.session.commit()
+# after the shortlist is created, created a referral record for each user in the shortlist
 
-        return {'message': 'shortlist saved successfully'}
+        currentShortlist = db.session.scalars(
+            db.select(Shortlist).filter(Shortlist.created_by_id == created_by).where(Shortlist.title == title)
+        ).first()
+
+        print(">>>>> currentShortlist record:", currentShortlist)
+
+        for referral in referrals:
+            newReferral = Referral(
+                shortlist_id = currentShortlist.id,
+                referred_id= referral['id']
+            )
+            db.session.add(newReferral)
+            db.session.commit()
+
+# TODO PRIORTY!:  should we be returning the new shortlist? How is the new shortlist being added to the state??
+        return currentShortlist.single_view()
     
     return {'error': save_shortlist_form.errors}
 
-# after the shortlist is created, created a referral record for each user in the shortlist
 
-# shortlist_id
-# referred_id
-# date_referred
-
+# * GET MY SHORTLISTS
 
 @shortlists_routes.route('/my-shortlists/<int:id>')
 def getShortlists(id):
@@ -95,3 +113,29 @@ def getShortlists(id):
 
 
     return [shortlist.single_view() for shortlist in shortlist_query]
+
+## * UPDATE A SHORTLIST
+
+@shortlists_routes.route('<int:id>', methods = ['PUT'])
+def updateShortlist(id):
+    
+    update_form = SaveShortlistForm()
+    update_form["csrf_token"].data = request.cookies["csrf_token"]
+
+    title = update_form.data['title']
+    description = update_form.data['description']
+
+    if update_form.validate_on_submit():
+       shortlist = db.session.scalars(
+           db.select(Shortlist).where(Shortlist.id == id)
+       ).first() 
+
+
+       shortlist.title = title
+       shortlist.description = description
+
+       db.session.commit()
+
+       return shortlist.single_view()
+
+    return {'error': update_form.errors}

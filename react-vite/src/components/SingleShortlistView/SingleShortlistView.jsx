@@ -1,65 +1,110 @@
 import "../../../src/index.css";
-import './single-shortlist.css'
-import { useSelector} from "react-redux";
-import { useEffect, useState } from 'react'
+import "./single-shortlist.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 import ShortlistCommentsFeed from "../ShortlistCommentsFeed/ShortlistCommentsFeed";
 import SearchDetails from "../SearchDetails/SearchDetails";
+import { fetchShortlists, updateShortlist } from "../../redux/shortlists";
 
+// !BUG - the default shortlist does not load automatically
+function SingleShortlistView({ shortlistIdx }) {
+  const dispatch = useDispatch();
+console.log("shortlistIdx at top of SingleShortListView", shortlistIdx);
+  const [editForm, setEditForm] = useState(false);
+  const [activeFields, setActiveFields] = useState("edit-off");
+  const [formBorder, setFormBorder] = useState("border-off");
 
-function SingleShortlistView({shortlistIdx}) {
+  const userId = useSelector(state => state.session.user.id)
   
-  const [editForm, setEditForm] = useState(false)
-  const [activeFields, setActiveFields] = useState('edit-off')
-const [formBorder, setFormBorder] = useState('border-off')
-
-
-  const shortlist = useSelector((state) => state.shortlists.saved_lists[shortlistIdx]);
-
-  const [title, setTitle] = useState(shortlist.title)
+  const shortlist =  useSelector(
+    (state) => state.shortlists.saved_lists[shortlistIdx] 
+  )
 
   useEffect(()=>{
 
-   setTitle(shortlist.title)
+    if(userId && shortlistIdx){
+      dispatch(fetchShortlists(userId))
+    }
+  },[userId, dispatch, shortlistIdx])
 
+  // console.log(">>>> current shortlist in singleview:", shortlist);
+  const [title, setTitle] = useState(shortlist ? shortlist.title : null);
+  const [description, setDescription] = useState(shortlist ? shortlist.description : null);
 
-  },[shortlist])
+  useEffect(() => { 
 
+if(shortlist){
+  setTitle(shortlist.title);
+  setDescription(shortlist.description);
+}
+    
+  }, [shortlist, shortlistIdx]);
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    editSwitch();
 
-  const editSwitch = () =>{
-    editForm ? setEditForm(false) : setEditForm(true)
-    activeFields === 'edit-on' ? setActiveFields('edit-off') : setActiveFields('edit-off')
-    formBorder === 'border-on' ? setFormBorder('border-off') : setFormBorder('border-on')
-  }
+    const formData = {
+      title,
+      description,
+    };
 
-  const submitHandler = () =>{
+    const shortlistId = shortlist.id;
 
-  }
+    dispatch(updateShortlist(shortlistId, JSON.stringify(formData)));
+
+    
+  };
+
+  const editSwitch = () => {
+    if (editForm) {
+      setEditForm(false);
+      setActiveFields("edit-off");
+      setFormBorder("border-off");
+    } else {
+      setEditForm(true);
+      setActiveFields("edit-on");
+      setFormBorder("border-on");
+    }
+  };
 
   return (
     <>
-    <h2>Shortlist:</h2>
-      {shortlist ? (
+      <h2>Shortlist:</h2>
+      { shortlist ? (
         <>
-          
-          <form id='edit-shortlist-form' onSubmit={submitHandler}>
+          <form id="edit-shortlist-form" onSubmit={submitHandler}>
             <div className={formBorder}>
-            <textarea id='edit-shortlist-title' className={activeFields}  disabled={editForm === false} value={title} onChange={(e)=> setTitle(e.target.value)  }/>
+              <textarea
+                id="edit-shortlist-title"
+                className={activeFields}
+                disabled={editForm === false}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
             </div>
 
-           
+            <div className={formBorder}>
+              <textarea
+                id="edit-shortlist-desc"
+                className={activeFields}
+                disabled={editForm === false}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+
+            <button type={`button`} onClick={editSwitch}>{`Edit`}</button>
+            <button>Delete</button>
+            {editForm && <button type="submit">Save Changes</button>}
           </form>
-          
-          <button onClick={editSwitch}>Edit</button>
-          <button>Delete</button>
-          <p>{shortlist.description}</p>
 
           <div>Search Details</div>
           <SearchDetails params={shortlist} />
-          <ShortlistCommentsFeed shortlist={shortlist} /> 
+          <ShortlistCommentsFeed shortlist={shortlist} editForm={editForm} />
         </>
       ) : (
-        <></>
+        <> <p> Loading...</p></>
       )}
     </>
   );
