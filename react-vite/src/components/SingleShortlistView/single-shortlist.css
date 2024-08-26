@@ -1,21 +1,33 @@
 
 .edit-on {
-    background: transparent;
+    background: rgb(59, 59, 59);
     border:none;
     color: white;
-    font-size: 30px;
-    min-height: 100px;
-    max-width: 300px;
+    
   }
 
 .edit-off {
     background: transparent;
     border: none;
     color: white;
-    font-size: 30px;
-    min-height:100px;
-    max-width: 300px;
+    
   } 
+
+  #edit-shortlist-title{
+font-size: 30px;
+    min-height:100px;
+    width: 300px;
+
+  }
+
+  #edit-shortlist-desc{
+font-size: 20px;
+    min-height: 100px;
+    width: 400px;
+    
+
+  }
+
 
   .border-on{
 border: 1px solid gray;

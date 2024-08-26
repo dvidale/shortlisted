@@ -8,25 +8,28 @@ import SingleShortlistView from '../SingleShortlistView/SingleShortlistView'
 
 
 
-function MyShortlists(){
+function MyShortlists({saved_shortlists}){
  
     const dispatch = useDispatch()
 
-    const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
+    // const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
-    const firstIdx = Object.keys(saved_shortlists)[0]
-    // console.log(">>> firstIdx:", firstIdx);
+    const firstIdx = saved_shortlists && Object.keys(saved_shortlists).length > 0 ? Object.keys(saved_shortlists)[0] : null;
+
+    // console.log(">>> firstIdx assigned:", firstIdx);
     const user = useSelector(state => state.session.user) 
- 
-     
   
-    const [shortlistIdx, setShortlistIdx]= useState(firstIdx)
+    const [shortlistIdx, setShortlistIdx]= useState(firstIdx || null)
+
+
+    // console.log(">>> firstIdx as default:", firstIdx);
+    // console.log(">>>> shortlistIdx from MyShortlists:", shortlistIdx);
 
     useEffect(()=>{
-
+        
         dispatch(fetchShortlists(user.id))
 
-    },[dispatch, user, saved_shortlists])
+    },[dispatch, user])
 
 
 
@@ -35,19 +38,20 @@ function MyShortlists(){
         { Object.keys(saved_shortlists).length > 0 ?  (
             <> 
             <h1>My Shortlists</h1>
- 
+   
                 {Object.values(saved_shortlists).map( shortlist =>{
 
                     return(
 
-                        <> 
+                        
                             <div key={shortlist.id}>
-                            <button   value={shortlist.id}
+                            <button value={shortlist.id}
                             onClick={(e) => setShortlistIdx(e.target.value)}> 
                             {shortlist.title}</button>
+                            {/* {console.log(">>>> current shortlist in my-shortlist view:", shortlist)} */}
                       </div>
-                      
-        </>
+                       
+        
                     )
                 })}
                 <div id="single-shortlist-view">
@@ -55,7 +59,7 @@ function MyShortlists(){
                      
         </div>
                  
-                </>
+                </>  
                 ):(
                 <>
                    <h1>No Shortlists Yet?</h1> 
