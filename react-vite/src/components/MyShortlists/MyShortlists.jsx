@@ -19,7 +19,7 @@ function MyShortlists(){
     const user = useSelector(state => state.session.user) 
 
     
- 
+  
     const [shortlistIdx, setShortlistIdx]= useState(firstIdx)
 
     useEffect(()=>{
