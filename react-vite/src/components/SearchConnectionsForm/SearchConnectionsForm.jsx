@@ -1,59 +1,23 @@
-import { useState, useEffect } from "react"
-import { useDispatch, useSelector } from 'react-redux'
-import { buildShortlist } from "../../redux/connections";
+import { useState } from 'react';
+import { useDispatch} from 'react-redux'
+import { buildShortlist } from "../../redux/shortlists";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-function SearchConnectionsForm(){
+
+function SearchConnectionsForm({user}){
 
     const dispatch = useDispatch();
-    const userId = useSelector( state => state.session.user.id)
+    
 
 
-    const [location, setLocation] = useState('')
-    const [industry_area, setIndustryArea] = useState('')
-    const [ job_title, setJobTitle] = useState('')
+    const [location, setLocation] = useState(null)
+    const [industry_area, setIndustryArea] = useState(null)
+    const [job_title, setJobTitle] = useState(null)
     const [genre, setGenre] = useState(null)
-    
-    const [startDay, setStartDay] = useState('1')
-    const [maxStartDay, setMaxStartDay] = useState('30')
-    const [startMonth, setStartMonth] = useState('1')
-    const [startYear, setStartYear] = useState('2024')
-    const [endDay, setEndDay] = useState('1')
-    const [maxEndDay, setMaxEndDay] = useState('30')
-    const [endMonth, setEndMonth] = useState('1')
-    const [endYear, setEndYear] = useState('2024')
+    const [start_date, setStartDate] = useState(new Date())
+    const [end_date, setEndDate] = useState(null)
 
-    const [start_date, setStartDate] = useState('')
-    const [end_date, setEndDate] = useState('')
-
-
-    
-
-    useEffect(()=>{
-        const thirtyFirsts = ['1' , '3', '5', '7', '8' , '10' ,'12']
-        // if(startMonth === ('1' || '3'|| '5'|| '7'|| '8' || '10' ||'12')) setMaxStartDay('31')
-        if(thirtyFirsts.includes(startMonth)) setMaxStartDay('31')
-        if(startMonth === '2') setMaxStartDay('29')
-        
-        if(startMonth === ('4' || '6' || '9' || '11')) setMaxStartDay('30')
-
-
-        if(endMonth === ('1' || '3'|| '5'|| '7'|| '8' || '10' ||'12')) setMaxEndDay('31')
-        
-            if(endMonth === '2') setMaxEndDay('29')
-            
-            if(endMonth === ('4' || '6' || '9' || '11')) setMaxEndDay('30')
-
-    
-    },[startMonth, endMonth])
-
-
-    useEffect(()=>{
-
-
-        
-        setStartDate
-        setEndDate
-    },[])
 
 
    
@@ -65,30 +29,31 @@ function SearchConnectionsForm(){
             location,
             industry_area,
             job_title,
-            genre
-            // start_date,
-            // end_date
+            genre,
+            start_date: start_date.toISOString(),
+            end_date: end_date ? end_date.toISOString() : null
         }
 
-        dispatch(buildShortlist(userId, JSON.stringify(formData)))
+        dispatch(buildShortlist(user.id, JSON.stringify(formData)))
     }
 
 
 
     return(<>
-    
+
+    <h1>Build a Shortlist</h1>
         <form id='search-connections' method='POST' onSubmit={submitHandler}>
 
         <label htmlFor="job-titles"></label>
         <select name='job-titles' id='job-title-select' value={job_title} onChange={e => setJobTitle(e.target.value)}>
-        <option value="">Job Title </option>
+        <option value={null}>Job Title </option>
     <option value="Editor">Editor</option>
     <option value='Assistant Editor'>Assistant Editor</option>
     </select>
 
         <label htmlFor="industry-area"></label>
         <select name='industry-areas' id='industry-area-select' value={industry_area} onChange={e => setIndustryArea(e.target.value)}>
-        <option value="">Industry Area</option>
+        <option value={null}>Industry Area</option>
             <option value="Scripted Television">Scripted Television</option>
             <option value='Unscripted Television'>Unscripted Television</option>
             <option value='Dramatic Film'>Dramatic Film</option>
@@ -109,38 +74,32 @@ function SearchConnectionsForm(){
 
         <label htmlFor="location"></label>
         <select name='locations' id='location-select' value={location} onChange={e => setLocation(e.target.value)}>
-            <option value="">Location</option>
+            <option value={null}>Location</option>
             <option value="Los Angeles">Los Angeles</option>
             <option value='New York'>New York</option>
             <option value='Atlanta'>Atlanta</option>
             <option value='Remote'>Remote</option>
         </select>
 
+       
+
         <p>Start Date</p>
         <label htmlFor="start_date_month"></label>
-        <input type="number" min='1' max='12' value={startMonth} onChange={ e => setStartMonth(e.target.value)}/>
-
-        <label htmlFor="start_date_day"></label>
-        <input type="number" min='1' max={maxStartDay} value={startDay} onChange={ e => setStartDay(e.target.value)}/>
-
-        <label htmlFor="start_date_year"></label>
-        <input type="number" min='2024' max='2030' value={startYear} onChange={ e => setStartYear(e.target.value)}/>
-
+        <div>
+            <DatePicker selected={start_date} onChange={ start_date => setStartDate(start_date)}  />
+        </div>
 
         <p>End Date</p>
         <label htmlFor="end_date_month"></label>
-        <input type="number" min='1' max='12' value={endMonth} onChange={ e => setEndMonth(e.target.value)}/>
-
-        <label htmlFor="end_date_day"></label>
-        <input type="number" min='1' max={maxEndDay} value={endDay} onChange={ e => setEndDay(e.target.value)}/>
-
-        <label htmlFor="end_date_year"></label>
-        <input type="number" min='2024' max='2030' value={endYear} onChange={ e => setEndYear(e.target.value)}/>
+        <div>
+            <DatePicker selected={end_date} onChange={ end_date => setEndDate(end_date)}  />
+        </div>
            
     
        <button id='submit' type="submit">Search</button>
 
         </form>
+    
 
       
     </>)

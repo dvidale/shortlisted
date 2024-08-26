@@ -1,158 +1,160 @@
 from app.models import db, Booking, environment, SCHEMA
 from sqlalchemy.sql import text
 from datetime import datetime
+import pytz
+
 
 # Adds a demo user, you can add other users here if you want
 def seed_bookings():
-   
-    # John
+    tz = pytz.utc
+   # John's bookings
     booking_john_1 = Booking(
         user_id=4,
         shortlist_id=None,
-        start_date=datetime(2024, 8, 1),
-        end_date=datetime(2024, 8, 21),
+        start_date=datetime(2024, 8, 1, tzinfo=tz),
+        end_date=datetime(2024, 8, 21, tzinfo=tz),
     )
 
     booking_john_2 = Booking(
         user_id=4,
         shortlist_id=None,
-        start_date=datetime(2024, 9, 1),
-        end_date=datetime(2024, 11, 1),
+        start_date=datetime(2024, 9, 1, tzinfo=tz),
+        end_date=datetime(2024, 11, 1, tzinfo=tz),
     )
 
-    # Jane
+    # Jane's bookings
     booking_jane_1 = Booking(
         user_id=5,
         shortlist_id=None,
-        start_date=datetime(2024, 8, 22),
-        end_date=datetime(2024, 9, 12),
+        start_date=datetime(2024, 8, 22, tzinfo=tz),
+        end_date=datetime(2024, 9, 12, tzinfo=tz),
     )
 
     booking_jane_2 = Booking(
         user_id=5,
         shortlist_id=None,
-        start_date=datetime(2024, 10, 1),
-        end_date=datetime(2024, 12, 1),
+        start_date=datetime(2024, 10, 1, tzinfo=tz),
+        end_date=datetime(2024, 12, 1, tzinfo=tz),
     )
 
-    # Michael
+    # Michael's bookings
     booking_michael_1 = Booking(
         user_id=6,
         shortlist_id=None,
-        start_date=datetime(2024, 9, 5),
-        end_date=datetime(2024, 9, 26),
+        start_date=datetime(2024, 9, 5, tzinfo=tz),
+        end_date=datetime(2024, 9, 26, tzinfo=tz),
     )
 
     booking_michael_2 = Booking(
         user_id=6,
         shortlist_id=None,
-        start_date=datetime(2024, 11, 1),
-        end_date=datetime(2025, 1, 1),
+        start_date=datetime(2024, 11, 1, tzinfo=tz),
+        end_date=datetime(2025, 1, 1, tzinfo=tz),
     )
 
-    # Emily
+    # Emily's bookings
     booking_emily_1 = Booking(
         user_id=7,
         shortlist_id=None,
-        start_date=datetime(2024, 9, 20),
-        end_date=datetime(2024, 10, 10),
+        start_date=datetime(2024, 9, 20, tzinfo=tz),
+        end_date=datetime(2024, 10, 10, tzinfo=tz),
     )
 
     booking_emily_2 = Booking(
         user_id=7,
         shortlist_id=None,
-        start_date=datetime(2024, 11, 15),
-        end_date=datetime(2025, 1, 15),
+        start_date=datetime(2024, 11, 15, tzinfo=tz),
+        end_date=datetime(2025, 1, 15, tzinfo=tz),
     )
 
-    # David
+    # David's bookings
     booking_david_1 = Booking(
         user_id=8,
         shortlist_id=None,
-        start_date=datetime(2024, 10, 1),
-        end_date=datetime(2024, 10, 21),
+        start_date=datetime(2024, 10, 1, tzinfo=tz),
+        end_date=datetime(2024, 10, 21, tzinfo=tz),
     )
 
     booking_david_2 = Booking(
         user_id=8,
         shortlist_id=None,
-        start_date=datetime(2024, 12, 1),
-        end_date=datetime(2024, 2, 1),
+        start_date=datetime(2024, 12, 1, tzinfo=tz),
+        end_date=datetime(2025, 2, 1, tzinfo=tz),
     )
 
-    # Sarah
+    # Sarah's bookings
     booking_sarah_1 = Booking(
         user_id=9,
         shortlist_id=None,
-        start_date=datetime(2024, 10, 15),
-        end_date=datetime(2024, 11, 5),
+        start_date=datetime(2024, 10, 15, tzinfo=tz),
+        end_date=datetime(2024, 11, 5, tzinfo=tz),
     )
 
     booking_sarah_2 = Booking(
         user_id=9,
         shortlist_id=None,
-        start_date=datetime(2025, 1, 1),
-        end_date=datetime(2025, 3, 1),
+        start_date=datetime(2025, 1, 1, tzinfo=tz),
+        end_date=datetime(2025, 3, 1, tzinfo=tz),
     )
 
-    # Chris
+    # Chris's bookings
     booking_chris_1 = Booking(
         user_id=10,
         shortlist_id=None,
-        start_date=datetime(2024, 11, 1),
-        end_date=datetime(2024, 11, 21),
+        start_date=datetime(2024, 11, 1, tzinfo=tz),
+        end_date=datetime(2024, 11, 21, tzinfo=tz),
     )
 
     booking_chris_2 = Booking(
         user_id=10,
         shortlist_id=None,
-        start_date=datetime(2024, 1, 15),
-        end_date=datetime(2025, 3, 15),
+        start_date=datetime(2025, 1, 15, tzinfo=tz),
+        end_date=datetime(2025, 3, 15, tzinfo=tz),
     )
 
-    # Laura
+    # Laura's bookings
     booking_laura_1 = Booking(
         user_id=11,
         shortlist_id=None,
-        start_date=datetime(2024, 11, 5),
-        end_date=datetime(2024, 11, 25),
+        start_date=datetime(2024, 11, 5, tzinfo=tz),
+        end_date=datetime(2024, 11, 25, tzinfo=tz),
     )
 
     booking_laura_2 = Booking(
         user_id=11,
         shortlist_id=None,
-        start_date=datetime(2025, 2, 1),
-        end_date=datetime(2025, 4, 1),
+        start_date=datetime(2025, 2, 1, tzinfo=tz),
+        end_date=datetime(2025, 4, 1, tzinfo=tz),
     )
 
-    # Joshua
+    # Joshua's bookings
     booking_joshua_1 = Booking(
         user_id=12,
         shortlist_id=None,
-        start_date=datetime(2024, 11, 20),
-        end_date=datetime(2024, 12, 10),
+        start_date=datetime(2024, 11, 20, tzinfo=tz),
+        end_date=datetime(2024, 12, 10, tzinfo=tz),
     )
 
     booking_joshua_2 = Booking(
         user_id=12,
         shortlist_id=None,
-        start_date=datetime(2025, 1, 1),
-        end_date=datetime(2025, 2, 1),
+        start_date=datetime(2025, 1, 1, tzinfo=tz),
+        end_date=datetime(2025, 2, 1, tzinfo=tz),
     )
 
-    # Olivia
+    # Olivia's bookings
     booking_olivia_1 = Booking(
         user_id=13,
         shortlist_id=None,
-        start_date=datetime(2024, 12, 5),
-        end_date=datetime(2024, 12, 25),
+        start_date=datetime(2024, 12, 5, tzinfo=tz),
+        end_date=datetime(2024, 12, 25, tzinfo=tz),
     )
 
     booking_olivia_2 = Booking(
         user_id=13,
         shortlist_id=None,
-        start_date=datetime(2024, 12, 1),
-        end_date=datetime(2025, 1, 1),
+        start_date=datetime(2024, 12, 1, tzinfo=tz),
+        end_date=datetime(2025, 1, 1, tzinfo=tz),
     )
 
 
