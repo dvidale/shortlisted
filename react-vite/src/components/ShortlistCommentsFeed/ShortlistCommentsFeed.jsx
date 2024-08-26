@@ -6,14 +6,13 @@ function ShortlistCommentsFeed({shortlist, editForm}){
 
 
     const referralInfoObj = {}
-
-    for (let idx of shortlist.referral_idxs){
-        for (let name of shortlist.referral_name){
-
-            referralInfoObj[idx]=`${name[0]} ${name[1]}`
-        }
-    }
+    let i=0
     
+    for (let name of shortlist.referral_name){
+            let referral_id = shortlist.referral_idxs[i]
+            referralInfoObj[referral_id]=`${name[0]} ${name[1]}`
+            i++;
+        }
  
     
     
