@@ -9,5 +9,5 @@ def get_comments(id):
     get_comments = db.session.scalars(
         db.select(Comment).where(Comment.referral_id == id)
     ).all()
-    print(">>>>get comments:", get_comments)
-    return get_comments
+    
+    return [comment.to_dict() for comment in get_comments]
