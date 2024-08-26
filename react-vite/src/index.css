@@ -2,6 +2,8 @@
 :root{
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
+    background-color: black;
+    color: white;
 }
 
 a {
@@ -49,3 +51,4 @@ grid-row:2;
 .comment-tile{
     border: 3px solid pink
 }
+

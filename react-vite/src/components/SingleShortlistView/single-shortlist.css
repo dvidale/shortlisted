@@ -1,0 +1,27 @@
+
+.edit-on {
+    background: transparent;
+    border:none;
+    color: white;
+    font-size: 30px;
+    min-height: 100px;
+    max-width: 300px;
+  }
+
+.edit-off {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 30px;
+    min-height:100px;
+    max-width: 300px;
+  } 
+
+  .border-on{
+border: 1px solid gray;
+
+  }
+
+  .border-off{
+    border: 1px solid transparent;
+  }
