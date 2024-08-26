@@ -57,7 +57,7 @@ def save_shortlists():
         locationId = db.session.scalars( db.select(Location.id).where(Location.city == location)).first()
 
 
-        print(">>> data after queries", title, description, job_title_id, industry_area_id, genreId, locationId,created_by)
+        # print(">>> data after queries", title, description, job_title_id, industry_area_id, genreId, locationId,created_by)
         
         newShortlist = Shortlist(
             title= title,
@@ -71,11 +71,11 @@ def save_shortlists():
             created_by_id=created_by
         )
 
-        print(">>> newShortlist", newShortlist.to_dict()) 
+        # print(">>> newShortlist", newShortlist.to_dict()) 
 
         db.session.add(newShortlist)
         db.session.commit()
-
+# TODO PRIORTY!:  should we be returning the new shortlist? How is the new shortlist being added to the state??
         return {'message': 'shortlist saved successfully'}
     
     return {'error': save_shortlist_form.errors}
@@ -86,6 +86,7 @@ def save_shortlists():
 # referred_id
 # date_referred
 
+# * GET MY SHORTLISTS
 
 @shortlists_routes.route('/my-shortlists/<int:id>')
 def getShortlists(id):
@@ -95,3 +96,29 @@ def getShortlists(id):
 
 
     return [shortlist.single_view() for shortlist in shortlist_query]
+
+## * UPDATE A SHORTLIST
+
+@shortlists_routes.route('<int:id>', methods = ['PUT'])
+def updateShortlist(id):
+    
+    update_form = SaveShortlistForm()
+    update_form["csrf_token"].data = request.cookies["csrf_token"]
+
+    title = update_form.data['title']
+    description = update_form.data['description']
+
+    if update_form.validate_on_submit():
+       shortlist = db.session.scalars(
+           db.select(Shortlist).where(Shortlist.id == id)
+       ).first() 
+
+
+       shortlist.title = title
+       shortlist.description = description
+
+       db.session.commit()
+
+       return shortlist.single_view()
+
+    return {'error': update_form.errors}

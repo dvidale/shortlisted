@@ -2,7 +2,7 @@ import '../../../src/index.css'
 import CommentsTile from '../CommentsTile'
 
 
-function ShortlistCommentsFeed({shortlist}){
+function ShortlistCommentsFeed({shortlist, editForm}){
 
 
     const referralInfoObj = {}
@@ -25,8 +25,9 @@ function ShortlistCommentsFeed({shortlist}){
         {Object.keys(referralInfoObj).length > 0 && Object.entries(referralInfoObj).map(  ([idx, fullName]) => {
                 
             return (
+            
                 <div key={idx} className='comment-tile'>{fullName} 
-                <CommentsTile id={idx}/>
+                <CommentsTile id={idx}/> {editForm && <button>Delete</button>}
                  </div>
  
             )
