@@ -4,26 +4,41 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import ShortlistCommentsFeed from "../ShortlistCommentsFeed/ShortlistCommentsFeed";
 import SearchDetails from "../SearchDetails/SearchDetails";
-import { updateShortlist } from "../../redux/shortlists";
+import { fetchShortlists, updateShortlist } from "../../redux/shortlists";
 
+// !BUG - the default shortlist does not load automatically
 function SingleShortlistView({ shortlistIdx }) {
   const dispatch = useDispatch();
-
+console.log("shortlistIdx at top of SingleShortListView", shortlistIdx);
   const [editForm, setEditForm] = useState(false);
   const [activeFields, setActiveFields] = useState("edit-off");
   const [formBorder, setFormBorder] = useState("border-off");
 
-  const shortlist = useSelector(
-    (state) => state.shortlists.saved_lists[shortlistIdx]
-  );
-  // console.log(">>>> current shortlist in singleview:", shortlist);
-  const [title, setTitle] = useState(shortlist.title);
-  const [description, setDescription] = useState(shortlist.description);
+  const userId = useSelector(state => state.session.user.id)
+  
+  const shortlist =  useSelector(
+    (state) => state.shortlists.saved_lists[shortlistIdx] 
+  )
 
-  useEffect(() => {
-    setTitle(shortlist.title);
-    setDescription(shortlist.description);
-  }, [shortlist]);
+  useEffect(()=>{
+
+    if(userId && shortlistIdx){
+      dispatch(fetchShortlists(userId))
+    }
+  },[userId, dispatch, shortlistIdx])
+
+  // console.log(">>>> current shortlist in singleview:", shortlist);
+  const [title, setTitle] = useState(shortlist ? shortlist.title : null);
+  const [description, setDescription] = useState(shortlist ? shortlist.description : null);
+
+  useEffect(() => { 
+
+if(shortlist){
+  setTitle(shortlist.title);
+  setDescription(shortlist.description);
+}
+    
+  }, [shortlist, shortlistIdx]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -38,7 +53,7 @@ function SingleShortlistView({ shortlistIdx }) {
 
     dispatch(updateShortlist(shortlistId, JSON.stringify(formData)));
 
-    // console.log(">>>> submit successful");
+    
   };
 
   const editSwitch = () => {
@@ -56,7 +71,7 @@ function SingleShortlistView({ shortlistIdx }) {
   return (
     <>
       <h2>Shortlist:</h2>
-      {shortlist ? (
+      { shortlist ? (
         <>
           <form id="edit-shortlist-form" onSubmit={submitHandler}>
             <div className={formBorder}>
@@ -89,7 +104,7 @@ function SingleShortlistView({ shortlistIdx }) {
           <ShortlistCommentsFeed shortlist={shortlist} editForm={editForm} />
         </>
       ) : (
-        <></>
+        <> <p> Loading...</p></>
       )}
     </>
   );

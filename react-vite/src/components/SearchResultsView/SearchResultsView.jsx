@@ -35,7 +35,9 @@ function SearchResultsView({user}){
             location: searchParams.location,
             start_date: searchParams.start_date,
             end_date: searchParams.end_date,
-            created_by:user.id
+            created_by:user.id,
+            referrals: searchResults
+           
         }
 
         dispatch(saveShortlist(JSON.stringify(shortlistData)))
@@ -48,10 +50,6 @@ function SearchResultsView({user}){
        <SearchDetails params={searchParams}/>
         
         
-
-
-
-
         <form method={'POST'} onSubmit={submitHandler}>
             <input type='text' 
             name='shortlist-name' 
@@ -61,7 +59,7 @@ function SearchResultsView({user}){
             <label htmlFor="description">Description</label>
             <textarea id='description-box' name="description" placeholder="Add any notes about the job." value={description} 
             onChange={e => setDescription(e.target.value)}/>
-            <button type='submit'>Save</button>
+            <button id='save-shortlist-btn' type='submit'>Save</button>
         </form>
 
 
