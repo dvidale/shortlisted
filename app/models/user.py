@@ -44,7 +44,7 @@ class User(db.Model, UserMixin):
     shortlists = db.relationship('Shortlist', cascade='all, delete-orphan', backref = 'users')
 
     shortlistings = db.relationship('Shortlist',
-    secondary='referrals', back_populates='shortlist_referrals' )
+    secondary=add_prefix_for_prod('referrals'), back_populates='shortlist_referrals' )
 
     bookings = db.relationship('Booking', cascade='all, delete-orphan')
 
