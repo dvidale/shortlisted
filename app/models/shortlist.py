@@ -44,6 +44,10 @@ class Shortlist(db.Model):
 
     referrals = db.relationship("Referral", cascade="all, delete-orphan")
 
+    shortlist_referrals = db.relationship('User', secondary='referrals', back_populates='shortlistings')
+
+    
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -88,7 +92,10 @@ class Shortlist(db.Model):
             "location": db.session.scalars(
                 db.select(Location.city).where(Location.id == self.location_id)
             ).first(),
-            "referrals": self.referral_list()
+            'referral_name':[(user.first_name, user.last_name) for user in self.shortlist_referrals],
+            'referral_idxs':db.session.scalars(
+                db.select(Referral.id).where(Referral.shortlist_id == self.id)
+            ).all()
             
             
         }

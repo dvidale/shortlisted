@@ -1,22 +1,37 @@
+import '../../../src/index.css'
 import CommentsTile from '../CommentsTile'
 
 
 function ShortlistCommentsFeed({shortlist}){
 
 
+    const referralInfoObj = {}
 
+    for (let idx of shortlist.referral_idxs){
+        for (let name of shortlist.referral_name){
 
+            referralInfoObj[idx]=`${name[0]} ${name[1]}`
+        }
+    }
+    
+ 
+    
+    
+    
     return(
         <>
         <hr/>
         {/* For every person on the list, return a comments tile */}
-        {shortlist.referrals.map( referral => {
+        {Object.keys(referralInfoObj).length > 0 && Object.entries(referralInfoObj).map(  ([idx, fullName]) => {
+                
             return (
-                <div key={referral}>Referral # {referral}  </div>
-
+                <div key={idx} className='comment-tile'>{fullName} 
+                <CommentsTile id={idx}/>
+                 </div>
+ 
             )
         })}
-        <CommentsTile/>
+        
         </>
     )
 }

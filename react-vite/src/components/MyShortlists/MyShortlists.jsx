@@ -9,17 +9,17 @@ import SingleShortlistView from '../SingleShortlistView/SingleShortlistView'
 
 
 function MyShortlists(){
-
+ 
     const dispatch = useDispatch()
 
     const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
     const firstIdx = Object.keys(saved_shortlists)[0]
-    console.log(">>> firstIdx:", firstIdx);
+    // console.log(">>> firstIdx:", firstIdx);
     const user = useSelector(state => state.session.user) 
 
     
-
+ 
     const [shortlistIdx, setShortlistIdx]= useState(firstIdx)
 
     useEffect(()=>{
@@ -35,7 +35,7 @@ function MyShortlists(){
         { Object.keys(saved_shortlists).length > 0 ?  (
             <> 
             <h1>My Shortlists</h1>
-
+ 
                 {Object.values(saved_shortlists).map( shortlist =>{
 
                     return(
@@ -52,7 +52,7 @@ function MyShortlists(){
                 })}
                 <div id="single-shortlist-view">
         <SingleShortlistView shortlistIdx={shortlistIdx}/>
-                 
+                     
         </div>
                  
                 </>
@@ -63,7 +63,7 @@ function MyShortlists(){
                 </>)
         }
        
-        
+         
         
         </>
     )
