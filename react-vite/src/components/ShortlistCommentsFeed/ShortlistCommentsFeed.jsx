@@ -1,5 +1,6 @@
 import '../../../src/index.css'
 import CommentsTile from '../CommentsTile'
+import { useModal } from '../../context/Modal'
 
 
 function ShortlistCommentsFeed({shortlist, editForm}){
@@ -9,11 +10,15 @@ function ShortlistCommentsFeed({shortlist, editForm}){
     let i=0
     
     for (let name of shortlist.referral_name){
-            let referral_id = shortlist.referral_idxs[i]
+            const referral_id = shortlist.referral_idxs[i]
             referralInfoObj[referral_id]=`${name[0]} ${name[1]}`
             i++;
         }
  
+        const deleteReferralHandler =() =>{
+            
+
+        }
     
     
     
@@ -26,7 +31,7 @@ function ShortlistCommentsFeed({shortlist, editForm}){
             return (
             
                 <div key={idx} className='comment-tile'>{fullName} 
-                <CommentsTile id={idx}/> {editForm && <button>Delete</button>}
+                <CommentsTile id={idx}/> {editForm && <button className='delete-comment-btn' onClick={()=> deleteReferralHandler(idx)}>Delete</button>}
                  </div>
  
             )
