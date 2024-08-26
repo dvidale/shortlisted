@@ -15,7 +15,7 @@ function SingleShortlistView({shortlistIdx}) {
       {shortlist ? (
         <>
           
-
+ 
           <h1>{shortlist.title} </h1>
           <button>Edit</button>
           <button>Delete</button>
