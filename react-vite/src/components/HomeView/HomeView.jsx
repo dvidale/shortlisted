@@ -16,8 +16,11 @@ const user = useSelector(state => state.session.user)
 
     
     useEffect(()=>{
-
-        dispatch(fetchShortlists(user.id))
+        
+        if(user){
+            dispatch(fetchShortlists(user.id))
+        }
+        
 
     },[dispatch, user])
 
