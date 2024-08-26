@@ -17,8 +17,8 @@ function MyShortlists(){
     const firstIdx = Object.keys(saved_shortlists)[0]
     // console.log(">>> firstIdx:", firstIdx);
     const user = useSelector(state => state.session.user) 
-
-    
+ 
+     
   
     const [shortlistIdx, setShortlistIdx]= useState(firstIdx)
 
@@ -42,7 +42,7 @@ function MyShortlists(){
 
                         <> 
                             <div key={shortlist.id}>
-                            <button key={shortlist.id}  value={shortlist.id}
+                            <button   value={shortlist.id}
                             onClick={(e) => setShortlistIdx(e.target.value)}> 
                             {shortlist.title}</button>
                       </div>
@@ -58,7 +58,8 @@ function MyShortlists(){
                 </>
                 ):(
                 <>
-                   <p>No Data</p> 
+                   <h1>No Shortlists Yet?</h1> 
+                   <h1>Create one!</h1>
                    
                 </>)
         }

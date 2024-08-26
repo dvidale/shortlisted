@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 import datetime
+from app.models.user import User
 
 class Comment(db.Model):
     __tablename__ = 'comments'
@@ -18,4 +19,17 @@ class Comment(db.Model):
 
     referrals = db.relationship('Referral', back_populates = 'comments')
 
-   
+    def to_dict(self):
+        return{
+            'id': self.id,
+            'shortlist_id': self.shortlist_id,
+            'commenter_id': self.commenter_id,
+            'referral_id': self.referral_id,
+            'commenter_name':db.session.scalars(
+                db.select(User.first_name).where(User.id == self.commenter_id)
+            ).first(),
+            'text': self.text,
+            'createdAt': self.createdAt,
+            'updatedAt': self.updatedAt
+
+        }
