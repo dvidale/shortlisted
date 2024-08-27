@@ -1,19 +1,29 @@
 import '../../../src/index.css'
 import CommentsTile from '../CommentsTile'
+import { useModal } from '../../context/Modal'
+import DeleteReferralModal from '../DeleteReferralModal/DeleteReferralModal';
+import { useSelector } from 'react-redux';
 
 
 function ShortlistCommentsFeed({shortlist, editForm}){
 
+    const { setModalContent } = useModal();
+
+    const userId = useSelector(state => state.session.user.id)
 
     const referralInfoObj = {}
     let i=0
     
     for (let name of shortlist.referral_name){
-            let referral_id = shortlist.referral_idxs[i]
+            const referral_id = shortlist.referral_idxs[i]
             referralInfoObj[referral_id]=`${name[0]} ${name[1]}`
             i++;
         }
  
+        const deleteReferralHandler =(id, full_name, user_id) =>{
+
+            setModalContent(<DeleteReferralModal idx={id} userId={user_id} fullName={full_name}/>)
+        }
     
     
     
@@ -26,7 +36,7 @@ function ShortlistCommentsFeed({shortlist, editForm}){
             return (
             
                 <div key={idx} className='comment-tile'>{fullName} 
-                <CommentsTile id={idx}/> {editForm && <button>Delete</button>}
+                <CommentsTile id={idx}/> {editForm && <button className='delete-referral-btn' onClick={()=> deleteReferralHandler(idx, fullName, userId)}>Delete</button>}
                  </div>
  
             )

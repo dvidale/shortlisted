@@ -2,6 +2,9 @@ const BUILD_SHORTLIST = '/shortlists/BUILD_SHORTLIST'
 const SAVE_SHORTLIST = '/shortlists/SAVE_SHORTLIST'
 const GET_SHORTLISTS = '/shortlists/GET_SHORTLISTS'
 const UPDATE_SHORTLIST = '/shortlists/UPDATE_SHORTLIST'
+const DELETE_SHORTLIST = '/shortlists/DELETE_SHORTLIST'
+
+
 
 export const buildAShortlist = (data,params) => {
 
@@ -34,6 +37,13 @@ export const updateAShortlist = (data) =>{
     return{
         type: UPDATE_SHORTLIST,
         payload: data
+    }
+}
+
+export const deleteAShortlist = (id) =>{
+    return{
+        type: DELETE_SHORTLIST,
+        payload: id
     }
 }
 
@@ -99,6 +109,7 @@ const response = await fetch(url)
 
 
 if(response.ok){
+    console.log(">>> Fetch dispatched and returned succesfully");
     // console.log(">>>> response in the fetch shortlists thunk", response);
     const data = await response.json()
     // console.log(">>> data returned from get shortlists route:", data);
@@ -132,6 +143,43 @@ export const updateShortlist = (id, formData) => async (dispatch) => {
 
 
 
+}
+
+
+export const deleteShortlist = (id) => async (dispatch)=> {
+
+const url = `/api/shortlists/${id}`
+const method = 'DELETE'
+const options = {method}
+
+const response = await fetch(url, options)
+
+if(response.ok){
+
+    const data = await response.json()
+
+    dispatch(deleteAShortlist(id))
+
+    return data
+
+}
+
+}
+
+
+export const deleteReferral = (id) => async ()=>{
+
+    const url = `/api/shortlists/referrals/${id}`
+    const method = 'DELETE'
+    const options = {method}
+
+    const response = await fetch(url, options)
+
+    if(response.ok){
+
+        const data = await response.json()
+        return data
+    }
 }
 
 /*-------------------
@@ -170,6 +218,12 @@ const shortlistsReducer = (state = initialState, action) =>{
             newState.saved_lists[shortlist.id] = shortlist
             return newState;
 
+        }
+        case DELETE_SHORTLIST:{
+            const newState ={...state}
+            const id = action.payload
+            delete newState.saved_lists[id];
+            return newState;
         }
         default:
             return state;

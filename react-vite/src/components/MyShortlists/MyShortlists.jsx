@@ -49,6 +49,11 @@ function MyShortlists({saved_shortlists}){
                             onClick={(e) => setShortlistIdx(e.target.value)}> 
                             {shortlist.title}</button>
                             {/* {console.log(">>>> current shortlist in my-shortlist view:", shortlist)} */}
+
+                            <div>
+                                <button>Edit</button>
+                                <button>Delete</button>
+                            </div>
                       </div>
                        
         
