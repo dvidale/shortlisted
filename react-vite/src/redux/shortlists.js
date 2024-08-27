@@ -167,9 +167,9 @@ if(response.ok){
 }
 
 
-export const deleteReferral =(id) => async ()=>{
+export const deleteReferral = (id) => async ()=>{
 
-    const url = `/shortlists/referrals/${id}`
+    const url = `/api/shortlists/referrals/${id}`
     const method = 'DELETE'
     const options = {method}
 
