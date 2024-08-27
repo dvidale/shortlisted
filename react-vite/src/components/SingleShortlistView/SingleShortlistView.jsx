@@ -5,39 +5,45 @@ import { useEffect, useState } from "react";
 import ShortlistCommentsFeed from "../ShortlistCommentsFeed/ShortlistCommentsFeed";
 import SearchDetails from "../SearchDetails/SearchDetails";
 import { fetchShortlists, updateShortlist } from "../../redux/shortlists";
+import { useModal } from "../../context/Modal";
+import DeleteShortlistModal from "../DeleteShortlistModal/DeleteShortlistModal";
+
+
 
 // !BUG - the default shortlist does not load automatically
 function SingleShortlistView({ shortlistIdx }) {
   const dispatch = useDispatch();
-console.log("shortlistIdx at top of SingleShortListView", shortlistIdx);
+
+  const { setModalContent } = useModal();
+
+  console.log("shortlistIdx at top of SingleShortListView", shortlistIdx);
   const [editForm, setEditForm] = useState(false);
   const [activeFields, setActiveFields] = useState("edit-off");
   const [formBorder, setFormBorder] = useState("border-off");
 
-  const userId = useSelector(state => state.session.user.id)
-  
-  const shortlist =  useSelector(
-    (state) => state.shortlists.saved_lists[shortlistIdx] 
-  )
+  const userId = useSelector((state) => state.session.user.id);
 
-  useEffect(()=>{
+  const shortlist = useSelector(
+    (state) => state.shortlists.saved_lists[shortlistIdx]
+  );
 
-    if(userId && shortlistIdx){
-      dispatch(fetchShortlists(userId))
+  useEffect(() => {
+    if (userId && shortlistIdx) {
+      dispatch(fetchShortlists(userId));
     }
-  },[userId, dispatch, shortlistIdx])
+  }, [userId, dispatch, shortlistIdx]);
 
   // console.log(">>>> current shortlist in singleview:", shortlist);
   const [title, setTitle] = useState(shortlist ? shortlist.title : null);
-  const [description, setDescription] = useState(shortlist ? shortlist.description : null);
+  const [description, setDescription] = useState(
+    shortlist ? shortlist.description : null
+  );
 
-  useEffect(() => { 
-
-if(shortlist){
-  setTitle(shortlist.title);
-  setDescription(shortlist.description);
-}
-    
+  useEffect(() => {
+    if (shortlist) {
+      setTitle(shortlist.title);
+      setDescription(shortlist.description);
+    }
   }, [shortlist, shortlistIdx]);
 
   const submitHandler = (e) => {
@@ -52,8 +58,6 @@ if(shortlist){
     const shortlistId = shortlist.id;
 
     dispatch(updateShortlist(shortlistId, JSON.stringify(formData)));
-
-    
   };
 
   const editSwitch = () => {
@@ -68,10 +72,15 @@ if(shortlist){
     }
   };
 
+  const handleDelete = (shortlist) => {
+
+    setModalContent(<DeleteShortlistModal userId={userId} shortlist={shortlist}/>)
+  };
+
   return (
     <>
       <h2>Shortlist:</h2>
-      { shortlist ? (
+      {shortlist ? (
         <>
           <form id="edit-shortlist-form" onSubmit={submitHandler}>
             <div className={formBorder}>
@@ -95,7 +104,12 @@ if(shortlist){
             </div>
 
             <button type={`button`} onClick={editSwitch}>{`Edit`}</button>
-            <button>Delete</button>
+            <button
+              className="single-shortlist-delete-btn"
+              onClick={() => handleDelete(shortlist, shortlist.id)}
+            >
+              Delete
+            </button>
             {editForm && <button type="submit">Save Changes</button>}
           </form>
 
@@ -104,7 +118,10 @@ if(shortlist){
           <ShortlistCommentsFeed shortlist={shortlist} editForm={editForm} />
         </>
       ) : (
-        <> <p> Loading...</p></>
+        <>
+          {" "}
+          <p> Loading...</p>
+        </>
       )}
     </>
   );

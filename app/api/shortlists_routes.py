@@ -139,3 +139,32 @@ def updateShortlist(id):
        return shortlist.single_view()
 
     return {'error': update_form.errors}
+
+
+# * DELETE A SHORTLIST
+@shortlists_routes.route('/<int:id>', methods=['DELETE'])
+def deleteShortlist(id):
+
+    target_shortlist = db.session.scalars(
+        db.select(Shortlist).where(Shortlist.id == id)
+    ).first()
+
+
+    db.session.delete(target_shortlist)
+    db.session.commit()
+
+    return {'message': "Shortlist deleted successfully"}
+
+# *DELETE A REFERRAL FROM A SHORTLIST
+@shortlists_routes.route('/referrals/<int:id>', methods=['DELETE'])
+def deleteReferral(id):
+
+    target_referral = db.session.scalars(
+        db.select(Referral).where(Referral.id == id)
+        ).first()
+    
+    db.session.delete(target_referral)
+    db.session.commit()
+
+    return {"message": "Shortlist member deleted successfully"}
+    
