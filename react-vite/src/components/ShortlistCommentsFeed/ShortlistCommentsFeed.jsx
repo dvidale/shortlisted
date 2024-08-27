@@ -36,7 +36,7 @@ function ShortlistCommentsFeed({shortlist, editForm}){
             return (
             
                 <div key={idx} className='comment-tile'>{fullName} 
-                <CommentsTile id={idx}/> {editForm && <button className='delete-referral-btn' onClick={()=> deleteReferralHandler(idx, fullName, userId)}>Delete</button>}
+                {editForm && <button className='delete-referral-btn' onClick={()=> deleteReferralHandler(idx, fullName, userId)}>Delete</button>} <CommentsTile shortlist={shortlist} id={idx}/>
                  </div>
  
             )

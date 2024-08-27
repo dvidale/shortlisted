@@ -35,6 +35,7 @@ function SearchConnectionsForm({user}){
         }
 
         dispatch(buildShortlist(user.id, JSON.stringify(formData)))
+      
     }
 
 
