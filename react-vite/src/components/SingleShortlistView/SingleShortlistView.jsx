@@ -16,7 +16,7 @@ function SingleShortlistView({ shortlistIdx }) {
 
   const { setModalContent } = useModal();
 
-  console.log("shortlistIdx at top of SingleShortListView", shortlistIdx);
+  // console.log("shortlistIdx at top of SingleShortListView", shortlistIdx);
   const [editForm, setEditForm] = useState(false);
   const [activeFields, setActiveFields] = useState("edit-off");
   const [formBorder, setFormBorder] = useState("border-off");
@@ -26,6 +26,8 @@ function SingleShortlistView({ shortlistIdx }) {
   const shortlist = useSelector(
     (state) => state.shortlists.saved_lists[shortlistIdx]
   );
+
+  
 
   useEffect(() => {
     if (userId && shortlistIdx) {
@@ -104,7 +106,7 @@ function SingleShortlistView({ shortlistIdx }) {
             </div>
 
             <button type={`button`} onClick={editSwitch}>{`Edit`}</button>
-            <button
+            <button disabled={editForm}
               className="single-shortlist-delete-btn"
               onClick={() => handleDelete(shortlist, shortlist.id)}
             >

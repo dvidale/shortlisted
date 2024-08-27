@@ -18,8 +18,59 @@ function SearchResultsView({user}){
 
     const searchParams = useSelector(state => state.shortlists.parameters)
 
-    
+    const availCheck = (connection => {
+        
+        let noConflict = true
+        let i = 0
 
+        if (connection['bookings'].length === 0) return noConflict;
+
+        while(noConflict && i < connection['bookings'].length){
+            const booking = connection['bookings'][i]
+            const [ bookingStart, bookingEnd ] = booking
+            const booking_start = new Date(bookingStart)
+            const booking_end = new Date(bookingEnd)
+            const paramsStart = new Date(searchParams['start_date'])
+            const paramsEndCheck = searchParams['end_date']
+            const paramsEnd = paramsEndCheck ? new Date(paramsEndCheck) : null
+            
+            // console.log(">>> connections being checked for avail:", connection.first_name);
+            // console.log(">>>booking_start", booking_start);
+            // console.log(">>> booking_end", booking_end);
+            // console.log(">>>> paramsStart:", paramsStart);
+
+            if(booking_start < paramsStart && paramsStart < booking_end ) noConflict = false
+            // checks if start date overlaps with a current booking
+
+            if(paramsEnd !== null){
+                // console.log(">>> non-null paramsEnd", paramsEnd);
+                if(booking_start < paramsEnd && paramsEnd < booking_end ) noConflict = false
+                // checks if the job ending overlaps with current booking dates
+
+                if(booking_start < paramsStart && paramsEnd < booking_end) noConflict = false
+                // checks for current booking wrapping around job opp
+
+                if(paramsStart < booking_start && booking_end < paramsEnd) noConflict = false
+                // checks if job opp wraps around current booking
+            }
+            
+            i++
+        }
+
+        return noConflict;
+
+
+       
+
+            
+    })
+            
+    let avail_filtered_results = []
+
+    if(searchResults.length > 0 && (searchResults !== null)){
+         avail_filtered_results = searchResults.filter(connection => availCheck(connection))
+
+    }
     
 
     const submitHandler = (e)=>{
@@ -65,12 +116,13 @@ function SearchResultsView({user}){
 
         
         {/*  Array.map of returned results tiles */}
-        {searchResults.map( result =>{
+        {avail_filtered_results.length > 0 ? avail_filtered_results.map( result =>{
             return (
             
                 <div key={result.id}>{result.first_name}</div>
             )
-        })}
+        }):
+        <p>No one matches this search.</p>}
         </>
     )
 }
