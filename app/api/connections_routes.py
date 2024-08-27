@@ -6,6 +6,7 @@ from dateutil import parser
 
 connections_routes = Blueprint('connections', __name__)
 
+
 # * BUILD A SHORTLIST
 @connections_routes.route('/<int:id>', methods=['POST'])
 def search_connections(id):
@@ -32,13 +33,13 @@ def search_connections(id):
 
         request_data = request.json
         # .json turns request data into a dict
-        start_date = request_data['start_date']
-        end_date = request_data['end_date']
+        # start_date = request_data['start_date']
+        # end_date = request_data['end_date']
 
-        startDate = parser.parse(start_date)
+        # startDate = parser.parse(start_date)
 
-        if end_date != None:
-            endDate = parser.parse(end_date)
+        # if end_date != None:
+        #     endDate = parser.parse(end_date)
 
         # if a parameter is present add its filter to filter list, if not, add its anti-filter
         location_matched = filter( lambda user: location[0] in user['locations'], user_network)
@@ -47,11 +48,9 @@ def search_connections(id):
 
         job_title_matched = filter(lambda user: job_title[0] in user['job_title'], industry_matched)
 
-        genre_matched = None
-
         if(genre[0] != 'None'):
 
-            genre_matched = filter(lambda user: genre[0] in user['genres'], industry_matched)
+            genre_matched = filter(lambda user: genre[0] in user['genres'], job_title_matched)
         else:
             genre_matched = job_title_matched
 
@@ -81,14 +80,14 @@ def search_connections(id):
                         return True
     
         
-        # avail_matched = filter(lambda user: availCheck(user), genre_matched)
+        avail_matched = filter(lambda user: availCheck(user), genre_matched)
 
         
 
 
 
         search_results = list(genre_matched)
-        print(">>>>>> search results", search_results)
+        # print(">>>>>> search results", search_results)
         return search_results
 
 
