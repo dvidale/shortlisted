@@ -33,3 +33,5 @@ class Comment(db.Model):
             'updatedAt': self.updatedAt
 
         }
+    
+    
