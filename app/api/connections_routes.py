@@ -54,33 +54,34 @@ def search_connections(id):
         else:
             genre_matched = job_title_matched
 
-        def availCheck(user):
-            if len(user['bookings']) == 0:
-                return True
-            else:
+# ? Moved availability checking to frontend for easier date object comparisons
+        # def availCheck(user):
+        #     if len(user['bookings']) == 0:
+        #         return True
+        #     else:
                 
-                for booking in user['bookings']:
-                    bookingStart, bookingEnd = booking
-                    print(">>>> user's current booking", bookingStart, ", ", bookingEnd)
-                    print(">>>> job start date:", startDate)
-                    if bookingStart < startDate < bookingEnd: #checks if start date falls in the middle of current booking
-                            return False
-                    if end_date != None:
-                        if bookingStart < endDate < bookingEnd: #checks if the job ending overlaps with current booking dates
-                            return False
-                        if bookingStart < startDate and endDate < bookingEnd: #checks for current booking wrapping around job opp
-                            return False
-                        if startDate < bookingStart and bookingEnd < endDate: #checks if job opp wraps around current booking
-                            return False
-                        if startDate < bookingStart < endDate: #checks if current booking starts conflicts with job dates
-                            return False
-                        if startDate < bookingEnd < endDate: #checks if current booking ending conflicts with job dates
-                            return False 
-                    else:
-                        return True
+        #         for booking in user['bookings']:
+        #             bookingStart, bookingEnd = booking
+        #             print(">>>> user's current booking", bookingStart, ", ", bookingEnd)
+        #             print(">>>> job start date:", startDate)
+        #             if bookingStart < startDate < bookingEnd: #checks if start date falls in the middle of current booking
+        #                     return False
+        #             if end_date != None:
+        #                 if bookingStart < endDate < bookingEnd: #checks if the job ending overlaps with current booking dates
+        #                     return False
+        #                 if bookingStart < startDate and endDate < bookingEnd: #checks for current booking wrapping around job opp
+        #                     return False
+        #                 if startDate < bookingStart and bookingEnd < endDate: #checks if job opp wraps around current booking
+        #                     return False
+        #                 if startDate < bookingStart < endDate: #checks if current booking starts conflicts with job dates
+        #                     return False
+        #                 if startDate < bookingEnd < endDate: #checks if current booking ending conflicts with job dates
+        #                     return False 
+        #             else:
+        #                 return True
     
         
-        avail_matched = filter(lambda user: availCheck(user), genre_matched)
+        # avail_matched = filter(lambda user: availCheck(user), genre_matched)
 
         
 
