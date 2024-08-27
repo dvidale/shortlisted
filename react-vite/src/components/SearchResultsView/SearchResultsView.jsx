@@ -31,14 +31,28 @@ function SearchResultsView({user}){
             const booking_start = new Date(bookingStart)
             const booking_end = new Date(bookingEnd)
             const paramsStart = new Date(searchParams['start_date'])
+            const paramsEndCheck = searchParams['end_date']
+            const paramsEnd = paramsEndCheck ? new Date(paramsEndCheck) : null
             
-            console.log(">>> connections being checked for avail:", connection.first_name);
-            console.log(">>>booking_start", booking_start);
-            console.log(">>> booking_end", booking_end);
-            console.log(">>>> paramsStart:", paramsStart);
+            // console.log(">>> connections being checked for avail:", connection.first_name);
+            // console.log(">>>booking_start", booking_start);
+            // console.log(">>> booking_end", booking_end);
+            // console.log(">>>> paramsStart:", paramsStart);
 
             if(booking_start < paramsStart && paramsStart < booking_end ) noConflict = false
+            // checks if start date overlaps with a current booking
 
+            if(paramsEnd !== null){
+                // console.log(">>> non-null paramsEnd", paramsEnd);
+                if(booking_start < paramsEnd && paramsEnd < booking_end ) noConflict = false
+                // checks if the job ending overlaps with current booking dates
+
+                if(booking_start < paramsStart && paramsEnd < booking_end) noConflict = false
+                // checks for current booking wrapping around job opp
+
+                if(paramsStart < booking_start && booking_end < paramsEnd) noConflict = false
+                // checks if job opp wraps around current booking
+            }
             
             i++
         }
