@@ -72,9 +72,9 @@ function SingleShortlistView({ shortlistIdx }) {
     }
   };
 
-  const handleDelete = (shortlist, shortlistId) => {
+  const handleDelete = (shortlist) => {
 
-    setModalContent(<DeleteShortlistModal userId={userId} shortlist={shortlist} shortlistId={shortlistId}/>)
+    setModalContent(<DeleteShortlistModal userId={userId} shortlist={shortlist}/>)
   };
 
   return (
