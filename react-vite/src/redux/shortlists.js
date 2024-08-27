@@ -109,7 +109,7 @@ const response = await fetch(url)
 
 
 if(response.ok){
-    console.log(">>> Fetch dispatched and returned succesfully");
+    // console.log(">>> Fetch dispatched and returned succesfully");
     // console.log(">>>> response in the fetch shortlists thunk", response);
     const data = await response.json()
     // console.log(">>> data returned from get shortlists route:", data);
