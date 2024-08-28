@@ -86,7 +86,7 @@ const formData = {
     <button id='new-shortlist-btn' onClick={() =>toggleFormView()}>
     <h1> New Shortlist <span className='toggle-symbol'>{toggleSymbol ? `+` : `-`}</span></h1>
     </button>
-        <form id='new-shortlist-form' className={searchFormView ? "hidden-panel" : "visibile-panel"} method='POST' onSubmit={submitHandler}>
+        <form id='new-shortlist-form' className={searchFormView ? "hide-form" : "show-form"} method='POST' onSubmit={submitHandler}>
         <div>
         <label htmlFor="job-titles">
         <select name='job-titles' id='job-title-select' value={job_title} onChange={e => setJobTitle(e.target.value)} className='create-shortlist-dropdown'>

@@ -1,34 +1,28 @@
 
 import '../../../src/index.css'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchShortlists } from '../../redux/shortlists'
-import SingleShortlistView from '../SingleShortlistView/SingleShortlistView'
+
 
 // import { createContext } from 'react'
 
 
 
-function MyShortlists({saved_shortlists}){
+function MyShortlists({setShortlistIdx, saved_shortlists, setEditForm}){
  
     const dispatch = useDispatch()
 
     // const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
-    const firstIdx = saved_shortlists && Object.keys(saved_shortlists).length > 0 ? Object.keys(saved_shortlists)[0] : null;
-
-    // console.log(">>> firstIdx assigned:", firstIdx);
+ 
     const user = useSelector(state => state.session.user) 
     
-    const [shortlistIdx, setShortlistIdx]= useState(firstIdx || null)
-    const [editForm, setEditForm] = useState(false);
-
-    // console.log(">>> firstIdx as default:", firstIdx);
-    // console.log(">>>> shortlistIdx from MyShortlists:", shortlistIdx);
-
-
     
+    
+
+     
 const switchShortlistAndReset = (e)=>{
 
     setEditForm(false)
@@ -73,10 +67,10 @@ const switchShortlistAndReset = (e)=>{
         
                     )
                 })}
-                <div id="single-shortlist-view">
+                {/* <div id="single-shortlist-view">
         <SingleShortlistView setEditForm={setEditForm} editForm={editForm} shortlistIdx={shortlistIdx}/>
                      
-        </div>
+        </div> */}
                  
                 </>  
                 ):(
