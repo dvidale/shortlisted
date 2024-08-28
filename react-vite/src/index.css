@@ -52,3 +52,12 @@ grid-row:2;
     border: 3px solid pink
 }
 
+#my-listings-calendar-placeholder{
+    border: 2px solid orangered;
+    grid-column: 4;
+    grid-row: 2;
+}
+
+p .errors{
+    color: brown
+}

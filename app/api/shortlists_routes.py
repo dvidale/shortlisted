@@ -5,6 +5,8 @@ import json
 from dateutil import parser
 from datetime import datetime
 
+from app.models.user import User
+
 shortlists_routes = Blueprint('shortlists', __name__)
 
 # * SAVE A SHORTLIST
@@ -16,12 +18,22 @@ def save_shortlists():
 
     title = save_shortlist_form.data['title']
     description = save_shortlist_form.data['description']
+    request_data = request.json
+      # .json turns request data into a dict
+
+    created_by = request_data['created_by']
+
+    # Unique title check
+    title_found = db.session.scalars(
+        db.select(Shortlist.title).filter(User.id == created_by).where(Shortlist.title == title)
+    ).first()
+
+    if(title_found):
+        return {'error': 'Titles must be unique'}, 400
+
 
     if save_shortlist_form.validate_on_submit():
         
-        request_data = request.json
-        # .json turns request data into a dict
-
         job_title = request_data['job_title']
         industry_area = request_data['industry_area']
         genre = request_data['genre']
@@ -34,7 +46,7 @@ def save_shortlists():
            endDateParsed = parser.parse(end_date)
         else:
             endDateParsed = None
-        created_by = request_data['created_by']
+        created_by = created_by
         referrals = request_data['referrals']
 
         print(">>>>>> referrals entering save route", referrals)

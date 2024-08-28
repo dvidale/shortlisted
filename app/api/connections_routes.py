@@ -54,7 +54,7 @@ def search_connections(id):
         else:
             genre_matched = job_title_matched
 
-# ? Moved availability checking to frontend for easier date object comparisons
+# ? Moved availability check to frontend for easier date object comparisons, but saving the logic for reference
         # def availCheck(user):
         #     if len(user['bookings']) == 0:
         #         return True
