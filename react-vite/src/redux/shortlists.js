@@ -90,10 +90,11 @@ if(response.ok){
     const data = await response.json()
     console.log(">>>> data returned to save thunk:", data);
     dispatch(saveAShortlist(data))
-    return data
+    
 }else{
     const data = await response.json()
-    return data.error
+    console.log("data object", data);
+    return data
 
 }
 
