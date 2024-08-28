@@ -1,12 +1,12 @@
-const GET_COMMENTS_BY_REFERRAL = '/comments/GET_COMMENTS_BY_REFERRAL'
+const GET_ALL_COMMENT_THREADS = '/comments/GET_ALL_COMMENT_THREADS'
 const ADD_A_COMMENT = '/comments/ADD_A_COMMENT'
 const EDIT_A_COMMENT = '/comments/EDIT_A_COMMENT'
 const DELETE_A_COMMENT = '/comments/DELETE_A_COMMENT'
 
 
-export const getAllCommentsByReferral = (data)=>{
+export const getAllCommentThreads = (data)=>{
     return {
-        type: GET_COMMENTS_BY_REFERRAL,
+        type: GET_ALL_COMMENT_THREADS,
         payload:data
     }
 }
@@ -25,10 +25,10 @@ export const editAComment = (data) =>{
     }
 }
 
-export const deleteAComment = (id) =>{
+export const deleteAComment = (data) =>{
     return {
         type: DELETE_A_COMMENT,
-        payload: id
+        payload: data
     }
 }
 
@@ -36,7 +36,7 @@ export const deleteAComment = (id) =>{
 THUNKS
 -------*/
 
-export const getCommentsByReferral = (id) => async (dispatch) => {
+export const getCommentThreads = (id) => async (dispatch) => {
 
 const url = `/api/comments/${id}`
 
@@ -46,7 +46,7 @@ if(response.ok){
 
     const data = await response.json()
     
-    dispatch(getAllCommentsByReferral(data))
+    dispatch(getAllCommentThreads(data))
     
     return data
 
@@ -105,7 +105,7 @@ const response = await fetch(url, options)
 if(response.ok){
 
     const data = await response.json()
-    dispatch(deleteAComment(id))
+    dispatch(deleteAComment(data))
 
     return data.message
 }
@@ -122,31 +122,32 @@ if(response.ok){
         REDUCER
 -------------------*/
 
-const initialState = { comments: {} }
+const initialState = { comment_threads: {} }
 
 const commentsReducer = (state = initialState, action ) =>{
     switch(action.type){
 
-        case GET_COMMENTS_BY_REFERRAL:{
+        case GET_ALL_COMMENT_THREADS:{
             const newState = {...state}
-            action.payload.forEach(comment =>{
-                newState.comments[comment.id] = comment
+            action.payload.forEach(thread =>{
+                const referral_id = thread[0]['referral_id']
+                newState.comment_threads[referral_id] = thread
             })
             return newState
         }
         case ADD_A_COMMENT:{
             const newState = {...state}
-            newState.comments[action.payload.id] = action.payload
+            newState.comment_threads[action.payload.referral_id].push(action.payload)
             return newState
         }
         case EDIT_A_COMMENT:{
             const newState = {...state}
-            newState.comments[action.payload.id] = action.payload
+            newState.comment_threads[action.payload[0]['referral_id']] = action.payload
             return newState    
         }
         case DELETE_A_COMMENT:{
             const newState = {...state}
-            delete newState.comments[action.payload]
+            newState.comment_threads[action.payload[0]['referral_id']] = action.payload
             return newState
         }
         default:
