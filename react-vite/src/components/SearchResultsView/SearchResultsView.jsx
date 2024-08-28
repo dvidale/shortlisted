@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import SearchDetails from "../SearchDetails/SearchDetails"
 import { saveShortlist } from "../../redux/shortlists"
@@ -11,7 +11,7 @@ function SearchResultsView({user}){
 
     const [shortlist_title, setShortlistTitle] = useState('')
     const [description, setDescription] = useState('')
-
+    const [errors, setErrors ] = useState({})
 
     // some state slice of search results
     const searchResults = useSelector(state => state.shortlists.results)
@@ -59,10 +59,6 @@ function SearchResultsView({user}){
 
         return noConflict;
 
-
-       
-
-            
     })
             
     let avail_filtered_results = []
@@ -72,10 +68,29 @@ function SearchResultsView({user}){
 
     }
     
+    useEffect(()=>{
+        const err = {}
+
+        if (description.length === 200) err.description = "Descriptions have a 200 character limit"
+       
+        setErrors(err)
+
+    },[description])
 
     const submitHandler = (e)=>{
         e.preventDefault()
 
+       
+       const err = {}
+
+
+
+        setErrors(err)
+
+        if(!Object.keys(errors).length){
+
+
+        
         const shortlistData ={
 
             title: shortlist_title,
@@ -90,8 +105,17 @@ function SearchResultsView({user}){
             referrals: searchResults
            
         }
+      
+        
+        dispatch(saveShortlist(JSON.stringify(shortlistData))).then( data => {
+            err.server = data.error
+            setErrors(err)
+        }
+        
+        )
+        }
 
-        dispatch(saveShortlist(JSON.stringify(shortlistData)))
+
 
     }
     
@@ -102,14 +126,19 @@ function SearchResultsView({user}){
         
         
         <form method={'POST'} onSubmit={submitHandler}>
+            <label>
             <input type='text' 
             name='shortlist-name' 
             value={shortlist_title} 
             onChange={e => setShortlistTitle(e.target.value)}placeholder="Name your list">
             </input>
+</label>
+{errors.title && <p className="error">{errors.title}</p>}
+{errors.server && <p className="error">{errors.server}</p>}
             <label htmlFor="description">Description</label>
             <textarea id='description-box' name="description" placeholder="Add any notes about the job." value={description} 
-            onChange={e => setDescription(e.target.value)}/>
+            maxLength={200}onChange={e => setDescription(e.target.value)}/>
+            {errors.description && <p className="error">{errors.description}</p>}
             <button id='save-shortlist-btn' type='submit'>Save</button>
         </form>
 

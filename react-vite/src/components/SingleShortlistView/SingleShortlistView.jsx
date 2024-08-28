@@ -11,13 +11,13 @@ import DeleteShortlistModal from "../DeleteShortlistModal/DeleteShortlistModal";
 
 
 // !BUG - the default shortlist does not load automatically
-function SingleShortlistView({ shortlistIdx }) {
+function SingleShortlistView({setEditForm, editForm, shortlistIdx }) {
   const dispatch = useDispatch();
 
   const { setModalContent } = useModal();
 
   // console.log("shortlistIdx at top of SingleShortListView", shortlistIdx);
-  const [editForm, setEditForm] = useState(false);
+ 
   const [activeFields, setActiveFields] = useState("edit-off");
   const [formBorder, setFormBorder] = useState("border-off");
 
@@ -33,6 +33,7 @@ function SingleShortlistView({ shortlistIdx }) {
     if (userId && shortlistIdx) {
       dispatch(fetchShortlists(userId));
     }
+    
   }, [userId, dispatch, shortlistIdx]);
 
   // console.log(">>>> current shortlist in singleview:", shortlist);
@@ -41,11 +42,15 @@ function SingleShortlistView({ shortlistIdx }) {
     shortlist ? shortlist.description : null
   );
 
+
+
   useEffect(() => {
     if (shortlist) {
       setTitle(shortlist.title);
       setDescription(shortlist.description);
+      
     }
+    
   }, [shortlist, shortlistIdx]);
 
   const submitHandler = (e) => {
@@ -73,6 +78,16 @@ function SingleShortlistView({ shortlistIdx }) {
       setFormBorder("border-on");
     }
   };
+
+  useEffect(()=>{
+
+    if(editForm === false){
+      setActiveFields("edit-off");
+      setFormBorder("border-off");
+    }
+
+  },[editForm])
+  
 
   const handleDelete = (shortlist) => {
 
