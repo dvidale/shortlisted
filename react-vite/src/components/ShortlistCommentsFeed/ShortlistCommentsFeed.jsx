@@ -11,6 +11,12 @@ function ShortlistCommentsFeed({shortlist, editForm}){
 
     const userId = useSelector(state => state.session.user.id)
 
+      
+
+// TODO: refactor with a join query to pull the referral ids and referred user names in one object
+
+// ? This object creates the combo of referral id and referred user name that I didn't know how to do in SQLAlchemy
+
     const referralInfoObj = {}
     let i=0
     
@@ -30,13 +36,13 @@ function ShortlistCommentsFeed({shortlist, editForm}){
     return(
         <>
         <hr/>
-        {/* For every person on the list, return a comments tile */}
-        {Object.keys(referralInfoObj).length > 0 && Object.entries(referralInfoObj).map(  ([idx, fullName]) => {
+        {/* For every referral, return a comments tile */}
+        {Object.keys(referralInfoObj).length > 0 && Object.entries(referralInfoObj).map(  ([referralIdx, fullName]) => {
                 
             return (
             
-                <div key={idx} className='comment-tile'>{fullName} 
-                {editForm && <button className='delete-referral-btn' onClick={()=> deleteReferralHandler(idx, fullName, userId)}>Delete</button>} <CommentsTile shortlist={shortlist} id={idx}/>
+                <div key={referralIdx} className='comment-tile'>{fullName} 
+                {editForm && <button className='delete-referral-btn' onClick={()=> deleteReferralHandler(referralIdx, fullName, userId)}>Delete</button>} <CommentsTile shortlist={shortlist} referralIdx={referralIdx}/>
                  </div>
  
             )

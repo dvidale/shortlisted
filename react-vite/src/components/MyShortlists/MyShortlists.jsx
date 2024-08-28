@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchShortlists } from '../../redux/shortlists'
 import SingleShortlistView from '../SingleShortlistView/SingleShortlistView'
+
 // import { createContext } from 'react'
 
 
@@ -19,17 +20,12 @@ function MyShortlists({saved_shortlists}){
 
     // console.log(">>> firstIdx assigned:", firstIdx);
     const user = useSelector(state => state.session.user) 
-  
+    
     const [shortlistIdx, setShortlistIdx]= useState(firstIdx || null)
     const [editForm, setEditForm] = useState(false);
 
     // console.log(">>> firstIdx as default:", firstIdx);
     // console.log(">>>> shortlistIdx from MyShortlists:", shortlistIdx);
-
-
-
-
-
 
 
     
@@ -42,9 +38,11 @@ const switchShortlistAndReset = (e)=>{
     useEffect(()=>{
         
         dispatch(fetchShortlists(user.id))
+        
 
     },[dispatch, user])
 
+    
     
    
     return(
