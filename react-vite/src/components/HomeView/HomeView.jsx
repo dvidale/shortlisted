@@ -45,13 +45,13 @@ if(shortlists_state){
     return(
         <>
         {user ? (<>
-         <div id='build-shortlist-form'>
+         <div id='build-shortlist-form' className='left-panel'>
         <SearchConnectionsForm user={user}/>
         </div>
         <div id='search-results-view'>
         <SearchResultsView user={user}/>
         </div>
-        <div id="my-shortlists"> 
+        <div id="my-shortlists" className='left-panel visible-panel'> 
             <MyShortlists saved_shortlists={saved_shortlists}/>
         </div>
        
