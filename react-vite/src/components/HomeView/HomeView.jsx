@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { fetchShortlists } from '../../redux/shortlists'
 
 import MyShortlists from "../MyShortlists/MyShortlists"
+import MyListings_Calendar from '../MyListings_Calendar/MyListings_Calendar'
 
 
 function HomeView(){
@@ -47,7 +48,9 @@ if(shortlists_state){
             
             <MyShortlists saved_shortlists={saved_shortlists}/>
         </div>
-        
+        <div id="my-listings-calendar-placeholder">
+            <MyListings_Calendar/>
+        </div>
         
         </>):(<>
         
