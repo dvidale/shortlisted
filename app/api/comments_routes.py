@@ -1,20 +1,36 @@
 from flask import Blueprint, request
 from app.models import db, Comment
 from app.models.referral import Referral
+from app.models.user import User
+from app.models.shortlist import Shortlist
 from app.forms.comment_form import CommentForm
 
 comments_routes = Blueprint('comments', __name__)
 
 
-#  * GET COMMENTS BY REFERRAL ID
+#  * GET ALL COMMENT THREADS BY USER ID
 
 @comments_routes.route('/<int:id>')
 def get_comments(id):
-    get_comments = db.session.scalars(
-        db.select(Comment).where(Comment.referral_id == id)
-    ).all()
+    current_user = User.query.get(id)
+    user_shortlists = current_user.shortlists
+
+    referral_lst = [
+    db.session.scalars(
+        db.select(Referral).where(Referral.shortlist_id == shortlist.id)
+    ).all() for shortlist in user_shortlists]
+
+    referrals_unnested = [ x for xs in referral_lst for x in xs ]
+
+    comment_threads = [ referral.comments for referral in referrals_unnested ]
+
+    # for each nested list of comments, go into that list, and apply to_dict to each comment
+
+    threads_unpacked = list(map(lambda thread: [comment.to_dict() for comment in thread], comment_threads))
     
-    return [comment.to_dict() for comment in get_comments]
+    nonempty_threads = list(filter(lambda thread: len(thread) > 0, threads_unpacked))
+    # print(">>>>>>nonempty_threads", nonempty_threads)
+    return nonempty_threads
 
 # * CREATE A NEW COMMENT
 
@@ -69,8 +85,11 @@ def update_comment(id):
         target_comment.text = text
 
         db.session.commit()
+        fresh_lst = db.session.scalars(
+            db.select(Comment).where(Comment.referral_id == target_comment.referral_id)
+        ).all()
 
-        return target_comment.to_dict()
+        return [comment.to_dict() for comment in fresh_lst]
      
      return {"error": comment_form.errors}
 
@@ -83,4 +102,10 @@ def delete_comment(id):
     db.session.delete(target_comment)
     db.session.commit()
 
-    return {"message" : "Comment deleted"}
+   
+    fresh_lst = db.session.scalars(
+            db.select(Comment).where(Comment.referral_id == target_comment.referral_id)
+        ).all()
+
+    return [comment.to_dict() for comment in fresh_lst]
+    # return {"message" : "Comment deleted"}

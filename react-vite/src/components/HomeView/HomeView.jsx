@@ -7,6 +7,8 @@ import { fetchShortlists } from '../../redux/shortlists'
 
 import MyShortlists from "../MyShortlists/MyShortlists"
 import MyListings_Calendar from '../MyListings_Calendar/MyListings_Calendar'
+import { getCommentThreads } from '../../redux/comments'
+
 
 
 function HomeView(){
@@ -18,6 +20,7 @@ const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
 const shortlists_state = useSelector(state => state.shortlists)
 
+
 if(shortlists_state){
     console.log("shortlists state loaded");
 }
@@ -26,13 +29,17 @@ if(shortlists_state){
     useEffect(()=>{
         
         if(user){
-            dispatch(fetchShortlists(user.id))
+            dispatch(fetchShortlists(user.id))       
         }
         
-
     },[dispatch, user])
 
+    useEffect(()=>{
+        if(saved_shortlists){        
+        dispatch(getCommentThreads(user.id))
+        }
 
+    },[saved_shortlists, dispatch,user])
 
 
     return(
@@ -44,10 +51,10 @@ if(shortlists_state){
         <div id='search-results-view'>
         <SearchResultsView user={user}/>
         </div>
-        <div id="my-shortlists">
-            
+        <div id="my-shortlists"> 
             <MyShortlists saved_shortlists={saved_shortlists}/>
         </div>
+       
         <div id="my-listings-calendar-placeholder">
             <MyListings_Calendar/>
         </div>
