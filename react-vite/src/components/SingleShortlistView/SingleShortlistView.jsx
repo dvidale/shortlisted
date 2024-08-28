@@ -159,7 +159,7 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx }) {
         </>
       ) : (
         <>
-          <p> Loading...</p>
+          <p> Choose a Shortlist to view!</p>
         </>
       )}
     </>
