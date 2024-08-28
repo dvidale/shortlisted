@@ -1,21 +1,22 @@
-import { useDispatch } from "react-redux"
-import { deleteComment, getCommentsByReferral } from "../../redux/comments"
+import { useDispatch, useSelector } from "react-redux"
+import { deleteComment, getCommentThreads} from "../../redux/comments"
 import { useModal } from "../../context/Modal"
 import { useNavigate } from "react-router-dom"
 
 
-function DeleteCommentModal({commentId, referralId}){
+function DeleteCommentModal({commentId}){
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const { closeModal } = useModal()
 
+    const userId = useSelector(state => state.session.user.id)
     const deleteHandler = () =>{
 
         dispatch(deleteComment(commentId))
         .then(closeModal)
         .then(navigate('/'))
-        .then(dispatch(getCommentsByReferral(referralId)))
+        .then(dispatch(getCommentThreads(userId)))
 
     }
 
