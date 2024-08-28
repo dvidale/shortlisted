@@ -19,13 +19,24 @@ function HomeView() {
 
   const shortlists_state = useSelector((state) => state.shortlists);
 
-  const firstIdx = saved_shortlists && Object.keys(saved_shortlists).length > 0 ? Object.keys(saved_shortlists)[0] : null;
+  const firstIdx =
+    saved_shortlists && Object.keys(saved_shortlists).length > 0
+      ? Object.keys(saved_shortlists)[0]
+      : null;
 
   // console.log(">>> firstIdx assigned:", firstIdx);
 
-  const [shortlistIdx, setShortlistIdx]= useState(firstIdx || null)
+  const [shortlistIdx, setShortlistIdx] = useState(firstIdx || null);
 
   const [editForm, setEditForm] = useState(false);
+  const [toggleSymbol, setToggleSymbol] = useState(`+`);
+  const [searchFormView, setSearchFormView] = useState(false);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+
+  const toggleFormView = () => {
+    setToggleSymbol(!toggleSymbol);
+    setSearchFormView(!searchFormView);
+  };
 
   if (shortlists_state) {
     console.log("shortlists state loaded");
@@ -48,19 +59,65 @@ function HomeView() {
       {user ? (
         <>
           <div id="search-and-my-shortlist-container">
-            <div id="build-shortlist-form" className="left-panel">
-              <SearchConnectionsForm user={user} />
+            <button id="new-shortlist-btn" onClick={() => toggleFormView()}>
+              <h1>
+                {" "}
+                New Shortlist{" "}
+                <span className="toggle-symbol">
+                  {toggleSymbol ? `+` : `-`}
+                </span>
+              </h1>
+            </button>
+
+            <div
+              id="build-shortlist-form"
+              
+            >
+              <SearchConnectionsForm
+                user={user}
+                searchFormView={searchFormView}
+                setShowSearchResults={setShowSearchResults}
+              />
             </div>
 
-            <div id="my-shortlists" className="left-panel visible-panel">
-              <MyShortlists shortlistIdx={shortlistIdx} setShortlistIdx={setShortlistIdx} saved_shortlists={saved_shortlists} setEditForm={setEditForm} />
+            <div
+              id="my-shortlists"
+              className={searchFormView ? "hide-view" : "show-view"}
+            >
+              <MyShortlists
+                shortlistIdx={shortlistIdx}
+                setShortlistIdx={setShortlistIdx}
+                saved_shortlists={saved_shortlists}
+                setEditForm={setEditForm}
+                searchFormView={searchFormView}
+                setShowSearchResults={setShowSearchResults}
+              />
             </div>
           </div>
-            <div id="single-shortlist-view" className="center-panel">
-              <SingleShortlistView setEditForm={setEditForm} editForm={editForm} shortlistIdx={shortlistIdx} />
-            </div>
-          <div id="search-results-view" className="center-panel">
-            <SearchResultsView user={user} />
+          <div
+            id="single-shortlist-view"
+            className={`center-panel ${
+              showSearchResults ? "hide-view" : "show-view"
+            }`}
+          >
+            <SingleShortlistView
+              setEditForm={setEditForm}
+              editForm={editForm}
+              shortlistIdx={shortlistIdx}
+            />
+          </div>
+          <div
+            id="search-results-view"
+            className={`center-panel ${
+              showSearchResults ? "show-view" : "hide-view"
+            }`}
+          >
+            <SearchResultsView
+              user={user}
+              setShowSearchResults={setShowSearchResults}
+              toggleFormView={toggleFormView}
+              setShortlistIdx={setShortlistIdx}
+            />
           </div>
 
           <div id="my-listings-calendar-placeholder" className="right-panel">

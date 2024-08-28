@@ -25,11 +25,44 @@ a {
     min-height: 700px;
 }
 
-.left-panel{
-padding: 10px 30px;
-min-width: 310px;
+/* .hide-form{
+    display: none;
+    flex-direction: column;
+    align-items:center;
+    gap: 10px;
+
+}
+*/
+
+.show-form{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+     padding: 10px 30px;
+    min-width: 310px;
+    gap: 10px;
+
+} 
+
+.show-view{
+    display:flex;
+    flex-direction: column;
+    padding: 10px 30px;
+    min-width: 310px;
+    /* border: 2px solid orange; */
 }
 
+.hide-view{
+    display: none;
+}
+
+.left-panel{
+    padding: 10px 30px;
+    min-width: 310px;
+    display:flex;
+    flex-direction: column;
+    }
+    
 .center-panel{
     padding: 10px 60px;
     min-width: 310px;
@@ -41,28 +74,46 @@ min-width: 310px;
 min-width: 310px;
 }
 
+#new-shortlist-btn{
+    background-color: black;
+    color: white;
+    border: 2px white solid;
+    padding: 1px;
+    margin: 5px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    /* display: flex;
+    flex-direction: row;
+    align-items: center; */
+}
+
+
+
 #build-shortlist-form{
 border: 2px dotted green;
-display: flex;
-flex-direction: column;
+
 }
+
+
 
 #search-and-my-shortlist-container{
     display: flex;
     flex-direction: column;
+    padding: 20px;
 }
 
 #search-results-view{
    
-    border: 2px dotted fuchsia;
+    border: 5px dotted fuchsia;
 
     }
 
 #my-shortlists{
     border: 2px solid blue;
-    display: flex;
-    flex-direction: column;
+  
 }
+
+
 
 .visibile-panel{
     visibility:visible
