@@ -1,12 +1,12 @@
 import './new-shortlist-form.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch} from 'react-redux'
 import { buildShortlist } from "../../redux/shortlists";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-function SearchConnectionsForm({user}){
+function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
 
     const dispatch = useDispatch();
     
@@ -16,24 +16,30 @@ function SearchConnectionsForm({user}){
     const [industry_area, setIndustryArea] = useState(null)
     const [job_title, setJobTitle] = useState(null)
     const [genre, setGenre] = useState(null)
-    const [start_date, setStartDate] = useState(new Date())
+    const [start_date, setStartDate] = useState(null)
     const [end_date, setEndDate] = useState(null)
-    const [toggleSymbol, setToggleSymbol] = useState(`+`)
+    
     const [errors, setErrors] = useState({})
 
-    const [searchFormView, setSearchFormView] = useState("hidden-panel")
+    console.log(">>>> searchFormView state:", searchFormView);
+    
+    useEffect((searchFormView)=>{
+        if(searchFormView === false){
+            setLocation(null)
+            setIndustryArea(null)
+            setJobTitle(null)
+            setGenre(null)
+            setStartDate(null)
+            setEndDate(null)
+            setErrors({})
+        }
 
-    const toggleFormView = ()=>{
 
-      setToggleSymbol(!toggleSymbol) 
-      setSearchFormView(!searchFormView)
-
-    }
+    },[searchFormView])
 
 
 
-
-   
+    
     const submitHandler = (e) =>{
       e.preventDefault()
 
@@ -57,11 +63,11 @@ function SearchConnectionsForm({user}){
     if(startDateCheck < today) err.start_date = 'Start date cannot be in the past'
     
 
-setErrors(err)
+    setErrors(err)
 
-if(!Object.keys(errors).length){
+    if(Object.keys(err).length === 0){
 
-const formData = {
+        const formData = {
 
             location,
             industry_area,
@@ -72,7 +78,8 @@ const formData = {
         }
 
         dispatch(buildShortlist(user.id, JSON.stringify(formData)))
-      
+        .then(setShowSearchResults(true))
+        
     }
 
 
@@ -83,10 +90,11 @@ const formData = {
 
 
     return(<>
-    <button id='new-shortlist-btn' onClick={() =>toggleFormView()}>
-    <h1> New Shortlist <span className='toggle-symbol'>{toggleSymbol ? `+` : `-`}</span></h1>
-    </button>
-        <form id='new-shortlist-form' className={searchFormView ? "hide-form" : "show-form"} method='POST' onSubmit={submitHandler}>
+    
+
+        <form id='new-shortlist-form' className={`${
+                searchFormView ? `show-form` : `hide-view`
+              } `} method='POST' onSubmit={submitHandler}>
         <div>
         <label htmlFor="job-titles">
         <select name='job-titles' id='job-title-select' value={job_title} onChange={e => setJobTitle(e.target.value)} className='create-shortlist-dropdown'>

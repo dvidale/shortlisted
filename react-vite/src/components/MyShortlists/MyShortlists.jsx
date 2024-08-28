@@ -10,7 +10,7 @@ import { fetchShortlists } from '../../redux/shortlists'
 
 
 
-function MyShortlists({setShortlistIdx, saved_shortlists, setEditForm}){
+function MyShortlists({setShortlistIdx, saved_shortlists, setEditForm,setShowSearchResults }){
  
     const dispatch = useDispatch()
 
@@ -26,7 +26,9 @@ function MyShortlists({setShortlistIdx, saved_shortlists, setEditForm}){
 const switchShortlistAndReset = (e)=>{
 
     setEditForm(false)
+
     setShortlistIdx(e.target.value)
+    setShowSearchResults(false)
 }
   
     useEffect(()=>{
