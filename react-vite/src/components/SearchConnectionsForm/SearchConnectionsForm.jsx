@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import './new-shortlist-form.css'
+import { useEffect, useState} from 'react';
 import { useDispatch} from 'react-redux'
 import { buildShortlist } from "../../redux/shortlists";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-function SearchConnectionsForm({user}){
+function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
 
     const dispatch = useDispatch();
     
@@ -15,12 +16,28 @@ function SearchConnectionsForm({user}){
     const [industry_area, setIndustryArea] = useState(null)
     const [job_title, setJobTitle] = useState(null)
     const [genre, setGenre] = useState(null)
-    const [start_date, setStartDate] = useState(new Date())
+    const [start_date, setStartDate] = useState(null)
     const [end_date, setEndDate] = useState(null)
-
+    
     const [errors, setErrors] = useState({})
 
-   
+    
+
+    useEffect(()=>{
+        if(searchFormView === false){
+            setLocation('')
+            setIndustryArea('')
+            setJobTitle('')
+            setGenre('')
+            setStartDate(null)
+            setEndDate(null)
+            setErrors({})
+        }
+
+    },[searchFormView])
+
+
+    
     const submitHandler = (e) =>{
       e.preventDefault()
 
@@ -44,11 +61,11 @@ function SearchConnectionsForm({user}){
     if(startDateCheck < today) err.start_date = 'Start date cannot be in the past'
     
 
-setErrors(err)
+    setErrors(err)
 
-if(!Object.keys(errors).length){
+    if(Object.keys(err).length === 0){
 
-const formData = {
+        const formData = {
 
             location,
             industry_area,
@@ -59,7 +76,8 @@ const formData = {
         }
 
         dispatch(buildShortlist(user.id, JSON.stringify(formData)))
-      
+        .then(setShowSearchResults(true))
+        
     }
 
 
@@ -70,21 +88,27 @@ const formData = {
 
 
     return(<>
+    
 
-    <h1>Build a Shortlist</h1>
-        <form id='search-connections' method='POST' onSubmit={submitHandler}>
+        <form id='new-shortlist-form' className={` ${
+                searchFormView ? `show-form` : `hide-view`
+              } `} method='POST' onSubmit={submitHandler}>
         <div>
         <label htmlFor="job-titles">
-        <select name='job-titles' id='job-title-select' value={job_title} onChange={e => setJobTitle(e.target.value)}>
+        <select name='job-titles' id='job-title-select' value={job_title} onChange={e => setJobTitle(e.target.value)} className='create-shortlist-dropdown'>
         <option value={null}>Job Title </option>
     <option value="Editor">Editor</option>
     <option value='Assistant Editor'>Assistant Editor</option>
     </select>
 </label>
-{errors.job_title && <p className='error'>{errors.job_title}</p>}
+<div className='error'>
+    {errors.job_title && <p>{errors.job_title}</p>}
+</div>
+
 </div>
         <label htmlFor="industry-area"></label>
-        <select name='industry-areas' id='industry-area-select' value={industry_area} onChange={e => setIndustryArea(e.target.value)}>
+        <select name='industry-areas' id='industry-area-select' value={industry_area} onChange={e => setIndustryArea(e.target.value)} 
+            className='create-shortlist-dropdown'>
         <option value={null}>Industry Area</option>
             <option value="Scripted Television">Scripted Television</option>
             <option value='Unscripted Television'>Unscripted Television</option>
@@ -92,10 +116,14 @@ const formData = {
             <option value='Documentary'>Documentary</option>
             <option value='Commercial'>Commercial</option>
         </select>
-        {errors.industry_area && <p className='error'>{errors.industry_area}</p>}
+        <div className='error'>
+        {errors.industry_area && <p>{errors.industry_area}
+            </p>}
+            </div>
 
         <label htmlFor="genre"></label>
-        <select name='genres' id='genre-select' value={genre} onChange={e => setGenre(e.target.value)}>
+        <select name='genres' id='genre-select' value={genre} onChange={e => setGenre(e.target.value)}
+            className='create-shortlist-dropdown'>
             <option value={null}>Genre</option>
             <option value="Drama">Drama</option>
             <option value='Comedy'>Comedy</option>
@@ -105,36 +133,47 @@ const formData = {
             <option value='Historical'>Historical</option>
         </select>
 
+        <div className='error'></div>
+
         <label htmlFor="location"></label>
-        <select name='locations' id='location-select' value={location} onChange={e => setLocation(e.target.value)}>
+        <select name='locations' id='location-select' value={location} onChange={e => setLocation(e.target.value)}
+            className='create-shortlist-dropdown'>
             <option value={null}>Location</option>
             <option value="Los Angeles">Los Angeles</option>
             <option value='New York'>New York</option>
             <option value='Atlanta'>Atlanta</option>
             <option value='Remote'>Remote</option>
         </select>
-        {errors.location && <p className='error'>{errors.location}</p>}
+        <div className='error'>
+        {errors.location && <p>{errors.location}</p>}
+        </div>
 
        
 
-        <p>Start Date</p>
-        <label htmlFor="start_date_month"></label>
-        <div>
+        <h2 className='panel-heading'>Start Date</h2>
+       
+        <div className='calendar-input' > <label htmlFor="start_date_month">
             <DatePicker selected={start_date} onChange={ start_date => setStartDate(start_date)}  />
-            {errors.start_date && <p className='error'>{errors.start_date}</p>}
+            </label>
+            <div className='error'>
+            {errors.start_date && <p>{errors.start_date}</p>}
+            </div>
         </div>
 
-        <p>End Date</p>
-        <label htmlFor="end_date_month"></label>
-        <div>
+        <h2 className='panel-heading'>End Date</h2>
+        
+        <div className='calendar-input'><label htmlFor="end_date_month">
             <DatePicker selected={end_date} onChange={ end_date => setEndDate(end_date)}  />
-
-            {errors.end_date && <p className='error'>{errors.end_date}</p>}               
+               </label>         
+            <div className='error'>
+               {errors.end_date && <p>{errors.end_date}</p>}   
+            </div>
         </div>
            
     
-       <button id='submit' type="submit">Search</button>
-
+       <button id='submit' type="submit">SEARCH</button>
+       
+       
         </form>
     
 

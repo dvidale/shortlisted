@@ -8,16 +8,14 @@ import { fetchShortlists, updateShortlist } from "../../redux/shortlists";
 import { useModal } from "../../context/Modal";
 import DeleteShortlistModal from "../DeleteShortlistModal/DeleteShortlistModal";
 
-
-
 // !BUG - the default shortlist does not load automatically
-function SingleShortlistView({setEditForm, editForm, shortlistIdx }) {
+function SingleShortlistView({ setEditForm, editForm, shortlistIdx }) {
   const dispatch = useDispatch();
 
   const { setModalContent } = useModal();
 
   // console.log("shortlistIdx at top of SingleShortListView", shortlistIdx);
- 
+
   const [activeFields, setActiveFields] = useState("edit-off");
   const [formBorder, setFormBorder] = useState("border-off");
 
@@ -27,13 +25,10 @@ function SingleShortlistView({setEditForm, editForm, shortlistIdx }) {
     (state) => state.shortlists.saved_lists[shortlistIdx]
   );
 
-  
-
   useEffect(() => {
     if (userId && shortlistIdx) {
       dispatch(fetchShortlists(userId));
     }
-    
   }, [userId, dispatch, shortlistIdx]);
 
   // console.log(">>>> current shortlist in singleview:", shortlist);
@@ -41,30 +36,50 @@ function SingleShortlistView({setEditForm, editForm, shortlistIdx }) {
   const [description, setDescription] = useState(
     shortlist ? shortlist.description : null
   );
-
-
+  const [errors, setErrors] = useState({});
+  const [warnings, setWarnings] = useState({});
 
   useEffect(() => {
     if (shortlist) {
       setTitle(shortlist.title);
       setDescription(shortlist.description);
-      
     }
-    
   }, [shortlist, shortlistIdx]);
 
+  // * Description Validation
+  useEffect(() => {
+    const warn = {};
+    if(description !== null){
+      if (description.length === 255)
+        warn.description = "There is a 255 character limit.";
+    }
+    setWarnings(warn);
+  }, [description]);
+
+  /* -------------------
+         Form Submission
+  ---------------------- */
   const submitHandler = (e) => {
     e.preventDefault();
-    editSwitch();
 
-    const formData = {
-      title,
-      description,
-    };
+    const err = {};
+    
+    if (title === null || title.length === 0) err.title = "A title is required";
 
-    const shortlistId = shortlist.id;
+    setErrors(err);
 
-    dispatch(updateShortlist(shortlistId, JSON.stringify(formData)));
+    if (Object.keys(err).length === 0) {
+      editSwitch();
+
+      const formData = {
+        title,
+        description,
+      };
+
+      const shortlistId = shortlist.id;
+
+      dispatch(updateShortlist(shortlistId, JSON.stringify(formData)));
+    }
   };
 
   const editSwitch = () => {
@@ -79,19 +94,17 @@ function SingleShortlistView({setEditForm, editForm, shortlistIdx }) {
     }
   };
 
-  useEffect(()=>{
-
-    if(editForm === false){
+  useEffect(() => {
+    if (editForm === false) {
       setActiveFields("edit-off");
       setFormBorder("border-off");
     }
-
-  },[editForm])
-  
+  }, [editForm]);
 
   const handleDelete = (shortlist) => {
-
-    setModalContent(<DeleteShortlistModal userId={userId} shortlist={shortlist}/>)
+    setModalContent(
+      <DeleteShortlistModal userId={userId} shortlist={shortlist} />
+    );
   };
 
   return (
@@ -100,44 +113,57 @@ function SingleShortlistView({setEditForm, editForm, shortlistIdx }) {
       {shortlist ? (
         <>
           <form id="edit-shortlist-form" onSubmit={submitHandler}>
+           <div className="shortlist-title-and-edit-btns">
             <div className={formBorder}>
               <textarea
                 id="edit-shortlist-title"
                 className={activeFields}
                 disabled={editForm === false}
                 value={title}
+                placeholder="Please give this shortlist a title"
                 onChange={(e) => setTitle(e.target.value)}
               />
+              {errors.title && <p className="error">{errors.title}</p>}
             </div>
+            <div className="edit-delete-save-btns">
+{editForm && <button type="submit">Save</button>}
+            {!editForm && (
+              <button type={`button`} onClick={editSwitch}>{`Edit`}</button>
+            )}
 
+            <button
+              disabled={editForm}
+              className="single-shortlist-delete-btn"
+              onClick={() => handleDelete(shortlist, shortlist.id)}
+            >
+              Delete
+            </button></div>
+</div>
             <div className={formBorder}>
               <textarea
                 id="edit-shortlist-desc"
                 className={activeFields}
                 disabled={editForm === false}
                 value={description}
+                maxLength={255}
                 onChange={(e) => setDescription(e.target.value)}
               />
+              {warnings.description && (
+                <p className="warning">{warnings.description}</p>
+              )}
             </div>
 
-            <button type={`button`} onClick={editSwitch}>{`Edit`}</button>
-            <button disabled={editForm}
-              className="single-shortlist-delete-btn"
-              onClick={() => handleDelete(shortlist, shortlist.id)}
-            >
-              Delete
-            </button>
-            {editForm && <button type="submit">Save Changes</button>}
           </form>
-
-          <div>Search Details</div>
+              
+          <h3 className="shortlist-details-heading">Search Details</h3>
+          <div className="search-params">
           <SearchDetails params={shortlist} />
+          </div>
           <ShortlistCommentsFeed shortlist={shortlist} editForm={editForm} />
         </>
       ) : (
         <>
-          {" "}
-          <p> Loading...</p>
+          <p> Choose a Shortlist to view!</p>
         </>
       )}
     </>

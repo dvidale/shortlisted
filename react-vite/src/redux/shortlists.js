@@ -187,7 +187,7 @@ export const deleteReferral = (id) => async ()=>{
       REDUCER
 ---------------------*/
 // TODO: consider changing "results" to "search_results" for easier interpretation
-const initialState = { parameters: {}, results: [], saved_lists:{}}
+const initialState = { parameters: {}, results_pre_avail: [], saved_lists:{}}
 
 const shortlistsReducer = (state = initialState, action) =>{
     switch(action.type){
@@ -195,7 +195,7 @@ const shortlistsReducer = (state = initialState, action) =>{
         case BUILD_SHORTLIST:{
             
             const newState = {...state}
-            newState['results'] = action.payload[0]
+            newState['results_pre_avail'] = action.payload[0]
             newState['parameters'] = action.payload[1]
             return newState
         }
