@@ -9,7 +9,6 @@ import { useState } from "react";
 
 function ShortlistCommentsFeed({ shortlist, editForm }) {
 
-    const [ openThread, setOpenThread ] = useState(false)
     const [currentReferral, setCurrentReferral ] = useState(null)
 
   const { setModalContent } = useModal();
