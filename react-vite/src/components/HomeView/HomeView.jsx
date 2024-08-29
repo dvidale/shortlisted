@@ -34,7 +34,7 @@ function HomeView() {
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
   const [searchFormView, setSearchFormView] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
-
+  const [searchSubmitted, setSearchSubmitted ] = useState(false)
 
   const resetSearchForm =()=> {
     return true
@@ -46,6 +46,7 @@ function HomeView() {
     setToggleSymbol(!toggleSymbol);
     setSearchFormView(!searchFormView);
     setShowSearchResults(!showSearchResults)
+    setSearchSubmitted(false)
   };
 
   
@@ -91,6 +92,7 @@ function HomeView() {
                 searchFormView={searchFormView}
                 setShowSearchResults={setShowSearchResults}
                 resetSearchForm={resetSearchForm}
+                setSearchSubmitted={setSearchSubmitted}
               
               />
             </div>
@@ -132,6 +134,8 @@ function HomeView() {
               setShowSearchResults={setShowSearchResults}
               toggleFormView={toggleFormView}
               setShortlistIdx={setShortlistIdx}
+              showSearchResults={showSearchResults}
+              searchSubmitted={searchSubmitted}
             />
           </div>
 

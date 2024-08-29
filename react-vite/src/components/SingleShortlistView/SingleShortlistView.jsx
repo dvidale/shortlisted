@@ -148,17 +148,12 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx }) {
                 maxLength={255}
                 onChange={(e) => setDescription(e.target.value)}
               />
-              {warnings.description && (
-                <p className="warning">{warnings.description}</p>
-              )}
             </div>
-
           </form>
+              <p className="error">{warnings.description}</p>
               
-          <h3 className="shortlist-details-heading">Search Details</h3>
-          <div className="search-params">
           <SearchDetails params={shortlist} />
-          </div>
+         
           
           <div className='shortlist-comments-feed'>
           <ShortlistCommentsFeed shortlist={shortlist} editForm={editForm} />
