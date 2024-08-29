@@ -49,7 +49,7 @@ const toggleOpenThread = () =>{
 
   return (
     <>
-      <hr />
+ 
       {/* For every referral, return a comments tile */}
       {Object.keys(referralInfoObj).length > 0 &&
         Object.entries(referralInfoObj).map(([referralIdx, fullName]) => {

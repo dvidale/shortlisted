@@ -194,8 +194,27 @@ min-width: 400px;
     border-left: 1px solid white;
 }  
 
+.shortlist-comments-feed{
+    height: 430px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Scrollbar thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background-color: black; /* Color of the thumb */
+    border-radius: 10px; /* Round the corners */
+    border: 2px solid #f0f0f0; /* Creates padding around the thumb */
+  }
+
 .comment-tile{
-    border: 3px solid pink
+    /* border: 3px solid white; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 2px solid white;
+    padding: 10px 0px;
+    /* border-radius: 20px; */
 }
 
 #my-listings-calendar-placeholder{
