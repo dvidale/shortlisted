@@ -2,16 +2,18 @@ import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import SearchDetails from "../SearchDetails/SearchDetails"
 import { fetchShortlists, saveShortlist } from "../../redux/shortlists"
+import './search-results.css'
+import '../SingleShortlistView/single-shortlist.css'
+import SearchResultTile from "./SearchResultTile"
 
-
-
-function SearchResultsView({user, setShowSearchResults, toggleFormView, setShortlistIdx, resetSearchForm}){
+function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleFormView, setShortlistIdx, resetSearchForm}){
 
     const dispatch = useDispatch()
 
     const [shortlist_title, setShortlistTitle] = useState('')
     const [description, setDescription] = useState('')
     const [errors, setErrors ] = useState({})
+
 
     // some state slice of search results
     const searchResults = useSelector(state => state.shortlists.results_pre_avail)
@@ -70,8 +72,12 @@ function SearchResultsView({user, setShowSearchResults, toggleFormView, setShort
 
     }
     
+    // * Form validations
+
     useEffect(()=>{
         const err = {}
+
+      
 
         if (description.length === 200) err.description = "Descriptions have a 200 character limit"
        
@@ -85,7 +91,7 @@ function SearchResultsView({user, setShowSearchResults, toggleFormView, setShort
        
        const err = {}
 
-
+        if(shortlist_title === '' || shortlist_title.length === 0) err.title = "A title is required to save."
 
         setErrors(err)
 
@@ -135,38 +141,42 @@ function SearchResultsView({user, setShowSearchResults, toggleFormView, setShort
     }
     
     return(
-        <>
-        <h1>Search Results</h1>
-       <SearchDetails params={searchParams}/>
-        
-        
+        <> 
+        <h1 className="search-results-heading">Search Results</h1>
+    <p className="error">{errors.server}</p>
+
         <form method={'POST'} onSubmit={submitHandler}>
-            <label>
+            <div className='title-and-save-button'>
+            <label htmlFor="shortlist title"> Like these results? Save them.
             <input type='text' 
-            name='shortlist-name' 
+            name='shortlist-name' className="save-shortlist-title"
             value={shortlist_title} 
             onChange={e => setShortlistTitle(e.target.value)}placeholder="Name your list">
             </input>
 </label>
-{errors.title && <p className="error">{errors.title}</p>}
-{errors.server && <p className="error">{errors.server}</p>}
-            <label htmlFor="description">Description</label>
-            <textarea id='description-box' name="description" placeholder="Add any notes about the job." value={description} 
+
+
+<button id='save-shortlist-btn'className="save-shortlist-btn" type='submit'>Save</button>
+</div><p className="error">{errors.title}</p>
+            <label htmlFor="description">Add a Description</label>
+            <div>
+            <textarea id='edit-shortlist-desc' name="description" placeholder="Add any notes about the job." value={description} 
             maxLength={200}onChange={e => setDescription(e.target.value)}/>
-            {errors.description && <p className="error">{errors.description}</p>}
-            <button id='save-shortlist-btn' type='submit'>Save</button>
+     <p className="error">{errors.description}</p>
+            </div>
         </form>
 
-
+        <SearchDetails searchSubmitted={searchSubmitted} params={searchParams}/>
         
         {/*  Array.map of returned results tiles */}
-        {avail_filtered_results.length > 0 ? avail_filtered_results.map( result =>{
+        {searchSubmitted && avail_filtered_results.length > 0 && avail_filtered_results.map( result =>{
             return (
             
-                <div key={result.id}>{result.first_name}</div>
+                <div key={result.id}><SearchResultTile resultFirstName={result.first_name}/></div>
             )
-        }):
-        <p>No one matches this search.</p>}
+        })}
+        {searchSubmitted && avail_filtered_results.length === 0 && <p>Sorry, none of your connections match this search.</p>}
+        {searchSubmitted === false && <p>Enter job details in the search to see who is available.</p>}
         </>
     )
 }

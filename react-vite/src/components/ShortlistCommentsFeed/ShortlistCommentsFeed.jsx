@@ -9,16 +9,21 @@ import { useState } from "react";
 
 function ShortlistCommentsFeed({ shortlist, editForm }) {
 
-    const [ openThread, setOpenThread ] = useState(false)
+    const [currentReferral, setCurrentReferral ] = useState(null)
 
   const { setModalContent } = useModal();
 
   const userId = useSelector((state) => state.session.user.id);
 
 
-const toggleOpenThread = () =>{
+const toggleOpenThread = (clickedIdx) =>{
 
-   setOpenThread(!openThread)
+  if(currentReferral !== clickedIdx){
+   setCurrentReferral(clickedIdx)
+  }else{
+    setCurrentReferral(null)
+  }
+
 
 
 }
@@ -55,7 +60,7 @@ const toggleOpenThread = () =>{
         Object.entries(referralInfoObj).map(([referralIdx, fullName]) => {
           return (
             <div key={referralIdx} className="comment-tile">
-              <div className="comment-thread-btn" onClick={toggleOpenThread} >
+              <div className="comment-thread-btn" onClick={()=> toggleOpenThread(referralIdx)} >
                 <CommentThreadButton fullName={fullName} />
 
                 {editForm && (
@@ -67,7 +72,7 @@ const toggleOpenThread = () =>{
                   </button>
                 )}
               </div>
-              <div className={openThread ? 'open-thread': 'close-thread'}>
+              <div className={currentReferral != referralIdx ? 'open-thread': 'close-thread'}>
               <CommentsTile shortlist={shortlist} referralIdx={referralIdx}/>
               </div>
             </div>

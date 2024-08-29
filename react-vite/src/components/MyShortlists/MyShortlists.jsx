@@ -10,7 +10,7 @@ import { fetchShortlists } from '../../redux/shortlists'
 
 
 
-function MyShortlists({setShortlistIdx, saved_shortlists, setEditForm,setShowSearchResults }){
+function MyShortlists({shortlistIdx, setShortlistIdx, saved_shortlists, setEditForm,setShowSearchResults }){
  
     const dispatch = useDispatch()
 
@@ -51,17 +51,20 @@ const switchShortlistAndReset = (e)=>{
 
                     return(
 
+                    
+                        <div key={shortlist.id} 
                         
-                        <div key={shortlist.id} className='title-and-button-pairs'>
+                        className={shortlist.id == shortlistIdx ?'title-and-button-pairs-clicked': 'title-and-button-pairs'}>
                             <div>
-                            <button className='shortlist-btn' value={shortlist.id}
+                                {/* if current shortlist_id in single view  matches this btn shortlist_id, change the style to .clicked */}
+                            <button className={shortlist.id == shortlistIdx ? 'shortlist-btn-clicked' : 'shortlist-btn'} value={shortlist.id}
                             onClick={ e => switchShortlistAndReset(e)    }
                 
                             > 
-                            {shortlist.title}</button>
-                            {/* {console.log(">>>> current shortlist in my-shortlist view:", shortlist)} */}
+                            {shortlist.title} </button>
+                    
                             </div>
-                            <div className='edit-delete-list-btns'>
+                             <div className={shortlist.id != shortlistIdx ?'edit-delete-list-btns': 'edit-delete-list-btns-hidden'}>
                                 <button>EDIT</button>
                                 <button>DELETE</button>
                             </div>
