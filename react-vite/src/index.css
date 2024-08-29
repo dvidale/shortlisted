@@ -60,7 +60,7 @@ button{
     display:flex;
     flex-direction: column;
     padding: 0px 30px;
-    min-width: 400px;
+    /* min-width: 400px; */
     /* border: 2px solid orange; */
 }
 
@@ -77,7 +77,7 @@ button{
     
 .center-panel{
     padding: 10px 60px;
-    min-width: 400px;
+    /* min-width: 400px; */
 
 }
 
@@ -163,8 +163,9 @@ min-width: 310px;
 }
 
 #search-results-view{
-   
-    border: 5px dotted fuchsia;
+    border-left: 1px solid white;
+    /* border: 5px dotted fuchsia; */
+min-width: 400px;
 
     }
 
@@ -185,10 +186,12 @@ min-width: 310px;
 
 
 #single-shortlist-view{
-    min-height: 400px;
-    border: 2px solid yellow;
+    /* min-height: 400px; */
+    /* border: 2px solid yellow; */
     grid-column: 4;
     grid-row: 2;
+    min-width: 400px;
+    border-left: 1px solid white;
 }  
 
 .comment-tile{
