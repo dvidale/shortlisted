@@ -113,6 +113,7 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx }) {
       {shortlist ? (
         <>
           <form id="edit-shortlist-form" onSubmit={submitHandler}>
+           <div className="shortlist-title-and-edit-btns">
             <div className={formBorder}>
               <textarea
                 id="edit-shortlist-title"
@@ -124,7 +125,20 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx }) {
               />
               {errors.title && <p className="error">{errors.title}</p>}
             </div>
+            <div className="edit-delete-save-btns">
+{editForm && <button type="submit">Save</button>}
+            {!editForm && (
+              <button type={`button`} onClick={editSwitch}>{`Edit`}</button>
+            )}
 
+            <button
+              disabled={editForm}
+              className="single-shortlist-delete-btn"
+              onClick={() => handleDelete(shortlist, shortlist.id)}
+            >
+              Delete
+            </button></div>
+</div>
             <div className={formBorder}>
               <textarea
                 id="edit-shortlist-desc"
@@ -139,22 +153,12 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx }) {
               )}
             </div>
 
-            {editForm && <button type="submit">Save</button>}
-            {!editForm && (
-              <button type={`button`} onClick={editSwitch}>{`Edit`}</button>
-            )}
-
-            <button
-              disabled={editForm}
-              className="single-shortlist-delete-btn"
-              onClick={() => handleDelete(shortlist, shortlist.id)}
-            >
-              Delete
-            </button>
           </form>
-
-          <div>Search Details</div>
+              
+          <h3 className="shortlist-details-heading">Search Details</h3>
+          <div className="search-params">
           <SearchDetails params={shortlist} />
+          </div>
           <ShortlistCommentsFeed shortlist={shortlist} editForm={editForm} />
         </>
       ) : (
