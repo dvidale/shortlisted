@@ -8,3 +8,9 @@
 .profile-btn{
   align-self: flex-end;
 }
+
+.navigation-bar{
+display:flex;
+justify-content: space-between;
+padding: 0px 10px;
+}
