@@ -5,7 +5,7 @@ import { fetchShortlists, saveShortlist } from "../../redux/shortlists"
 
 
 
-function SearchResultsView({user, setShowSearchResults, toggleFormView, setShortlistIdx}){
+function SearchResultsView({user, setShowSearchResults, toggleFormView, setShortlistIdx, resetSearchForm}){
 
     const dispatch = useDispatch()
 
@@ -119,7 +119,7 @@ function SearchResultsView({user, setShowSearchResults, toggleFormView, setShort
                 setShortlistTitle('')
                 setDescription('')
                 avail_filtered_results = []
-                
+                resetSearchForm()
                
             }
         }

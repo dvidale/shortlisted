@@ -33,10 +33,20 @@ function HomeView() {
   const [searchFormView, setSearchFormView] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
 
+
+  const resetSearchForm =()=> {
+    return true
+
+  }
+
+
   const toggleFormView = () => {
     setToggleSymbol(!toggleSymbol);
     setSearchFormView(!searchFormView);
+
   };
+
+  
 
   if (shortlists_state) {
     console.log("shortlists state loaded");
@@ -77,6 +87,8 @@ function HomeView() {
                 user={user}
                 searchFormView={searchFormView}
                 setShowSearchResults={setShowSearchResults}
+                resetSearchForm={resetSearchForm}
+              
               />
             </div>
 

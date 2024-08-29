@@ -1,5 +1,5 @@
 import './new-shortlist-form.css'
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { useDispatch} from 'react-redux'
 import { buildShortlist } from "../../redux/shortlists";
 import DatePicker from "react-datepicker";
@@ -21,21 +21,8 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
     
     const [errors, setErrors] = useState({})
 
-    console.log(">>>> searchFormView state:", searchFormView);
     
-    useEffect((searchFormView)=>{
-        if(searchFormView === false){
-            setLocation(null)
-            setIndustryArea(null)
-            setJobTitle(null)
-            setGenre(null)
-            setStartDate(null)
-            setEndDate(null)
-            setErrors({})
-        }
-
-
-    },[searchFormView])
+    
 
 
 
