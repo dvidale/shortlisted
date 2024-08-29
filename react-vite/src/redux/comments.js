@@ -69,7 +69,10 @@ export const addComment = (commentData) => async (dispatch) =>{
         const data = await response.json()
         dispatch(addAComment(data))
 
-        return data
+        // return data
+    }else{
+        const serverError = await response.json()
+        return serverError 
     }
 }
 

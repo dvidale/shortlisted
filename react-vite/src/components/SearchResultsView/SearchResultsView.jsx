@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import SearchDetails from "../SearchDetails/SearchDetails"
-import { saveShortlist } from "../../redux/shortlists"
+import { fetchShortlists, saveShortlist } from "../../redux/shortlists"
 
 
 
-function SearchResultsView({user}){
+function SearchResultsView({user, setShowSearchResults, toggleFormView, setShortlistIdx, resetSearchForm}){
 
     const dispatch = useDispatch()
 
@@ -14,9 +14,11 @@ function SearchResultsView({user}){
     const [errors, setErrors ] = useState({})
 
     // some state slice of search results
-    const searchResults = useSelector(state => state.shortlists.results)
+    const searchResults = useSelector(state => state.shortlists.results_pre_avail)
 
     const searchParams = useSelector(state => state.shortlists.parameters)
+
+    const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
     const availCheck = (connection => {
         
@@ -87,7 +89,7 @@ function SearchResultsView({user}){
 
         setErrors(err)
 
-        if(!Object.keys(errors).length){
+        if(!Object.keys(err).length){
 
 
         
@@ -102,17 +104,30 @@ function SearchResultsView({user}){
             start_date: searchParams.start_date,
             end_date: searchParams.end_date,
             created_by:user.id,
-            referrals: searchResults
+            referrals: avail_filtered_results
            
         }
       
         
         dispatch(saveShortlist(JSON.stringify(shortlistData))).then( data => {
-            err.server = data.error
+            if(data){
+                err.server = data.error
             setErrors(err)
+            }else{
+                setShowSearchResults(false)
+                toggleFormView()
+                setShortlistTitle('')
+                setDescription('')
+                avail_filtered_results = []
+                resetSearchForm()
+               
+            }
         }
-        
-        )
+        // TODO: Get the newly saved shortlist to appear in the center panel. Right now it pulls up an older list
+        ).then( dispatch(fetchShortlists(user.id)))
+        .then( setShortlistIdx(Object.keys(saved_shortlists).length-1) )
+
+
         }
 
 
