@@ -1,5 +1,9 @@
 .create-shortlist-dropdown{
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
     border-radius: 10px;
+}
+
+.calendar-input{
+    text-align: center;
 }

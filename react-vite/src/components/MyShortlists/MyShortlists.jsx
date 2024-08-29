@@ -45,34 +45,32 @@ const switchShortlistAndReset = (e)=>{
         <>
         { Object.keys(saved_shortlists).length > 0 ?  (
             <> 
-            <h1>My Shortlists</h1>
-   
+            <h1 className='panel-heading'>My Shortlists</h1>
+                <div className='my-shortlists-list'>
                 {Object.values(saved_shortlists).map( shortlist =>{
 
                     return(
 
                         
-                            <div key={shortlist.id}>
-                            <button value={shortlist.id}
+                        <div key={shortlist.id} className='title-and-button-pairs'>
+                            <div>
+                            <button className='shortlist-btn' value={shortlist.id}
                             onClick={ e => switchShortlistAndReset(e)    }
                 
                             > 
                             {shortlist.title}</button>
                             {/* {console.log(">>>> current shortlist in my-shortlist view:", shortlist)} */}
-
-                            <div>
-                                <button>Edit</button>
-                                <button>Delete</button>
                             </div>
-                      </div>
+                            <div className='edit-delete-list-btns'>
+                                <button>EDIT</button>
+                                <button>DELETE</button>
+                            </div>
+                        </div>
                        
         
                     )
                 })}
-                {/* <div id="single-shortlist-view">
-        <SingleShortlistView setEditForm={setEditForm} editForm={editForm} shortlistIdx={shortlistIdx}/>
-                     
-        </div> */}
+           </div>
                  
                 </>  
                 ):(
