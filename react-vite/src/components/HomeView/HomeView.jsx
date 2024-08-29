@@ -121,6 +121,7 @@ function HomeView() {
               setEditForm={setEditForm}
               editForm={editForm}
               shortlistIdx={shortlistIdx}
+              showSearchResults={showSearchResults}
             />
           </div>
           <div

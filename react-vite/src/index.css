@@ -110,12 +110,6 @@ min-width: 310px;
 
 }
 
-
-#build-shortlist-form{
-/* border: 2px dotted green; */
-/* padding-top: 20px; */
-
-}
 .my-shortlists-list{
 
     
@@ -127,7 +121,13 @@ min-width: 310px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-     
+ 
+}
+.title-and-button-pairs-clicked{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white; 
 }
 
 .shortlist-btn{
@@ -140,10 +140,26 @@ min-width: 310px;
     border: none;
 }
 
+.shortlist-btn-clicked{
+    /* border: 2px dotted green; */
+    background-color: white;
+    color: black;
+    align-self:center;
+    padding: 10px 10px;
+    font-size: 20px;
+    box-shadow: 0px 0px 0px 0px;
+    border-radius: 0px;
+    border: none;
+}
+
 .edit-delete-list-btns{
     display: flex;
     flex-direction: column;
  
+}
+
+.edit-delete-list-btns-hidden{
+   display:none;
 }
 
 .edit-delete-list-btns button{

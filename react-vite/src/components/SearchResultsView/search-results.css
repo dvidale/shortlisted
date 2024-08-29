@@ -24,3 +24,14 @@
     font-size: 20px;
     height: 35px;
 }
+
+.search-result-tile{
+    font-size: 20px;
+   border-top: 2px solid white;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    column-gap: 10px;
+}

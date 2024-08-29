@@ -4,7 +4,7 @@ import SearchDetails from "../SearchDetails/SearchDetails"
 import { fetchShortlists, saveShortlist } from "../../redux/shortlists"
 import './search-results.css'
 import '../SingleShortlistView/single-shortlist.css'
-
+import SearchResultTile from "./SearchResultTile"
 
 function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleFormView, setShortlistIdx, resetSearchForm}){
 
@@ -172,7 +172,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
         {searchSubmitted && avail_filtered_results.length > 0 && avail_filtered_results.map( result =>{
             return (
             
-                <div key={result.id}>{result.first_name}</div>
+                <div key={result.id}><SearchResultTile resultFirstName={result.first_name}/></div>
             )
         })}
         {searchSubmitted && avail_filtered_results.length === 0 && <p>Sorry, none of your connections match this search.</p>}

@@ -63,12 +63,14 @@ border: 1px solid gray;
     justify-content: center;
     column-gap: 30px;
     padding-bottom: 10px;
+
   }
 
   .actual-params-details{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-evenly; 
+     height: 80px;
   }
 
 .param-detail-text{

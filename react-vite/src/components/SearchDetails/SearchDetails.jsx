@@ -1,6 +1,6 @@
 // !BUG - throwing an "invalid date" error
 
-function SearchDetails({ params, searchSubmitted }) {
+function SearchDetails({ params, searchSubmitted, showSearchResults }) {
   // const startDate = new Date(params.start_date)
   // const options = {month: "short"};
   // const month = new Intl.DateTimeFormat("en-US", options).format(startDate) //! the problem is with this formatting line
@@ -14,7 +14,7 @@ function SearchDetails({ params, searchSubmitted }) {
   return (
     <>
       <div className="search-params">
-        {searchSubmitted && (<>
+        {searchSubmitted || showSearchResults === false && (<>
         <div>
        
           <h3 className="shortlist-details-heading">Search Details</h3>{" "}
@@ -24,7 +24,8 @@ function SearchDetails({ params, searchSubmitted }) {
               <div className="param-detail-text">{params.industry_area}</div>
               <div className="param-detail-text">{params.job_title}</div>
               {params.genre && (
-                <div className="param-detail-text">{params.genre}</div>
+                <div className="param-detail-text">
+                    {params.genre}</div>
               )}
             </div>
             <div className="dates-location">
