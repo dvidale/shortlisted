@@ -34,7 +34,7 @@ function HomeView() {
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
   const [searchFormView, setSearchFormView] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
-
+  const [searchSubmitted, setSearchSubmitted ] = useState(false)
 
   const resetSearchForm =()=> {
     return true
@@ -46,6 +46,7 @@ function HomeView() {
     setToggleSymbol(!toggleSymbol);
     setSearchFormView(!searchFormView);
     setShowSearchResults(!showSearchResults)
+    setSearchSubmitted(false)
   };
 
   
@@ -91,6 +92,7 @@ function HomeView() {
                 searchFormView={searchFormView}
                 setShowSearchResults={setShowSearchResults}
                 resetSearchForm={resetSearchForm}
+                setSearchSubmitted={setSearchSubmitted}
               
               />
             </div>
@@ -111,20 +113,21 @@ function HomeView() {
           </div>
           <div
             id="single-shortlist-view"
-            className={`center-panel ${
-              showSearchResults ? "hide-view" : "show-view"
+            className={`${
+              showSearchResults ? "center-panel hide-view" : "center-panel show-view"
             }`}
           >
             <SingleShortlistView
               setEditForm={setEditForm}
               editForm={editForm}
               shortlistIdx={shortlistIdx}
+              showSearchResults={showSearchResults}
             />
           </div>
           <div
             id="search-results-view"
-            className={`center-panel ${
-              showSearchResults ? "show-view" : "hide-view"
+            className={`${
+              showSearchResults ? "center-panel show-view" : "center-panel hide-view"
             }`}
           >
             <SearchResultsView
@@ -132,6 +135,8 @@ function HomeView() {
               setShowSearchResults={setShowSearchResults}
               toggleFormView={toggleFormView}
               setShortlistIdx={setShortlistIdx}
+              showSearchResults={showSearchResults}
+              searchSubmitted={searchSubmitted}
             />
           </div>
 
