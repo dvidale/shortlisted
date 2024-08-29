@@ -46,20 +46,24 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
     if(!location) err.location = 'Location required'
     if(!industry_area) err.industry_area = 'Industry area required'
     if(!job_title) err.job_title = "Job title required"
-    if(!start_date) err.start_date = "Start date required"
-    const startDateCheck = new Date(start_date)
-
+    const startDateCheck = new Date(start_date).setHours(1,0,0,0)
+    
     const today = new Date().setHours(0,0,0,0)
-
+    
     let endDateCheck
     if(end_date){
-    endDateCheck = new Date(end_date)
-    if(endDateCheck < today) err.end_date = 'End date cannot be in the past'
-    if(startDateCheck > endDateCheck) err.end_date = 'End date cannot be before start date'
+        endDateCheck = new Date(end_date)
+        if(endDateCheck < today) err.end_date = 'End date cannot be in the past'
+    }
+         
+        if(startDateCheck > endDateCheck) err.end_date = 'End date cannot be before start date'
+
+    if(!start_date){
+     err.start_date = "Start date required"   
+    } else if(startDateCheck !== '' && startDateCheck !== null && startDateCheck < today) {
+    err.start_date = 'Start date cannot be in the past'
     }
    
-    if(startDateCheck < today) err.start_date = 'Start date cannot be in the past'
-    
 
     setErrors(err)
 
@@ -70,7 +74,7 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
             location,
             industry_area,
             job_title,
-            genre,
+            genre: genre === '' ? null : genre,
             start_date: start_date.toISOString(),
             end_date: end_date ? end_date.toISOString() : null
         }
@@ -101,8 +105,10 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
     <option value='Assistant Editor'>Assistant Editor</option>
     </select>
 </label>
-<div className='error'>
-    {errors.job_title && <p>{errors.job_title}</p>}
+<div >
+    {
+  
+     <p className='error'>{errors.job_title}</p>}
 </div>
 
 </div>
@@ -116,8 +122,10 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
             <option value='Documentary'>Documentary</option>
             <option value='Commercial'>Commercial</option>
         </select>
-        <div className='error'>
-        {errors.industry_area && <p>{errors.industry_area}
+        <div >
+        {
+ 
+        <p className='error'>{errors.industry_area}
             </p>}
             </div>
 
@@ -144,8 +152,10 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
             <option value='Atlanta'>Atlanta</option>
             <option value='Remote'>Remote</option>
         </select>
-        <div className='error'>
-        {errors.location && <p>{errors.location}</p>}
+        <div >
+        {
+     
+        <p className='error'>{errors.location}</p>}
         </div>
 
        
@@ -155,8 +165,10 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
         <div className='calendar-input' > <label htmlFor="start_date_month">
             <DatePicker selected={start_date} onChange={ start_date => setStartDate(start_date)}  />
             </label>
-            <div className='error'>
-            {errors.start_date && <p>{errors.start_date}</p>}
+            <div >
+            {
+    
+            <p className='error'>{errors.start_date}</p>}
             </div>
         </div>
 
@@ -165,8 +177,10 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
         <div className='calendar-input'><label htmlFor="end_date_month">
             <DatePicker selected={end_date} onChange={ end_date => setEndDate(end_date)}  />
                </label>         
-            <div className='error'>
-               {errors.end_date && <p>{errors.end_date}</p>}   
+            <div >
+               {
+  
+               <p className='error'>{errors.end_date}</p>}   
             </div>
         </div>
            

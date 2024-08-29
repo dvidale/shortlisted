@@ -70,26 +70,30 @@ function CommentForm({ shortlist, referralIdx, user }) {
 
   return (
     <>
-    {errors.serverError && <p>{errors.serverError}</p>}
-      <form onSubmit={submitHandler}>
+     <p>{errors.serverError}</p>
+      <form className='comment-form' onSubmit={submitHandler}>
+        <div>
         <label htmlFor="comment-box"></label>
         <textarea
-          id="comment-text"
+          id="comment-textarea"
           placeholder="Send a message"
           maxLength={140}
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        {warnings.text && <p className="warning">{warnings.text}</p>}
-        {errors.text && <p className="warning">{errors.text}</p>}
+               <p className="warning">{warnings.text}</p>
+       <p className="warning">{errors.text}</p>
         {text && (
           <button id="cancel-comment" onClick={cancelComment}>
             Cancel
           </button>
         )}
+        </div>
+        <div>
         <button id="submit-comment" type="submit">
           Send
         </button>
+        </div>
       </form>
     </>
   );
