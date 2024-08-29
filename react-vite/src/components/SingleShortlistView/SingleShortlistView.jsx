@@ -9,7 +9,7 @@ import { useModal } from "../../context/Modal";
 import DeleteShortlistModal from "../DeleteShortlistModal/DeleteShortlistModal";
 
 // !BUG - the default shortlist does not load automatically
-function SingleShortlistView({ setEditForm, editForm, shortlistIdx }) {
+function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchResults }) {
   const dispatch = useDispatch();
 
   const { setModalContent } = useModal();
@@ -152,7 +152,7 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx }) {
           </form>
               <p className="error">{warnings.description}</p>
               
-          <SearchDetails params={shortlist} />
+          <SearchDetails params={shortlist} showSearchResults={showSearchResults} />
          
           
           <div className='shortlist-comments-feed'>
