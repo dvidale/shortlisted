@@ -159,7 +159,10 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx }) {
           <div className="search-params">
           <SearchDetails params={shortlist} />
           </div>
+          
+          <div className='shortlist-comments-feed'>
           <ShortlistCommentsFeed shortlist={shortlist} editForm={editForm} />
+          </div>
         </>
       ) : (
         <>

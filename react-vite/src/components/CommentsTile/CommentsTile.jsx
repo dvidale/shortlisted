@@ -5,7 +5,7 @@ import { getCommentThreads } from "../../redux/comments";
 import { useDispatch, useSelector } from "react-redux";
 import CommentForm from "../CommentFormComponent/CommentForm";
 import DeleteCommentModal from "../DeleteCommentModal/DeleteCommentModal";
-
+import { VscAccount } from "react-icons/vsc";
 import { useModal } from "../../context/Modal";
 import CommentEditorModal from "../CommentEditorModal/CommentEditorModal";
 
@@ -48,31 +48,41 @@ function CommentsTile({ shortlist, referralIdx }) {
           return (
             <div key={comment.id}>
               <div className="comment-block">
-                <div className="comment_name">{comment.commenter_name}</div>
+                <div className="commenter_name">{comment.commenter_name !== user.first_name && <span><VscAccount />{comment.commenter_name}</span>}</div>
 
-                <div className="comment-text">{comment.text}</div>
+                <div className="comment-text"><span className="message-bubble">{comment.text}</span></div>
+               
+         
 
                 <div className="edit-delete-list-btns">
+                {comment.commenter_id === user.id &&
                   <button
                     onClick={() => commentEditor(comment.text, comment.id)}
                   >
                     Edit
-                  </button>
-
+                  </button>}
+                  {comment.commenter_id === user.id &&
                   <button onClick={() => deleteCommentModal(comment.id)}>
                     Delete
-                  </button>
+                  </button>}
+       {comment.commenter_id === user.id && <div className="you_icon"><VscAccount />You</div>}
+
+
                 </div>
+                
               </div>
+             
             </div>
           );
         })}
 
-      <CommentForm
+    <div className="comment-form-container">
+  <CommentForm
         shortlist={shortlist}
         referralIdx={referralIdx}
         user={user}
       />
+</div> 
     </>
   );
 }
