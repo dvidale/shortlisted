@@ -1,5 +1,5 @@
 import './new-shortlist-form.css'
-import { useState} from 'react';
+import { useEffect, useState} from 'react';
 import { useDispatch} from 'react-redux'
 import { buildShortlist } from "../../redux/shortlists";
 import DatePicker from "react-datepicker";
@@ -22,8 +22,19 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
     const [errors, setErrors] = useState({})
 
     
-    
 
+    useEffect(()=>{
+        if(searchFormView === false){
+            setLocation('')
+            setIndustryArea('')
+            setJobTitle('')
+            setGenre('')
+            setStartDate(null)
+            setEndDate(null)
+            setErrors({})
+        }
+
+    },[searchFormView])
 
 
     
@@ -79,7 +90,7 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
     return(<>
     
 
-        <form id='new-shortlist-form' className={`${
+        <form id='new-shortlist-form' className={` ${
                 searchFormView ? `show-form` : `hide-view`
               } `} method='POST' onSubmit={submitHandler}>
         <div>
@@ -90,7 +101,10 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
     <option value='Assistant Editor'>Assistant Editor</option>
     </select>
 </label>
-{errors.job_title && <p className='error'>{errors.job_title}</p>}
+<div className='error'>
+    {errors.job_title && <p>{errors.job_title}</p>}
+</div>
+
 </div>
         <label htmlFor="industry-area"></label>
         <select name='industry-areas' id='industry-area-select' value={industry_area} onChange={e => setIndustryArea(e.target.value)} 
@@ -102,7 +116,10 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
             <option value='Documentary'>Documentary</option>
             <option value='Commercial'>Commercial</option>
         </select>
-        {errors.industry_area && <p className='error'>{errors.industry_area}</p>}
+        <div className='error'>
+        {errors.industry_area && <p>{errors.industry_area}
+            </p>}
+            </div>
 
         <label htmlFor="genre"></label>
         <select name='genres' id='genre-select' value={genre} onChange={e => setGenre(e.target.value)}
@@ -116,6 +133,8 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
             <option value='Historical'>Historical</option>
         </select>
 
+        <div className='error'></div>
+
         <label htmlFor="location"></label>
         <select name='locations' id='location-select' value={location} onChange={e => setLocation(e.target.value)}
             className='create-shortlist-dropdown'>
@@ -125,28 +144,36 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
             <option value='Atlanta'>Atlanta</option>
             <option value='Remote'>Remote</option>
         </select>
-        {errors.location && <p className='error'>{errors.location}</p>}
-
-       
-
-        <h2>Start Date</h2>
-       
-        <div > <label htmlFor="start_date_month">
-            <DatePicker selected={start_date} onChange={ start_date => setStartDate(start_date)}  />
-            {errors.start_date && <p className='error'>{errors.start_date}</p>}</label>
+        <div className='error'>
+        {errors.location && <p>{errors.location}</p>}
         </div>
 
-        <h2>End Date</h2>
-        
-        <div><label htmlFor="end_date_month">
-            <DatePicker selected={end_date} onChange={ end_date => setEndDate(end_date)}  />
+       
 
-            {errors.end_date && <p className='error'>{errors.end_date}</p>}      </label>         
+        <h2 className='panel-heading'>Start Date</h2>
+       
+        <div className='calendar-input' > <label htmlFor="start_date_month">
+            <DatePicker selected={start_date} onChange={ start_date => setStartDate(start_date)}  />
+            </label>
+            <div className='error'>
+            {errors.start_date && <p>{errors.start_date}</p>}
+            </div>
+        </div>
+
+        <h2 className='panel-heading'>End Date</h2>
+        
+        <div className='calendar-input'><label htmlFor="end_date_month">
+            <DatePicker selected={end_date} onChange={ end_date => setEndDate(end_date)}  />
+               </label>         
+            <div className='error'>
+               {errors.end_date && <p>{errors.end_date}</p>}   
+            </div>
         </div>
            
     
-       <button id='submit' type="submit">Search</button>
-
+       <button id='submit' type="submit">SEARCH</button>
+       
+       
         </form>
     
 

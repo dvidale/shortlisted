@@ -10,6 +10,16 @@ a {
     text-decoration: none;
 }
 
+button{
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
 #site-wide-container{
     border: 2px dotted orange;
     display:flex;
@@ -39,16 +49,17 @@ a {
     flex-direction: column;
     align-items:center;
      padding: 10px 30px;
-    min-width: 310px;
-    gap: 10px;
+    min-width: 400px;
+    
+    
 
 } 
 
 .show-view{
     display:flex;
     flex-direction: column;
-    padding: 10px 30px;
-    min-width: 310px;
+    padding: 0px 30px;
+    min-width: 400px;
     /* border: 2px solid orange; */
 }
 
@@ -58,14 +69,14 @@ a {
 
 .left-panel{
     padding: 10px 30px;
-    min-width: 310px;
+    min-width: 400px;
     display:flex;
     flex-direction: column;
     }
     
 .center-panel{
     padding: 10px 60px;
-    min-width: 310px;
+    min-width: 400px;
 
 }
 
@@ -75,31 +86,79 @@ min-width: 310px;
 }
 
 #new-shortlist-btn{
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
     background-color: black;
     color: white;
     border: 2px white solid;
     padding: 1px;
-    margin: 5px;
-    margin-bottom: 20px;
-    font-size: 18px;
+    
+    margin-bottom: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 0px 0px;
     /* display: flex;
     flex-direction: row;
     align-items: center; */
 }
 
-
-
-#build-shortlist-form{
-border: 2px dotted green;
+.panel-heading{
+    margin-top:0px;
+    padding-top:0px;
 
 }
 
+
+#build-shortlist-form{
+/* border: 2px dotted green; */
+/* padding-top: 20px; */
+
+}
+.my-shortlists-list{
+
+    
+    /* display: flex;
+    flex-direction: column;
+    align-items: end; */
+}
+.title-and-button-pairs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+     
+}
+
+.shortlist-btn{
+    /* border: 2px dotted green; */
+    align-self:center;
+    padding: 10px 10px;
+    font-size: 20px;
+    box-shadow: 0px 0px 0px 0px;
+    border-radius: 0px;
+    border: none;
+}
+
+.edit-delete-list-btns{
+    display: flex;
+    flex-direction: column;
+ 
+}
+
+.edit-delete-list-btns button{
+       font-size:11px;
+       padding: 2px 2px;
+       box-shadow: 0px 0px 0px 0px;
+       border: 1px solid white;
+}
 
 
 #search-and-my-shortlist-container{
     display: flex;
     flex-direction: column;
-    padding: 20px;
+  
+   
+    
 }
 
 #search-results-view{
@@ -109,8 +168,8 @@ border: 2px dotted green;
     }
 
 #my-shortlists{
-    border: 2px solid blue;
-  
+    /* border: 2px solid blue; */
+  min-width: 400px;
 }
 
 
@@ -142,8 +201,10 @@ border: 2px dotted green;
 }
 
 .error{
+    display:block;
     color: brown;
-    min-height: 12px;
+    min-height: 50px;
+    text-align: center;
 }
 
 #user-profile{

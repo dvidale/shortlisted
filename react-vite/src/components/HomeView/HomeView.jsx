@@ -4,6 +4,8 @@ import SearchResultsView from "../SearchResultsView/SearchResultsView";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchShortlists } from "../../redux/shortlists";
+import { FaPlusCircle } from "react-icons/fa";
+import { FaMinusCircle } from "react-icons/fa";
 
 import MyShortlists from "../MyShortlists/MyShortlists";
 import MyListings_Calendar from "../MyListings_Calendar/MyListings_Calendar";
@@ -43,7 +45,7 @@ function HomeView() {
   const toggleFormView = () => {
     setToggleSymbol(!toggleSymbol);
     setSearchFormView(!searchFormView);
-
+    setShowSearchResults(!showSearchResults)
   };
 
   
@@ -71,11 +73,12 @@ function HomeView() {
           <div id="search-and-my-shortlist-container">
             <button id="new-shortlist-btn" onClick={() => toggleFormView()}>
               <h1>
-                {" "}
-                New Shortlist{" "}
-                <span className="toggle-symbol">
-                  {toggleSymbol ? `+` : `-`}
-                </span>
+            
+                New Shortlist 
+                </h1>
+                <h1>
+                {toggleSymbol ? <FaPlusCircle /> : <FaMinusCircle />}
+             
               </h1>
             </button>
 
