@@ -61,7 +61,7 @@ function HomeView() {
   }, [dispatch, user]);
 
   useEffect(() => {
-    if (saved_shortlists) {
+    if (saved_shortlists && user) {
       dispatch(getCommentThreads(user.id));
     }
   }, [saved_shortlists, dispatch, user]);
@@ -140,7 +140,9 @@ function HomeView() {
           </div>
         </>
       ) : (
-        <></>
+        <>
+       
+        </>
       )}
     </>
   );
