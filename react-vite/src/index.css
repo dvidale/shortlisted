@@ -21,7 +21,7 @@ button{
 }
 
 #site-wide-container{
-    border: 2px dotted orange;
+    /* border: 2px dotted orange; */
     display:flex;
     flex-direction: column;
     grid-column-gap: 0px;
@@ -77,8 +77,8 @@ button{
     
 .center-panel{
     padding: 10px 60px;
-    /* min-width: 400px; */
-
+    min-width: 400px;
+    max-width:400px;
 }
 
 .right-panel{
@@ -165,7 +165,6 @@ min-width: 310px;
 #search-results-view{
     border-left: 1px solid white;
     /* border: 5px dotted fuchsia; */
-min-width: 400px;
 
     }
 
@@ -188,9 +187,8 @@ min-width: 400px;
 #single-shortlist-view{
     /* min-height: 400px; */
     /* border: 2px solid yellow; */
-    grid-column: 4;
-    grid-row: 2;
-    min-width: 400px;
+
+  
     border-left: 1px solid white;
 }  
 

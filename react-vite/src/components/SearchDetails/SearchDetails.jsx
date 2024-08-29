@@ -1,4 +1,4 @@
-
+// !BUG - throwing an "invalid date" error
 
 function SearchDetails({params}){
     const startDate = new Date(params.start_date)

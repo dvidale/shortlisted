@@ -111,8 +111,8 @@ function HomeView() {
           </div>
           <div
             id="single-shortlist-view"
-            className={`center-panel ${
-              showSearchResults ? "hide-view" : "show-view"
+            className={`${
+              showSearchResults ? "center-panel hide-view" : "center-panel show-view"
             }`}
           >
             <SingleShortlistView
@@ -123,8 +123,8 @@ function HomeView() {
           </div>
           <div
             id="search-results-view"
-            className={`center-panel ${
-              showSearchResults ? "show-view" : "hide-view"
+            className={`${
+              showSearchResults ? "center-panel show-view" : "center-panel hide-view"
             }`}
           >
             <SearchResultsView

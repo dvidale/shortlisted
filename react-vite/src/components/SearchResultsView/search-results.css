@@ -1,0 +1,26 @@
+.save-shortlist-title{
+    border: 1px solid yellowgreen;
+    font-size: 20px;
+    width: 300px;
+}
+
+.search-results-heading{
+    margin-top:0px;
+    padding-top:5px;
+    margin-bottom: 0px;
+    
+}
+
+.title-and-save-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: end;
+}
+
+.save-shortlist-btn{
+    padding: 0px 4px;
+    margin: 0px;
+    font-size: 20px;
+    height: 35px;
+}
