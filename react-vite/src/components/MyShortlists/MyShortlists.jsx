@@ -62,7 +62,7 @@ const switchShortlistAndReset = (e)=>{
                 
                             > 
                             {shortlist.title} </button>
-                            {/* {console.log(">>>> current shortlist in my-shortlist view:", shortlist)} */}
+                    
                             </div>
                              <div className={shortlist.id != shortlistIdx ?'edit-delete-list-btns': 'edit-delete-list-btns-hidden'}>
                                 <button>EDIT</button>
