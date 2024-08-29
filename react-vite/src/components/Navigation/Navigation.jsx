@@ -9,10 +9,14 @@ function Navigation() {
     //     <NavLink to="/">Home</NavLink>
     //   </li>
     //   <li>
+    <div className="navigation-bar">
+     <div>Shortlisted.</div>
     <div className="profile-btn">
       <ProfileButton />
 
     </div>
+    </div>
+    
     //   </li>
     // </ul>
   );
