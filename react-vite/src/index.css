@@ -121,13 +121,15 @@ min-width: 310px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
- 
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
 .title-and-button-pairs-clicked{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: white; 
+    margin-top: 5px;
 }
 
 .shortlist-btn{
