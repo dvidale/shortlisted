@@ -1,10 +1,22 @@
 .signup-modal-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 min-height: 300px;
-min-width: 150px;
-max-width: 400px;
+width: 300px;
+padding:20px;
 border: 3px solid white;
+}
+
+
+.signup-label-field{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 20px;
+}
+.label{
+    grid-column-start: 1;
+}
+
+.field{
+    grid-column-start: 2;
 }

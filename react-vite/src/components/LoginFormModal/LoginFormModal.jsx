@@ -14,7 +14,17 @@ function LoginFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const serverResponse = await dispatch(
+    const err ={}
+
+    if(!email.length) err.email ='Email is required'
+    if(!password.length) err.password ='Password is required'
+    if(password && password.length < 8) err.password = 'Password must be at least 8 characters'
+
+    setErrors(err)
+
+    if(Object.keys(err).length === 0 ){
+
+     const serverResponse = await dispatch(
       thunkLogin({
         email,
         password,
@@ -26,7 +36,10 @@ function LoginFormModal() {
     } else {
       closeModal();
     }
-  };
+  }
+
+    }
+    
 
   const handleDemoLogin = async (e) => {
     e.preventDefault();
@@ -52,40 +65,53 @@ function LoginFormModal() {
 
   return (
     <>
-    
+    <div className="heading-and-form">
       <h1>Log In</h1>
 
       <form className='login-form' onSubmit={handleSubmit}>
+        <div className="login-fields">
+          <div className="field-and-error">
         <label>
           Email
-          <input
+          <input className="front-input-field"
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+<div className="error-email">
+         <p className="error">{errors.email}</p>
+        </div> 
+</div>
+         <div className="password-and-error">
         <label>
           Password
-          <input
+          <input className="front-input-field"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        <div>
+          <p className="error">{errors.password}</p>
+        </div>
+      </div>
+</div>
+
+      <div className="login-buttons">
         <button type="submit">Log In</button>
-        <hr />
+        
 				<button
 					className='login-btn'
 					onClick={handleDemoLogin}
 				>
 					Log In Demo User
 				</button>
-
+</div>
       </form>
+      </div>
     </>
   );
 }

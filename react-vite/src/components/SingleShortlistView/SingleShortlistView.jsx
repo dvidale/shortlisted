@@ -94,12 +94,16 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchRe
     }
   };
 
+  
+  // * Disable and hide the edit fields for title and description
   useEffect(() => {
     if (editForm === false) {
       setActiveFields("edit-off");
       setFormBorder("border-off");
     }
   }, [editForm]);
+
+
 
   const handleDelete = (shortlist) => {
     setModalContent(
