@@ -25,15 +25,27 @@ button{
     display:flex;
     flex-direction: column;
     grid-column-gap: 0px;
+    margin: 0px;
+}
+.front-login-signup-btn{
+    border-radius: 30px;
+    background-color: white;
+    color: black;
 }
 
 #app-views-container{
-    border: 2px dotted yellowgreen;
+    /* border: 2px dotted yellowgreen; */
     display:flex;
     flex-direction: row;
     justify-content: center;
     /* min-height: 500px; */
    height: 800px;
+    margin: 0px;
+}
+.splash-img{
+    display: flex;
+    justify-content: end;
+    flex-wrap: wrap;
 }
 
 /* .hide-form{
@@ -69,6 +81,7 @@ button{
 }
 
 .left-panel{
+    
     padding: 10px 30px;
     min-width: 400px;
     display:flex;
@@ -76,6 +89,7 @@ button{
     }
     
 .center-panel{
+    border: 2px solid white;
     padding: 10px 60px;
     min-width: 400px;
     max-width:400px;
@@ -110,13 +124,13 @@ min-width: 310px;
 
 }
 
-.my-shortlists-list{
+/* .my-shortlists-list{
 
-    
-    /* display: flex;
+    display: flex;
     flex-direction: column;
-    align-items: end; */
-}
+    align-items: end;
+} */
+ 
 .title-and-button-pairs{
     display: flex;
     flex-direction: row;
@@ -173,18 +187,18 @@ min-width: 310px;
 
 
 #search-and-my-shortlist-container{
+    border: 2px solid white;
     display: flex;
     flex-direction: column;
   
-   
-    
 }
-
+/*
 #search-results-view{
-    border-left: 1px solid white;
-    /* border: 5px dotted fuchsia; */
+
+     border: 5px dotted fuchsia; 
 
     }
+    */
 
 #my-shortlists{
     /* border: 2px solid blue; */
@@ -202,13 +216,10 @@ min-width: 310px;
 }
 
 
-#single-shortlist-view{
-    /* min-height: 400px; */
-    /* border: 2px solid yellow; */
-
-  
-    border-left: 1px solid white;
-}  
+/* #single-shortlist-view{
+    min-height: 400px; 
+    border: 2px solid yellow;
+}   */
 
 .shortlist-comments-feed{
     height: 430px;
@@ -234,7 +245,7 @@ min-width: 310px;
 }
 
 #my-listings-calendar-placeholder{
-    border: 2px solid orangered;
+    border: 2px solid white;
     grid-column: 4;
     grid-row: 2;
 }
@@ -244,6 +255,16 @@ min-width: 310px;
     color: brown;
     max-height: 20px;
    min-height: 20px;
+    text-align: center;
+    margin: 10px 0px;
+}
+
+.two-line-error{
+    display:block;
+    color: brown;
+    max-height:60px;
+   min-height: 60px;
+   max-width: 300px;
     text-align: center;
     margin: 10px 0px;
 }

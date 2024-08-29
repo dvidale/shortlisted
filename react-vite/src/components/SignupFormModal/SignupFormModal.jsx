@@ -34,7 +34,7 @@ function SignupFormModal() {
 
     setErrors(err)
 
-    if(Object.keys(errors).length === 0){
+    if(Object.keys(err).length === 0){
 
       
       const serverResponse = await dispatch(
@@ -60,25 +60,32 @@ function SignupFormModal() {
     <>
       <h1>Sign Up</h1>
     < div className="signup-modal-container">
-    
-      {errors.server && <p>{errors.server}</p>}
+   
+     <p className="error">{errors.server}</p>
+
       <form onSubmit={handleSubmit}>
-        <div>  
-      <label>
-          First Name
+    
+        <div className='signup-label-field'>   
+          <div>First Name</div>
+
+      <label htmlFor="firstName">
+       
           <input
+          className="field"
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
           />
         </label>
-        {errors.firstName && <p className="error">{errors.firstName}</p>}
-        </div>
+          </div>
+     <p className="two-line-error">{errors.firstName}</p>
+      
 
-        <div>
-        <label>
-          Last Name
+        <div className='signup-label-field'>  
+           <div>Last Name </div>
+        <label htmlFor="lastName">
+      
           <input
             type="text"
             value={lastName}
@@ -86,12 +93,15 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.lastName && <p className="error">{errors.lastName}</p>}
+       
         </div>
+  <p className="two-line-error">{errors.lastName}</p>
 
-        <div>
-        <label>
-          Email
+<div className="label-field-error">
+        <div className='signup-label-field'>    
+             <div>Email    </div>
+        <label htmlFor="email">
+     
           <input
             type="text"
             value={email}
@@ -99,13 +109,14 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && <p className="error">{errors.email}</p>}
+       
 </div>
-
-
-<div>
-        <label>
-          Username
+ <p className="two-line-error">{errors.email}</p>
+</div>
+<div className='signup-label-field'> 
+   <div>Username </div>
+        <label htmlFor="username">
+        
           <input
             type="text"
             value={username}
@@ -113,13 +124,13 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p className="error">{errors.username}</p>}
-
+       
         </div>
+ <p className="two-line-error">{errors.username}</p>
 
-        <div>
-        <label>
-          Password
+        <div className='signup-label-field'> <div>Password    </div>
+        <label htmlFor="password">
+          
           <input
             type="password"
             value={password}
@@ -127,13 +138,16 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && <p className="error">{errors.password}</p>}
+       
 
         </div>
+ <p className="error">{errors.password}</p>
 
-        <div>
-        <label>
-          Confirm Password
+
+        <div className='signup-label-field'>   
+        <div>Confirm Password </div>
+        <label htmlFor="confirm">
+       
           <input
             type="password"
             value={confirmPassword}
@@ -141,9 +155,13 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
+    
         </div>
-        <div>
+  <p className="error">{errors.confirmPassword}</p>
+
+        <div className='signup-label-field'>
+
+
         <button type="submit">Sign Up</button>
         </div>
       </form>
