@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
+function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, searchFormView}){
 
     const dispatch = useDispatch();
     
@@ -78,7 +78,7 @@ function SearchConnectionsForm({user, setShowSearchResults, searchFormView}){
             start_date: start_date.toISOString(),
             end_date: end_date ? end_date.toISOString() : null
         }
-
+        setSearchSubmitted(true)
         dispatch(buildShortlist(user.id, JSON.stringify(formData)))
         .then(setShowSearchResults(true))
         
