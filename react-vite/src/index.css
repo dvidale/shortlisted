@@ -207,8 +207,10 @@ min-width: 400px;
 .error{
     display:block;
     color: brown;
-    min-height: 50px;
+    max-height: 20px;
+   min-height: 20px;
     text-align: center;
+    margin: 10px 0px;
 }
 
 #user-profile{

@@ -63,3 +63,38 @@ border: 1px solid gray;
     justify-content: center;
     column-gap: 30px;
   }
+
+  .genre-details{
+    min-height: 15px;
+  }
+
+
+  .comment-thread-btn{
+text-align: center;
+padding-top: 8px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: row;
+column-gap: 15px;
+font-size: 30px;
+  }
+
+  .open-thread{
+    display:none
+  }
+
+  .closed-thread{
+    display: block;
+  }
+
+
+  .comment-block{
+    border: 2px solid purple;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    column-gap: 20px;
+    max-width: 300px;
+    
+  }
