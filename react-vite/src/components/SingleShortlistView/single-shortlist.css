@@ -62,4 +62,110 @@ border: 1px solid gray;
     flex-direction: row;
     justify-content: center;
     column-gap: 30px;
+    padding-bottom: 10px;
   }
+
+  .genre-details{
+    min-height: 15px;
+  }
+
+
+  .comment-thread-btn{
+text-align: center;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: row;
+column-gap: 15px;
+font-size: 30px;
+  }
+
+  .open-thread{
+    display:none
+  }
+
+  .closed-thread{
+    display: block;
+  }
+
+
+  .comment-block{
+/* border: 2px solid purple; */
+    display:grid;
+    grid-template-columns: 40px auto 40px;
+    grid-template-rows: auto auto;
+    column-gap: 20px;
+    max-width: 350px;
+    padding: 15px 0px;
+    
+  }
+
+  .commenter_name{
+    grid-column-start: 1;
+    grid-row: 1;
+    align-self: flex-end;
+    text-align: center;
+    font-size: 12px;
+    padding-left: 4px;
+  }
+  .comment-text{
+    /* border: 2px solid purple; */
+    grid-column-start: 2;
+   max-width: 200px;
+  }
+
+  .you_icon{
+    grid-column-start: 3;
+    text-align: center;
+  }
+
+
+  .message-bubble {
+    max-width: 100%; 
+    background-color:white;
+    padding: 10px 15px;
+    border-radius: 15px;
+    position: relative;
+    word-wrap: break-word; /* Ensure text wraps within the bubble */
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+
+/* Optional: Add a tail to the bubble */
+/* .message-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: white;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: -5px;
+  margin-bottom: -10px;
+} */
+
+/* .comment-form-container{
+display: flexbox;
+flex-direction: column;
+justify-content: center;
+
+} */
+
+.comment-form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 20px;
+  max-height: 30px;
+}
+
+#comment-textarea{
+  max-width:200px;
+  min-width:200px;
+  max-height: 30px;
+  min-width: 30px;
+}
