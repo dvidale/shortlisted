@@ -25,10 +25,10 @@ export const editAComment = (data) =>{
     }
 }
 
-export const deleteAComment = (id) =>{
+export const deleteAComment = (id, thread) =>{
     return {
         type: DELETE_A_COMMENT,
-        payload: id
+        payload: [id, thread]
     }
 }
 
@@ -108,9 +108,9 @@ const response = await fetch(url, options)
 if(response.ok){
 
     const data = await response.json()
-    dispatch(deleteAComment(id))
+    dispatch(deleteAComment(id, data['target_thread']))
 
-    return data.message
+    return {"message" : "deleted successfully"}
 }
 
 
@@ -158,7 +158,9 @@ const commentsReducer = (state = initialState, action ) =>{
         }
         case DELETE_A_COMMENT:{
             const newState = {...state}
-            newState.comment_threads[action.payload[0]['referral_id']] = action.payload
+            const thread_id = action.payload[1]
+            const comment_id = action.payload[0]
+            delete newState.comment_threads[thread_id][comment_id]
             return newState
         }
         default:

@@ -100,6 +100,8 @@ def update_comment(id):
 def delete_comment(id):
     target_comment = Comment.query.get(id)
 
+    target_referral_id = target_comment.to_dict()['referral_id']
+
     db.session.delete(target_comment)
     db.session.commit()
 
@@ -109,4 +111,4 @@ def delete_comment(id):
     #     ).all()
     # # ? send back the entire list with the comment removed
     # return [comment.to_dict() for comment in fresh_lst]
-    return {"message" : "Comment deleted"}
+    return {"target_thread" : target_referral_id}, 200
