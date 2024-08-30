@@ -67,11 +67,26 @@ function HomeView() {
     }
   }, [saved_shortlists, dispatch, user]);
 
+
+  // const splashImgStyle = {
+	// 	width: '100%',
+	// 	backgroundImage: `url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png')`,
+	// 	backgroundSize: 'cover',
+	// 	backgroundPosition: 'center',
+	// 	position: 'relative', // Ensure the overlay is positioned correctly
+	// };
+
+
+
+
+
   return (
     <>
       {user ? (
         <>
+        
           <div id="search-and-my-shortlist-container">
+          <div className="shortlisted-title">Shortlisted.</div>
             <button id="new-shortlist-btn" onClick={() => toggleFormView()}>
               <h1>
             
@@ -147,6 +162,14 @@ function HomeView() {
       ) : (
         <>
        
+       {/* <div className="splash-img" style={splashImgStyle}>
+ <h1>Recommend peers for jobs, or get referred yourself...</h1>
+ <br/>
+ <h1>
+          with Shortlisted.
+        </h1>
+        <img alt='splash-img' src='https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png'/>
+       </div> */}
         </>
       )}
     </>

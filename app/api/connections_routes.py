@@ -6,7 +6,7 @@ from dateutil import parser
 
 connections_routes = Blueprint('connections', __name__)
 
-# !BUG - 'Genre' is throwing a validation error when no genre is chosen
+
 # * BUILD A SHORTLIST
 @connections_routes.route('/<int:id>', methods=['POST'])
 def search_connections(id):

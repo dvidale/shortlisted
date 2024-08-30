@@ -1,8 +1,9 @@
 .profile-dropdown {
   background-color: black;
   position: absolute;
-  right: 1%;
+  right: 5%;
   padding: 10px;
+  border: 3px solid white;
 }
 
 .profile-btn{
@@ -13,4 +14,12 @@
 display:flex;
 justify-content: space-between;
 padding: 0px 10px;
+}
+
+.login-signup-homepage-btns{
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  align-items: center;
+  font-size: 20px;
 }

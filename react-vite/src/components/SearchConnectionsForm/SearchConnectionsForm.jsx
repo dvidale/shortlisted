@@ -37,7 +37,7 @@ function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, 
     },[searchFormView])
 
 
-    
+    // !BUG - if i set the job title and then switch it back to nothing, it can pass validation
     const submitHandler = (e) =>{
       e.preventDefault()
 
@@ -68,7 +68,7 @@ function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, 
     setErrors(err)
 
     if(Object.keys(err).length === 0){
-
+    setSearchSubmitted(true)
         const formData = {
 
             location,
@@ -78,7 +78,7 @@ function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, 
             start_date: start_date.toISOString(),
             end_date: end_date ? end_date.toISOString() : null
         }
-        setSearchSubmitted(true)
+      
         dispatch(buildShortlist(user.id, JSON.stringify(formData)))
         .then(setShowSearchResults(true))
         
