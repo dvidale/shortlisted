@@ -6,125 +6,84 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_user_industries():
     # Fetch users and industry areas from the database
-    # African American Women
-    aaliyah = User.query.get(1)
-    imani = User.query.get(2)
-    kaiya = User.query.get(3)
-    makayla = User.query.get(4)
-    zuri = User.query.get(5)
-    sanaa = User.query.get(6)
-    nala = User.query.get(7)
-    ariyah = User.query.get(8)
-    amara = User.query.get(9)
-    jaleah = User.query.get(10)
+    aaliyah = User.query.filter_by(username='aaliyah.walker@example.com').first()
+    brianna = User.query.filter_by(username='brianna.jones@example.com').first()
+    ciara = User.query.filter_by(username='ciara.taylor@example.com').first()
+    deja = User.query.filter_by(username='deja.harris@example.com').first()
+    emani = User.query.filter_by(username='emani.brown@example.com').first()
+    faith = User.query.filter_by(username='faith.davis@example.com').first()
+    gabrielle = User.query.filter_by(username='gabrielle.white@example.com').first()
+    halle = User.query.filter_by(username='halle.jackson@example.com').first()
+    imani = User.query.filter_by(username='imani.clark@example.com').first()
+    jada = User.query.filter_by(username='jada.lee@example.com').first()
 
-    # African American Men
-    elijah = User.query.get(11)
-    xavier = User.query.get(12)
-    malik = User.query.get(13)
-    tyrone = User.query.get(14)
-    amir = User.query.get(15)
-    darius = User.query.get(16)
-    jamal = User.query.get(17)
-    khalil = User.query.get(18)
-    nasir = User.query.get(19)
-    quincy = User.query.get(20)
+    aaron_z = User.query.filter_by(username='aaron.mitchell@example.com').first()
+    brandon = User.query.filter_by(username='brandon.carter@example.com').first()
+    caleb = User.query.filter_by(username='caleb.richardson@example.com').first()
+    darius = User.query.filter_by(username='darius.scott@example.com').first()
+    elijah = User.query.filter_by(username='elijah.thomas@example.com').first()
+    franklin = User.query.filter_by(username='franklin.bailey@example.com').first()
+    gregory = User.query.filter_by(username='gregory.daniels@example.com').first()
+    howard = User.query.filter_by(username='howard.foster@example.com').first()
+    isaiah = User.query.filter_by(username='isaiah.griffin@example.com').first()
+    jason = User.query.filter_by(username='jason.hayes@example.com').first()
 
-    # South Asian Men
-    rahul = User.query.get(21)
-    arjun = User.query.get(22)
-    sanjay = User.query.get(23)
-    vikram = User.query.get(24)
-    amit = User.query.get(25)
-    deepak = User.query.get(26)
-    raj = User.query.get(27)
-    ravi = User.query.get(28)
-    harsh = User.query.get(29)
-    manish = User.query.get(30)
+    arjun = User.query.filter_by(username='arjun.patel@example.com').first()
+    bilal = User.query.filter_by(username='bilal.khan@example.com').first()
+    chetan = User.query.filter_by(username='chetan.sharma@example.com').first()
+    dev = User.query.filter_by(username='dev.raj@example.com').first()
+    eshan = User.query.filter_by(username='eshan.mehta@example.com').first()
+    faisal = User.query.filter_by(username='faisal.naidu@example.com').first()
+    gautam = User.query.filter_by(username='gautam.anand@example.com').first()
+    harish = User.query.filter_by(username='harish.joshi@example.com').first()
+    imran = User.query.filter_by(username='imran.qureshi@example.com').first()
+    jai = User.query.filter_by(username='jai.verma@example.com').first()
 
-    # South Asian Women
-    anika = User.query.get(31)
-    isha = User.query.get(32)
-    padmini = User.query.get(33)
-    maya = User.query.get(34)
-    kavita = User.query.get(35)
-    neha = User.query.get(36)
-    rani = User.query.get(37)
-    divya = User.query.get(38)
-    lakshmi = User.query.get(39)
-    tara = User.query.get(40)
+    kavya = User.query.filter_by(username='kavya.malhotra@example.com').first()
+    lata = User.query.filter_by(username='lata.nair@example.com').first()
+    meera = User.query.filter_by(username='meera.patel@example.com').first()
+    naina = User.query.filter_by(username='naina.raj@example.com').first()
+    oorja = User.query.filter_by(username='oorja.singh@example.com').first()
+    pooja = User.query.filter_by(username='pooja.kumar@example.com').first()
+    qadira = User.query.filter_by(username='qadira.tiwari@example.com').first()
+    rani = User.query.filter_by(username='rani.ahuja@example.com').first()
+    sanya = User.query.filter_by(username='sanya.mehta@example.com').first()
+    tanvi = User.query.filter_by(username='tanvi.varma@example.com').first()
 
-    # Hispanic Men
-    alejandro = User.query.get(41)
-    carlos = User.query.get(42)
-    diego = User.query.get(43)
-    emilio = User.query.get(44)
-    fernando = User.query.get(45)
-    hector = User.query.get(46)
-    javier = User.query.get(47)
-    luis = User.query.get(48)
-    miguel = User.query.get(49)
-    ricardo = User.query.get(50)
+    elena = User.query.filter_by(username='elena.santos@example.com').first()
+    frida = User.query.filter_by(username='frida.torres@example.com').first()
+    gabriela = User.query.filter_by(username='gabriela.uribe@example.com').first()
+    helena = User.query.filter_by(username='helena.velasquez@example.com').first()
+    isabella = User.query.filter_by(username='isabella.williams@example.com').first()
+    juana = User.query.filter_by(username='juana.ximenez@example.com').first()
+    karla = User.query.filter_by(username='karla.ybarra@example.com').first()
+    lucia = User.query.filter_by(username='lucia.zaragoza@example.com').first()
+    mariana = User.query.filter_by(username='mariana.alonso@example.com').first()
+    natalia = User.query.filter_by(username='natalia.barrera@example.com').first()
 
-    # Hispanic Women
-    ana = User.query.get(51)
-    bianca = User.query.get(52)
-    carla = User.query.get(53)
-    elena = User.query.get(54)
-    gabriela = User.query.get(55)
-    isabel = User.query.get(56)
-    luz = User.query.get(57)
-    maria = User.query.get(58)
-    natalia = User.query.get(59)
-    sofia = User.query.get(60)
+    olivia = User.query.filter_by(username='olivia.clark@example.com').first()
+    penelope = User.query.filter_by(username='penelope.dunn@example.com').first()
+    quinn = User.query.filter_by(username='quinn.ellis@example.com').first()
+    rachel = User.query.filter_by(username='rachel.ford@example.com').first()
+    sophia = User.query.filter_by(username='sophia.gray@example.com').first()
+    tiffany = User.query.filter_by(username='tiffany.hunt@example.com').first()
+    ursula = User.query.filter_by(username='ursula.ingram@example.com').first()
+    victoria = User.query.filter_by(username='victoria.jones@example.com').first()
+    wendy = User.query.filter_by(username='wendy.knight@example.com').first()
+    xena = User.query.filter_by(username='xena.lambert@example.com').first()
 
-    # White Men
-    andrew = User.query.get(61)
-    brian = User.query.get(62)
-    charles = User.query.get(63)
-    david = User.query.get(64)
-    edward = User.query.get(65)
-    frank = User.query.get(66)
-    george = User.query.get(67)
-    henry = User.query.get(68)
-    ian = User.query.get(69)
-    john = User.query.get(70)
+    aaron_miller = User.query.filter_by(username='aaron.miller@example.com').first()
+    brian = User.query.filter_by(username='brian.nelson@example.com').first()
+    cameron = User.query.filter_by(username='cameron.owens@example.com').first()
+    dylan = User.query.filter_by(username='dylan.parker@example.com').first()
+    ethan = User.query.filter_by(username='ethan.quinn@example.com').first()
+    felix = User.query.filter_by(username='felix.ross@example.com').first()
+    gavin = User.query.filter_by(username='gavin.stone@example.com').first()
+    henry = User.query.filter_by(username='henry.taylor@example.com').first()
+    ian = User.query.filter_by(username='ian.underwood@example.com').first()
+    jack = User.query.filter_by(username='jack.vance@example.com').first()
 
-    # White Women
-    alice = User.query.get(71)
-    beth = User.query.get(72)
-    claire = User.query.get(73)
-    diana = User.query.get(74)
-    emily = User.query.get(75)
-    fiona = User.query.get(76)
-    grace = User.query.get(77)
-    helen = User.query.get(78)
-    iris = User.query.get(79)
-    julia = User.query.get(80)
 
-    # Middle Eastern Men
-    ahmad = User.query.get(81)
-    basim = User.query.get(82)
-    farid = User.query.get(83)
-    hadi = User.query.get(84)
-    jamal_m = User.query.get(85)
-    karim = User.query.get(86)
-    nabil = User.query.get(87)
-    omar = User.query.get(88)
-    rami = User.query.get(89)
-    yasin = User.query.get(90)
-
-    # Middle Eastern Women
-    amina_f = User.query.get(91)
-    dalal = User.query.get(92)
-    farah = User.query.get(93)
-    hana = User.query.get(94)
-    iman = User.query.get(95)
-    lina = User.query.get(96)
-    mariam = User.query.get(97)
-    nadia = User.query.get(98)
-    rima = User.query.get(99)
-    yasmin = User.query.get(100)
 
 
     scripted_television = Industry_Area.query.get(1)
@@ -136,322 +95,84 @@ def seed_user_industries():
 
 
     # Associate industry areas with users
-    # African American Women
-    aaliyah.industry_areas.append(scripted_television)  # Amina - Scripted Television
-    aaliyah.industry_areas.append(documentary)  # Amina - Documentary
+    # Industry Area Associations
+    aaliyah.industry_areas.extend([scripted_television, dramatic_film])  # Aaliyah - Scripted Television, Dramatic Film
+    brianna.industry_areas.extend([unscripted_television, documentary])  # Brianna - Unscripted Television, Documentary
+    ciara.industry_areas.extend([commercial, animation])  # Ciara - Commercial, Animation
+    deja.industry_areas.extend([scripted_television, unscripted_television])  # Deja - Scripted Television, Unscripted Television
+    emani.industry_areas.extend([dramatic_film, documentary])  # Emani - Dramatic Film, Documentary
+    faith.industry_areas.extend([commercial, animation])  # Faith - Commercial, Animation
+    gabrielle.industry_areas.extend([scripted_television, dramatic_film])  # Gabrielle - Scripted Television, Dramatic Film
+    halle.industry_areas.extend([unscripted_television, documentary])  # Halle - Unscripted Television, Documentary
+    imani.industry_areas.extend([commercial, animation])  # Imani - Commercial, Animation
+    jada.industry_areas.extend([scripted_television, unscripted_television])  # Jada - Scripted Television, Unscripted Television
+
+    aaron_z.industry_areas.extend([dramatic_film, documentary])  # Aaron - Dramatic Film, Documentary
+    brandon.industry_areas.extend([commercial, animation])  # Brandon - Commercial, Animation
+    caleb.industry_areas.extend([scripted_television, dramatic_film])  # Caleb - Scripted Television, Dramatic Film
+    darius.industry_areas.extend([unscripted_television, documentary])  # Darius - Unscripted Television, Documentary
+    elijah.industry_areas.extend([commercial, animation])  # Elijah - Commercial, Animation
+    franklin.industry_areas.extend([scripted_television, unscripted_television])  # Franklin - Scripted Television, Unscripted Television
+    gregory.industry_areas.extend([dramatic_film, documentary])  # Gregory - Dramatic Film, Documentary
+    howard.industry_areas.extend([commercial, animation])  # Howard - Commercial, Animation
+    isaiah.industry_areas.extend([scripted_television, dramatic_film])  # Isaiah - Scripted Television, Dramatic Film
+    jason.industry_areas.extend([unscripted_television, documentary])  # Jason - Unscripted Television, Documentary
+
+    arjun.industry_areas.extend([commercial, animation])  # Arjun - Commercial, Animation
+    bilal.industry_areas.extend([scripted_television, dramatic_film])  # Bilal - Scripted Television, Dramatic Film
+    chetan.industry_areas.extend([unscripted_television, documentary])  # Chetan - Unscripted Television, Documentary
+    dev.industry_areas.extend([commercial, animation])  # Dev - Commercial, Animation
+    eshan.industry_areas.extend([scripted_television, unscripted_television])  # Eshan - Scripted Television, Unscripted Television
+    faisal.industry_areas.extend([dramatic_film, documentary])  # Faisal - Dramatic Film, Documentary
+    gautam.industry_areas.extend([commercial, animation])  # Gautam - Commercial, Animation
+    harish.industry_areas.extend([scripted_television, dramatic_film])  # Harish - Scripted Television, Dramatic Film
+    imran.industry_areas.extend([unscripted_television, documentary])  # Imran - Unscripted Television, Documentary
+    jai.industry_areas.extend([commercial, animation])  # Jai - Commercial, Animation
+
+    kavya.industry_areas.extend([scripted_television, unscripted_television])  # Kavya - Scripted Television, Unscripted Television
+    lata.industry_areas.extend([dramatic_film, documentary])  # Lata - Dramatic Film, Documentary
+    meera.industry_areas.extend([commercial, animation])  # Meera - Commercial, Animation
+    naina.industry_areas.extend([scripted_television, dramatic_film])  # Naina - Scripted Television, Dramatic Film
+    oorja.industry_areas.extend([unscripted_television, documentary])  # Oorja - Unscripted Television, Documentary
+    pooja.industry_areas.extend([commercial, animation])  # Pooja - Commercial, Animation
+    qadira.industry_areas.extend([scripted_television, unscripted_television])  # Qadira - Scripted Television, Unscripted Television
+    rani.industry_areas.extend([dramatic_film, documentary])  # Rani - Dramatic Film, Documentary
+    sanya.industry_areas.extend([commercial, animation])  # Sanya - Commercial, Animation
+    tanvi.industry_areas.extend([scripted_television, dramatic_film])  # Tanvi - Scripted Television, Dramatic Film
+
+    elena.industry_areas.extend([unscripted_television, documentary])  # Elena - Unscripted Television, Documentary
+    frida.industry_areas.extend([commercial, animation])  # Frida - Commercial, Animation
+    gabriela.industry_areas.extend([scripted_television, unscripted_television])  # Gabriela - Scripted Television, Unscripted Television
+    helena.industry_areas.extend([dramatic_film, documentary])  # Helena - Dramatic Film, Documentary
+    isabella.industry_areas.extend([commercial, animation])  # Isabella - Commercial, Animation
+    juana.industry_areas.extend([scripted_television, dramatic_film])  # Juana - Scripted Television, Dramatic Film
+    karla.industry_areas.extend([unscripted_television, documentary])  # Karla - Unscripted Television, Documentary
+    lucia.industry_areas.extend([commercial, animation])  # Lucia - Commercial, Animation
+    mariana.industry_areas.extend([scripted_television, unscripted_television])  # Mariana - Scripted Television, Unscripted Television
+    natalia.industry_areas.extend([dramatic_film, documentary])  # Natalia - Dramatic Film, Documentary
+
+    olivia.industry_areas.extend([commercial, animation])  # Olivia - Commercial, Animation
+    penelope.industry_areas.extend([scripted_television, dramatic_film])  # Penelope - Scripted Television, Dramatic Film
+    quinn.industry_areas.extend([unscripted_television, documentary])  # Quinn - Unscripted Television, Documentary
+    rachel.industry_areas.extend([commercial, animation])  # Rachel - Commercial, Animation
+    sophia.industry_areas.extend([scripted_television, unscripted_television])  # Sophia - Scripted Television, Unscripted Television
+    tiffany.industry_areas.extend([dramatic_film, documentary])  # Tiffany - Dramatic Film, Documentary
+    ursula.industry_areas.extend([commercial, animation])  # Ursula - Commercial, Animation
+    victoria.industry_areas.extend([scripted_television, dramatic_film])  # Victoria - Scripted Television, Dramatic Film
+    wendy.industry_areas.extend([unscripted_television, documentary])  # Wendy - Unscripted Television, Documentary
+    xena.industry_areas.extend([commercial, animation])  # Xena - Commercial, Animation
+
+    aaron_miller.industry_areas.extend([scripted_television, unscripted_television])  # Aaron - Scripted Television, Unscripted Television
+    brian.industry_areas.extend([dramatic_film, documentary])  # Brian - Dramatic Film, Documentary
+    cameron.industry_areas.extend([commercial, animation])  # Cameron - Commercial, Animation
+    dylan.industry_areas.extend([scripted_television, dramatic_film])  # Dylan - Scripted Television, Dramatic Film
+    ethan.industry_areas.extend([unscripted_television, documentary])  # Ethan - Unscripted Television, Documentary
+    felix.industry_areas.extend([commercial, animation])  # Felix - Commercial, Animation
+    gavin.industry_areas.extend([scripted_television, unscripted_television])  # Gavin - Scripted Television, Unscripted Television
+    henry.industry_areas.extend([dramatic_film, documentary])  # Henry - Dramatic Film, Documentary
+    ian.industry_areas.extend([commercial, animation])  # Ian - Commercial, Animation
+    jack.industry_areas.extend([scripted_television, dramatic_film])  # Jack - Scripted Television, Dramatic Film
 
-    imani.industry_areas.append(dramatic_film)  # Imani - Dramatic Film
-    imani.industry_areas.append(animation)  # Imani - Animation
-
-    kaiya.industry_areas.append(commercial)  # Kaiya - Commercial
-    kaiya.industry_areas.append(documentary)  # Kaiya - Documentary
-
-    makayla.industry_areas.append(scripted_television)  # Makayla - Scripted Television
-    makayla.industry_areas.append(dramatic_film)  # Makayla - Dramatic Film
-
-    zuri.industry_areas.append(animation)  # Zuri - Animation
-    zuri.industry_areas.append(commercial)  # Zuri - Commercial
-
-    sanaa.industry_areas.append(unscripted_television)  # Sanaa - Unscripted Television
-    sanaa.industry_areas.append(documentary)  # Sanaa - Documentary
-
-    nala.industry_areas.append(scripted_television)  # Nala - Scripted Television
-    nala.industry_areas.append(animation)  # Nala - Animation
-
-    ariyah.industry_areas.append(dramatic_film)  # Ariyah - Dramatic Film
-    ariyah.industry_areas.append(unscripted_television)  # Ariyah - Unscripted Television
-
-    amara.industry_areas.append(commercial)  # Amara - Commercial
-    amara.industry_areas.append(documentary)  # Amara - Documentary
-
-    jaleah.industry_areas.append(scripted_television)  # Jaleah - Scripted Television
-    jaleah.industry_areas.append(dramatic_film)  # Jaleah - Dramatic Film
-
-    # African American Men
-    elijah.industry_areas.append(unscripted_television)  # Elijah - Unscripted Television
-    elijah.industry_areas.append(animation)  # Elijah - Animation
-
-    xavier.industry_areas.append(scripted_television)  # Xavier - Scripted Television
-    xavier.industry_areas.append(documentary)  # Xavier - Documentary
-
-    malik.industry_areas.append(dramatic_film)  # Malik - Dramatic Film
-    malik.industry_areas.append(commercial)  # Malik - Commercial
-
-    tyrone.industry_areas.append(animation)  # Tyrone - Animation
-    tyrone.industry_areas.append(documentary)  # Tyrone - Documentary
-
-    amir.industry_areas.append(unscripted_television)  # Amir - Unscripted Television
-    amir.industry_areas.append(scripted_television)  # Amir - Scripted Television
-
-    darius.industry_areas.append(dramatic_film)  # Darius - Dramatic Film
-    darius.industry_areas.append(documentary)  # Darius - Documentary
-
-    jamal.industry_areas.append(commercial)  # Jamal - Commercial
-    jamal.industry_areas.append(unscripted_television)  # Jamal - Unscripted Television
-
-    khalil.industry_areas.append(animation)  # Khalil - Animation
-    khalil.industry_areas.append(scripted_television)  # Khalil - Scripted Television
-
-    nasir.industry_areas.append(dramatic_film)  # Nasir - Dramatic Film
-    nasir.industry_areas.append(commercial)  # Nasir - Commercial
-
-    quincy.industry_areas.append(documentary)  # Quincy - Documentary
-    quincy.industry_areas.append(scripted_television)  # Quincy - Scripted Television
-
-    # South Asian Men
-    rahul.industry_areas.append(scripted_television)  # Rahul - Scripted Television
-    rahul.industry_areas.append(dramatic_film)  # Rahul - Dramatic Film
-
-    arjun.industry_areas.append(animation)  # Arjun - Animation
-    arjun.industry_areas.append(unscripted_television)  # Arjun - Unscripted Television
-
-    sanjay.industry_areas.append(commercial)  # Sanjay - Commercial
-    sanjay.industry_areas.append(documentary)  # Sanjay - Documentary
-
-    vikram.industry_areas.append(unscripted_television)  # Vikram - Unscripted Television
-    vikram.industry_areas.append(scripted_television)  # Vikram - Scripted Television
-
-    amit.industry_areas.append(dramatic_film)  # Amit - Dramatic Film
-    amit.industry_areas.append(animation)  # Amit - Animation
-
-    deepak.industry_areas.append(scripted_television)  # Deepak - Scripted Television
-    deepak.industry_areas.append(documentary)  # Deepak - Documentary
-
-    raj.industry_areas.append(commercial)  # Raj - Commercial
-    raj.industry_areas.append(unscripted_television)  # Raj - Unscripted Television
-
-    ravi.industry_areas.append(animation)  # Ravi - Animation
-    ravi.industry_areas.append(scripted_television)  # Ravi - Scripted Television
-
-    harsh.industry_areas.append(dramatic_film)  # Harsh - Dramatic Film
-    harsh.industry_areas.append(commercial)  # Harsh - Commercial
-
-    manish.industry_areas.append(documentary)  # Manish - Documentary
-    manish.industry_areas.append(scripted_television)  # Manish - Scripted Television
-
-    # South Asian Women
-    anika.industry_areas.append(scripted_television)  # Anika - Scripted Television
-    anika.industry_areas.append(documentary)  # Anika - Documentary
-
-    isha.industry_areas.append(dramatic_film)  # Isha - Dramatic Film
-    isha.industry_areas.append(animation)  # Isha - Animation
-
-    padmini.industry_areas.append(commercial)  # Padmini - Commercial
-    padmini.industry_areas.append(documentary)  # Padmini - Documentary
-
-    maya.industry_areas.append(scripted_television)  # Maya - Scripted Television
-    maya.industry_areas.append(dramatic_film)  # Maya - Dramatic Film
-
-    kavita.industry_areas.append(animation)  # Kavita - Animation
-    kavita.industry_areas.append(commercial)  # Kavita - Commercial
-
-    neha.industry_areas.append(unscripted_television)  # Neha - Unscripted Television
-    neha.industry_areas.append(documentary)  # Neha - Documentary
-
-    rani.industry_areas.append(scripted_television)  # Rani - Scripted Television
-    rani.industry_areas.append(animation)  # Rani - Animation
-
-    divya.industry_areas.append(dramatic_film)  # Divya - Dramatic Film
-    divya.industry_areas.append(unscripted_television)  # Divya - Unscripted Television
-
-    lakshmi.industry_areas.append(commercial)  # Lakshmi - Commercial
-    lakshmi.industry_areas.append(documentary)  # Lakshmi - Documentary
-
-    tara.industry_areas.append(scripted_television)  # Tara - Scripted Television
-    tara.industry_areas.append(dramatic_film)  # Tara - Dramatic Film
-
-    # Hispanic Men
-    alejandro.industry_areas.append(unscripted_television)  # Alejandro - Unscripted Television
-    alejandro.industry_areas.append(animation)  # Alejandro - Animation
-
-    carlos.industry_areas.append(scripted_television)  # Carlos - Scripted Television
-    carlos.industry_areas.append(documentary)  # Carlos - Documentary
-
-    diego.industry_areas.append(dramatic_film)  # Diego - Dramatic Film
-    diego.industry_areas.append(commercial)  # Diego - Commercial
-
-    emilio.industry_areas.append(animation)  # Emilio - Animation
-    emilio.industry_areas.append(documentary)  # Emilio - Documentary
-
-    fernando.industry_areas.append(unscripted_television)  # Fernando - Unscripted Television
-    fernando.industry_areas.append(scripted_television)  # Fernando - Scripted Television
-
-    hector.industry_areas.append(dramatic_film)  # Hector - Dramatic Film
-    hector.industry_areas.append(documentary)  # Hector - Documentary
-
-    javier.industry_areas.append(commercial)  # Javier - Commercial
-    javier.industry_areas.append(unscripted_television)  # Javier - Unscripted Television
-
-    luis.industry_areas.append(animation)  # Luis - Animation
-    luis.industry_areas.append(scripted_television)  # Luis - Scripted Television
-
-    miguel.industry_areas.append(dramatic_film)  # Miguel - Dramatic Film
-    miguel.industry_areas.append(commercial)  # Miguel - Commercial
-
-    ricardo.industry_areas.append(documentary)  # Ricardo - Documentary
-    ricardo.industry_areas.append(scripted_television)  # Ricardo - Scripted Television
-
-    # Hispanic Women
-    ana.industry_areas.append(scripted_television)  # Ana - Scripted Television
-    ana.industry_areas.append(documentary)  # Ana - Documentary
-
-    bianca.industry_areas.append(dramatic_film)  # Bianca - Dramatic Film
-    bianca.industry_areas.append(animation)
-
-    # Hispanic Women
-    ana.industry_areas.append(scripted_television)  # Ana - Scripted Television
-    ana.industry_areas.append(documentary)  # Ana - Documentary
-
-    bianca.industry_areas.append(dramatic_film)  # Bianca - Dramatic Film
-    bianca.industry_areas.append(animation)  # Bianca - Animation
-
-    carla.industry_areas.append(commercial)  # Carla - Commercial
-    carla.industry_areas.append(documentary)  # Carla - Documentary
-
-    elena.industry_areas.append(scripted_television)  # Elena - Scripted Television
-    elena.industry_areas.append(dramatic_film)  # Elena - Dramatic Film
-
-    gabriela.industry_areas.append(animation)  # Gabriela - Animation
-    gabriela.industry_areas.append(commercial)  # Gabriela - Commercial
-
-    isabel.industry_areas.append(unscripted_television)  # Isabel - Unscripted Television
-    isabel.industry_areas.append(documentary)  # Isabel - Documentary
-
-    luz.industry_areas.append(scripted_television)  # Luz - Scripted Television
-    luz.industry_areas.append(animation)  # Luz - Animation
-
-    maria.industry_areas.append(dramatic_film)  # Maria - Dramatic Film
-    maria.industry_areas.append(unscripted_television)  # Maria - Unscripted Television
-
-    natalia.industry_areas.append(commercial)  # Natalia - Commercial
-    natalia.industry_areas.append(documentary)  # Natalia - Documentary
-
-    sofia.industry_areas.append(scripted_television)  # Sofia - Scripted Television
-    sofia.industry_areas.append(dramatic_film)  # Sofia - Dramatic Film
-
-    # White Men
-    andrew.industry_areas.append(unscripted_television)  # Andrew - Unscripted Television
-    andrew.industry_areas.append(animation)  # Andrew - Animation
-
-    brian.industry_areas.append(scripted_television)  # Brian - Scripted Television
-    brian.industry_areas.append(documentary)  # Brian - Documentary
-
-    charles.industry_areas.append(dramatic_film)  # Charles - Dramatic Film
-    charles.industry_areas.append(commercial)  # Charles - Commercial
-
-    david.industry_areas.append(animation)  # David - Animation
-    david.industry_areas.append(documentary)  # David - Documentary
-
-    edward.industry_areas.append(unscripted_television)  # Edward - Unscripted Television
-    edward.industry_areas.append(scripted_television)  # Edward - Scripted Television
-
-    frank.industry_areas.append(dramatic_film)  # Frank - Dramatic Film
-    frank.industry_areas.append(documentary)  # Frank - Documentary
-
-    george.industry_areas.append(commercial)  # George - Commercial
-    george.industry_areas.append(unscripted_television)  # George - Unscripted Television
-
-    henry.industry_areas.append(animation)  # Henry - Animation
-    henry.industry_areas.append(scripted_television)  # Henry - Scripted Television
-
-    ian.industry_areas.append(dramatic_film)  # Ian - Dramatic Film
-    ian.industry_areas.append(commercial)  # Ian - Commercial
-
-    john.industry_areas.append(documentary)  # John - Documentary
-    john.industry_areas.append(scripted_television)  # John - Scripted Television
-
-    # White Women
-    alice.industry_areas.append(scripted_television)  # Alice - Scripted Television
-    alice.industry_areas.append(documentary)  # Alice - Documentary
-
-    beth.industry_areas.append(dramatic_film)  # Beth - Dramatic Film
-    beth.industry_areas.append(animation)  # Beth - Animation
-
-    claire.industry_areas.append(commercial)  # Claire - Commercial
-    claire.industry_areas.append(documentary)  # Claire - Documentary
-
-    diana.industry_areas.append(scripted_television)  # Diana - Scripted Television
-    diana.industry_areas.append(dramatic_film)  # Diana - Dramatic Film
-
-    emily.industry_areas.append(animation)  # Emily - Animation
-    emily.industry_areas.append(commercial)  # Emily - Commercial
-
-    fiona.industry_areas.append(unscripted_television)  # Fiona - Unscripted Television
-    fiona.industry_areas.append(documentary)  # Fiona - Documentary
-
-    grace.industry_areas.append(scripted_television)  # Grace - Scripted Television
-    grace.industry_areas.append(animation)  # Grace - Animation
-
-    helen.industry_areas.append(dramatic_film)  # Helen - Dramatic Film
-    helen.industry_areas.append(unscripted_television)  # Helen - Unscripted Television
-
-    iris.industry_areas.append(commercial)  # Iris - Commercial
-    iris.industry_areas.append(documentary)  # Iris - Documentary
-
-    julia.industry_areas.append(scripted_television)  # Julia - Scripted Television
-    julia.industry_areas.append(dramatic_film)  # Julia - Dramatic Film
-
-    # Middle Eastern Men
-    ahmad.industry_areas.append(unscripted_television)  # Ahmad - Unscripted Television
-    ahmad.industry_areas.append(animation)  # Ahmad - Animation
-
-    basim.industry_areas.append(scripted_television)  # Basim - Scripted Television
-    basim.industry_areas.append(documentary)  # Basim - Documentary
-
-    farid.industry_areas.append(dramatic_film)  # Farid - Dramatic Film
-    farid.industry_areas.append(commercial)  # Farid - Commercial
-
-    hadi.industry_areas.append(animation)  # Hadi - Animation
-    hadi.industry_areas.append(documentary)  # Hadi - Documentary
-
-    jamal.industry_areas.append(unscripted_television)  # Jamal - Unscripted Television
-    jamal.industry_areas.append(scripted_television)  # Jamal - Scripted Television
-
-    karim.industry_areas.append(dramatic_film)  # Karim - Dramatic Film
-    karim.industry_areas.append(documentary)  # Karim - Documentary
-
-    nabil.industry_areas.append(commercial)  # Nabil - Commercial
-    nabil.industry_areas.append(unscripted_television)  # Nabil - Unscripted Television
-
-    omar.industry_areas.append(animation)  # Omar - Animation
-    omar.industry_areas.append(scripted_television)  # Omar - Scripted Television
-
-    rami.industry_areas.append(dramatic_film)  # Rami - Dramatic Film
-    rami.industry_areas.append(commercial)  # Rami - Commercial
-
-    yasin.industry_areas.append(documentary)  # Yasin - Documentary
-    yasin.industry_areas.append(scripted_television)  # Yasin - Scripted Television
-
-    # Middle Eastern Women
-    amina_f.industry_areas.append(scripted_television)  # Amina - Scripted Television
-    amina_f.industry_areas.append(documentary)  # Amina - Documentary
-
-    dalal.industry_areas.append(dramatic_film)  # Dalal - Dramatic Film
-    dalal.industry_areas.append(animation)  # Dalal - Animation
-
-    farah.industry_areas.append(commercial)  # Farah - Commercial
-    farah.industry_areas.append(documentary)  # Farah - Documentary
-
-    hana.industry_areas.append(scripted_television)  # Hana - Scripted Television
-    hana.industry_areas.append(dramatic_film)  # Hana - Dramatic Film
-
-    iman.industry_areas.append(animation)  # Iman - Animation
-    iman.industry_areas.append(commercial)  # Iman - Commercial
-
-    lina.industry_areas.append(unscripted_television)  # Lina - Unscripted Television
-    lina.industry_areas.append(documentary)  # Lina - Documentary
-
-    mariam.industry_areas.append(scripted_television)  # Mariam - Scripted Television
-    mariam.industry_areas.append(animation)  # Mariam - Animation
-
-    nadia.industry_areas.append(dramatic_film)  # Nadia - Dramatic Film
-    nadia.industry_areas.append(unscripted_television)  # Nadia - Unscripted Television
-
-    rima.industry_areas.append(commercial)  # Rima - Commercial
-    rima.industry_areas.append(documentary)  # Rima - Documentary
-
-    yasmin.industry_areas.append(scripted_television)  # Yasmin - Scripted Television
-    yasmin.industry_areas.append(dramatic_film)  # Yasmin - Dramatic Film
 
 
 

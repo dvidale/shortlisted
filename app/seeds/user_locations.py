@@ -21,15 +21,9 @@ def seed_user_locations():
         user.locations.append(remote)
 
     # Next 30 users with Atlanta and Remote
-    for i in range(41, 71):
+    for i in range(41, 70):
         user = User.query.get(i)
         user.locations.append(atlanta)
-        user.locations.append(remote)
-
-    # Next 30 users with New York and Remote
-    for i in range(71, 101):
-        user = User.query.get(i)
-        user.locations.append(new_york)
         user.locations.append(remote)
 
 
