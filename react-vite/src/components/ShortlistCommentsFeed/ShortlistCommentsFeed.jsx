@@ -29,10 +29,6 @@ const toggleOpenThread = (clickedIdx) =>{
 }
  
 
-
-
-
-
   // TODO: refactor with a join query to pull the referral ids and referred user names in one object
 
   // ? This object creates the combo of referral id and referred user name that I didn't know how to do in SQLAlchemy
