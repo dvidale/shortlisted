@@ -12,6 +12,8 @@ import MyListings_Calendar from "../MyListings_Calendar/MyListings_Calendar";
 import { getCommentThreads } from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 
+
+// !BUG - reseed to include users in New York!
 function HomeView() {
   const dispatch = useDispatch();
 

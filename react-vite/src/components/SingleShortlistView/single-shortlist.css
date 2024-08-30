@@ -110,7 +110,7 @@ cursor: pointer;
   }
 
 
-  .comment-block{
+  .comment-bubble-and-avatar{
 /* border: 2px solid purple; */
     display:grid;
     grid-template-columns: 40px auto 40px;

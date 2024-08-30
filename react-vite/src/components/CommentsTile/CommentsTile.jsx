@@ -1,8 +1,8 @@
 import "../../../src/index.css";
 import "../SingleShortlistView/single-shortlist.css";
-import { useEffect } from "react";
-import { getCommentThreads } from "../../redux/comments";
-import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { getCommentThreads } from "../../redux/comments";
+import { useSelector } from "react-redux";
 import CommentForm from "../CommentFormComponent/CommentForm";
 import DeleteCommentModal from "../DeleteCommentModal/DeleteCommentModal";
 import { VscAccount } from "react-icons/vsc";
@@ -10,22 +10,14 @@ import { useModal } from "../../context/Modal";
 import CommentEditorModal from "../CommentEditorModal/CommentEditorModal";
 
 function CommentsTile({ shortlist, referralIdx }) {
-  const dispatch = useDispatch();
 
   const current_thread = useSelector(
     (state) => state.comments.comment_threads[referralIdx]
   );
-  // if(comments) "good";
-
-  const all_threads = useSelector((state) => state.comments.comment_threads);
-
+ 
   const user = useSelector((state) => state.session.user);
 
   const { setModalContent } = useModal();
-
-  useEffect(() => {
-    dispatch(getCommentThreads(user.id));
-  }, [dispatch, all_threads, user]);
 
   const commentEditor = (currentComment, commentId) => {
     setModalContent(
@@ -55,9 +47,9 @@ current_thread_sorted = Object.values(current_thread).sort( comment => comment['
         Object.values(current_thread_sorted).length > 0 &&
         Object.values(current_thread_sorted).map((comment) => {
           return (
-            <div key={comment.id}>
-              <div className="comment-block">
-                <div className="commenter_name">{comment.commenter_name !== user.first_name && <span><VscAccount />{comment.commenter_name}</span>}</div>
+         
+              <div key={comment.id} className="comment-bubble-and-avatar">
+                <div  className="commenter_name">{comment.commenter_name !== user.first_name && <span><VscAccount />{comment.commenter_name}</span>}</div>
 
                 <div className="comment-text"><span className="message-bubble">{comment.text}</span></div>
                
@@ -80,8 +72,7 @@ current_thread_sorted = Object.values(current_thread).sort( comment => comment['
                 </div>
                 
               </div>
-             
-            </div>
+          
           );
         })}
 
