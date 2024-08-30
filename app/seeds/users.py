@@ -17,7 +17,7 @@ def seed_users():
     Jada_L = User(username='jada.lee@example.com', email='jada.lee@example.com', phone_number='2015550110', password='password', first_name='Jada', last_name='Lee', profile_img_url= 'https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/seed-profile-images/lat-w/sSlice+9.jpg')
 
     #aa m
-    Aaron_M = User(username='aaron.mitchell@example.com', email='aaron.mitchell@example.com', phone_number='2015550111', password='password', first_name='Aaron', last_name='Mitchell', profile_img_url='https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/seed-profile-images/aa-m/aa-m001.jpg')
+    Aaron_Z = User(username='aaron.mitchell@example.com', email='aaron.mitchell@example.com', phone_number='2015550111', password='password', first_name='Aaron', last_name='Mitchell', profile_img_url='https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/seed-profile-images/aa-m/aa-m001.jpg')
     Brandon_C = User(username='brandon.carter@example.com', email='brandon.carter@example.com', phone_number='2015550112', password='password', first_name='Brandon', last_name='Carter', profile_img_url='https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/seed-profile-images/aa-m/aa-m002.png')
     Caleb_R = User(username='caleb.richardson@example.com', email='caleb.richardson@example.com', phone_number='2015550113', password='password', first_name='Caleb', last_name='Richardson', profile_img_url='https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/seed-profile-images/aa-m/aa-m003.png')
     Darius_S = User(username='darius.scott@example.com', email='darius.scott@example.com', phone_number='2015550114', password='password', first_name='Darius', last_name='Scott', profile_img_url='https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/seed-profile-images/aa-m/aa-m004.png')
@@ -492,7 +492,7 @@ def seed_users():
     Halle_J,
     Imani_C,
     Jada_L,
-    Aaron_M,
+    Aaron_Z,
     Brandon_C,
     Caleb_R,
     Darius_S,

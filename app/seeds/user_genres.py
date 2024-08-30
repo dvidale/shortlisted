@@ -20,29 +20,14 @@ def seed_user_genres():
         user = User.query.get(i)
         user.genres.append(drama)
         user.genres.append(comedy)
+        user.genres.append(historical)
 
     # Next 10 users associated with both Horror and Sci-Fi
-    for i in range(41, 51):
+    for i in range(41, 70):
         user = User.query.get(i)
         user.genres.append(horror)
         user.genres.append(sci_fi)
 
-    # Next 30 users associated with Historical
-    for i in range(51, 81):
-        user = User.query.get(i)
-        user.genres.append(historical)
-
-    # Alternate genres for the remaining 20 users
-    for i in range(81, 101):
-        user = User.query.get(i)
-        if i % 2 == 0:
-            user.genres.append(drama)
-        else:
-            user.genres.append(comedy)
-        if i % 3 == 0:
-            user.genres.append(horror)
-        elif i % 5 == 0:
-            user.genres.append(sci_fi)
 
     # Commit the changes to the database
     db.session.commit()
