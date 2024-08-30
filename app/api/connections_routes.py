@@ -29,30 +29,31 @@ def search_connections(id):
     if searchForm.validate_on_submit():
         user = User.query.get(id)
         user_network = user.my_connections()
-        # user_network are all the users the current user is connected to, rather by invitation sent or received
+        # user_network are all the users the current user is connected to, whether by invitation sent or received
 
         request_data = request.json
         # .json turns request data into a dict
-        # start_date = request_data['start_date']
-        # end_date = request_data['end_date']
-
-        # startDate = parser.parse(start_date)
-
-        # if end_date != None:
-        #     endDate = parser.parse(end_date)
-
+       
         # if a parameter is present add its filter to filter list, if not, add its anti-filter
         location_matched = filter( lambda user: location[0] in user['locations'], user_network)
 
         industry_matched = filter(lambda user: industry_area[0] in user['industry_areas'], location_matched)
 
         job_title_matched = filter(lambda user: job_title[0] in user['job_title'], industry_matched)
+        # print(">>>>>> job_title_matched", list(job_title_matched))
+       
+        genre_matched = None
 
         if(genre[0] != 'None'):
-
+            # print(">>>>> current genre830", genre[0])
             genre_matched = filter(lambda user: genre[0] in user['genres'], job_title_matched)
         else:
-            genre_matched = job_title_matched
+            # print(">>>>> current genre830","No Genre")
+            genre_matched = filter(lambda user: genre[0] not in user['genres'], job_title_matched)
+
+        
+
+        # print(">>>>genre_filtered:", list(genre_matched))
 
 # ? Moved availability check to frontend for easier date object comparisons, but saving the logic for reference
         # def availCheck(user):
@@ -85,15 +86,17 @@ def search_connections(id):
 
         
 
+        # ? filter returns an iterable but not a list, so it has to be wrapped before sending
 
-
-        search_results = list(genre_matched)
-        # print(">>>>>> search results", search_results)
+        search_results_lst = list(genre_matched)
+        # ? these lines removed duplicates from the list
+        search_results = [i for n, i in enumerate( search_results_lst) if i not in  search_results_lst[:n]]
+        
         return search_results
 
 
 
 
-    print(">>>>>0form errors:", searchForm.errors)
+    # print(">>>>>0form errors:", searchForm.errors)
     return searchForm.errors, 400
     

@@ -1,19 +1,24 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { deleteShortlist, fetchShortlists} from "../../redux/shortlists"
 import { useModal } from "../../context/Modal"
 import { useNavigate } from 'react-router-dom'
 
 
-function DeleteShortlistModal({ userId,shortlist}){
+function DeleteShortlistModal({ userId,shortlist, setShortlistIdx}){
 
 const navigate = useNavigate()
 const dispatch = useDispatch()
 const {closeModal} = useModal();
 
+const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
+
+const firstIdx = Object.keys(saved_shortlists)[0]
+
 // !BUG - get 500 error when you click delete on live site
     const deleteHandler= (id) =>{
-
+       
         dispatch(deleteShortlist(id))
+        .then(()=> setShortlistIdx(firstIdx))
         .then(closeModal)
         .then(navigate('/'))
         .then(dispatch(fetchShortlists(userId)))

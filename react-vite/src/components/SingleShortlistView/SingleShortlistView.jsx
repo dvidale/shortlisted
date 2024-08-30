@@ -9,7 +9,7 @@ import { useModal } from "../../context/Modal";
 import DeleteShortlistModal from "../DeleteShortlistModal/DeleteShortlistModal";
 
 // !BUG - the default shortlist does not load automatically
-function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchResults }) {
+function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlistIdx, showSearchResults }) {
   const dispatch = useDispatch();
 
   const { setModalContent } = useModal();
@@ -104,10 +104,10 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchRe
   }, [editForm]);
 
 
-
+// * DELETE Shortlist
   const handleDelete = (shortlist) => {
     setModalContent(
-      <DeleteShortlistModal userId={userId} shortlist={shortlist} />
+      <DeleteShortlistModal userId={userId} shortlist={shortlist} setShortlistIdx={setShortlistIdx} />
     );
   };
 

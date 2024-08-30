@@ -135,6 +135,7 @@ function HomeView() {
             <SingleShortlistView
               setEditForm={setEditForm}
               editForm={editForm}
+              setShortlistIdx={setShortlistIdx}
               shortlistIdx={shortlistIdx}
               showSearchResults={showSearchResults}
             />
