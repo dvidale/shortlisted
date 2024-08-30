@@ -72,8 +72,8 @@ export const buildShortlist = (userId, formData) => async (dispatch) =>{
         // console.log(">>>> parsed form data in thunk:", params);
         return data
     }else{
-        const serverError = await response.json()
-        return serverError;
+        const error = await response.json()
+        return error;
     }
 }
 
@@ -91,13 +91,13 @@ const response = await fetch(url, options)
 
 if(response.ok){
     const data = await response.json()
-    console.log(">>>> data returned to save thunk:", data);
+    // console.log(">>>> data returned to save thunk:", data);
     dispatch(saveAShortlist(data))
-    
+    return data.id;
 }else{
-    const data = await response.json()
-    console.log("data object", data);
-    return data
+    const error = await response.json()
+    console.log("error object", error);
+    return error
 
 }
 

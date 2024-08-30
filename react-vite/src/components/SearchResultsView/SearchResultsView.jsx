@@ -6,7 +6,7 @@ import './search-results.css'
 import '../SingleShortlistView/single-shortlist.css'
 import SearchResultTile from "./SearchResultTile"
 
-function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleFormView, setShortlistIdx, resetSearchForm}){
+function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleFormView}){
 
     const dispatch = useDispatch()
 
@@ -20,7 +20,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
     const searchParams = useSelector(state => state.shortlists.parameters)
 
-    const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
+    // const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
     const availCheck = (connection => {
         
@@ -85,6 +85,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
     },[description])
 
+    // *SAVE NEW SHORTLIST
     const submitHandler = (e)=>{
         e.preventDefault()
 
@@ -116,8 +117,8 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
       
         
         dispatch(saveShortlist(JSON.stringify(shortlistData))).then( data => {
-            if(data){
-                err.server = data.error
+            if(data.serverError){
+                err.server = data.serverError
             setErrors(err)
             }else{
                 setShowSearchResults(false)
@@ -125,21 +126,21 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
                 setShortlistTitle('')
                 setDescription('')
                 avail_filtered_results = []
-                resetSearchForm()
+            
                
             }
         }
         // TODO: Get the newly saved shortlist to appear in the center panel. Right now it pulls up an older list
         ).then( dispatch(fetchShortlists(user.id)))
-        .then( setShortlistIdx(Object.keys(saved_shortlists).length-1) )
-
+        
 
         }
 
 
 
     }
-    // !BUG - getting a duplicate key error even though there is only one key in use.
+    // !BUG - Search details have a visible stall in rendering while waiting for search query to return results
+
     return(
         <> 
         <h1 className="search-results-heading">Search Results</h1>
