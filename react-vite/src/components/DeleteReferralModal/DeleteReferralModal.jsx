@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { deleteReferral } from "../../redux/shortlists"
 import { fetchShortlists } from "../../redux/shortlists"
 
-function DeleteReferralModal({idx, fullName, userId}){
+function DeleteReferralModal({idx, userId}){
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const {closeModal} = useModal();
@@ -20,7 +20,7 @@ function DeleteReferralModal({idx, fullName, userId}){
 
     return(
 <>
-<h2>Are you sure you want to remove {`"${fullName}"`} from the Shortlist?</h2>
+<h2>Are you sure you want to remove this person from the Shortlist?</h2>
 <p>This change cannot be undone.</p>
 <div>
     <button onClick={()=> deleteHandler(idx)}>Yes (Remove from Shortlist)</button>
