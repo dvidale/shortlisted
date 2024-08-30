@@ -71,6 +71,9 @@ export const buildShortlist = (userId, formData) => async (dispatch) =>{
          // TODO: refactor to pass the form data into Context so we can pass it straight from the component
         // console.log(">>>> parsed form data in thunk:", params);
         return data
+    }else{
+        const serverError = await response.json()
+        return serverError;
     }
 }
 

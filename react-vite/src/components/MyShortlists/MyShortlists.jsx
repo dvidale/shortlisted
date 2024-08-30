@@ -65,8 +65,8 @@ const switchShortlistAndReset = (e)=>{
                     
                             </div>
                              <div className={shortlist.id != shortlistIdx ?'edit-delete-list-btns': 'edit-delete-list-btns-hidden'}>
-                                <button>EDIT</button>
-                                <button>DELETE</button>
+                                {/* <button>EDIT</button>
+                                <button>DELETE</button> */}
                             </div>
                         </div>
                        

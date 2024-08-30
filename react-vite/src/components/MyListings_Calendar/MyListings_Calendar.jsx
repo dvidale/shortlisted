@@ -7,7 +7,13 @@ function MyListings_Calendar(){
 
 const user = useSelector(state => state.session.user)
 
-
+const bannerImgStyle = {
+    width: '100%',
+    backgroundImage: `url(${user.profile_img_url})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    position: 'relative', // Ensure the overlay is positioned correctly
+};
 
 
     return(
@@ -15,8 +21,13 @@ const user = useSelector(state => state.session.user)
 <div>
 
 <div className='profile-btn'>  <ProfileButton /></div>
-<img alt={`${user.first_name} profile photo`} src={user.profile_img_url}/>
+{/* <img height={100} alt={`${user.first_name} profile photo`} src=
 
+{user.profile_img_url}/> */}
+
+<div className={'profile-img-container'} style={bannerImgStyle}>Upload photo feature coming soon. </div>
+
+<div></div>
 <h1>Me, Shortlisted</h1>
 <hr/>
 <h2>Shortlisting 1</h2>
@@ -26,6 +37,9 @@ const user = useSelector(state => state.session.user)
 
 <div>
     <h1>My Calendar</h1>
+    <div className='cal-box'>
+        Feature Coming Soon
+    </div>
 </div>
 </>
     )
