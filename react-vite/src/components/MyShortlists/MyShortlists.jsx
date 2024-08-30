@@ -47,7 +47,7 @@ const switchShortlistAndReset = (e)=>{
             <> 
             <h1 className='panel-heading'>My Shortlists</h1>
                 <div className='my-shortlists-list'>
-                {Object.values(saved_shortlists).map( shortlist =>{
+                {Object.values(saved_shortlists).reverse().map( shortlist =>{
 
                     return(
 

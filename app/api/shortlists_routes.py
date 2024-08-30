@@ -86,7 +86,7 @@ def save_shortlists():
             db.select(Shortlist).filter(Shortlist.created_by_id == created_by).where(Shortlist.title == title)
         ).first()
 
-        print(">>>>> currentShortlist record:", currentShortlist)
+        # print(">>>>> currentShortlist record:", currentShortlist)
 
         for referral in referrals:
             newReferral = Referral(
@@ -99,8 +99,8 @@ def save_shortlists():
 # TODO PRIORTY!:  should we be returning the new shortlist? How is the new shortlist being added to the state??
         return currentShortlist.single_view()
     
-    print('> save shortlist error', save_shortlist_form.errors)
-    return {'error': save_shortlist_form.errors}
+    # print('> save shortlist error', save_shortlist_form.errors)
+    return {'serverError': save_shortlist_form.errors}, 400
 
 
 # * GET MY SHORTLISTS

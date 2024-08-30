@@ -21,15 +21,18 @@ function HomeView() {
 
   const shortlists_state = useSelector((state) => state.shortlists);
 
-  const firstIdx =
-    saved_shortlists && Object.keys(saved_shortlists).length > 0
-      ? Object.keys(saved_shortlists)[0]
-      : null;
+  // const firstIdx =
+  //   saved_shortlists && Object.keys(saved_shortlists).length > 0
+  //     ? Object.keys(saved_shortlists).reverse()[0]['id']
+  //     : null;
+
+      // const lastIdx =  saved_shortlists && Object.keys(saved_shortlists).length > 0
+      // ? Object.keys(saved_shortlists)[Object.keys(saved_shortlists).length-1]['id']
+      // : null;
 
   // console.log(">>> firstIdx assigned:", firstIdx);
 
-  const [shortlistIdx, setShortlistIdx] = useState(firstIdx || null);
-
+  const [shortlistIdx, setShortlistIdx] = useState(1);
   const [editForm, setEditForm] = useState(false);
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
   const [searchFormView, setSearchFormView] = useState(false);
@@ -65,6 +68,9 @@ function HomeView() {
     if (saved_shortlists && user) {
       dispatch(getCommentThreads(user.id));
     }
+
+    
+
   }, [saved_shortlists, dispatch, user]);
 
 
