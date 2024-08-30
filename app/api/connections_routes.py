@@ -15,7 +15,7 @@ def search_connections(id):
     searchForm["csrf_token"].data = request.cookies["csrf_token"]
     
     location = searchForm.data['location']
-    print('>>>>>>>location:', location)
+    # print('>>>>>>>location:', location)
     industry_area = searchForm.data['industry_area']
     job_title = searchForm.data['job_title']
     genre = searchForm.data['genre']
@@ -94,6 +94,6 @@ def search_connections(id):
 
 
 
-    print(">>>>>>form errors:", searchForm.errors)
-    return {"message": "form data rejected"}
+    print(">>>>>0form errors:", searchForm.errors)
+    return searchForm.errors, 400
     

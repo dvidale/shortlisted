@@ -139,7 +139,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
 
     }
-    
+    // !BUG - getting a duplicate key error even though there is only one key in use.
     return(
         <> 
         <h1 className="search-results-heading">Search Results</h1>
@@ -171,16 +171,20 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
         
         }
         
-        
+        {searchSubmitted && avail_filtered_results.length === 0 && <p>Sorry, none of your connections match this search.</p>}
+       
+        {searchSubmitted === false && <p>Enter job details in the search to see who is available.</p>}
         {/*  Array.map of returned results tiles */}
+        { searchSubmitted && avail_filtered_results.length > 0 && <p className="result-count">{avail_filtered_results.length} of your peers are available</p>}
+        <div className="results-box">
         {searchSubmitted && avail_filtered_results.length > 0 && avail_filtered_results.map( result =>{
             return (
             
                 <div key={result.id}><SearchResultTile resultFirstName={result.first_name}/></div>
             )
         })}
-        {searchSubmitted && avail_filtered_results.length === 0 && <p>Sorry, none of your connections match this search.</p>}
-        {searchSubmitted === false && <p>Enter job details in the search to see who is available.</p>}
+       </div>
+        
         </>
     )
 }

@@ -25,6 +25,16 @@
     height: 35px;
 }
 
+.results-box{
+height: 400px;
+overflow-y: scroll;
+}
+.result-count{
+    text-align: center;
+    margin: 0px;
+    padding-bottom: 5px;
+}
+
 .search-result-tile{
     font-size: 20px;
    border-top: 2px solid white;

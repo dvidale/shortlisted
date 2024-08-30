@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, searchFormView}){
+function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, searchFormView}){
 
     const dispatch = useDispatch();
     
@@ -78,8 +78,11 @@ function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, 
             start_date: start_date.toISOString(),
             end_date: end_date ? end_date.toISOString() : null
         }
-      
-        dispatch(buildShortlist(user.id, JSON.stringify(formData)))
+    //   TODO: switch dispatch back to user.id after demo
+        dispatch(buildShortlist(1, JSON.stringify(formData)))
+        .then( serverError =>{ if(serverError){
+            setErrors(serverError)
+        }  })
         .then(setShowSearchResults(true))
         
     }
@@ -100,7 +103,7 @@ function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, 
         <div>
         <label htmlFor="job-titles">
         <select name='job-titles' id='job-title-select' value={job_title} onChange={e => setJobTitle(e.target.value)} className='create-shortlist-dropdown'>
-        <option value={null}>Job Title </option>
+        <option value={''}>Job Title </option>
     <option value="Editor">Editor</option>
     <option value='Assistant Editor'>Assistant Editor</option>
     </select>
@@ -115,7 +118,7 @@ function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, 
         <label htmlFor="industry-area"></label>
         <select name='industry-areas' id='industry-area-select' value={industry_area} onChange={e => setIndustryArea(e.target.value)} 
             className='create-shortlist-dropdown'>
-        <option value={null}>Industry Area</option>
+        <option value={''}>Industry Area</option>
             <option value="Scripted Television">Scripted Television</option>
             <option value='Unscripted Television'>Unscripted Television</option>
             <option value='Dramatic Film'>Dramatic Film</option>
@@ -132,7 +135,7 @@ function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, 
         <label htmlFor="genre"></label>
         <select name='genres' id='genre-select' value={genre} onChange={e => setGenre(e.target.value)}
             className='create-shortlist-dropdown'>
-            <option value={null}>Genre</option>
+            <option value={''}>Genre</option>
             <option value="Drama">Drama</option>
             <option value='Comedy'>Comedy</option>
             <option value='Horror'>Horror</option>
@@ -146,7 +149,7 @@ function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, 
         <label htmlFor="location"></label>
         <select name='locations' id='location-select' value={location} onChange={e => setLocation(e.target.value)}
             className='create-shortlist-dropdown'>
-            <option value={null}>Location</option>
+            <option value={''}>Location</option>
             <option value="Los Angeles">Los Angeles</option>
             <option value='New York'>New York</option>
             <option value='Atlanta'>Atlanta</option>
@@ -186,7 +189,7 @@ function SearchConnectionsForm({user, setShowSearchResults, setSearchSubmitted, 
            
     
        <button id='submit' type="submit">SEARCH</button>
-       
+       <p className='error'>{errors.serverError}</p>
        
         </form>
     
