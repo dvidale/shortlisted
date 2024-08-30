@@ -24,6 +24,10 @@ def seed_industry_areas():
         industry_area='Commercial',
     )
 
+    animation = Industry_Area(
+        industry_area = 'Animation',
+    )
+
 
 
     db.session.add(scripted_television)
@@ -31,6 +35,7 @@ def seed_industry_areas():
     db.session.add(dramatic_film)
     db.session.add(documentary)
     db.session.add(commercial)
+    db.session.add(animation)
 
     db.session.commit()
 
