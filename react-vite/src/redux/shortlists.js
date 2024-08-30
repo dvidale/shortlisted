@@ -3,7 +3,7 @@ const SAVE_SHORTLIST = '/shortlists/SAVE_SHORTLIST'
 const GET_SHORTLISTS = '/shortlists/GET_SHORTLISTS'
 const UPDATE_SHORTLIST = '/shortlists/UPDATE_SHORTLIST'
 const DELETE_SHORTLIST = '/shortlists/DELETE_SHORTLIST'
-
+const RESET_SHORTLISTS = '/shortlists/RESET_SHORTLISTS'
 
 
 export const buildAShortlist = (data,params) => {
@@ -47,6 +47,13 @@ export const deleteAShortlist = (id) =>{
     }
 }
 
+export const resetShortlists = () =>{
+
+    return{
+        type: RESET_SHORTLISTS,
+        payload: null
+    }
+}
 
 /*-------------------
        THUNKS
@@ -186,6 +193,14 @@ export const deleteReferral = (id) => async ()=>{
     }
 }
 
+
+
+export const resetShortlistState = () => async (dispatch) =>{
+
+dispatch(resetShortlists())
+
+}
+
 /*-------------------
       REDUCER
 ---------------------*/
@@ -228,6 +243,10 @@ const shortlistsReducer = (state = initialState, action) =>{
             const id = action.payload
             delete newState.saved_lists[id];
             return newState;
+        }
+        case RESET_SHORTLISTS:{
+            const newState =  { ...state, parameters: {}, results_pre_avail: [], saved_lists:{}}
+            return newState
         }
         default:
             return state;

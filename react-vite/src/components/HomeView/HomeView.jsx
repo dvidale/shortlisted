@@ -169,14 +169,14 @@ function HomeView() {
       ) : (
         <>
        
-       {/* <div className="splash-img" style={splashImgStyle}>
- <h1>Recommend peers for jobs, or get referred yourself...</h1>
+    
+ <h1 className="splash-text">Recommend peers for jobs, or get referred yourself... with Shortlisted.</h1>
  <br/>
  <h1>
-          with Shortlisted.
+          
         </h1>
-        <img alt='splash-img' src='https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png'/>
-       </div> */}
+        <img className="splash-img" alt='splash-img' src='https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png'/>
+    
         </>
       )}
     </>

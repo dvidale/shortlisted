@@ -30,9 +30,8 @@ const bannerImgStyle = {
 <div></div>
 <h1>Me, Shortlisted</h1>
 <hr/>
-<h2>Shortlisting 1</h2>
-<h2>Shortlisting 2</h2>
-<h2>Shortlisting 3</h2>
+<h2>Feature Coming Soon</h2>
+
 </div>
 
 <div>
