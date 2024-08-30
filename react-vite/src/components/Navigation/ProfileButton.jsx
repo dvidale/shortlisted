@@ -5,6 +5,8 @@ import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { resetShortlistState } from "../../redux/shortlists";
+import { resetCommentsState } from "../../redux/comments";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -35,7 +37,9 @@ function ProfileButton() {
 
   const logout = (e) => {
     e.preventDefault();
-    dispatch(thunkLogout());
+    dispatch(resetShortlistState())
+    dispatch(resetCommentsState())
+    dispatch(thunkLogout())
     closeMenu();
   };
 

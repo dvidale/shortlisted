@@ -2,7 +2,7 @@
 :root{
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
-    background-color: black;
+    background-color: rgb(23, 23, 23);
     color: white;
 }
 
@@ -43,11 +43,18 @@ button{
     margin: 0px;
 }
 .splash-img{
+   
     display: flex;
     justify-content: end;
     flex-wrap: wrap;
+    object-fit:none;
 }
 
+.splash-text{
+    background-color: brown;
+    position:absolute;
+    z-index: 1;
+}
 .shortlisted-title{
 align-self: flex-start;
 }
@@ -107,7 +114,7 @@ min-width: 310px;
     display: flex;
     justify-content: center;
     column-gap: 20px;
-    background-color: black;
+    background-color: rgb(78, 78, 78);
     color: white;
     border: 2px white solid;
     padding: 1px;
@@ -130,12 +137,11 @@ min-width: 310px;
 
 }
 
-/* .my-shortlists-list{
+.my-shortlists-list{
 
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-} */
+    max-height: 600px;
+    overflow-y:auto;
+}
  
 .title-and-button-pairs{
     display: flex;

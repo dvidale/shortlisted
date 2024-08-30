@@ -27,7 +27,7 @@
 
 .results-box{
 height: 400px;
-overflow-y: scroll;
+overflow-y: auto;
 }
 .result-count{
     text-align: center;
