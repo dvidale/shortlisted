@@ -27,6 +27,7 @@ def seed_users():
         password='password',
         first_name='John',
         last_name='Doe',
+        profile_img_url= 'https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/man-001.jpg' ,
     )
 
     Jane = User(
@@ -110,19 +111,19 @@ def seed_users():
         last_name='Taylor',
     )
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    # db.session.add(demo)
+    # db.session.add(marnie)
+    # db.session.add(bobbie)
     db.session.add(John)
-    db.session.add(Jane)
-    db.session.add(Michael)
-    db.session.add(Emily)
-    db.session.add(David)
-    db.session.add(Sarah)
-    db.session.add(Chris)
-    db.session.add(Laura)
-    db.session.add(Joshua)
-    db.session.add(Olivia)
+    # db.session.add(Jane)
+    # db.session.add(Michael)
+    # db.session.add(Emily)
+    # db.session.add(David)
+    # db.session.add(Sarah)
+    # db.session.add(Chris)
+    # db.session.add(Laura)
+    # db.session.add(Joshua)
+    # db.session.add(Olivia)
     db.session.commit()
 
 

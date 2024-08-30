@@ -21,8 +21,8 @@ def seed_user_genres():
     comedy = Genre.query.get(2)
     horror = Genre.query.get(3)
     sci_fi = Genre.query.get(4)
-    animation = Genre.query.get(5)
-    historical = Genre.query.get(6)
+    historical = Genre.query.get(5)
+   
 
     # Associate genres with users
     john.genres.append(drama)  # John - Drama
