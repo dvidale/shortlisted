@@ -21,10 +21,10 @@ function HomeView() {
 
   const shortlists_state = useSelector((state) => state.shortlists);
 
-  // const firstIdx =
-  //   saved_shortlists && Object.keys(saved_shortlists).length > 0
-  //     ? Object.keys(saved_shortlists).reverse()[0]['id']
-  //     : null;
+  const firstIdx =
+    saved_shortlists && Object.keys(saved_shortlists).length > 0
+      ? Object.keys(saved_shortlists).reverse()[0]['id']
+      : null;
 
       // const lastIdx =  saved_shortlists && Object.keys(saved_shortlists).length > 0
       // ? Object.keys(saved_shortlists)[Object.keys(saved_shortlists).length-1]['id']
@@ -32,7 +32,7 @@ function HomeView() {
 
   // console.log(">>> firstIdx assigned:", firstIdx);
 
-  const [shortlistIdx, setShortlistIdx] = useState(1);
+  const [shortlistIdx, setShortlistIdx] = useState(firstIdx || null);
   const [editForm, setEditForm] = useState(false);
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
   const [searchFormView, setSearchFormView] = useState(false);

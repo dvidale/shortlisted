@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "../../../src/index.css";
+import '../SingleShortlistView/single-shortlist.css'
 
 import { addComment, getCommentThreads } from "../../redux/comments";
 
