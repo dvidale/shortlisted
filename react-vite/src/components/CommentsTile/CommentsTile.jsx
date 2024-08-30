@@ -40,11 +40,20 @@ function CommentsTile({ shortlist, referralIdx }) {
     setModalContent(<DeleteCommentModal commentId={commentId} />);
   };
 
+let current_thread_sorted;
+
+if(current_thread){
+current_thread_sorted = Object.values(current_thread).sort( comment => comment['createdAt'])
+
+  }
+
+
+
   return (
     <>
       {current_thread &&
-        Object.values(current_thread).length > 0 &&
-        Object.values(current_thread).map((comment) => {
+        Object.values(current_thread_sorted).length > 0 &&
+        Object.values(current_thread_sorted).map((comment) => {
           return (
             <div key={comment.id}>
               <div className="comment-block">
