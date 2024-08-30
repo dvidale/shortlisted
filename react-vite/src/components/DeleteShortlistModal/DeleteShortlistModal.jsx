@@ -10,7 +10,7 @@ const navigate = useNavigate()
 const dispatch = useDispatch()
 const {closeModal} = useModal();
 
-
+// !BUG - get 500 error when you click delete on live site
     const deleteHandler= (id) =>{
 
         dispatch(deleteShortlist(id))
@@ -24,7 +24,7 @@ const {closeModal} = useModal();
 
 return (
 <>
-<h2>Are you sure you want to delete {`"${shortlist.title}" ?`}</h2>
+<h2>Are you sure you want to delete this shortlist?</h2>
 <div>
     <button onClick={()=> deleteHandler(shortlist.id)}>Yes (Delete Shortlist)</button>
     <button onClick={closeModal}>No (Cancel Delete)</button>

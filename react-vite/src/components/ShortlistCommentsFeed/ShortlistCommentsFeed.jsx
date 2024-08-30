@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import CommentThreadButton from "./CommentThreadButton";
 import { useState } from "react";
 
-function ShortlistCommentsFeed({ shortlist, editForm }) {
+function ShortlistCommentsFeed({ shortlist }) {
 
     const [currentReferral, setCurrentReferral ] = useState(null)
 
@@ -47,7 +47,7 @@ const toggleOpenThread = (clickedIdx) =>{
       <DeleteReferralModal idx={id} userId={user_id} fullName={full_name} />
     );
   };
-
+// !BUG - after UI design, a newly created comment doesn't appear until hard refresh
   return (
     <>
  
@@ -59,14 +59,14 @@ const toggleOpenThread = (clickedIdx) =>{
               <div className="comment-thread-btn" onClick={()=> toggleOpenThread(referralIdx)} >
                 <CommentThreadButton fullName={fullName} />
 
-                {editForm && (
+              
                   <button
                     className="delete-referral-btn"
                     onClick={() =>
                       deleteReferralHandler(referralIdx, fullName, userId)
                     }> Delete
                   </button>
-                )}
+                
               </div>
               <div className={currentReferral != referralIdx ? 'open-thread': 'close-thread'}>
               <CommentsTile shortlist={shortlist} referralIdx={referralIdx}/>
