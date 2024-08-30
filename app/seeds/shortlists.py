@@ -4,32 +4,41 @@ from datetime import datetime
 
 # Adds a demo user, you can add other users here if you want
 def seed_shortlists():
-  
-  # Assuming the IDs are known and correct
-    job_title_id = 2  # ID for Assistant Editor
-    industry_area_id = 1  # ID for Scripted Television
-    genre_id = 1  # ID for Drama
-    location_id = 1  # ID for Los Angeles
-    created_by_id = 4  # ID for John
-
 # Create the Shortlist record using db.func.now() for timestamps
-    shortlist = Shortlist(
+    
+
+    shortlist_1 = Shortlist(
+    title="NYC Editors for Indie Documentary",
+    description="An independent production company is seeking experienced editors for a feature-length documentary exploring social justice issues in New York City. The project is set to begin filming in early February.",
+    job_title_id=2,  # Assuming '2' corresponds to 'Editor'
+    industry_area_id=4,  # Assuming '4' corresponds to 'Documentary'
+    genre_id=3,  # Assuming '3' corresponds to 'Historical'
+    location_id=3,  # Assuming '3' corresponds to 'New York, NY'
+    start_date=datetime(2024, 2, 5),
+    end_date=datetime(2024, 8, 15),
+    optional_img=None,
+    created_by_id=1,  # User ID 1 as the creator
+    createdAt=db.func.now(),
+    updatedAt=db.func.now()
+    )
+
+    shortlist_2 = Shortlist(
         title="LA Assistant Editors for HBO Drama",
         description="HBO is looking for AEs for the second season of a hit drama starting the second week in January",
-        job_title_id=job_title_id,
-        industry_area_id=industry_area_id,
-        genre_id=genre_id,
-        location_id=location_id,
-        start_date=datetime(2024, 1, 8),
+        job_title_id=2,
+        industry_area_id=1,
+        genre_id=1,
+        location_id=1,
+        start_date=datetime(2024, 1, 9),
         end_date=datetime(2025, 5, 31),
         optional_img=None,
-        created_by_id=created_by_id,
+        created_by_id=1,
         createdAt=db.func.now(),
         updatedAt=db.func.now()
     )
 
     # Add to the session and commit
-    db.session.add(shortlist)
+    db.session.add_all([shortlist_1, shortlist_2])
 
 
     

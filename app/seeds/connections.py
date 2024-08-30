@@ -6,25 +6,20 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_connections():
     # Fetch users from the database
-    john = User.query.get(4)  # Assuming John has user_id=4
-    users = User.query.filter(User.id != john.id).all()  # Get all users except John
+    users = User.query.all()  # Retrieve all users
 
-    # Create connection records
-    connections = []
-    for user in users:
-        connection = Connection(
-            user_id=user.id,
-            connected_id=john.id,
-            connection_type='Worked with',
-            connection_context='on two seasons of a production',
-            createdAt= db.func.now(),
-            updatedAt= db.func.now()
-        )
-        connections.append(connection)
+    for initiator in users:
+        for receiver in users:
+            if initiator.id != receiver.id:  # Ensure a user does not connect with themselves
+                connection = Connection(
+                    user_id=initiator.id,
+                    connected_id=receiver.id,
+                    connection_type='Worked together',  # Example type, adjust as necessary
+                    connection_context='On a TV show or movie'  # Example context, adjust as necessary
+                )
+                db.session.add(connection)
 
-    # Add and commit all connections to the database
-    db.session.add_all(connections)
-    db.session.commit()
+    db.session.commit()  # Commit all connections to the database
 
 
 

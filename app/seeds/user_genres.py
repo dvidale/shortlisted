@@ -6,17 +6,7 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_user_genres():
     # Fetch users and genres from the database
-    john = User.query.get(4)
-    jane = User.query.get(5)
-    michael = User.query.get(6)
-    emily = User.query.get(7)
-    david = User.query.get(8)
-    sarah = User.query.get(9)
-    chris = User.query.get(10)
-    laura = User.query.get(11)
-    joshua = User.query.get(12)
-    olivia = User.query.get(13)
-
+    
     drama = Genre.query.get(1)
     comedy = Genre.query.get(2)
     horror = Genre.query.get(3)
@@ -25,27 +15,34 @@ def seed_user_genres():
    
 
     # Associate genres with users
-    john.genres.append(drama)  # John - Drama
-    john.genres.append(comedy)  # John - Comedy
+    # First 40 users associated with both Drama and Comedy
+    for i in range(1, 41):
+        user = User.query.get(i)
+        user.genres.append(drama)
+        user.genres.append(comedy)
 
-    jane.genres.append(drama)  # Jane - Drama
-    jane.genres.append(comedy)  # Jane - Comedy
+    # Next 10 users associated with both Horror and Sci-Fi
+    for i in range(41, 51):
+        user = User.query.get(i)
+        user.genres.append(horror)
+        user.genres.append(sci_fi)
 
-    michael.genres.append(drama)  # Michael - Drama
-    michael.genres.append(comedy)  # Michael - Comedy
+    # Next 30 users associated with Historical
+    for i in range(51, 81):
+        user = User.query.get(i)
+        user.genres.append(historical)
 
-    emily.genres.append(drama)  # Emily - Drama
-    emily.genres.append(comedy)  # Emily - Comedy
-
-    david.genres.append(horror)  # David - Horror
-    david.genres.append(sci_fi)  # David - Sci-Fi
-
-    sarah.genres.append(animation)  # Sarah - Animation
-    chris.genres.append(animation)  # Chris - Animation
-    laura.genres.append(animation)  # Laura - Animation
-
-    joshua.genres.append(historical)  # Joshua - Historical
-    olivia.genres.append(historical)  # Olivia - Historical
+    # Alternate genres for the remaining 20 users
+    for i in range(81, 101):
+        user = User.query.get(i)
+        if i % 2 == 0:
+            user.genres.append(drama)
+        else:
+            user.genres.append(comedy)
+        if i % 3 == 0:
+            user.genres.append(horror)
+        elif i % 5 == 0:
+            user.genres.append(sci_fi)
 
     # Commit the changes to the database
     db.session.commit()

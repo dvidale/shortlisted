@@ -5,15 +5,52 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_referrals():
     
-    referral = Referral(
-    shortlist_id =1,
+    referral_0 = Referral(
+    shortlist_id = 2,
     referred_id = 6,
     date_referred = db.func.now()
-)
+    )
+
+    referral_1 = Referral(
+    shortlist_id=1,  # The ID of the shortlist "NYC Editors for Indie Documentary"
+    referred_id=12,  # User ID of a matching user
+    date_referred=db.func.now()
+    )
+
+    referral_2 = Referral(
+        shortlist_id=1,
+        referred_id=15,
+        date_referred=db.func.now()
+    )
+
+    referral_3 = Referral(
+        shortlist_id=1,
+        referred_id=23,
+        date_referred=db.func.now()
+    )
+
+    referral_4 = Referral(
+        shortlist_id=1,
+        referred_id=34,
+        date_referred=db.func.now()
+    )
+
+    referral_5 = Referral(
+        shortlist_id=1,
+        referred_id=45,
+        date_referred=db.func.now()
+    )
+
+    referral_6 = Referral(
+        shortlist_id=1,
+        referred_id=56,
+        date_referred=db.func.now()
+    )
+    
 
 
    
-    db.session.add(referral)
+    db.session.add_all([referral_0,referral_1,referral_2,referral_3,referral_4,referral_5,referral_6])
     
     
     db.session.commit()
