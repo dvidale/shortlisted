@@ -32,9 +32,9 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
   }, [userId, dispatch, shortlistIdx]);
 
   // console.log(">>>> current shortlist in singleview:", shortlist);
-  const [title, setTitle] = useState(shortlist ? shortlist.title : null);
+  const [title, setTitle] = useState(shortlist ? shortlist.title : '');
   const [description, setDescription] = useState(
-    shortlist ? shortlist.description : null
+    shortlist ? shortlist.description : ''
   );
   const [errors, setErrors] = useState({});
   const [warnings, setWarnings] = useState({});
@@ -49,7 +49,7 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
   // * Description Validation
   useEffect(() => {
     const warn = {};
-    if(description !== null){
+    if(description !== ''){
       if (description.length === 255)
         warn.description = "There is a 255 character limit.";
     }
@@ -64,7 +64,7 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
 
     const err = {};
     
-    if (title === null || title.length === 0) err.title = "A title is required";
+    if (title === '' || title.length === 0) err.title = "A title is required";
 
     setErrors(err);
 

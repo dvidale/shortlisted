@@ -12,12 +12,12 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
     
 
 
-    const [location, setLocation] = useState(null)
-    const [industry_area, setIndustryArea] = useState(null)
-    const [job_title, setJobTitle] = useState(null)
-    const [genre, setGenre] = useState(null)
-    const [start_date, setStartDate] = useState(null)
-    const [end_date, setEndDate] = useState(null)
+    const [location, setLocation] = useState('')
+    const [industry_area, setIndustryArea] = useState('')
+    const [job_title, setJobTitle] = useState('')
+    const [genre, setGenre] = useState('')
+    const [start_date, setStartDate] = useState('')
+    const [end_date, setEndDate] = useState('')
     
     const [errors, setErrors] = useState({})
 
@@ -29,8 +29,8 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
             setIndustryArea('')
             setJobTitle('')
             setGenre('')
-            setStartDate(null)
-            setEndDate(null)
+            setStartDate('')
+            setEndDate('')
             setErrors({})
         }
 

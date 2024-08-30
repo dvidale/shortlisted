@@ -1,9 +1,9 @@
 
 import '../../../src/index.css'
 
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchShortlists } from '../../redux/shortlists'
+// import { useEffect } from 'react'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { fetchShortlists } from '../../redux/shortlists'
 
 
 // import { createContext } from 'react'
@@ -12,12 +12,12 @@ import { fetchShortlists } from '../../redux/shortlists'
 
 function MyShortlists({shortlistIdx, setShortlistIdx, saved_shortlists, setEditForm,setShowSearchResults }){
  
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
     // const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
  
-    const user = useSelector(state => state.session.user) 
+    // const user = useSelector(state => state.session.user) 
     
     
     
@@ -31,12 +31,12 @@ const switchShortlistAndReset = (e)=>{
     setShowSearchResults(false)
 }
   
-    useEffect(()=>{
+    // useEffect(()=>{
         
-        dispatch(fetchShortlists(user.id))
+    //     dispatch(fetchShortlists(user.id))
         
 
-    },[dispatch, user])
+    // },[dispatch, user])
 
     
     

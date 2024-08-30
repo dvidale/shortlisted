@@ -10,7 +10,7 @@ function CommentForm({ shortlist, referralIdx, user }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [text, setText] = useState(null);
+  const [text, setText] = useState('');
   const [errors, setErrors] = useState({});
   const [warnings, setWarnings] = useState({});
   const comments = useSelector((state) => state.comments.comments);
@@ -40,7 +40,7 @@ function CommentForm({ shortlist, referralIdx, user }) {
     e.preventDefault();
 
     let err = {};
-    if (text === null) {
+    if (text === '') {
       err.text = "Text is required to send a message.";
     } else {
       if (text.length === 0) err.text = "Text is required to send a message.";
