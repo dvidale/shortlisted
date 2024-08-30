@@ -25,10 +25,10 @@ export const editAComment = (data) =>{
     }
 }
 
-export const deleteAComment = (data) =>{
+export const deleteAComment = (id) =>{
     return {
         type: DELETE_A_COMMENT,
-        payload: data
+        payload: id
     }
 }
 
@@ -108,7 +108,7 @@ const response = await fetch(url, options)
 if(response.ok){
 
     const data = await response.json()
-    dispatch(deleteAComment(data))
+    dispatch(deleteAComment(id))
 
     return data.message
 }
@@ -134,18 +134,26 @@ const commentsReducer = (state = initialState, action ) =>{
             const newState = {...state}
             action.payload.forEach(thread =>{
                 const referral_id = thread[0]['referral_id']
-                newState.comment_threads[referral_id] = thread
+                newState.comment_threads[referral_id] = {}
+
+                thread.forEach(comment => {
+
+                    newState.comment_threads[referral_id][comment['id']] = comment
+                })
+
+
             })
             return newState
         }
         case ADD_A_COMMENT:{
             const newState = {...state}
-            newState.comment_threads[action.payload['referral_id']].push(action.payload)
+            newState.comment_threads[action.payload['referral_id']] = action.payload['id'] = action.payload
             return newState
         }
         case EDIT_A_COMMENT:{
             const newState = {...state}
-            newState.comment_threads[action.payload[0]['referral_id']] = action.payload
+            const target_thread = newState.comment_threads[action.payload['referral_id']]
+             target_thread[action.payload['id']] = action.payload
             return newState    
         }
         case DELETE_A_COMMENT:{

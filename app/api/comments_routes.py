@@ -66,7 +66,7 @@ def add_comment():
 
         return newCommentFromDB.to_dict()
     
-    return {"error": comment_form.errors}
+    return {"error": comment_form.errors}, 400
 
 
 # * UPDATE A COMMENT
@@ -85,13 +85,14 @@ def update_comment(id):
         target_comment.text = text
 
         db.session.commit()
-        fresh_lst = db.session.scalars(
-            db.select(Comment).where(Comment.referral_id == target_comment.referral_id)
-        ).all()
 
-        return [comment.to_dict() for comment in fresh_lst]
+        updatedComment = db.session.scalars(
+            db.select(Comment).where(Comment.id == target_comment.id)
+        ).first()
+
+        return updatedComment.to_dict()
      
-     return {"error": comment_form.errors}
+     return {"error": comment_form.errors}, 400
 
 # * DELETE A COMMENT
 
@@ -103,9 +104,9 @@ def delete_comment(id):
     db.session.commit()
 
    
-    fresh_lst = db.session.scalars(
-            db.select(Comment).where(Comment.referral_id == target_comment.referral_id)
-        ).all()
-
-    return [comment.to_dict() for comment in fresh_lst]
-    # return {"message" : "Comment deleted"}
+    # fresh_lst = db.session.scalars(
+    #         db.select(Comment).where(Comment.referral_id == target_comment.referral_id)
+    #     ).all()
+    # # ? send back the entire list with the comment removed
+    # return [comment.to_dict() for comment in fresh_lst]
+    return {"message" : "Comment deleted"}
