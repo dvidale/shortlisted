@@ -20,9 +20,6 @@ def seed_genres():
         genre_name='Sci-Fi',
     )
 
-    animation = Genre(
-        genre_name='Animation',
-    )
 
     historical = Genre(
         genre_name='Historical',
@@ -33,7 +30,6 @@ def seed_genres():
     db.session.add(comedy)
     db.session.add(horror)
     db.session.add(sci_fi)
-    db.session.add(animation)
     db.session.add(historical)
 
     
