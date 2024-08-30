@@ -1,8 +1,9 @@
 .profile-dropdown {
   background-color: black;
   position: absolute;
-  right: 1%;
+  right: 5%;
   padding: 10px;
+  border: 3px solid white;
 }
 
 .profile-btn{

@@ -84,7 +84,9 @@ function HomeView() {
     <>
       {user ? (
         <>
+        
           <div id="search-and-my-shortlist-container">
+          <div className="shortlisted-title">Shortlisted.</div>
             <button id="new-shortlist-btn" onClick={() => toggleFormView()}>
               <h1>
             

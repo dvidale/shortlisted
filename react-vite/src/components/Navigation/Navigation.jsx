@@ -1,5 +1,5 @@
 
-import ProfileButton from "./ProfileButton";
+
 import "./Navigation.css";
 import { useModal } from "../../context/Modal";
 import { useSelector } from "react-redux";
@@ -26,10 +26,10 @@ function Navigation() {
   return (
  
     <div className="navigation-bar">
-     <div>Shortlisted.</div>
+     
     <div className="profile-btn">
       { user ? (<>     
-      <ProfileButton />
+
        </>):(<>   
        <div className="login-signup-homepage-btns">
        <button className='front-login-signup-btn' onClick={handleLogin}>Login</button>   
