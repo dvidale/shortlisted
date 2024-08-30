@@ -140,7 +140,7 @@ const commentsReducer = (state = initialState, action ) =>{
         }
         case ADD_A_COMMENT:{
             const newState = {...state}
-            newState.comment_threads[action.payload.referral_id].push(action.payload)
+            newState.comment_threads[action.payload['referral_id']].push(action.payload)
             return newState
         }
         case EDIT_A_COMMENT:{
