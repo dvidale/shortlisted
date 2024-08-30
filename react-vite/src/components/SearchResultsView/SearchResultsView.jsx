@@ -166,7 +166,11 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
             </div>
         </form>
 
+        {searchSubmitted &&
         <SearchDetails searchSubmitted={searchSubmitted} params={searchParams}/>
+        
+        }
+        
         
         {/*  Array.map of returned results tiles */}
         {searchSubmitted && avail_filtered_results.length > 0 && avail_filtered_results.map( result =>{
