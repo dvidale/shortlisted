@@ -79,6 +79,7 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
       const shortlistId = shortlist.id;
 
       dispatch(updateShortlist(shortlistId, JSON.stringify(formData)));
+      // TODO: Add server response control
     }
   };
 

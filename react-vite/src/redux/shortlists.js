@@ -4,6 +4,7 @@ const GET_SHORTLISTS = '/shortlists/GET_SHORTLISTS'
 const UPDATE_SHORTLIST = '/shortlists/UPDATE_SHORTLIST'
 const DELETE_SHORTLIST = '/shortlists/DELETE_SHORTLIST'
 const RESET_SHORTLISTS = '/shortlists/RESET_SHORTLISTS'
+const CLEAR_SEARCH = '/shortlists/CLEAR_SEARCH'
 
 
 export const buildAShortlist = (data,params) => {
@@ -47,6 +48,12 @@ export const deleteAShortlist = (id) =>{
     }
 }
 
+export const clearSearch = () => {
+    return {
+        type: CLEAR_SEARCH
+    }
+}
+
 export const resetShortlists = () =>{
 
     return{
@@ -79,8 +86,8 @@ export const buildShortlist = (userId, formData) => async (dispatch) =>{
         // console.log(">>>> parsed form data in thunk:", params);
         return data
     }else{
-        const error = await response.json()
-        return error;
+        const serverError = await response.json()
+        return serverError;   //the serverError object: {'location': ["'' is not a valid choice for this field."], 'industry_area': ["'' is not a valid choice for this field."], 'job_title': ["'' is not a valid choice for this field."]}
     }
 }
 
@@ -194,7 +201,6 @@ export const deleteReferral = (id) => async ()=>{
 }
 
 
-
 export const resetShortlistState = () => async (dispatch) =>{
 
 dispatch(resetShortlists())
@@ -242,6 +248,10 @@ const shortlistsReducer = (state = initialState, action) =>{
             const newState ={...state}
             const id = action.payload
             delete newState.saved_lists[id];
+            return newState;
+        }
+        case CLEAR_SEARCH:{
+            const newState = {...state, parameters: {}, results_pre_avail: []}
             return newState;
         }
         case RESET_SHORTLISTS:{
