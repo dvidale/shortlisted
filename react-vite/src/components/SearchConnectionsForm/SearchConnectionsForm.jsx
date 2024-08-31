@@ -4,7 +4,7 @@ import { useDispatch} from 'react-redux'
 import { buildShortlist } from "../../redux/shortlists";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import { clearSearch } from '../../redux/shortlists';
 
 function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, searchFormView}){
 
@@ -32,9 +32,10 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
             setStartDate('')
             setEndDate('')
             setErrors({})
+            dispatch(clearSearch())
         }
 
-    },[searchFormView])
+    },[searchFormView, dispatch])
 
 
     // !BUG - if i set the job title and then switch it back to nothing, it can pass validation
@@ -67,8 +68,8 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
 
     setErrors(err)
 
-    if(Object.keys(err).length === 0){
-    setSearchSubmitted(true)
+    // if(Object.keys(err).length === 0){
+    
         const formData = {
 
             location,
@@ -82,18 +83,25 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
         dispatch(buildShortlist(1, JSON.stringify(formData)))
         .then( serverError =>{ if(serverError){
             setErrors(serverError)
-        }  })
-        .then(setShowSearchResults(true))
+            setSearchSubmitted(false)
+        }else{
+            setSearchSubmitted(true) 
+        } })
+        .then( () => {
+            
+            setShowSearchResults(true)
+            
+        })
         
     }
 
 
 
-}
+// }
 
         
 
-
+// TODO: Figure out why job title dropdown moves left when a server error is returned for an invalid job title choice
     return(<>
     
 
@@ -108,10 +116,8 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
     <option value='Assistant Editor'>Assistant Editor</option>
     </select>
 </label>
-<div >
-    {
-  
-     <p className='error'>{errors.job_title}</p>}
+<div >  
+     <p className='error'>{errors.job_title}</p>
 </div>
 
 </div>
@@ -126,10 +132,10 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
             <option value='Commercial'>Commercial</option>
         </select>
         <div >
-        {
+        
  
         <p className='error'>{errors.industry_area}
-            </p>}
+            </p>
             </div>
 
         <label htmlFor="genre"></label>
