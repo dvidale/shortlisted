@@ -78,7 +78,7 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
             start_date: start_date.toISOString(),
             end_date: end_date ? end_date.toISOString() : null
         }
-    //   TODO: switch dispatch back to user.id after demo
+    //   TODO: switch "1" dispatch back to user.id after demo
         dispatch(buildShortlist(1, JSON.stringify(formData)))
         .then( serverError =>{ if(serverError){
             setErrors(serverError)

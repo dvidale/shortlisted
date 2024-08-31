@@ -1,4 +1,4 @@
-/* TODO: Add sitewide styles */
+
 :root{
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
@@ -43,11 +43,10 @@ button{
     margin: 0px;
 }
 .splash-img{
-   
-    display: flex;
-    justify-content: end;
-    flex-wrap: wrap;
-    object-fit:none;
+   background-image: url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png');
+   background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: -500px;
 }
 
 .splash-text{
