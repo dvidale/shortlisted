@@ -13,7 +13,9 @@ import { getCommentThreads } from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 
 
-// !BUG - reseed to include users in New York!
+// TODO PRIORITY - reseed to include users in New York!
+// TODO PRIORITY - create a modal to output server errors! 
+// TODO: Write all labels to match their element ids
 function HomeView() {
   const dispatch = useDispatch();
 
@@ -76,13 +78,13 @@ function HomeView() {
   }, [saved_shortlists, dispatch, user]);
 
 
-  // const splashImgStyle = {
-	// 	width: '100%',
-	// 	backgroundImage: `url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png')`,
-	// 	backgroundSize: 'cover',
-	// 	backgroundPosition: 'center',
-	// 	position: 'relative', // Ensure the overlay is positioned correctly
-	// };
+  const splashImgStyle = {
+		width: '100%',
+		backgroundImage: "url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png')",
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
+		position: 'relative', // Ensure the overlay is positioned correctly
+	};
 
 
 

@@ -204,7 +204,7 @@ dispatch(resetShortlists())
 /*-------------------
       REDUCER
 ---------------------*/
-// TODO: consider changing "results" to "search_results" for easier interpretation
+
 const initialState = { parameters: {}, results_pre_avail: [], saved_lists:{}}
 
 const shortlistsReducer = (state = initialState, action) =>{

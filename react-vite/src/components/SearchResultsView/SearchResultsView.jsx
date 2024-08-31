@@ -130,7 +130,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
                
             }
         }
-        // TODO: Get the newly saved shortlist to appear in the center panel. Right now it pulls up an older list
+        // TODO PRIORITY: Get the newly saved shortlist to appear in the center panel. Right now it pulls up an older list
         ).then( dispatch(fetchShortlists(user.id)))
         
 

@@ -9,6 +9,7 @@ from app.models.user import User
 
 shortlists_routes = Blueprint('shortlists', __name__)
 
+
 # * SAVE A SHORTLIST
 @shortlists_routes.route('/new', methods=['POST'])
 def save_shortlists():
@@ -96,7 +97,6 @@ def save_shortlists():
             db.session.add(newReferral)
             db.session.commit()
 
-# TODO PRIORTY!:  should we be returning the new shortlist? How is the new shortlist being added to the state??
         return currentShortlist.single_view()
     
     # print('> save shortlist error', save_shortlist_form.errors)
