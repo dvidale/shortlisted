@@ -68,7 +68,7 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
 
     setErrors(err)
 
-    // if(Object.keys(err).length === 0){
+    if(Object.keys(err).length === 0){
     
         const formData = {
 
@@ -97,7 +97,7 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
 
 
 
-// }
+}
 
         
 
