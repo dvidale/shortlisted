@@ -84,7 +84,7 @@ export const buildShortlist = (userId, formData) => async (dispatch) =>{
         dispatch(buildAShortlist(data, params))
          // TODO: refactor to pass the form data into Context so we can pass it straight from the component
         // console.log(">>>> parsed form data in thunk:", params);
-        return data
+        
     }else{
         const serverError = await response.json()
         return serverError;   //the serverError object: {'location': ["'' is not a valid choice for this field."], 'industry_area': ["'' is not a valid choice for this field."], 'job_title': ["'' is not a valid choice for this field."]}
