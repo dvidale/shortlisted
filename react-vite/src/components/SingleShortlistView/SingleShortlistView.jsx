@@ -79,7 +79,7 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
       const shortlistId = shortlist.id;
 
       dispatch(updateShortlist(shortlistId, JSON.stringify(formData)));
-      // TODO: Add server response control
+      // TODO: Add server response modal
     }
   };
 
@@ -106,9 +106,9 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
 
 
 // * DELETE Shortlist
-  const handleDelete = (shortlist) => {
+  const handleDelete = (shortlistId) => {
     setModalContent(
-      <DeleteShortlistModal userId={userId} shortlist={shortlist} setShortlistIdx={setShortlistIdx} />
+      <DeleteShortlistModal userId={userId} shortlist={shortlist} shortlistId={shortlistId} setShortlistIdx={setShortlistIdx} />
     );
   };
 
@@ -139,7 +139,7 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
             <button
               disabled={editForm}
               className="single-shortlist-delete-btn"
-              onClick={() => handleDelete(shortlist, shortlist.id)}
+              onClick={() => handleDelete(shortlist.id)}
             >
               Delete
             </button></div>

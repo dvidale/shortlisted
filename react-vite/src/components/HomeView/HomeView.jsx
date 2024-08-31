@@ -13,8 +13,7 @@ import { getCommentThreads } from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 
 
-// TODO PRIORITY - reseed to include users in New York!
-// TODO PRIORITY - create a modal to output server errors! 
+ 
 // TODO: Write all labels to match their element ids
 function HomeView() {
   const dispatch = useDispatch();

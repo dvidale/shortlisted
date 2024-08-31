@@ -54,9 +54,11 @@ button{
     position:absolute;
     z-index: 1;
 }
+
 .shortlisted-title{
 align-self: flex-start;
 }
+
 /* .hide-form{
     display: none;
     flex-direction: column;

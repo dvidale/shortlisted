@@ -140,6 +140,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
     }
     // !BUG - Search details have a visible stall in rendering while waiting for search query to return results
+    // TODO: add a loading indicator to appear on screen between the search being submitted and the results being returned
 
     return(
         <> 
@@ -166,7 +167,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
      <p className="error">{errors.description}</p>
             </div>
         </form>
-
+        
         {searchSubmitted &&
         <SearchDetails searchSubmitted={searchSubmitted} params={searchParams}/>
         

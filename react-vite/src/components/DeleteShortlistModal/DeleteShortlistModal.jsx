@@ -6,8 +6,8 @@ import { useModal } from "../../context/Modal"
 import { useNavigate } from 'react-router-dom'
 
 
-function DeleteShortlistModal({ shortlist,
-    userId,
+function DeleteShortlistModal({
+    userId,shortlistId
 
 }){
 
@@ -33,7 +33,7 @@ return (
 <>
 <h2>Are you sure you want to delete this shortlist?</h2>
 <div>
-    <button onClick={()=> deleteHandler(shortlist.id)}>Yes (Delete Shortlist)</button>
+    <button onClick={()=> deleteHandler(shortlistId)}>Yes (Delete Shortlist)</button>
     <button onClick={closeModal}>No (Cancel Delete)</button>
 </div>
 </>
