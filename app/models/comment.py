@@ -9,7 +9,7 @@ class Comment(db.Model):
         __table_args__ = {'schema': SCHEMA}
     
     id = db.Column(db.Integer, primary_key=True,unique=True, autoincrement=True)
-    shortlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shortlists.id')), nullable=False)
+    shortlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shortlists.id'), ondelete='CASCADE'), nullable=False)
     commenter_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     referral_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('referrals.id'), ondelete='CASCADE'), nullable=False)
     text = db.Column(db.String(255), nullable = False)
