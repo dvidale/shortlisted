@@ -5,6 +5,7 @@ import json
 from dateutil import parser
 from datetime import datetime
 
+from app.models.comment import Comment
 from app.models.user import User
 
 shortlists_routes = Blueprint('shortlists', __name__)
@@ -149,11 +150,21 @@ def deleteShortlist(id):
         db.select(Shortlist).where(Shortlist.id == id)
     ).first()
 
+    # create a list of all the referral_ids to clear the state
+    referrals_lst = db.session.scalars(
+        db.select(Referral.id).where(Referral.shortlist_id == target_shortlist.id)
+    ).all()
+
+    # Manually deleting all associated comments before deleting shortlist
+    db.session.query(Comment).filter(Comment.shortlist_id == target_shortlist.id).delete()
+    db.session.commit()
 
     db.session.delete(target_shortlist)
     db.session.commit()
 
-    return {'message': "Shortlist deleted successfully"}
+    success_msg = {'message': "Shortlist deleted successfully"}
+
+    return [referrals_lst, success_msg]
 
 # *DELETE A REFERRAL FROM A SHORTLIST
 @shortlists_routes.route('/referrals/<int:id>', methods=['DELETE'])
