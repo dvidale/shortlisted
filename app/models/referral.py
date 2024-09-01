@@ -9,7 +9,7 @@ class Referral(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
-    shortlist_id= db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shortlists.id')))
+    shortlist_id= db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shortlists.id'), ondelete='CASCADE'))
     referred_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')) )
     date_referred = db.Column(db.DateTime, nullable=False, default=db.func.now())
 
