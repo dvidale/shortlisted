@@ -48,8 +48,8 @@ function CommentsTile({ shortlist, referralIdx }) {
             <div key={comment.id} className="comment-bubble-and-avatar">
               <div key={`${comment.id}-name`} className="commenter_name">
                 {comment.commenter_name !== user.first_name && (
-                  <span key={`${comment.id}-avatar`}>
-                    <VscAccount />
+                  <span key={`${comment.id}-avatar-span`}>
+                    <VscAccount key={`${comment.id}-avatar`}  />
                     {comment.commenter_name}
                   </span>
                 )}
@@ -73,8 +73,8 @@ function CommentsTile({ shortlist, referralIdx }) {
                   </button>
                 )}
                 {comment.commenter_id === user.id && (
-                  <div key={`${comment.id}-you-icon`} className="you_icon">
-                    <VscAccount />
+                  <div key={`${comment.id}-you-icon-div`} className="you_icon">
+                    <VscAccount key={`${comment.id}-you-icon`}/>
                     You
                   </div>
                 )}
