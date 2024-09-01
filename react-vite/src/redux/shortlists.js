@@ -180,6 +180,11 @@ if(response.ok){
 
     return data
 
+}else{
+
+    const serverError = await response.json()
+
+    return serverError
 }
 
 }
