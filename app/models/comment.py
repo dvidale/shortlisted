@@ -18,7 +18,7 @@ class Comment(db.Model):
 
 
     referrals = db.relationship('Referral', back_populates = 'comments')
-    # shortlists = db.relationship('Shortlist', back_populates = 'comments')
+    shortlists = db.relationship('Shortlist', back_populates = 'comments')
 
     def to_dict(self):
         return{
