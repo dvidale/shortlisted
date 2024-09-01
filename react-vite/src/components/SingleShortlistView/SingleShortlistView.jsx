@@ -56,9 +56,9 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
     setWarnings(warn);
   }, [description]);
 
-  /* -------------------
+  /* ---------------------------------------------
          Form Submission
-  ---------------------- */
+  ----------------------------------------------- */
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -107,6 +107,7 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
 
 // * DELETE Shortlist
   const handleDelete = (shortlistId) => {
+    
     setModalContent(
       <DeleteShortlistModal userId={userId} shortlist={shortlist} shortlistId={shortlistId} setShortlistIdx={setShortlistIdx} />
     );
@@ -133,16 +134,19 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
             <div className="edit-delete-save-btns">
 {editForm && <button type="submit">Save</button>}
             {!editForm && (
-              <button type={`button`} onClick={editSwitch}>{`Edit`}</button>
+              <button type='button' onClick={editSwitch}>{`Edit`}</button>
             )}
 
-            <button
+
+            <button type='button'
               disabled={editForm}
               className="single-shortlist-delete-btn"
               onClick={() => handleDelete(shortlist.id)}
             >
               Delete
-            </button></div>
+            </button>
+            
+            </div>
 </div>
             <div className={formBorder}>
               <textarea

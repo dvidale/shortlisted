@@ -7,16 +7,13 @@ import { useNavigate } from 'react-router-dom'
 import { clearDeletedThreads } from "../../redux/comments"
 
 
-function DeleteShortlistModal({
-    userId,shortlistId
-
-}){
+function DeleteShortlistModal({ userId,shortlistId }){
 
 const navigate = useNavigate()
 const dispatch = useDispatch()
 const {closeModal} = useModal();
 
-
+ 
 
 
     const deleteHandler= (id) =>{
