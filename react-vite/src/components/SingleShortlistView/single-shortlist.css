@@ -16,15 +16,15 @@
   #edit-shortlist-title{
 font-size: 26px;
     min-height:80px;
-    min-width: 350px;
     max-height:80px;
+    min-width: 350px;
     max-width: 350px;
 /* border:2px solid yellowgreen; */
   }
 
   #edit-shortlist-desc{
     /* border: 2px solid yellowgreen; */
-font-size: 16px;
+    font-size: 16px;
     min-height: 50px;
     max-height: 50px;
     min-width: 350px;
@@ -33,10 +33,10 @@ font-size: 16px;
   }
 
 
-  .border-on{
+  /* .border-on{
 border: 1px solid gray;
 
-  }
+  } */
 
   .border-off{
     border: 1px solid transparent;
