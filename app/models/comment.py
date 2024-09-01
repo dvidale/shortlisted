@@ -11,7 +11,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True,unique=True, autoincrement=True)
     shortlist_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shortlists.id')), nullable=False)
     commenter_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    referral_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('referrals.id')), nullable=False)
+    referral_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('referrals.id'), ondelete='CASCADE'), nullable=False)
     text = db.Column(db.String(255), nullable = False)
     createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
