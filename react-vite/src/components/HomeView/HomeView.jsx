@@ -79,14 +79,7 @@ function HomeView() {
   }, [saved_shortlists, dispatch, user]);
 
 
-  // const splashImgStyle = {
-	// 	width: '100%',
-	// 	backgroundImage: "url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png')",
-	// 	backgroundSize: 'cover',
-	// 	backgroundPosition: 'center',
-	// 	position: 'relative', // Ensure the overlay is positioned correctly
-	// };
-
+ 
 
 
 
@@ -177,10 +170,8 @@ function HomeView() {
     
  <h1 className="splash-text">Recommend peers for jobs, or get referred yourself... with Shortlisted.</h1>
  <br/>
- <h1>
-          
-        </h1>
-        {/* <img className="splash-img" alt='splash-img' src='https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png'/> */}
+ <h1>        </h1>
+        <div className="splash-img"></div>
     
         </>
       )}
