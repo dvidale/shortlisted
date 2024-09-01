@@ -8,13 +8,13 @@ class Referral(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     shortlist_id= db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('shortlists.id')))
     referred_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')) )
     date_referred = db.Column(db.DateTime, nullable=False, default=db.func.now())
 
     comments = db.relationship('Comment', back_populates='referrals', cascade='all, delete-orphan')
-
+    shortlists = db.relationship('Shortlist', back_populates='referrals')
     
 
     def with_details(self):

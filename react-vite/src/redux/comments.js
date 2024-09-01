@@ -2,6 +2,7 @@ const GET_ALL_COMMENT_THREADS = '/comments/GET_ALL_COMMENT_THREADS'
 const ADD_A_COMMENT = '/comments/ADD_A_COMMENT'
 const EDIT_A_COMMENT = '/comments/EDIT_A_COMMENT'
 const DELETE_A_COMMENT = '/comments/DELETE_A_COMMENT'
+const CLEAR_DELETED_THREAD = '/comments/CLEAR_DELETED_THREAD'
 const RESET_COMMENTS = '/comments/RESET_COMMENTS'
 
 export const getAllCommentThreads = (data)=>{
@@ -29,6 +30,13 @@ export const deleteAComment = (id, thread) =>{
     return {
         type: DELETE_A_COMMENT,
         payload: [id, thread]
+    }
+}
+
+export const clearDeletedThreads = (data) =>{
+    return {
+        type: CLEAR_DELETED_THREAD,
+        payload: data
     }
 }
 
@@ -169,6 +177,13 @@ const commentsReducer = (state = initialState, action ) =>{
             const thread_id = action.payload[1]
             const comment_id = action.payload[0]
             delete newState.comment_threads[thread_id][comment_id]
+            return newState
+        }
+        case CLEAR_DELETED_THREAD:{
+            const newState = { ...state}
+            action.payload.forEach( threadId => 
+                delete newState.comment_threads[threadId]
+            )
             return newState
         }
         case RESET_COMMENTS:{
