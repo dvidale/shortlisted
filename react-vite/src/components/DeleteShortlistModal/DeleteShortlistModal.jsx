@@ -21,7 +21,7 @@ const {closeModal} = useModal();
     const deleteHandler= (id) =>{
        
         dispatch(deleteShortlist(id))
-        .then( data => {if(data.message) console.log("Response to DELETE request:", data.message)})
+        .then( data => {if(data) console.log("Response to DELETE request:", data)})
         .then(closeModal)
         .then(()=> dispatch(fetchShortlists(userId)))
         .then(()=> navigate('/'))
