@@ -21,9 +21,10 @@ const {closeModal} = useModal();
     const deleteHandler= (id) =>{
        
         dispatch(deleteShortlist(id))
+        .then( data => console.log("Response to DELETE request:", data.message))
         .then(closeModal)
-        .then(dispatch(fetchShortlists(userId)))
-        .then(navigate('/'))
+        .then(()=> dispatch(fetchShortlists(userId)))
+        .then(()=> navigate('/'))
       
     // !DO NOT try to trigger the selection of another shortlist from here. It causes the delete to stall
         
