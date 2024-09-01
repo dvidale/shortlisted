@@ -2,8 +2,15 @@
 :root{
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
-    background-color: rgb(23, 23, 23);
-    color: white;
+    --dark-bg: black;
+    --light-bg: silver;
+    --dark-text: black;
+    --light-text: white;
+    --dark-button: black;
+    --light-text: white;
+    --dark-border: 2px solid black;
+    --light-border: 2px solid white;
+    background-color: var(--light-bg);
 }
 
 a {
@@ -11,9 +18,9 @@ a {
 }
 
 button{
-    background-color: black;
-    color: white;
-    border: 2px solid white;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
+    border: var(--dark-border);
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 5px;
@@ -29,8 +36,8 @@ button{
 }
 .front-login-signup-btn{
     border-radius: 30px;
-    background-color: white;
-    color: black;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
 }
 
 #app-views-container{
@@ -46,13 +53,16 @@ button{
    background-image: url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png');
    background-size: cover;
     background-repeat: no-repeat;
-    margin-top: -500px;
+    /* margin-top: -500px; */
+   position: relative;
+   color: var(--dark-bg);
+   resize:both;
 }
 
 .splash-text{
     background-color: brown;
     position:absolute;
-    z-index: 1;
+    /* z-index: 1; */
 }
 
 .shortlisted-title{
@@ -114,8 +124,8 @@ min-width: 310px;
     justify-content: center;
     column-gap: 20px;
     background-color: rgb(78, 78, 78);
-    color: white;
-    border: 2px white solid;
+    color: var(--light-text);
+    border: 2px var(--light-border) solid;
     padding: 1px;
     cursor: pointer;
     margin-top: 10px;
@@ -148,6 +158,7 @@ min-width: 310px;
     justify-content: space-between;
     margin-top: 5px;
     margin-bottom: 0px;
+    background-color: black;
 }
 .title-and-button-pairs-clicked{
     display: flex;
