@@ -42,9 +42,9 @@ class Shortlist(db.Model):
         db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now()
     )
 
-    referrals = db.relationship("Referral", cascade="all, delete-orphan")
+    referrals = db.relationship("Referral", cascade="all, delete, delete-orphan")
 
-    comments = db.relationship('Comment', cascade="all, delete-orphan" )
+    # comments = db.relationship('Comment', cascade="all, delete-orphan" )
 
     shortlist_referrals = db.relationship('User', secondary=add_prefix_for_prod('referrals'), back_populates='shortlistings')
 
