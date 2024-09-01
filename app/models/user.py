@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
         __table_args__ = {'schema': SCHEMA}
 
     
-    id = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     first_name = db.Column(db.String(50), nullable = False)
     last_name = db.Column(db.String(50), nullable = False)
     email = db.Column(db.String(50), nullable=False, unique=True)

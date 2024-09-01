@@ -7,7 +7,7 @@ class Location(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True, autoincrement=True)
     city = db.Column(db.String(50), nullable = False)
     state = db.Column(db.String(50), nullable = True)
     country = db.Column(db.String(50), nullable = True)

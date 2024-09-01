@@ -7,7 +7,7 @@ class Genre(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    id = db.Column(db.Integer, primary_key=True,unique=True)
+    id = db.Column(db.Integer, primary_key=True,unique=True, autoincrement=True)
     genre_name = db.Column(db.String(50), nullable = False)
 
     users = db.relationship('User', secondary = user_genres, back_populates='genres')
