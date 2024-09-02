@@ -182,7 +182,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
         {searchSubmitted && avail_filtered_results.length > 0 && avail_filtered_results.map( result =>{
             return (
             
-                <div key={result.id}><SearchResultTile resultFirstName={result.first_name}/></div>
+                <div key={result.id}><SearchResultTile resultFirstName={result.first_name} resultLastName={result.last_name}/></div>
             )
         })}
        </div>
