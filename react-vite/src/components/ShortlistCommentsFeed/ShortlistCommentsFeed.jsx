@@ -47,7 +47,7 @@ const toggleOpenThread = (clickedIdx) =>{
       <DeleteReferralModal idx={id} userId={user_id} fullName={full_name} />
     );
   };
-// !BUG - after UI design, a newly created comment doesn't appear until hard refresh
+
   return (
     <>
  

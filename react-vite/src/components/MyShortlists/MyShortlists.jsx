@@ -1,25 +1,10 @@
 
 import '../../../src/index.css'
 
-// import { useEffect } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { fetchShortlists } from '../../redux/shortlists'
-
-
-// import { createContext } from 'react'
-
 
 
 function MyShortlists({shortlistIdx, setShortlistIdx, saved_shortlists, setEditForm,setShowSearchResults }){
- 
-    // const dispatch = useDispatch()
 
-    // const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
-
- 
-    // const user = useSelector(state => state.session.user) 
-    
-    
     
 
      
@@ -30,15 +15,7 @@ const switchShortlistAndReset = (e)=>{
     setShortlistIdx(e.target.value)
     setShowSearchResults(false)
 }
-  
-    // useEffect(()=>{
-        
-    //     dispatch(fetchShortlists(user.id))
-        
 
-    // },[dispatch, user])
-
-    
     
    
     return(
@@ -55,7 +32,7 @@ const switchShortlistAndReset = (e)=>{
                         <div key={shortlist.id} 
                         
                         className={shortlist.id == shortlistIdx ?'title-and-button-pairs-clicked': 'title-and-button-pairs'}>
-                            <div>
+                            
                                 {/* if current shortlist_id in single view  matches this btn shortlist_id, change the style to .clicked */}
                             <button className={shortlist.id == shortlistIdx ? 'shortlist-btn-clicked' : 'shortlist-btn'} value={shortlist.id}
                             onClick={ e => switchShortlistAndReset(e)    }
@@ -63,11 +40,11 @@ const switchShortlistAndReset = (e)=>{
                             > 
                             {shortlist.title} </button>
                     
-                            </div>
-                             <div className={shortlist.id != shortlistIdx ?'edit-delete-list-btns': 'edit-delete-list-btns-hidden'}>
-                                {/* <button>EDIT</button>
-                                <button>DELETE</button> */}
-                            </div>
+                            
+                             {/* <div className={shortlist.id != shortlistIdx ?'edit-delete-list-btns': 'edit-delete-list-btns-hidden'}>
+                                <button>EDIT</button>
+                                <button>DELETE</button>
+                            </div> */}
                         </div>
                        
         

@@ -76,6 +76,7 @@ function LoginFormModal() {
           <input className="front-input-field"
             type="text"
             value={email}
+            maxLength={50}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -90,13 +91,14 @@ function LoginFormModal() {
           <input className="front-input-field"
             type="password"
             value={password}
+            maxLength={50}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
-        <div>
+     
           <p className="error">{errors.password}</p>
-        </div>
+      
       </div>
 </div>
 

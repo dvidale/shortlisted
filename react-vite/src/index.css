@@ -2,15 +2,21 @@
 :root{
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
-    --dark-bg: black;
-    --light-bg: silver;
-    --dark-text: black;
+    --dark-bg: rgb(84, 46, 0);
+    --light-bg: #fffae9;
+    --tran-bg: rgba(1, 12, 60, 0.12);
+    --dark-text: rgb(84, 46, 0);
+    --dark-text-2: rgb(0, 66, 69);
+    --dark-txt-3: rgb(0, 18, 107);
     --light-text: white;
-    --dark-button: black;
+    --dark-button: rgb(0, 66, 69);
     --light-text: white;
-    --dark-border: 2px solid black;
+    --dark-border: 2px solid rgb(84, 46, 0);
     --light-border: 2px solid white;
+    --panel-border: 30px;
+    --light-hover: rgba(201, 253, 255, 0.5);
     background-color: var(--light-bg);
+    color:var(--dark-text)
 }
 
 a {
@@ -92,7 +98,6 @@ align-self: flex-start;
     flex-direction: column;
     padding: 0px 30px;
     /* min-width: 400px; */
-    /* border: 2px solid orange; */
 }
 
 .hide-view{
@@ -100,21 +105,27 @@ align-self: flex-start;
 }
 
 .left-panel{
-    
-    padding: 10px 30px;
+    /* border: 2px solid orange; */
+    padding: 10px 20px;
     min-width: 400px;
     display:flex;
     flex-direction: column;
     }
     
 .center-panel{
-    border: 2px solid white;
-    padding: 10px 60px;
+    /* border: 2px solid white; */
+    background: var(--light-bg);
+    border: var(--dark-border);
+    border-radius: var(--panel-border);
+    padding: 10px 40px;
     min-width: 400px;
     max-width:400px;
+    margin: 0px 15px;
 }
 
 .right-panel{
+    background: var(--tran-bg);
+    border-radius: var(--panel-border);
     padding: 10px 30px;
 min-width: 310px;
 }
@@ -123,7 +134,7 @@ min-width: 310px;
     display: flex;
     justify-content: center;
     column-gap: 20px;
-    background-color: rgb(78, 78, 78);
+    background-color: var(--dark-button);
     color: var(--light-text);
     border: 2px var(--light-border) solid;
     padding: 1px;
@@ -152,44 +163,60 @@ min-width: 310px;
     overflow-y:auto;
 }
  
+
 .title-and-button-pairs{
+    /* border: 2px solid red; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 5px;
     margin-bottom: 0px;
-    background-color: black;
+    background-color: var(--light-bg) 
 }
+
+.title-and-button-pairs :hover{
+     background-color: var(--light-hover);
+}
+
 .title-and-button-pairs-clicked{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: white; 
+    background-color: var(--dark-bg);
+    color: var(--light-text); 
     margin-top: 5px;
+    margin-bottom: 0px;
 }
+
+
 
 .shortlist-btn{
     /* border: 2px dotted green; */
     align-self:center;
+    text-align: left;
     padding: 10px 10px;
     font-size: 20px;
     box-shadow: 0px 0px 0px 0px;
-    border-radius: 0px;
-    border: none;
+    /* border-radius: 0px; */
+    flex-grow: 1;
     cursor: pointer;
+    /* background-color: var (--light-bg); */
 }
 
+.shortlist-btn :hover{
+    background-color: var(--tran-bg);
+}
 .shortlist-btn-clicked{
     /* border: 2px dotted green; */
-    background-color: white;
-    color: black;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
     align-self:center;
-    padding: 10px 10px;
+    text-align: left;
     font-size: 20px;
     box-shadow: 0px 0px 0px 0px;
-    border-radius: 0px;
-    border: none;
     cursor:pointer;
+    flex-grow: 1;
+    padding: 10px 10px;
 }
 
 .edit-delete-list-btns{
@@ -204,14 +231,18 @@ min-width: 310px;
 
 .edit-delete-list-btns button{
        font-size:11px;
-       padding: 2px 2px;
+       padding: 1px 2px;
        box-shadow: 0px 0px 0px 0px;
-       border: 1px solid white;
+       border: 1px solid rgb(84, 46, 0);
+       margin-bottom: 1px;
 }
 
 
 #search-and-my-shortlist-container{
-    border: 2px solid white;
+    color: var(--dark-text);
+    border: var(--dark-border);
+    border-radius: var(--panel-border);
+    /* background-color: var(--tran-bg); */
     display: flex;
     flex-direction: column;
   align-items: center;
@@ -263,16 +294,15 @@ min-width: 310px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-top: 2px solid white;
+    border-top: 1px solid rgb(84, 46, 0);
     padding: 10px 0px;
     /* border-radius: 20px; */
 }
 
-#my-listings-calendar-placeholder{
-    border: 2px solid white;
-    grid-column: 4;
-    grid-row: 2;
+.commenter_name{
+    color:var(--dark-text-2);
 }
+
 
 .profile-img-container {
 	position: relative;

@@ -115,7 +115,7 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
 
   return (
     <>
-      <h2>Shortlist:</h2>
+      <h2 className="single-shortlist-view-heading">Shortlist:</h2>
       {shortlist ? (
         <>
           <form id="edit-shortlist-form" onSubmit={submitHandler}>
