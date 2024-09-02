@@ -1,5 +1,5 @@
 .save-shortlist-title{
-    border: 1px solid yellowgreen;
+    /* border: 1px solid yellowgreen; */
     font-size: 20px;
     width: 300px;
 }
@@ -44,4 +44,5 @@ overflow-y: auto;
     justify-content: start;
     align-items: center;
     column-gap: 10px;
+    color: var(--dark-text-2);
 }
