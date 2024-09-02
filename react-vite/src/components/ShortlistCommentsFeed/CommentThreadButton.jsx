@@ -6,8 +6,8 @@ function CommentThreadButton({fullName}){
 
     return(
 <>
-<VscAccount />
-{fullName}
+<span className='avatar'><VscAccount /> </span>
+<span className='referral-fullName'>{fullName}</span>
 <FaRegComments />
 </>
 

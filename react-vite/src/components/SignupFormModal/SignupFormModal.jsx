@@ -58,8 +58,8 @@ function SignupFormModal() {
   }
   return (
     <>
-      <h1>Sign Up</h1>
     < div className="signup-modal-container">
+      <h1>Sign Up</h1>
    
      <p className="error">{errors.server}</p>
 
@@ -159,7 +159,7 @@ function SignupFormModal() {
         </div>
   <p className="error">{errors.confirmPassword}</p>
 
-        <div className='signup-label-field'>
+        <div className='signup-button'>
 
 
         <button type="submit">Sign Up</button>

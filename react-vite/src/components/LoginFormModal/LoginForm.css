@@ -1,4 +1,14 @@
-
+.heading-and-form{
+    text-align: center;
+    border: var(--dark-border);
+    border-radius: 10px;
+    min-height: 120px;
+    min-width: fit-content;
+    padding: 10px 20px;
+    /* max-width: 300px; */
+    background-color: var(--light-bg);
+    color: var(--dark-text)
+}
 
 .login-form{
   
@@ -7,21 +17,27 @@
     align-items: center;
     row-gap: 20px;
     column-gap: 20px;
-    
-    /* border: 3px solid white; */
-    min-height: 120px;
-    min-width: 150px;
-    max-width: 300px;
+      
 }
 
 .login-fields{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     flex-wrap: nowrap;
     column-gap:30px;
-    background-color: var(--light-bg);
-    color: var(--dark-text)
+    color: var(--dark-text);
+    min-width: 400px;
 }
+
+.password-and-error{
+    
+    /* border: 2px solid yellowgreen; */
+    min-width: 400px;
+    text-align: center;
+}
+
+
 .error-email{
     
     min-width:200px;

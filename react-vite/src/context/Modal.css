@@ -22,7 +22,7 @@
 
 #modal-content {
   position: absolute;
-  background-color: var(--light-bg);
+  /* background-color: var(--light-bg); */
   border: 2px solid var(--dark-border);
   padding: 5px 20px;
 }
