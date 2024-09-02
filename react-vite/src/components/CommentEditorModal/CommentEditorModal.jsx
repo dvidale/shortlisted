@@ -27,8 +27,8 @@ function CommentEditorModal({currentCommentText, commentId}){
     return(
 
         <form id='edit-comment-box' onSubmit={submitHandler}>
-        <label htmlFor='edit your comment'></label>
-        <textarea id='edit-form' value={commentUpdate} 
+        <label htmlFor='edit-comment-form'>Edit Your Comment</label>
+        <textarea id='edit-comment-form' value={commentUpdate} 
         onChange={(e)=> setCommentUpdate(e.target.value)}/>
         <button type="submit">Submit</button>
     </form>

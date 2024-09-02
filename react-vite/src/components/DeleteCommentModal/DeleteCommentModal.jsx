@@ -22,11 +22,14 @@ function DeleteCommentModal({commentId}){
 
     return (
 <>
+<div className="delete-comment-modal">
 <h2>Are you sure you want to delete this comment?</h2>
-<div>
-    <button onClick={()=> deleteHandler(commentId)}>Yes (Delete Comment)</button>
+<div className="comment-edit-delete-btns btn-hover">
+    <button className="modal-delete-btn" onClick={()=> deleteHandler(commentId)}>Yes (Delete Comment)</button>
     <button onClick={closeModal}>No (Cancel Delete)</button>
 </div>
+</div>
+
 </>
 
     )

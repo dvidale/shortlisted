@@ -149,8 +149,9 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
         <form method={'POST'} onSubmit={submitHandler}>
             <div className='title-and-save-button'>
-            <label htmlFor="shortlist title"> Like these results? Save them.
+            <label htmlFor="shortlist-name"> Like these results? Save them.
             <input type='text' 
+            id="shortlist-name"
             name='shortlist-name' className="save-shortlist-title"
             value={shortlist_title} 
             onChange={e => setShortlistTitle(e.target.value)}placeholder="Name your list">

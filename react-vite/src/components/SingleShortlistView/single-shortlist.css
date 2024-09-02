@@ -25,6 +25,7 @@
 
   #edit-shortlist-desc{
     /* border: 2px solid yellowgreen; */
+    font-family: "Open Sans", sans-serif;
     font-size: 16px;
     min-height: 60px;
     /* max-height: 50px; */
@@ -157,10 +158,10 @@ color: var(--dark-txt-3);
   }
 
   .you_icon{
-    
+    margin-top: 15px;
     grid-column-start: 3;
     text-align: center;
-    
+    color: var(--dark-text-2);
   }
 
 
@@ -214,7 +215,52 @@ justify-content: center;
   min-width:200px;
   max-height: 30px;
   min-width: 30px;
+  overflow-y: scroll;
 }
+
+#edit-comment-box{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid yellowgreen;
+  background-color: var(--light-bg);
+  border:var(--dark-border);
+  padding: 10px 20px;
+  border-radius: 10px;
+  
+}
+
+#edit-comment-form{
+  margin: 5px 0px;
+  height: 80px;
+width: 300px;
+}
+
+.delete-comment-modal{
+padding: 10px 20px;
+background-color: var(--light-bg);
+border: var(--dark-border);
+border-radius: 10px;
+}
+
+.comment-edit-delete-btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.btn-hover :hover{
+  background-color: var(--light-hover);
+  color: var(--dark-text);
+}
+
+
+.modal-delete-btn{
+  background-color: var(--dark-bg-2);
+  color: var(--light-text)
+}
+
 
 .delete-referral-btn{
   grid-column: 4;

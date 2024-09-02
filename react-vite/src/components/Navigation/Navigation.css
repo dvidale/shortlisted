@@ -1,11 +1,16 @@
 .profile-dropdown {
-  background-color: black;
+  background-color: var(--light-bg);
   position: absolute;
   right: 90px;
   top: 40px;
   padding: 10px;
-  border: 3px solid white;
+  border: var(--dark-border);
+  border-radius: 10px;
   z-index: 1;
+}
+
+.profile-dropdown li{
+  list-style: none;
 }
 
 .profile-btn{
