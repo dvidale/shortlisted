@@ -1,6 +1,6 @@
 import { VscAccount } from "react-icons/vsc";
 
-function SearchResultTile ({resultFirstName}){
+function SearchResultTile ({resultFirstName, resultLastName}){
 
 
 
@@ -8,7 +8,7 @@ function SearchResultTile ({resultFirstName}){
 
 <div className="search-result-tile">
 <VscAccount />
-{resultFirstName}
+{resultFirstName}{` `}{resultLastName}
 </div>
     )
 }
