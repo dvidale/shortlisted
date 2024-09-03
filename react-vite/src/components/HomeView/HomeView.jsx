@@ -170,7 +170,10 @@ function HomeView() {
     
  <div className="splash-text">
   <div>
-  <h1 >Recommend peers for jobs, or get referred yourself... </h1>
+  <h1 >Recommend peers for jobs, or</h1>
+  </div>
+  <div>
+  <h1 >get referred yourself... </h1>
   </div>
  <div>
  <h1>with Shortlisted.        </h1>

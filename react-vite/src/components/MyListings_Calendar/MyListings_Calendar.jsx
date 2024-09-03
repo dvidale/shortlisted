@@ -25,7 +25,7 @@ const bannerImgStyle = {
 
 {user.profile_img_url}/> */}
 
-<div className={'profile-img-container'} style={bannerImgStyle}>Upload photo feature coming soon. </div>
+<div className={'profile-img-container'} style={bannerImgStyle}> </div>
 
 <div></div>
 <h1>Me, Shortlisted</h1>
