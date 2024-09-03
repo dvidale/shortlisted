@@ -1,6 +1,6 @@
 
 .edit-on {
-    background: rgb(59, 59, 59);
+    background: white;
     border:none;
     /* color: white; */
     
@@ -268,3 +268,4 @@ font-size: 12px;
 padding: 0px 2px 0px 2px;
 margin-left: 20px;
 }
+

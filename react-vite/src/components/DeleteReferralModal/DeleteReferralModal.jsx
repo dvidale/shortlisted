@@ -20,13 +20,14 @@ function DeleteReferralModal({idx, userId}){
 
     return(
 <>
+<div className='delete-comment-modal'>
 <h2>Are you sure you want to remove this person from the Shortlist?</h2>
 <p>This change cannot be undone.</p>
-<div>
-    <button onClick={()=> deleteHandler(idx)}>Yes (Remove from Shortlist)</button>
+<div className="comment-edit-delete-btns btn-hover">
+    <button className="modal-delete-btn" onClick={()=> deleteHandler(idx)}>Yes (Remove from Shortlist)</button>
     <button onClick={closeModal}>No (Cancel)</button>
 </div>
-
+</div>
 
 
 </>
