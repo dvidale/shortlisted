@@ -58,19 +58,36 @@ button{
     margin: 0px;
 }
 .splash-img{
-   background-image: url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/splash_page_no_BG.png');
+   background-image: url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/Shortlisted_Screenshot.png');
    background-size: cover;
+   height: 100vh;
+   width: 100vw;
     background-repeat: no-repeat;
-    /* margin-top: -500px; */
-   position: relative;
-   color: var(--dark-bg);
-   resize:both;
+    margin-top: 400px;
+   /* position: relative; */
+   /* color: var(--dark-bg); */
+   /* resize:both; */
+   border: 2px solid yellowgreen;
+}
+
+.rotate{
+    transform: rotate(20deg);
 }
 
 .splash-text{
-    background-color: brown;
-    position:absolute;
+    /* background-color: brown; */
+    border: 2px solid yellowgreen;
+    position:relative;
+    display:flex;
+    flex-direction: column;
+    align-items: end;
+    height: fit-content;
     /* z-index: 1; */
+}
+
+.splash-text h1{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
 }
 
 .shortlisted-title{
