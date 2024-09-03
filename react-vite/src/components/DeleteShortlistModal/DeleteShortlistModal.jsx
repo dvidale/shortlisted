@@ -34,10 +34,13 @@ const {closeModal} = useModal();
 
 return (
 <>
+<div className="delete-comment-modal"> 
 <h2>Are you sure you want to delete this shortlist?</h2>
 <div>
-    <button onClick={()=> deleteHandler(shortlistId)}>Yes (Delete Shortlist)</button>
+    <button className="modal-delete-btn" onClick={()=> deleteHandler(shortlistId)}>Yes (Delete Shortlist)</button>
     <button onClick={closeModal}>No (Cancel Delete)</button>
+</div>
+
 </div>
 </>
 
