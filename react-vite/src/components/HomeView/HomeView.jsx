@@ -168,10 +168,15 @@ function HomeView() {
         <>
        
     
- <h1 className="splash-text">Recommend peers for jobs, or get referred yourself... with Shortlisted.</h1>
- <br/>
- <h1>        </h1>
-        <div className="splash-img"></div>
+ <div className="splash-text">
+  <div>
+  <h1 >Recommend peers for jobs, or get referred yourself... </h1>
+  </div>
+ <div>
+ <h1>with Shortlisted.        </h1>
+</div>
+</div>
+        <div className="splash-img rotate"></div>
     
         </>
       )}
