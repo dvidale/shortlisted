@@ -29,7 +29,7 @@ def get_comments(id):
     threads_unpacked = list(map(lambda thread: [comment.to_dict() for comment in thread], comment_threads))
     
     nonempty_threads = list(filter(lambda thread: len(thread) > 0, threads_unpacked))
-    # print(">>>>>>nonempty_threads", nonempty_threads)
+   
     return nonempty_threads
 
 # * CREATE A NEW COMMENT
@@ -98,17 +98,14 @@ def update_comment(id):
 
 @comments_routes.route('/<int:id>', methods=['DELETE'])
 def delete_comment(id):
-    target_comment = Comment.query.get(id)
+    try:
+        target_comment = Comment.query.get(id)
 
-    target_referral_id = target_comment.to_dict()['referral_id']
+        target_referral_id = target_comment.to_dict()['referral_id']
 
-    db.session.delete(target_comment)
-    db.session.commit()
+        db.session.delete(target_comment)
+        db.session.commit()
 
-   
-    # fresh_lst = db.session.scalars(
-    #         db.select(Comment).where(Comment.referral_id == target_comment.referral_id)
-    #     ).all()
-    # # ? send back the entire list with the comment removed
-    # return [comment.to_dict() for comment in fresh_lst]
-    return {"target_thread" : target_referral_id}, 200
+        return {"target_thread" : target_referral_id}, 200
+    except:
+        return {'error':'There was an error deleting the comment'}, 500

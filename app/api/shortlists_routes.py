@@ -98,7 +98,7 @@ def save_shortlists():
             db.session.add(newReferral)
             db.session.commit()
 
-        return currentShortlist.single_view()
+        return currentShortlist.single_view(), 201
     
     # print('> save shortlist error', save_shortlist_form.errors)
     return {'serverError': save_shortlist_form.errors}, 400
@@ -137,45 +137,52 @@ def updateShortlist(id):
 
        db.session.commit()
 
-       return shortlist.single_view()
+       return shortlist.single_view(), 200
 
-    return {'error': update_form.errors}
+    return {'error': update_form.errors}, 400
 
 
 # * DELETE A SHORTLIST
 @shortlists_routes.route('/<int:id>', methods=['DELETE'])
 def deleteShortlist(id):
 
-    target_shortlist = db.session.scalars(
-        db.select(Shortlist).where(Shortlist.id == id)
-    ).first()
+    try:
+        target_shortlist = db.session.scalars(
+            db.select(Shortlist).where(Shortlist.id == id)
+        ).first()
 
-    # create a list of all the referral_ids to clear the state
-    referrals_lst = db.session.scalars(
-        db.select(Referral.id).where(Referral.shortlist_id == target_shortlist.id)
-    ).all()
+        # create a list of all the referral_ids to clear the state
+        referrals_lst = db.session.scalars(
+            db.select(Referral.id).where(Referral.shortlist_id == target_shortlist.id)
+        ).all()
 
-    # Manually deleting all associated comments before deleting shortlist
-    db.session.query(Comment).filter(Comment.shortlist_id == target_shortlist.id).delete()
-    db.session.commit()
+        # Manually deleting all associated comments before deleting shortlist
+        db.session.query(Comment).filter(Comment.shortlist_id == target_shortlist.id).delete()
+        db.session.commit()
 
-    db.session.delete(target_shortlist)
-    db.session.commit()
+        db.session.delete(target_shortlist)
+        db.session.commit()
 
-    success_msg = {'message': "Shortlist deleted successfully"}
+        success_msg = {'message': "Shortlist deleted successfully"}
 
-    return [referrals_lst, success_msg]
+        return [referrals_lst, success_msg]
+    
+    except:
+        return {'error': 'There was an error deleting the shortlist'}, 500
 
 # *DELETE A REFERRAL FROM A SHORTLIST
 @shortlists_routes.route('/referrals/<int:id>', methods=['DELETE'])
 def deleteReferral(id):
 
-    target_referral = db.session.scalars(
-        db.select(Referral).where(Referral.id == id)
-        ).first()
-    
-    db.session.delete(target_referral)
-    db.session.commit()
+    try:
+        target_referral = db.session.scalars(
+            db.select(Referral).where(Referral.id == id)
+            ).first()
+        
+        db.session.delete(target_referral)
+        db.session.commit()
+    except:
+        return {'error': 'There was an error deleting the referral'}, 500
 
     return {"message": "Shortlist member deleted successfully"}
     

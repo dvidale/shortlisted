@@ -5,13 +5,14 @@ import { deleteShortlist,
 import { useModal } from "../../context/Modal"
 import { useNavigate } from 'react-router-dom'
 import { clearDeletedThreads } from "../../redux/comments"
+import ServerMessageModal from "../ServerMessageModal/ServerMessageModal"
 
 
 function DeleteShortlistModal({ userId,shortlistId }){
 
 const navigate = useNavigate()
 const dispatch = useDispatch()
-const {closeModal} = useModal();
+const {setModalContent, closeModal} = useModal();
 
  
 
@@ -19,11 +20,15 @@ const {closeModal} = useModal();
     const deleteHandler= (id) =>{
        
         dispatch(deleteShortlist(id))
-        .then( data => {
-            if(data){
-                console.log("Response to DELETE request:", data[1])}
+        .then((data)=>{ 
+            if(data.error){
+            setModalContent(<ServerMessageModal message={data.error}/>)
+        }else{
+            if(data[1].message){
+                setModalContent(<ServerMessageModal message={data[1].message}/>)}
                 dispatch(clearDeletedThreads(data[0]))
-            } )
+        }
+        })
         .then(closeModal)
         .then(()=> dispatch(fetchShortlists(userId)))
         .then(()=> navigate('/'))
