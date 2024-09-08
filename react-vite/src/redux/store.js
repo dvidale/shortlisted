@@ -9,12 +9,14 @@ import sessionReducer from "./session";
 import imgReducer from "./img-test";
 import shortlistsReducer from "./shortlists";
 import commentsReducer from "./comments";
+import bookingsReducer from "./bookings";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   img:imgReducer,
   shortlists: shortlistsReducer,
-  comments: commentsReducer
+  comments: commentsReducer,
+  bookings: bookingsReducer
 });
 
 let enhancer;

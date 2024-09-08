@@ -16,4 +16,16 @@ class Booking(db.Model):
     createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
-    user = db.relationship('User', backref='calendar')
+    # users = db.relationship('User')
+
+    def to_dict(self):
+        return{
+            'id': self.id,
+            'user_id': self.user_id,
+            'shortlist_id': self.shortlist_id,
+            'start_date':self.start_date,
+            'end_date':self.end_date,
+            'createdAt':self.createdAt,
+            'updatedAt': self.updatedAt,
+            'activity_type': 'booking'
+        }

@@ -46,7 +46,7 @@ class User(db.Model, UserMixin):
     shortlistings = db.relationship('Shortlist',
     secondary=add_prefix_for_prod('referrals'), back_populates='shortlist_referrals' )
 
-    bookings = db.relationship('Booking', cascade='all, delete-orphan')
+    bookings = db.relationship('Booking', backref='users', cascade='all, delete-orphan')
 
     referrals = db.relationship('Referral', cascade='all, delete-orphan')
 
@@ -88,7 +88,7 @@ class User(db.Model, UserMixin):
             'industry_areas': [name.industry_area for name in self.industry_areas ],
             'genres':[ name.genre_name for name in self.genres ],
             'locations': [name.city for name in self.locations],
-            'bookings': [(booking.start_date, booking.end_date) for booking in self.calendar],
+            'bookings': [(booking.start_date, booking.end_date) for booking in self.bookings],
             'profile_img_url': self.profile_img_url
 
         }
