@@ -79,6 +79,11 @@ cd shortlisted
 
 ## Screenshots
 
+### Landing Page
+![Landing Page](react-vite/public/assets/screenshots/001_shortlist_landing_page.gif)
+
+
+
 ##Wiki Documentation
 
 ### Find the following additional documentation in our Wiki
