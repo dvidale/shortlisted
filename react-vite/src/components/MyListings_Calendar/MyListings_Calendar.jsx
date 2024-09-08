@@ -1,11 +1,16 @@
 import '../../../src/index.css'
 import ProfileButton from '../Navigation/ProfileButton'
-import { useSelector } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { getMyBookings } from '../../redux/bookings'
+import { useEffect } from 'react'
 
 function MyListings_Calendar(){
 
 const user = useSelector(state => state.session.user)
+const user_bookings = useSelector(state => state.bookings.user_bookings)
+
+const dispatch = useDispatch()
+
 
 const bannerImgStyle = {
     width: '100%',
@@ -14,6 +19,13 @@ const bannerImgStyle = {
     backgroundPosition: 'center',
     position: 'relative', // Ensure the overlay is positioned correctly
 };
+
+
+useEffect(()=>{
+
+    dispatch(getMyBookings(user.id))
+
+},[dispatch,user.id])
 
 
     return(
@@ -38,7 +50,12 @@ const bannerImgStyle = {
     <h1>My Calendar</h1>
     <div className='cal-box'>
         Feature Coming Soon
-    </div>
+    {user_bookings && Object.keys(user_bookings).length > 0 && Object.values(user_bookings).map( booking => (
+        <>
+        <div key={booking.id}>{booking.start_date} - {booking.end_date}</div>
+        </>
+    ))}
+        </div>
 </div>
 </>
     )
