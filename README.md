@@ -8,6 +8,7 @@ https://shortlisted-m7e4.onrender.com
 ## Table of Contents
 * [Technologies Used](#technologies-used)
 * [Features](#features)
+* [Technical Implementations](#Technical-Implementations)
 * [Set Up](#set-up)
 * [Screenshots](#screenshots)
 * [Wiki Documentation](#wiki-documentation)
@@ -35,6 +36,14 @@ https://shortlisted-m7e4.onrender.com
 4. Ranked Search
 5. Facebook Login
 6. Google Maps API Integration
+
+## Technical Implementations
+
+### Filtering Connections by Availability
+
+### Inline Form Fields
+
+### 
 
 ## Set Up
 To set up and run the project locally, follow these steps:
