@@ -129,7 +129,7 @@ function SingleShortlistView({ setEditForm, editForm, setShortlistIdx, shortlist
                 placeholder="Please give this shortlist a title"
                 onChange={(e) => setTitle(e.target.value)}
               />
-              {errors.title && <p className="error">{errors.title}</p>}
+               <p className="error">{errors.title}</p>
             </div>
             <div className="edit-delete-save-btns">
 {editForm && <button type="submit">Save</button>}

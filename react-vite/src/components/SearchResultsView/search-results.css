@@ -44,5 +44,5 @@ overflow-y: auto;
     justify-content: start;
     align-items: center;
     column-gap: 10px;
-    color: var(--dark-text-2);
+    color: var(--light-text);
 }
