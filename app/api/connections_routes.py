@@ -63,6 +63,6 @@ def search_connections(id):
         return search_results
         # ? Moved availability check to frontend for easier date object comparisons
 
-    print(">>>>>0form errors:", searchForm.errors)
+    # print(">>>>>0form errors:", searchForm.errors)
     return searchForm.errors, 400
     

@@ -106,9 +106,5 @@ def delete_comment(id):
     db.session.commit()
 
    
-    # fresh_lst = db.session.scalars(
-    #         db.select(Comment).where(Comment.referral_id == target_comment.referral_id)
-    #     ).all()
-    # # ? send back the entire list with the comment removed
-    # return [comment.to_dict() for comment in fresh_lst]
+   
     return {"target_thread" : target_referral_id}, 200
