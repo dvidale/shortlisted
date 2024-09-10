@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from app.models import db, Booking
-
+from app.forms.booking_form import BookingForm
 from dateutil import parser
 
 from app.models.user import User
@@ -19,3 +19,24 @@ def get_my_bookings(id):
 
     print("user_bookings",user_bookings)
     return [booking.to_dict() for booking in user_bookings]
+
+#CREATE A NEW BOOKING
+@bookings_routes.route('/new')
+def create_booking():
+    create_booking_form = BookingForm()
+    create_booking_form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if create_booking_form.validate_on_submit():
+        
+        user_id = create_booking_form.data['user_id']
+        shortlist_id = create_booking_form.data['shortlist_id']
+        start_date = create_booking_form.data['start_date']
+        end_date = create_booking_form.data['end_date']
+        
+        startDateParsed = parser.parse(start_date)
+        endDateParsed = parser.parse(end_date)
+
+        newBooking = Booking(
+            user_id=user_id,
+            shortlist_id= 
+        )
