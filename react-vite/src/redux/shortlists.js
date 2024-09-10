@@ -87,7 +87,8 @@ export const buildShortlist = (userId, formData) => async (dispatch) =>{
         
     }else{
         const serverError = await response.json()
-        return serverError;   //the serverError object: {'location': ["'' is not a valid choice for this field."], 'industry_area': ["'' is not a valid choice for this field."], 'job_title': ["'' is not a valid choice for this field."]}
+        return serverError;  
+         //the serverError object: {'location': ["'' is not a valid choice for this field."], 'industry_area': ["'' is not a valid choice for this field."], 'job_title': ["'' is not a valid choice for this field."]}
     }
 }
 
@@ -179,6 +180,8 @@ if(response.ok){
     dispatch(deleteAShortlist(id))
 
     return data
+    //data response object
+    // [ [referrals ids], {success message}]
 
 }else{
 

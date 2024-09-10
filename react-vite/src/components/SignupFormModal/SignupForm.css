@@ -1,22 +1,28 @@
 .signup-modal-container{
-min-height: 300px;
+
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
 width: 300px;
 padding:10px 40px;
-background-color: var(--light-bg);
+background-color: var(--dark-bg-3);
+/* border: 2px yellowgreen solid; */
+border-radius: 20px;
+border: var(--light-border);
 }
 
 .signup-modal-container h1{
     margin:0px;
+    padding: 0px;
 }
 
 
 .signup-label-field{
-    /* border: 2px yellowgreen solid; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    column-gap: 20px;
+    column-gap: 10px;
 }
 
 .signup-button{
