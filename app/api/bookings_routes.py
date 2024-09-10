@@ -38,5 +38,13 @@ def create_booking():
 
         newBooking = Booking(
             user_id=user_id,
-            shortlist_id= 
-        )
+            shortlist_id= shortlist_id or None,
+            start_date=startDateParsed,
+            end_date=endDateParsed
+            )
+        db.session.add(newBooking)
+        db.session.commit()
+
+        return newBooking.to_dict(), 200
+    
+    return {'error': create_booking_form.errors}, 400

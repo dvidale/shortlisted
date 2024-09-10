@@ -7,7 +7,7 @@ from dateutil import parser
 connections_routes = Blueprint('connections', __name__)
 
 
-# * BUILD A SHORTLIST
+# * SEARCH CONNECTIONS
 @connections_routes.route('/<int:id>', methods=['POST'])
 def search_connections(id):
 

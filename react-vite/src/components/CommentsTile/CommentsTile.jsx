@@ -56,7 +56,7 @@ function CommentsTile({ shortlist, referralIdx }) {
               </div>
 
               <div key={`${comment.id}-text`} className="comment-text">
-                <span key={`${comment.id}-bubble`} className="message-bubble">{comment.text}</span>
+                <span key={`${comment.id}-bubble`} className={comment.commenter_id === user.id ? "message-bubble-right" : "message-bubble-left"}>{comment.text}</span>
               </div>
 
               <div key={`${comment.id}-edit-delete`} className="edit-delete-list-btns">

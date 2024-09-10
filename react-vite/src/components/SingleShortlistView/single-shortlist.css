@@ -1,6 +1,6 @@
 
 .edit-on {
-    background: white;
+    background: var(--dark-bg-5);
     border:none;
     /* color: white; */
     
@@ -21,6 +21,7 @@
     min-width: 350px;
     max-width: 350px;
 /* border:2px solid yellowgreen; */
+color: var(--light-text);
   }
 
   #edit-shortlist-desc{
@@ -33,6 +34,7 @@
     max-width: 350px;
     overflow-y: scroll;
     overflow-x: hidden;
+    color: var(--light-text);
   }
 
 
@@ -46,7 +48,7 @@ border: 1px solid gray;
   }
 
   .single-shortlist-view-heading{
-    color: var(--dark-button)
+    color: var(--light-text)
   }
 
   .shortlist-title-and-edit-btns{
@@ -63,7 +65,7 @@ border: 1px solid gray;
   .shortlist-details-heading{
     margin-top: 3px;
     text-align: center;
-    color: var(--dark-text-2)
+    color: var(--light-txt-2)
   }
 
   .search-params{
@@ -83,8 +85,8 @@ border: 1px solid gray;
   }
 
 .param-detail-text{
-  background-color: var(--dark-bg);
-  color: var(--light-bg);
+  background-color: var(--light-bg);
+  color: var(--dark-bg-5);
   text-align: center;
   border-radius: 10px;
   min-height:15px;
@@ -108,7 +110,7 @@ align-items: center;
 column-gap: 15px;
 font-size: 20px;
 cursor: pointer;
-color: var(--dark-txt-3);
+color: var(--light-text);
 /* border: 1px solid blue; */
   }
 
@@ -161,11 +163,24 @@ color: var(--dark-txt-3);
     margin-top: 15px;
     grid-column-start: 3;
     text-align: center;
-    color: var(--dark-text-2);
+    color: var(--light-text);
   }
 
 
-  .message-bubble {
+  .message-bubble-left {
+    max-width: 100%; 
+    background-color:white;
+    padding: 10px 15px;
+    border-radius: 15px;
+    position: relative;
+    word-wrap: break-word; /* Ensure text wraps within the bubble */
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    color: #333;
+    box-shadow: inset -3px -3px 10px gray;
+  }
+
+  .message-bubble-right {
     max-width: 100%; 
     background-color:white;
     padding: 10px 15px;
@@ -179,7 +194,7 @@ color: var(--dark-txt-3);
   }
 
 /* Optional: Add a tail to the bubble */
-/* .message-bubble::after {
+.message-bubble-left::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -192,7 +207,22 @@ color: var(--dark-txt-3);
   border-left: 0;
   margin-left: -5px;
   margin-bottom: -10px;
-} */
+}
+
+.message-bubble-right::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: white;
+  border-bottom: 0;
+  border-left: 0;
+  margin-left: -5px;
+  margin-bottom: -10px;
+}
 
 /* .comment-form-container{
 display: flexbox;
