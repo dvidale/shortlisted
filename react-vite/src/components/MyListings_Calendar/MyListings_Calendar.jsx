@@ -48,9 +48,9 @@ useEffect(()=>{
 </div>
 
 <div>
-    <h1>My Calendar</h1>
+    <h2>My Busy Days</h2>
     <div className='cal-box'>
-        Feature Coming Soon
+      
         <BookingsPanel user_bookings={user_bookings}/>
     
         </div>

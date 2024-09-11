@@ -1,0 +1,18 @@
+.cal-box{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+    height: 200px;
+    width: 300px;
+    /* border: 2px solid white; */
+    text-align: center;
+
+}
+
+.dates-and-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

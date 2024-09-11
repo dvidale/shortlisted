@@ -353,16 +353,7 @@ min-width: 310px;
 	border-radius: 10px;
 }
 
-.cal-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-    width: 200px;
-    border: 2px solid white;
-    text-align: center;
 
-}
 
 .error{
     display:block;
