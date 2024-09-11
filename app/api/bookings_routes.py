@@ -21,7 +21,7 @@ def get_my_bookings(id):
     return [booking.to_dict() for booking in user_bookings]
 
 #CREATE A NEW BOOKING
-@bookings_routes.route('/new')
+@bookings_routes.route('/new', methods=['POST'])
 def create_booking():
     create_booking_form = BookingForm()
     create_booking_form["csrf_token"].data = request.cookies["csrf_token"]

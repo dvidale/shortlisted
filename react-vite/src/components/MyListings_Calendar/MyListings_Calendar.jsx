@@ -3,6 +3,7 @@ import ProfileButton from '../Navigation/ProfileButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMyBookings } from '../../redux/bookings'
 import { useEffect } from 'react'
+import BookingsPanel from './BookingsPanel'
 
 function MyListings_Calendar(){
 
@@ -50,11 +51,8 @@ useEffect(()=>{
     <h1>My Calendar</h1>
     <div className='cal-box'>
         Feature Coming Soon
-    {user_bookings && Object.keys(user_bookings).length > 0 && Object.values(user_bookings).map( booking => (
-        <>
-        <div key={booking.id}>{booking.start_date} - {booking.end_date}</div>
-        </>
-    ))}
+        <BookingsPanel user_bookings={user_bookings}/>
+    
         </div>
 </div>
 </>
