@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMyBookings } from '../../redux/bookings'
 import { useEffect } from 'react'
 import BookingsPanel from './BookingsPanel'
+import MyListingsPanel from './MyListingsPanel'
 
 function MyListings_Calendar(){
 
@@ -42,19 +43,18 @@ useEffect(()=>{
 
 <div></div>
 <h1>Me, Shortlisted</h1>
-<hr/>
-<h2>Feature Coming Soon</h2>
 
+<MyListingsPanel/>
 </div>
 
 <div>
     <h2>My Busy Days</h2>
-    <div className='cal-box'>
+    
       
         <BookingsPanel user_bookings={user_bookings}/>
     
         </div>
-</div>
+
 </>
     )
 }
