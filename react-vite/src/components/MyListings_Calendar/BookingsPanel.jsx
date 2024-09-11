@@ -15,8 +15,10 @@ function BookingsPanel({user_bookings}){
 
     return(
         <>
+        <h3>Start - End</h3>
         {user_bookings && Object.keys(user_bookings).length > 0 && Object.values(user_bookings).map( booking => (
         <>
+        <div className='cal-box'>
         <div key={booking.id} className="dates-and-buttons">{dateDisplay(booking.start_date) } - {dateDisplay(booking.end_date)}
             <div className="edit-delete-list-btns">
 
@@ -24,6 +26,7 @@ function BookingsPanel({user_bookings}){
             <button>Edit</button>
             <button>Delete</button>
             </div>
+        </div>
         </div>
         </>
     ))}
