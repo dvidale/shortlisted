@@ -179,6 +179,7 @@ if(response.ok){
 
     dispatch(deleteAShortlist(id))
 
+    // TODO: refactor this to only return the referral ids and manually code the success message on the frontend component or something. Basically, no need for the nested array holding both the referral ids and the success message
     return data
     //data response object
     // [ [referrals ids], {success message}]

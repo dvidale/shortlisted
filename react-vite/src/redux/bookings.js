@@ -1,9 +1,19 @@
 const GET_MY_BOOKINGS = '/bookings/GET_MY_BOOKINGS'
+const CREATE_A_BOOKING = '/bookings/CREATE_A_BOOKING'
+
 
 export const getAllMyBookings = (data) =>{
 
     return {
         type:GET_MY_BOOKINGS,
+        payload: data
+    }
+}
+
+export const createABooking = (data) => {
+
+    return {
+        type: CREATE_A_BOOKING,
         payload: data
     }
 }
@@ -31,6 +41,32 @@ export const getMyBookings = (userId) => async (dispatch) => {
     }
 }
 
+export const createBooking = (formData) => async (dispatch) => {
+
+    const url = `/api/bookings/new`
+
+    const method = 'POST'
+
+    const headers = {'Content-Type': 'application-json'}
+
+    const body = formData;
+
+    const options = {method, headers, body}
+
+    const response = await fetch(url, options);
+
+    if(response.ok){
+
+        const data = await response.json()
+
+        dispatch(createABooking(data))
+
+    }else{
+        const serverError = await response.json()
+
+        return serverError;
+    }
+}
 
 /*--------------------------
          REDUCER
@@ -46,6 +82,12 @@ const bookingsReducer = (state = intitalState, action) =>{
             action.payload.forEach( booking =>{
                 newState.user_bookings[booking.id] = booking
             })
+            return newState;
+        }
+        case CREATE_A_BOOKING:{
+            const newState = {...state }
+            const newBooking = action.payload;
+            newState.user_bookings[newBooking.id] = newBooking;
             return newState;
         }
         default:
