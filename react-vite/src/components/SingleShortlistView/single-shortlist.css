@@ -2,15 +2,11 @@
 .edit-on {
     background: var(--dark-bg-5);
     border:none;
-    /* color: white; */
-    
   }
 
 .edit-off {
     background: transparent;
     border: none;
-    /* color: white; */
-    
   } 
 
   #edit-shortlist-title{

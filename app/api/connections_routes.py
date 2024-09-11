@@ -60,7 +60,7 @@ def search_connections(id):
         # ? this list comp removes duplicates from the list
         search_results = [i for n, i in enumerate( search_results_lst) if i not in  search_results_lst[:n]]
         
-        return search_results
+        return search_results, 200
         # ? Moved availability check to frontend for easier date object comparisons
 
     # print(">>>>>0form errors:", searchForm.errors)
