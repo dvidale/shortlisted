@@ -63,7 +63,7 @@ button{
     margin: 0px;
 }
 .splash-img{
-   background-image: url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/splash_page_screenshot.png');
+   background-image: url('react-vite/public/assets/screenshots/shortlisted-dark-mode-screenshot-for-splash.png');
    background-size: cover;
    height: 100vh;
    width: 100vw;

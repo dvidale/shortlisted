@@ -224,13 +224,57 @@ const editSwitch = () => {
 
 The Shortlisted app features a multi-panel, single layout UI for a very intuitive and focused user experience.
 
-Components are typically rendered according to the the triggering of specific frontend routes. Using this approach for a single layout design would require a lot of redundancy in rendering components at each route in order to appear to be a single view. It would also require a very inefficient data flow structure in order to make sure the re-rendered components still have the correct data. 
+![shortlisted-single-page-layout](react-vite/public/assets/screenshots/shortlisted-home-view-screenshot.png)
+
+React components are typically rendered according to the triggering of specific frontend routes. Using this approach for a single layout design would require a lot of redundancy in rendering components at each route in order to appear to be a single view. It would also require a very inefficient data flow structure in order to make sure the re-rendered components still have the correct data. 
 
 The single layout view for Shortlisted is achieved by a combination of state variables, buttons and CSS style commands.
 
-I initialized several state variables in a top level component as a sort of library of functionality for every other component. I then nested all of my component inside of the top level component, and passed down the state variables as needed as props.
+I initialized several state variables in a top level component as a sort of library of functionality for every other component. I then nested all of my main components inside of the top level component, and passed down the state variables as needed as props.
 
-This structure for my React components allowed the components to effect the rendering of the other components without them having to be nested within each other, or navigated to via routes.
+![Shortlisted-React-Components-Tree](react-vite/public/assets/screenshots/Shortlisted_React-Component-Tree.png)
+
+#### The state variables passed down from the top level component:
+``` javascript
+  const [shortlistIdx, setShortlistIdx] = useState(firstIdx || null);
+  const [editForm, setEditForm] = useState(false);
+  const [searchFormView, setSearchFormView] = useState(false);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [searchSubmitted, setSearchSubmitted ] = useState(false)
+```
+#### A sample of component views controlled by CSS and state variables:
+
+``` javascript
+
+<div id="my-shortlists"
+      className={searchFormView ? "hide-view" : "show-view"}
+            >
+              <MyShortlists
+                shortlistIdx={shortlistIdx}
+                setShortlistIdx={setShortlistIdx}
+                saved_shortlists={saved_shortlists}
+                setEditForm={setEditForm}
+                searchFormView={searchFormView}
+                setShowSearchResults={setShowSearchResults}
+              />
+</div>   
+<div
+    id="single-shortlist-view"
+    className={`${
+      showSearchResults ? "center-panel hide-view" : "center-panel show-view"}`}
+      >
+        <SingleShortlistView
+          setEditForm={setEditForm}
+          editForm={editForm}
+          setShortlistIdx={setShortlistIdx}
+          shortlistIdx={shortlistIdx}
+          showSearchResults={showSearchResults}
+        />
+</div>
+
+```
+
+This structure for my React components allowed buttons inside the components to effect the rendering of other components without them having to be nested within each other, or navigated to via routes.
 
 
 
