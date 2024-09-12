@@ -58,6 +58,7 @@ button{
     display:flex;
     flex-direction: row;
     justify-content: center;
+ 
     /* min-height: 500px; */
     height: 800px;
     margin: 0px;
@@ -148,7 +149,7 @@ align-self: flex-start;
 .center-panel{
     /* border: 2px solid white; */
     background: var(--dark-bg-3);
-    border: none;
+    /* border: none; */
     border-radius: var(--panel-border);
     padding: 10px 40px;
     min-width: 400px;
