@@ -112,7 +112,7 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchRe
       <DeleteShortlistModal userId={userId} shortlistId={shortlistId} />
     );
   };
-
+// TODO: Try to remove the formBorder variable. I don't think we need it at all.
   return (
     <>
       <h2 className="single-shortlist-view-heading">Shortlist:</h2>

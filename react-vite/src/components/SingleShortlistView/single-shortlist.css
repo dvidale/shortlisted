@@ -34,15 +34,6 @@ color: var(--light-text);
   }
 
 
-  /* .border-on{
-border: 1px solid gray;
-
-  } */
-
-  .border-off{
-    border: 1px solid transparent;
-  }
-
   .single-shortlist-view-heading{
     color: var(--light-text)
   }
