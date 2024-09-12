@@ -178,11 +178,12 @@ function HomeView() {
           <div id="my-listings-calendar-placeholder" className="right-panel">
             <MyListings_Calendar />
           </div>
-        </>
+  </>
       ) : (
-        <>
        
+      <> 
     <div className="splash-img"></div>
+
  <div className="splash-text">
   <div>
   <h1 >Recommend peers for jobs, or</h1>
@@ -195,8 +196,8 @@ function HomeView() {
 </div>
 </div>
         
-    
-        </>
+   </>
+       
       )}
     </>
   );
