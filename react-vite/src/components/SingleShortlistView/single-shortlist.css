@@ -263,7 +263,7 @@ width: 300px;
 
 .delete-comment-modal{
 padding: 10px 20px;
-background-color: var(--light-bg);
+background-color: var(--dark-bg-3);
 border: var(--dark-border);
 border-radius: 10px;
 }
