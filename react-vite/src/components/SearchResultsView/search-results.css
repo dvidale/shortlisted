@@ -1,7 +1,11 @@
 .save-shortlist-title{
-    /* border: 1px solid yellowgreen; */
     font-size: 20px;
     width: 300px;
+}
+
+.save-shortlist-desc{
+    border: 2px solid yellowgreen;
+    color: black;
 }
 
 .search-results-heading{

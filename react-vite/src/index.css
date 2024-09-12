@@ -12,6 +12,7 @@
     --dark-text: rgb(84, 46, 0);
     --dark-text-2: rgb(0, 66, 69);
     --dark-txt-3: rgb(0, 18, 107);
+    --dark-text-4: black;
     --light-text: white;
     --light-txt-2: #fffae9;
     --dark-button: rgb(0, 66, 69);
@@ -75,11 +76,13 @@ button:active {
    width: 100vw;
     background-repeat: no-repeat;
     margin-top: 300px;
-   /* position: relative; */
+   position: relative;
    /* color: var(--dark-bg); */
    /* resize:both; */
    padding: 30px;
-   border: var(--light-border-2);
+   /* border: var(--light-border-2); */
+   box-shadow: #f0f0f0 0px 5px 15px 5px;
+   z-index: -1;
 }
 
 .scale{
