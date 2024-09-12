@@ -11,7 +11,7 @@ function Footer(){
         </p>
         <div className='footer'>
 
-        <a href='https://github.com/dvidale/shortlisted'>
+        <a href='https://github.com/dvidale'>
 
             Github <FaGithub />
         </a>
