@@ -15,7 +15,6 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
     const [errors, setErrors ] = useState({})
 
 
-    // some state slice of search results
     const searchResults = useSelector(state => state.shortlists.results_pre_avail)
 
     const searchParams = useSelector(state => state.shortlists.parameters)
@@ -38,10 +37,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
             const paramsEndCheck = searchParams['end_date']
             const paramsEnd = paramsEndCheck ? new Date(paramsEndCheck) : null
             
-            // console.log(">>> connections being checked for avail:", connection.first_name);
-            // console.log(">>>booking_start", booking_start);
-            // console.log(">>> booking_end", booking_end);
-            // console.log(">>>> paramsStart:", paramsStart);
+          
 
             if(booking_start < paramsStart && paramsStart < booking_end ) noConflict = false
             // checks if start date overlaps with a current booking
@@ -69,6 +65,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
     if(searchResults.length > 0 && (searchResults !== null)){
          avail_filtered_results = searchResults.filter(connection => availCheck(connection))
+         
          setIsLoading(false)
         setShowSearchResults(true)
         setShowShortlists(false)
