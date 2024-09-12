@@ -67,14 +67,14 @@ button:active {
     justify-content: center;
  
     /* min-height: 500px; */
-    height: 800px;
+    height: 770px;
     margin: 0px;
 }
+
 .splash-img{
-   background-image: url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/landing-page-splash-img/shortlisted_splash_09-12-2024.png');
+   background-image: url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/landing-page-splash-img/shortlisted_splash_09-12-2024_002.png');
    background-size: cover;
-   height: 100vh;
-   width: 100vw;
+   width: 99vw;
     background-repeat: no-repeat;
     background-position: center;
     margin-top: -130px;
@@ -94,8 +94,7 @@ button:active {
 }
 
 .splash-text{
-    /* background-color: brown; */
-    /* border: 2px solid yellowgreen; */
+
     position:absolute;
     right: 100px;
     display:flex;

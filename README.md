@@ -49,14 +49,16 @@ https://shortlisted-m7e4.onrender.com
 
 ### Landing Page
 
-![Landing Page](react-vite/public/assets/screenshots/001_shortlist_landing_page.gif)
+![Landing Page](react-vite/public/assets/screenshots/shortlist_landing_page.gif)
 
 ### Create a Shortlist
+![Create a Shortlist](react-vite/public/assets/screenshots/create-shortlist.gif)
 
 ### Edit a Shortlist Title or Description
+![Edit a Shortlist](react-vite/public/assets/screenshots/edit-shortlist.gif)
 
-### Message a Referral
-
+### Start a Thread about a Job
+![Message a Referral](react-vite/public/assets/screenshots/message-a-referral.gif)
 
 
 ## Technical Implementations

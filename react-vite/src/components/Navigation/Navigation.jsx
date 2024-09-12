@@ -26,21 +26,18 @@ function Navigation() {
   return (
  
     <div className="navigation-bar">
-     
-    <div className="profile-btn">
+    
       { user ? (<>     
 
        </>):(<>   
+        <div className="landing-page-site-title">Shortlisted.</div>
        <div className="login-signup-homepage-btns">
        <button className='front-login-signup-btn' onClick={handleLogin}>Login</button>   
        or   
        <button className='front-login-signup-btn' onClick={handleSignUp}>Sign Up</button>
        </div>
            </>)}
-      
-      
 
-    </div>
     </div>
     
   );
