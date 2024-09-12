@@ -182,7 +182,7 @@ function HomeView() {
       ) : (
         <>
        
-    
+    <div className="splash-img"></div>
  <div className="splash-text">
   <div>
   <h1 >Recommend peers for jobs, or</h1>
@@ -194,7 +194,7 @@ function HomeView() {
  <h1>with Shortlisted.        </h1>
 </div>
 </div>
-        <div className="splash-img"></div>
+        
     
         </>
       )}

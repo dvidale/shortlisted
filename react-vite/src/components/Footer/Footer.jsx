@@ -7,6 +7,8 @@ function Footer(){
 
     return (
         <>
+        <div className='footer-wrapper'>
+
         <p className='footer'>Shortlisted is an application developed by DeAndré Vidale.
         </p>
         <div className='footer'>
@@ -18,6 +20,7 @@ function Footer(){
         <a href='https://www.linkedin.com/in/deandrevidale'>
             LinkedIn <FaLinkedin /> 
         </a>
+        </div>
         </div>
         </>
     )

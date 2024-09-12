@@ -18,9 +18,13 @@
 }
 
 .navigation-bar{
+  align-self: flex-end;
+  position: relative;
+  right: 80px;
 display:flex;
 justify-content: end;
 padding: 0px 10px;
+/* border: 2px solid yellowgreen; */
 }
 
 .login-signup-homepage-btns{

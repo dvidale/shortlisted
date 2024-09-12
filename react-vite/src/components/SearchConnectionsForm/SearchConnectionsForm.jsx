@@ -193,7 +193,7 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
            
     
        <button id='submit' type="submit">SEARCH</button>
-       <p className='error'>{errors.serverError}</p>
+       <p className='error'>{errors.errors}</p>
        
        <h4 style={{'color': 'white'}}>{isLoading && `Loading...`}</h4>
         </form>

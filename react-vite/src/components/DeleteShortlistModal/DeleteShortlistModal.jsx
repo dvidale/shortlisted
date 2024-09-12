@@ -24,6 +24,7 @@ const {setModalContent, closeModal} = useModal();
             if(data.error){
             setModalContent(<ServerMessageModal message={data.error}/>)
         }else{
+            // TODO: Add switch to set showShortlists to false
             if(data[1].message){
                 setModalContent(<ServerMessageModal message={data[1].message}/>)}
                 dispatch(clearDeletedThreads(data[0]))
