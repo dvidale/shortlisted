@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { clearSearch } from '../../redux/shortlists';
 
-function SearchConnectionsForm({setSearchSubmitted, searchFormView}){
+function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading, isLoading}){
 
     const dispatch = useDispatch();
     
@@ -80,12 +80,14 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView}){
             end_date: end_date ? end_date.toISOString() : null
         }
     //   TODO: switch "1" dispatch back to user.id after demo
+        setIsLoading(true)
         dispatch(buildShortlist(1, JSON.stringify(formData)))
         .then( serverError =>{ if(serverError){
+            setIsLoading(false)
             setErrors(serverError)
             setSearchSubmitted(false)
         }else{
-            setSearchSubmitted(true) 
+            setSearchSubmitted(true)     
         } })
        
         
@@ -193,6 +195,7 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView}){
        <button id='submit' type="submit">SEARCH</button>
        <p className='error'>{errors.serverError}</p>
        
+       <p>{isLoading && `Loading...`}</p>
         </form>
     
 

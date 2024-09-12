@@ -43,7 +43,7 @@ function HomeView() {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [searchSubmitted, setSearchSubmitted ] = useState(false)
   const [showShortlists, setShowShortlists] = useState(false)
-
+  const [isLoading, setIsLoading] = useState(false)
   const resetSearchForm =()=> {
     return true
 
@@ -115,7 +115,7 @@ function HomeView() {
                 setShowSearchResults={setShowSearchResults}
                 resetSearchForm={resetSearchForm}
                 setSearchSubmitted={setSearchSubmitted}
-              
+                setIsLoading={setIsLoading}
               />
             </div>
            
@@ -163,6 +163,8 @@ function HomeView() {
               showSearchResults={showSearchResults}
               searchSubmitted={searchSubmitted}
               setShowShortlists={setShowShortlists}
+              setIsLoading={setIsLoading}
+              isLoading={isLoading}
             />
           </div>
 

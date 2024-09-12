@@ -6,7 +6,7 @@ import './search-results.css'
 import '../SingleShortlistView/single-shortlist.css'
 import SearchResultTile from "./SearchResultTile"
 
-function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleFormView, setShowShortlists}){
+function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleFormView, setShowShortlists, setIsLoading}){
 
     const dispatch = useDispatch()
 
@@ -69,6 +69,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
     if(searchResults.length > 0 && (searchResults !== null)){
          avail_filtered_results = searchResults.filter(connection => availCheck(connection))
+         setIsLoading(false)
         setShowSearchResults(true)
         setShowShortlists(false)
     }
