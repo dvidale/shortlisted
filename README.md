@@ -10,9 +10,9 @@ https://shortlisted-m7e4.onrender.com
 
 - [Technologies Used](#technologies-used)
 - [Features](#features)
+- [Screenshots](#screenshots)
 - [Technical Implementations](#Technical-Implementations)
 - [Set Up](#set-up)
-- [Screenshots](#screenshots)
 - [Wiki Documentation](#wiki-documentation)
 - [Contact](#contact)
 
@@ -43,6 +43,21 @@ https://shortlisted-m7e4.onrender.com
 4. Ranked Search
 5. Facebook Login
 6. Google Maps API Integration
+
+
+## Screenshots
+
+### Landing Page
+
+![Landing Page](react-vite/public/assets/screenshots/001_shortlist_landing_page.gif)
+
+### Create a Shortlist
+
+### Edit a Shortlist Title or Description
+
+### Message a Referral
+
+
 
 ## Technical Implementations
 
@@ -324,11 +339,6 @@ cd shortlisted
    npm run dev
    ```
 
-## Screenshots
-
-### Landing Page
-
-![Landing Page](react-vite/public/assets/screenshots/001_shortlist_landing_page.gif)
 
 ##Wiki Documentation
 

@@ -11,6 +11,7 @@ import MyShortlists from "../MyShortlists/MyShortlists";
 import MyListings_Calendar from "../MyListings_Calendar/MyListings_Calendar";
 import { getCommentThreads } from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
+import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
 
 
  
@@ -41,6 +42,7 @@ function HomeView() {
   const [searchFormView, setSearchFormView] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [searchSubmitted, setSearchSubmitted ] = useState(false)
+  const [showShortlists, setShowShortlists] = useState(false)
 
   const resetSearchForm =()=> {
     return true
@@ -51,9 +53,10 @@ function HomeView() {
   const toggleFormView = () => {
     setToggleSymbol(!toggleSymbol);
     setSearchFormView(!searchFormView);
-    setShowSearchResults(!showSearchResults)
     setSearchSubmitted(false)
-    
+
+    setShowSearchResults(false)
+
   };
 
 
@@ -115,7 +118,7 @@ function HomeView() {
               
               />
             </div>
-
+           
             <div
               id="my-shortlists"
               className={searchFormView ? "hide-view" : "show-view"}
@@ -127,13 +130,14 @@ function HomeView() {
                 setEditForm={setEditForm}
                 searchFormView={searchFormView}
                 setShowSearchResults={setShowSearchResults}
+                setShowShortlists={setShowShortlists}
               />
             </div>
           </div>
           <div
             id="single-shortlist-view"
             className={`${
-              showSearchResults ? "center-panel hide-view" : "center-panel show-view"
+              showShortlists ? "center-panel show-view" : "center-panel hide-view "
             }`}
           >
             <SingleShortlistView
@@ -144,10 +148,11 @@ function HomeView() {
               showSearchResults={showSearchResults}
             />
           </div>
+
           <div
             id="search-results-view"
             className={`${
-              showSearchResults ? "center-panel show-view" : "center-panel hide-view"
+              showSearchResults && searchSubmitted ? "center-panel show-view" : "center-panel hide-view"
             }`}
           >
             <SearchResultsView
@@ -157,8 +162,15 @@ function HomeView() {
               setShortlistIdx={setShortlistIdx}
               showSearchResults={showSearchResults}
               searchSubmitted={searchSubmitted}
+              setShowShortlists={setShowShortlists}
             />
           </div>
+
+            <div id="recent-activity-view"
+            className={((showSearchResults && searchSubmitted )|| showShortlists ) ? "center-panel hide-view" :"center-panel show-view"}>
+              <RecentActivityFeed/>
+            </div>
+         
 
           <div id="my-listings-calendar-placeholder" className="right-panel">
             <MyListings_Calendar />

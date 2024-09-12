@@ -6,7 +6,7 @@ import './search-results.css'
 import '../SingleShortlistView/single-shortlist.css'
 import SearchResultTile from "./SearchResultTile"
 
-function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleFormView}){
+function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleFormView, setShowShortlists}){
 
     const dispatch = useDispatch()
 
@@ -69,15 +69,14 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
     if(searchResults.length > 0 && (searchResults !== null)){
          avail_filtered_results = searchResults.filter(connection => availCheck(connection))
-
+        setShowSearchResults(true)
+        setShowShortlists(false)
     }
     
     // * Form validations
 
     useEffect(()=>{
         const err = {}
-
-      
 
         if (description.length === 200) err.description = "Descriptions have a 200 character limit"
        

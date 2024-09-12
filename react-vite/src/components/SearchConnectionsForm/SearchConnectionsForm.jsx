@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { clearSearch } from '../../redux/shortlists';
 
-function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, searchFormView}){
+function SearchConnectionsForm({setSearchSubmitted, searchFormView}){
 
     const dispatch = useDispatch();
     
@@ -87,11 +87,7 @@ function SearchConnectionsForm({setShowSearchResults, setSearchSubmitted, search
         }else{
             setSearchSubmitted(true) 
         } })
-        .then( () => {
-            
-            setShowSearchResults(true)
-            
-        })
+       
         
     }
 
