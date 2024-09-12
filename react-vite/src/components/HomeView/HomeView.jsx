@@ -194,7 +194,7 @@ function HomeView() {
  <h1>with Shortlisted.        </h1>
 </div>
 </div>
-        <div className="splash-img rotate"></div>
+        <div className="splash-img"></div>
     
         </>
       )}

@@ -136,8 +136,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
 
     }
-    // !BUG - Search details have a visible stall in rendering while waiting for search query to return results
-    // TODO: add a loading indicator to appear on screen between the search being submitted and the results being returned
+ 
 
     return(
         <> 
@@ -160,7 +159,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 </div><p className="error">{errors.title}</p>
             <label htmlFor="description">Add a Description</label>
             <div>
-            <textarea id='edit-shortlist-desc' name="description" placeholder="Add any notes about the job." value={description} 
+            <textarea id='edit-shortlist-desc' name="description" className="save-shortlist-desc" placeholder="Add any notes about the job." value={description} 
             maxLength={200}onChange={e => setDescription(e.target.value)}/>
      <p className="error">{errors.description}</p>
             </div>
