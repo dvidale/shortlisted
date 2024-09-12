@@ -60,6 +60,9 @@ def search_connections(id):
         # ? this list comp removes duplicates from the list
         search_results = [i for n, i in enumerate( search_results_lst) if i not in  search_results_lst[:n]]
         
+        if len(search_results) == 0:
+            return {'errors':'Sorry, none of your connections match this search.'}, 404
+        
         return search_results, 200
         # ? Moved availability check to frontend for easier date object comparisons
 
