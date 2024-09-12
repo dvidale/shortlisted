@@ -164,10 +164,9 @@ This is achieved by structuring CSS style commands in alignment with button logi
 
 The title and description text that is visible on screen is loaded from the Redux state into the form fields, and the form fields are set to default as disabled for editing. By then adding CSS style commands to hide the form field surrounding the text, the UI appears to be rendering the text alone. When the edit button is pressed, the CSS style commands are changed by triggering a change in the class associated with the form field elements.
 
-#### Local state variables managing CSS classes
+#### Local state variable managing CSS classes
 ```javascript
 const [activeFields, setActiveFields] = useState("edit-off");
-const [formBorder, setFormBorder] = useState("border-off");
 ```
 
 
@@ -197,11 +196,11 @@ const editSwitch = () => {
   if (editForm) {
     setEditForm(false);
     setActiveFields("edit-off");
-    setFormBorder("border-off");
+   
   } else {
     setEditForm(true);
     setActiveFields("edit-on");
-    setFormBorder("border-on");
+  
   }
 };
 ```
@@ -231,7 +230,7 @@ const editSwitch = () => {
       maxLength={255}
       onChange={(e) => setDescription(e.target.value)}
             />
-         </div>
+        //  </div>
 
 ```
 
