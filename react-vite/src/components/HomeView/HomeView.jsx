@@ -116,6 +116,7 @@ function HomeView() {
                 resetSearchForm={resetSearchForm}
                 setSearchSubmitted={setSearchSubmitted}
                 setIsLoading={setIsLoading}
+                isLoading={isLoading}
               />
             </div>
            
