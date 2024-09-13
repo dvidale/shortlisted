@@ -166,7 +166,7 @@ color: var(--light-text);
     display: inline-block;
     font-family: Arial, sans-serif;
     color: #333;
-    box-shadow: inset -3px -3px 10px gray;
+   
   }
 
   .message-bubble-right {
@@ -179,7 +179,7 @@ color: var(--light-text);
     display: inline-block;
     font-family: Arial, sans-serif;
     color: #333;
-    box-shadow: inset -3px -3px 10px gray;
+  
   }
 
 /* Optional: Add a tail to the bubble */
@@ -208,8 +208,8 @@ color: var(--light-text);
   border: 10px solid transparent;
   border-top-color: white;
   border-bottom: 0;
-  border-left: 0;
-  margin-left: -5px;
+  border-right: 0;
+  margin-right: -5px;
   margin-bottom: -10px;
 }
 
