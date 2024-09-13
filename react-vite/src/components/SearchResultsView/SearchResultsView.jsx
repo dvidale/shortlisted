@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import SearchDetails from "../SearchDetails/SearchDetails"
-import { fetchShortlists, saveShortlist } from "../../redux/shortlists"
+import { clearSearch, saveShortlist } from "../../redux/shortlists"
 import './search-results.css'
 import '../SingleShortlistView/single-shortlist.css'
 import SearchResultTile from "./SearchResultTile"
 
-function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleFormView, setShowShortlists, setIsLoading}){
+function SearchResultsView({user, searchSubmitted, toggleFormView, setShowShortlists, setIsLoading, setShowSearchResults}){
 
     const dispatch = useDispatch()
 
@@ -19,7 +19,6 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
     const searchParams = useSelector(state => state.shortlists.parameters)
 
-    // const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
     const availCheck = (connection => {
         
@@ -66,11 +65,19 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
     if(searchResults.length > 0 && (searchResults !== null)){
          avail_filtered_results = searchResults.filter(connection => availCheck(connection))
          
-         setIsLoading(false)
+        setIsLoading(false)
         setShowSearchResults(true)
         setShowShortlists(false)
+        console.log("back setting show shortlist to false");
     }
     
+    useEffect(()=>{
+
+        
+
+
+    },[searchResults])
+
     // * Form validations
 
     useEffect(()=>{
@@ -83,7 +90,7 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
     },[description])
 
     // *SAVE NEW SHORTLIST
-    const submitHandler = (e)=>{
+    const submitHandler = async (e)=>{
         e.preventDefault()
 
        
@@ -111,25 +118,25 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
             referrals: avail_filtered_results
            
         }
-      
-        
-        dispatch(saveShortlist(JSON.stringify(shortlistData))).then( data => {
+
+        await dispatch(clearSearch())
+
+        await dispatch(saveShortlist(JSON.stringify(shortlistData))).then( data => {
             if(data.serverError){
                 err.server = data.serverError
             setErrors(err)
             }else{
-                setShowSearchResults(false)
+            
                 toggleFormView()
                 setShortlistTitle('')
                 setDescription('')
                 avail_filtered_results = []
-            
-               
+                
             }
         }
-        // TODO PRIORITY: Get the newly saved shortlist to appear in the center panel. Right now it pulls up an older list
-        ).then( dispatch(fetchShortlists(user.id)))
-        
+  
+        )
+       
 
         }
 
