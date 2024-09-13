@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import SearchDetails from "../SearchDetails/SearchDetails"
-import { fetchShortlists, saveShortlist } from "../../redux/shortlists"
+import { saveShortlist } from "../../redux/shortlists"
 import './search-results.css'
 import '../SingleShortlistView/single-shortlist.css'
 import SearchResultTile from "./SearchResultTile"
@@ -19,7 +19,6 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
 
     const searchParams = useSelector(state => state.shortlists.parameters)
 
-    // const saved_shortlists = useSelector(state => state.shortlists.saved_lists)
 
     const availCheck = (connection => {
         
@@ -118,17 +117,17 @@ function SearchResultsView({user, searchSubmitted, setShowSearchResults, toggleF
                 err.server = data.serverError
             setErrors(err)
             }else{
-                setShowSearchResults(false)
+            
                 toggleFormView()
                 setShortlistTitle('')
                 setDescription('')
                 avail_filtered_results = []
-            
                
             }
         }
         // TODO PRIORITY: Get the newly saved shortlist to appear in the center panel. Right now it pulls up an older list
-        ).then( dispatch(fetchShortlists(user.id)))
+        )
+        // .then( dispatch(fetchShortlists(user.id)))
         
 
         }

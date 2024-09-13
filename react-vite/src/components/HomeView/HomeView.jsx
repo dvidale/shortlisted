@@ -23,12 +23,13 @@ function HomeView() {
 
   const saved_shortlists = useSelector((state) => state.shortlists.saved_lists);
 
-  const shortlists_state = useSelector((state) => state.shortlists);
+  // const shortlists_state = useSelector((state) => state.shortlists);
 
-  const firstIdx =
-    saved_shortlists && Object.keys(saved_shortlists).length > 0
-      ? Object.keys(saved_shortlists).reverse()[0]['id']
-      : null;
+  let newestIdx;
+if(saved_shortlists && Object.keys(saved_shortlists).length > 0){
+newestIdx = Object.keys(saved_shortlists).reverse()[0]
+}
+  
 
       // const lastIdx =  saved_shortlists && Object.keys(saved_shortlists).length > 0
       // ? Object.keys(saved_shortlists)[Object.keys(saved_shortlists).length-1]['id']
@@ -36,7 +37,7 @@ function HomeView() {
 
   // console.log(">>> firstIdx assigned:", firstIdx);
 
-  const [shortlistIdx, setShortlistIdx] = useState(firstIdx || null);
+  const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
   const [editForm, setEditForm] = useState(false);
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
   const [searchFormView, setSearchFormView] = useState(false);
@@ -62,9 +63,9 @@ function HomeView() {
 
   
 
-  if (shortlists_state) {
-    console.log("shortlists state loaded");
-  }
+  // if (shortlists_state) {
+  //   console.log("");
+  // }
 
   useEffect(() => {
     if (user) {
@@ -75,11 +76,13 @@ function HomeView() {
   useEffect(() => {
     if (saved_shortlists && user) {
       dispatch(getCommentThreads(user.id));
+      setShortlistIdx(newestIdx)
+      setShowShortlists(true)
     }
 
     
 
-  }, [saved_shortlists, dispatch, user]);
+  }, [saved_shortlists, dispatch, user, newestIdx]);
 
 
  
