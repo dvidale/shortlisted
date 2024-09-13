@@ -23,19 +23,13 @@ function HomeView() {
 
   const saved_shortlists = useSelector((state) => state.shortlists.saved_lists);
 
-  // const shortlists_state = useSelector((state) => state.shortlists);
+  const shortlists_state = useSelector((state) => state.shortlists);
 
   let newestIdx;
 if(saved_shortlists && Object.keys(saved_shortlists).length > 0){
 newestIdx = Object.keys(saved_shortlists).reverse()[0]
 }
   
-
-      // const lastIdx =  saved_shortlists && Object.keys(saved_shortlists).length > 0
-      // ? Object.keys(saved_shortlists)[Object.keys(saved_shortlists).length-1]['id']
-      // : null;
-
-  // console.log(">>> firstIdx assigned:", firstIdx);
 
   const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
   const [editForm, setEditForm] = useState(false);
@@ -45,6 +39,8 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [searchSubmitted, setSearchSubmitted ] = useState(false)
   const [showShortlists, setShowShortlists] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+
+
   const resetSearchForm =()=> {
     return true
 
@@ -63,9 +59,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
   
 
-  // if (shortlists_state) {
-  //   console.log("");
-  // }
+  if (shortlists_state) {
+    console.log("");
+  }
 
   useEffect(() => {
     if (user) {
