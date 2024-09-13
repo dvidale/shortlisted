@@ -166,7 +166,7 @@ color: var(--light-text);
     display: inline-block;
     font-family: Arial, sans-serif;
     color: #333;
-    box-shadow: inset -3px -3px 10px gray;
+   
   }
 
   .message-bubble-right {
@@ -179,7 +179,7 @@ color: var(--light-text);
     display: inline-block;
     font-family: Arial, sans-serif;
     color: #333;
-    box-shadow: inset -3px -3px 10px gray;
+  
   }
 
 /* Optional: Add a tail to the bubble */
