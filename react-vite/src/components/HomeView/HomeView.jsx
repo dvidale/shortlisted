@@ -25,18 +25,13 @@ function HomeView() {
 
   const shortlists_state = useSelector((state) => state.shortlists);
 
-  const firstIdx =
-    saved_shortlists && Object.keys(saved_shortlists).length > 0
-      ? Object.keys(saved_shortlists).reverse()[0]['id']
-      : null;
+  let newestIdx;
+if(saved_shortlists && Object.keys(saved_shortlists).length > 0){
+newestIdx = Object.keys(saved_shortlists).reverse()[0]
+}
+  
 
-      // const lastIdx =  saved_shortlists && Object.keys(saved_shortlists).length > 0
-      // ? Object.keys(saved_shortlists)[Object.keys(saved_shortlists).length-1]['id']
-      // : null;
-
-  // console.log(">>> firstIdx assigned:", firstIdx);
-
-  const [shortlistIdx, setShortlistIdx] = useState(firstIdx || null);
+  const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
   const [editForm, setEditForm] = useState(false);
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
   const [searchFormView, setSearchFormView] = useState(false);
@@ -44,6 +39,8 @@ function HomeView() {
   const [searchSubmitted, setSearchSubmitted ] = useState(false)
   const [showShortlists, setShowShortlists] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+
+
   const resetSearchForm =()=> {
     return true
 
@@ -63,7 +60,7 @@ function HomeView() {
   
 
   if (shortlists_state) {
-    console.log("shortlists state loaded");
+    console.log("");
   }
 
   useEffect(() => {
@@ -75,11 +72,13 @@ function HomeView() {
   useEffect(() => {
     if (saved_shortlists && user) {
       dispatch(getCommentThreads(user.id));
+      setShortlistIdx(newestIdx)
+      setShowShortlists(true)
     }
 
     
 
-  }, [saved_shortlists, dispatch, user]);
+  }, [saved_shortlists, dispatch, user, newestIdx]);
 
 
  
