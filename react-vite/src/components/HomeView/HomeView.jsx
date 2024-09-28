@@ -68,6 +68,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
   useEffect(() => {
     if (user) {
+      setShowShortlists(false)
       dispatch(fetchShortlists(user.id));
     }
   }, [dispatch, user]);
@@ -76,7 +77,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
     if (saved_shortlists && user) {
       dispatch(getCommentThreads(user.id));
       setShortlistIdx(newestIdx)
-      // setShowShortlists(true)
+    
     }
 
     
