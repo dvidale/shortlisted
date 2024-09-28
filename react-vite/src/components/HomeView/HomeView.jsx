@@ -2,7 +2,7 @@ import "../../../src/index.css";
 import SearchConnectionsForm from "../SearchConnectionsForm/SearchConnectionsForm";
 import SearchResultsView from "../SearchResultsView/SearchResultsView";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { fetchShortlists } from "../../redux/shortlists";
 import { FaPlusCircle } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
@@ -13,10 +13,13 @@ import { getCommentThreads } from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
 
-
+export const DisplayContext = createContext({displayShortlists:false})
  
 // TODO: Write all labels to match their element ids
 function HomeView() {
+
+
+
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
@@ -40,7 +43,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [showShortlists, setShowShortlists] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-
+  
   const resetSearchForm =()=> {
     return true
 
@@ -73,7 +76,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
     if (saved_shortlists && user) {
       dispatch(getCommentThreads(user.id));
       setShortlistIdx(newestIdx)
-      setShowShortlists(true)
+      // setShowShortlists(true)
     }
 
     
@@ -180,7 +183,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   </>
       ) : (
        
-      <> 
+      < > 
     <div className="splash-img"></div>
 
  <div className="splash-text">
