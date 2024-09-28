@@ -68,7 +68,6 @@ function SearchResultsView({user, searchSubmitted, toggleFormView, setShowShortl
         setIsLoading(false)
         setShowSearchResults(true)
         setShowShortlists(false)
-        console.log("back setting show shortlist to false");
     }
     
     useEffect(()=>{
