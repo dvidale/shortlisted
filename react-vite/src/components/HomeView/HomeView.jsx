@@ -6,7 +6,7 @@ import { createContext, useEffect, useState } from "react";
 import { fetchShortlists } from "../../redux/shortlists";
 import { FaPlusCircle } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
-
+import SplashPageComponent from "../SplashPageComponent/SplashPageComponent";
 import MyShortlists from "../MyShortlists/MyShortlists";
 import MyListings_Calendar from "../MyListings_Calendar/MyListings_Calendar";
 import { getCommentThreads } from "../../redux/comments";
@@ -182,23 +182,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           </div>
   </>
       ) : (
-       
-      < > 
-    <div className="splash-img"></div>
-
- <div className="splash-text">
-  <div>
-  <h1 >Recommend peers for jobs, or</h1>
-  </div>
-  <div>
-  <h1 >get referred yourself... </h1>
-  </div>
- <div>
- <h1>with Shortlisted.        </h1>
-</div>
-</div>
-        
-   </>
+   <SplashPageComponent/>
        
       )}
     </>
