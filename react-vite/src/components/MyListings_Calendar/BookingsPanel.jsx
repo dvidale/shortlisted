@@ -1,8 +1,7 @@
 import './listings-calendar.css'
-import { FaPlusCircle } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function BookingsPanel({user_bookings}){
 
@@ -17,6 +16,34 @@ function BookingsPanel({user_bookings}){
 
 const [bookingStart, setBookingStart] = useState('')
 const [bookingEnd, setBookingEnd] = useState('')
+const [errors, setErrors] = useState({})
+
+// VALIDATIONS
+useEffect(()=>{
+
+const err = {}
+
+function pastCheck(bookingDate){
+
+    const today = new Date().setHours(0,0,0,0)
+
+    if(bookingDate < today) err.booking_date = 'Date cannot be in the past'
+
+}
+
+if(bookingStart){
+    pastCheck(bookingStart)
+}
+if(bookingEnd){
+    pastCheck(bookingEnd)
+}
+
+setErrors(err)
+
+}, [bookingStart, bookingEnd])
+
+
+
 
 const submitHandler = (e) =>{
 
@@ -29,17 +56,26 @@ const submitHandler = (e) =>{
     <h2 className='booking-title-btn'>My Busy Days</h2> 
   
         <h3 className="start-end-title">Start - End</h3>
+
     <div className='booking-input' > 
-    <form id="add-booking-form" className={'show-booking-form'} method='POST' onSubmit={submitHandler}>
-        <label htmlFor="booking-start">
-            <DatePicker id='booking-start' selected={bookingStart} onChange={ bookingStart => setBookingStart(bookingStart)}/>
-            </label>
-            <label htmlFor="booking-end">
-            <DatePicker id='booking-end' selected={bookingEnd} onChange={ bookingEnd => setBookingEnd(bookingEnd)}  />
-            </label>
-    <button id="submit-booking" type='submit' ><FaPlusCircle /></button>
+    <form id="add-booking-form" className={'booking-form'} method='POST' onSubmit={submitHandler}>
+        {/* <label htmlFor="booking-start">
+                </label> */}
+            {errors.booking_date && <div className='tooltip'>{errors.booking_date}</div>}    
+            <div className="booking-inputs">
+                <DatePicker dateFormat="MMM dd, yyyy"
+                id='booking-start' selected={bookingStart} onChange={ bookingStart => setBookingStart(bookingStart)}/>
+            </div>
+            - 
+            {/* <label htmlFor="booking-end">
+            </label> */}
+            <div className="booking-inputs">
+                <DatePicker dateFormat="MMM dd, yyyy" id='booking-end' selected={bookingEnd} onChange={ bookingEnd => setBookingEnd(bookingEnd)}  />
+            </div>
+    <button id="submit-booking" type='submit' > ADD </button>
     </form>
             </div >
+
         {user_bookings && Object.keys(user_bookings).length > 0 && Object.values(user_bookings).map( booking => (
         <>
         <div className='cal-box'>
