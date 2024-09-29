@@ -4,7 +4,7 @@
     /* justify-content: center; */
     /* align-items: center; */
     height: 50px;
-    width: 300px;
+    width: 250px;
     /* border: 2px solid white; */
     text-align: center;
     overflow-y: auto;
@@ -13,6 +13,7 @@
 .dates-and-buttons{
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
 
@@ -35,29 +36,53 @@
     padding: 1px 5px;
 }
 
-#booking-title-btn{
+.booking-form{
     display: flex;
     flex-direction: row;
-    align-items: baseline;
-    justify-content: start;
+    flex-wrap:nowrap;
+    justify-content: space-evenly;
+    align-items: center;
     column-gap: 10px;
-    padding: 0px;
-    margin: 0px;
+    width: 250px;
+    margin-bottom: 10px;
+    /* border: 2px solid yellowgreen; */
 }
 
-.booking-input{
-    display: flex;
-    flex-direction: row;
-    border: 2px solid yellowgreen;
+.booking-inputs
+{
+    display: inline !important;
+   width: 100%;
+    
 }
+
+.booking-inputs > div.react-datepicker-wrapper{
+    width: 90%;
+}
+
 
 .start-end-title{
     padding: 0px;
     margin: 0px;
 }
 
-#add-booking-btn{
-    padding: 3px 10px;
+#submit-booking{
+    padding: 3px 5px;
     height: 50%;
+    font-size: 12px;
 }
 
+input{
+    display: inline !important;
+    width: 100%;
+}
+
+
+.tooltip{
+    position: absolute;
+    bottom: -100px;
+    z-index: 1;
+    color: brown;
+    background-color: antiquewhite;
+    /* border-radius: 20px; */
+    
+}
