@@ -19,6 +19,7 @@ function SearchResultsView({user, searchSubmitted, toggleFormView, setShowShortl
 
     const searchParams = useSelector(state => state.shortlists.parameters)
 
+    
 
     const availCheck = (connection => {
         
@@ -72,10 +73,9 @@ function SearchResultsView({user, searchSubmitted, toggleFormView, setShowShortl
     
     useEffect(()=>{
 
-        
+        console.log(">>>>searchParams.start_date", searchParams.start_date);
 
-
-    },[searchResults])
+    },[searchResults, searchParams])
 
     // * Form validations
 
@@ -101,7 +101,7 @@ function SearchResultsView({user, searchSubmitted, toggleFormView, setShowShortl
 
         if(!Object.keys(err).length){
 
-
+        
         
         const shortlistData ={
 

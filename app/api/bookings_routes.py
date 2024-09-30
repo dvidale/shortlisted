@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+import json
 from app.models import db, Booking
 from app.forms.booking_form import BookingForm
 from dateutil import parser
@@ -17,7 +18,7 @@ def get_my_bookings(id):
 
     user_bookings = user.bookings
 
-    print("user_bookings",user_bookings)
+    
     return [booking.to_dict() for booking in user_bookings]
 
 #CREATE A NEW BOOKING
@@ -26,25 +27,38 @@ def create_booking():
     create_booking_form = BookingForm()
     create_booking_form["csrf_token"].data = request.cookies["csrf_token"]
 
+    print(">>>>>inside the booking POST route")
+
+    request_data = request.json
+      # .json turns request data into a dict
+    print('>request object', request_data)
+    start_date = request_data['start_date']
+    end_date = request_data['end_date']
+    print('after the request json')
+
     if create_booking_form.validate_on_submit():
-        
-        user_id = create_booking_form.data['user_id']
-        shortlist_id = create_booking_form.data['shortlist_id']
-        start_date = create_booking_form.data['start_date']
-        end_date = create_booking_form.data['end_date']
-        
-        startDateParsed = parser.parse(start_date)
-        endDateParsed = parser.parse(end_date)
+        try:
+            user_id = create_booking_form.data['user_id']
+            shortlist_id = create_booking_form.data['shortlist_id']
+           
 
-        newBooking = Booking(
-            user_id=user_id,
-            shortlist_id= shortlist_id or None,
-            start_date=startDateParsed,
-            end_date=endDateParsed
-            )
-        db.session.add(newBooking)
-        db.session.commit()
+            
+            
+            startDateParsed = parser.parse(start_date)
+            endDateParsed = parser.parse(end_date)
 
-        return newBooking.to_dict(), 200
+            newBooking = Booking(
+                user_id=user_id,
+                shortlist_id= shortlist_id or None,
+                start_date=startDateParsed,
+                end_date=endDateParsed
+                )
+            db.session.add(newBooking)
+            db.session.commit()
+
+            return newBooking.to_dict(), 200
+        except:
+            return {'error':'There was a servor error saving the booking'}, 500
     
-    return {'error': create_booking_form.errors}, 400
+    print ('booking_error', create_booking_form.errors)
+    return {'error': "create_booking_form.errors"}, 400

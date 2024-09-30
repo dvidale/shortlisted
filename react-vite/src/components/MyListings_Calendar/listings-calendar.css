@@ -45,6 +45,7 @@
     column-gap: 10px;
     width: 250px;
     margin-bottom: 10px;
+    position: relative;
     /* border: 2px solid yellowgreen; */
 }
 
@@ -79,10 +80,11 @@ input{
 
 .tooltip{
     position: absolute;
-    bottom: -100px;
+    bottom: 45px;
     z-index: 1;
     color: brown;
     background-color: antiquewhite;
-    /* border-radius: 20px; */
-    
+    border-radius: 10px;
+    min-width: fit-content;
+    padding: 1px 5px;
 }

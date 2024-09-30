@@ -60,11 +60,8 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   };
 
 
+  useEffect(()=>{},[shortlists_state])
   
-
-  if (shortlists_state) {
-    console.log("");
-  }
 
   useEffect(() => {
     if (user) {

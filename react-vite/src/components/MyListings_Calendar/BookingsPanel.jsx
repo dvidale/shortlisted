@@ -2,8 +2,13 @@ import './listings-calendar.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState, useEffect } from 'react';
+import { createBooking } from '../../redux/bookings';
+import { useDispatch, useSelector } from 'react-redux';
 
 function BookingsPanel({user_bookings}){
+
+    const user = useSelector(state => state.session.user)
+    const dispatch = useDispatch()
 
     const dateDisplay = (date) => {
     return new Intl.DateTimeFormat('en-US',{
@@ -27,7 +32,7 @@ function pastCheck(bookingDate){
 
     const today = new Date().setHours(0,0,0,0)
 
-    if(bookingDate < today) err.booking_date = 'Date cannot be in the past'
+    if(bookingDate < today) err.booking_date = 'Dates cannot be in the past'
 
 }
 
@@ -49,6 +54,18 @@ const submitHandler = (e) =>{
 
     e.preventDefault();
 
+    // console.log("bookingEnd", bookingEnd.toISOString());
+
+    const bookingData = {
+        user_id:user.id,
+        
+        start_date: bookingStart.toISOString(),
+        end_date: bookingEnd.toISOString()
+    }
+    console.log("stringified booking", JSON.stringify(bookingData));
+
+    dispatch(createBooking(JSON.stringify(bookingData)))
+
 }
     return(
         <>
@@ -57,7 +74,7 @@ const submitHandler = (e) =>{
   
         <h3 className="start-end-title">Start - End</h3>
 
-    <div className='booking-input' > 
+    <div className='booking-input'> 
     <form id="add-booking-form" className={'booking-form'} method='POST' onSubmit={submitHandler}>
         {/* <label htmlFor="booking-start">
                 </label> */}
@@ -70,9 +87,9 @@ const submitHandler = (e) =>{
             {/* <label htmlFor="booking-end">
             </label> */}
             <div className="booking-inputs">
-                <DatePicker dateFormat="MMM dd, yyyy" id='booking-end' selected={bookingEnd} onChange={ bookingEnd => setBookingEnd(bookingEnd)}  />
+                <DatePicker dateFormat="MMM dd, yyyy" id='booking-end' selected={bookingEnd} onChange={ bookingEnd => setBookingEnd(bookingEnd)}/>
             </div>
-    <button id="submit-booking" type='submit' > ADD </button>
+    <button id="submit-booking" type='submit'> ADD </button>
     </form>
             </div >
 
