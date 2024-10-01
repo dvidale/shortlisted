@@ -47,7 +47,7 @@ def create_booking():
             newBooking = Booking(
                 user_id=user_id,
                 shortlist_id= shortlist_id or None,
-                start_date= None,
+                start_date= startDateParsed,
                 end_date=endDateParsed
                 )
             db.session.add(newBooking)
