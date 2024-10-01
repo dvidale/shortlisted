@@ -49,7 +49,7 @@ function BookingsPanel({ user_bookings }) {
     e.preventDefault();
 
     const bookingData = {
-    //   user_id: user.id,
+      user_id: user.id,
 
       start_date: bookingStart.toISOString(),
       end_date: bookingEnd.toISOString(),

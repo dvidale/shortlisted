@@ -47,7 +47,7 @@ def create_booking():
             newBooking = Booking(
                 user_id=user_id,
                 shortlist_id= shortlist_id or None,
-                start_date=startDateParsed,
+                start_date= None,
                 end_date=endDateParsed
                 )
             db.session.add(newBooking)
@@ -55,7 +55,7 @@ def create_booking():
 
             return newBooking.to_dict(), 200
         except:
-            return {'error':'There was an error saving the booking'}, 500
-    
+            return {'error':{'error':'There was an error saving the booking'}}, 500
+    # TODO: refactor these errors to not need this object nesting
     print ('booking_error', create_booking_form.errors)
     return {'error': create_booking_form.errors}, 400
