@@ -27,23 +27,20 @@ def create_booking():
     create_booking_form = BookingForm()
     create_booking_form["csrf_token"].data = request.cookies["csrf_token"]
 
-    print(">>>>>inside the booking POST route")
+    
 
     request_data = request.json
       # .json turns request data into a dict
-    print('>request object', request_data)
+    
     start_date = request_data['start_date']
     end_date = request_data['end_date']
-    print('after the request json')
+   
 
     if create_booking_form.validate_on_submit():
         try:
             user_id = create_booking_form.data['user_id']
             shortlist_id = create_booking_form.data['shortlist_id']
-           
-
-            
-            
+             
             startDateParsed = parser.parse(start_date)
             endDateParsed = parser.parse(end_date)
 
@@ -58,7 +55,7 @@ def create_booking():
 
             return newBooking.to_dict(), 200
         except:
-            return {'error':'There was a servor error saving the booking'}, 500
+            return {'error':'There was an error saving the booking'}, 500
     
     print ('booking_error', create_booking_form.errors)
-    return {'error': "create_booking_form.errors"}, 400
+    return {'error': create_booking_form.errors}, 400
