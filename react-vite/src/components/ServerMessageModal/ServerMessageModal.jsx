@@ -5,7 +5,8 @@ function ServerMessageModal({message}){
 
     const { closeModal } = useModal();
 
-
+// write logic for if the message is an array of messages vs a single message
+console.log("message in server msg modal", message);
 
 return(
 <>

@@ -1,14 +1,4 @@
-.cal-box{
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    /* align-items: center; */
-    height: 50px;
-    width: 250px;
-    /* border: 2px solid white; */
-    text-align: center;
-    overflow-y: auto;
-}
+
 
 .dates-and-buttons{
     display: flex;
@@ -46,7 +36,13 @@
     width: 250px;
     margin-bottom: 10px;
     position: relative;
+}
+
+.bookings-list-container{
+    overflow-y:scroll;
+    max-height: 120px;
     /* border: 2px solid yellowgreen; */
+
 }
 
 .booking-inputs

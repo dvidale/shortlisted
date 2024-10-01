@@ -66,7 +66,7 @@ export const createBooking = (bookingData) => async (dispatch) => {
     }else{
 
         const serverError = await response.json()
-        console.log("serverError", serverError);
+        console.log("serverError from new Booking", serverError);
         return serverError;
     }
 }
