@@ -28,12 +28,13 @@ function RecentActivityFeed(){
 
     return(
         <>
-        <h1>Recent Activity</h1>
+        <h1 className='recent-feed-title'>Recent Activity</h1>
+        <div className='recent-activity-feed'> 
         { activities.map(activity =>(
 
             <div className='activity-tile' key={activity.msg}>{activity.msg}</div>
         ))}
-        
+        </div>
         </>
     )
 }

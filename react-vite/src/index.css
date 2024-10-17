@@ -61,7 +61,7 @@ button:active {
 }
 
 #app-views-container{
-    /* border: 2px dotted yellowgreen; */
+    
     display:flex;
     flex-direction: row;
     justify-content: center;
@@ -113,14 +113,6 @@ button:active {
 align-self: flex-start;
 }
 
-/* .hide-form{
-    display: none;
-    flex-direction: column;
-    align-items:center;
-    gap: 10px;
-
-}
-*/
 
 .show-form{
     display: flex;
@@ -145,7 +137,8 @@ align-self: flex-start;
 .left-panel{
     /* border: 2px solid orange; */
     padding: 10px 20px;
-    min-width: 400px;
+    min-width: 300px;
+    max-width: 400px;
     display:flex;
     flex-direction: column;
     }
@@ -156,7 +149,7 @@ align-self: flex-start;
     /* border: none; */
     border-radius: var(--panel-border);
     padding: 10px 40px;
-    min-width: 400px;
+    min-width: 250px;
     max-width:400px;
     margin: 0px 15px;
 }
@@ -296,6 +289,7 @@ min-width: 310px;
     display: flex;
     flex-direction: column;
   align-items: center;
+  /* border: 2px solid blue; */
 }
 /*
 #search-results-view{
@@ -306,8 +300,7 @@ min-width: 310px;
     */
 
 #my-shortlists{
-    /* border: 2px solid blue; */
-  min-width: 400px;
+  min-width: 200px;
 }
 
 
@@ -412,3 +405,63 @@ min-width: 310px;
     border-radius: 10px;
     padding: 0px 3px 0px 3px;
 }
+
+.mobile-nav-btns{
+    display: none;
+}
+
+
+/* Media Queries */
+
+@media (width <= 1100px) {
+    
+    #app-views-container{
+        /* border: 2px dotted yellowgreen; */
+        display:flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .mobile-nav-container{
+        display:flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    /* border: 2px dotted yellowgreen; */
+    }
+
+    .recent-feed-title{
+        margin: 0px;
+        padding: 0px;
+        font-size: 20px;
+
+    }
+
+
+    .recent-activity-feed{
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+    #my-shortlists{
+        display: none;
+    }
+
+    .mbl-btns{
+        border: 1px solid pink;
+        padding: 5px;
+    }
+
+    .center-panel{
+        padding: 10px 10px;
+    }
+
+    .right-panel{
+        display: none;
+    }
+
+    .footer{
+        font-size: 10px;
+    }
+
+  }

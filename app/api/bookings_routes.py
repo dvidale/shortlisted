@@ -69,10 +69,14 @@ def update_booking():
     request_data = request.json
       # .json turns request data into a dict
 
+    start_date = request_data['start_date']
+    end_date = request_data['end_date']
+   
+
     if update_booking_form.validate_on_submit():
         try:
-            user_id = create_booking_form.data['user_id']
-            shortlist_id = create_booking_form.data['shortlist_id']
+            user_id = update_booking_form.data['user_id']
+            shortlist_id = update_booking_form.data['shortlist_id']
 
             startDateParsed = parser.parse(start_date)
             endDateParsed = parser.parse(end_date)
@@ -91,4 +95,4 @@ def update_booking():
             return {'error':{'error':'There was an error saving the booking'}}, 500
         # TODO: refactor these errors to not need this object nesting
 
-    return {'error': create_booking_form.errors}, 400
+    return {'error': update_booking_form.errors}, 400
