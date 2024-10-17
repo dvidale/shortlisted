@@ -93,7 +93,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
         <>
         
           <div id="search-and-my-shortlist-container">
-          {/* <div className="shortlisted-title">Shortlisted.</div> */}
+          
             <button id="new-shortlist-btn" onClick={() => toggleFormView()}>
               <h1>
             
@@ -178,6 +178,13 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           <div id="my-listings-calendar-placeholder" className="right-panel">
             <MyListings_Calendar />
           </div>
+
+          <div id="mobile-nav" className="mobile-nav-container">
+            <div className="mbl-btns"> My Shortlists </div>
+            <div className="mbl-btns"> Profile </div>
+            <div className="mbl-btns"> My Calendar </div>
+          </div>
+
   </>
       ) : (
    <SplashPageComponent/>
