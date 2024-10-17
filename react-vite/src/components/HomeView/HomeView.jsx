@@ -2,21 +2,24 @@ import "../../../src/index.css";
 import SearchConnectionsForm from "../SearchConnectionsForm/SearchConnectionsForm";
 import SearchResultsView from "../SearchResultsView/SearchResultsView";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { fetchShortlists } from "../../redux/shortlists";
 import { FaPlusCircle } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
-
+import SplashPageComponent from "../SplashPageComponent/SplashPageComponent";
 import MyShortlists from "../MyShortlists/MyShortlists";
 import MyListings_Calendar from "../MyListings_Calendar/MyListings_Calendar";
 import { getCommentThreads } from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
 
-
+export const DisplayContext = createContext({displayShortlists:false})
  
 // TODO: Write all labels to match their element ids
 function HomeView() {
+
+
+
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
@@ -40,7 +43,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [showShortlists, setShowShortlists] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
-
+  
   const resetSearchForm =()=> {
     return true
 
@@ -57,14 +60,12 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   };
 
 
+  useEffect(()=>{},[shortlists_state])
   
-
-  if (shortlists_state) {
-    console.log("");
-  }
 
   useEffect(() => {
     if (user) {
+      setShowShortlists(false)
       dispatch(fetchShortlists(user.id));
     }
   }, [dispatch, user]);
@@ -73,7 +74,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
     if (saved_shortlists && user) {
       dispatch(getCommentThreads(user.id));
       setShortlistIdx(newestIdx)
-      setShowShortlists(true)
+    
     }
 
     
@@ -179,23 +180,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           </div>
   </>
       ) : (
-       
-      <> 
-    <div className="splash-img"></div>
-
- <div className="splash-text">
-  <div>
-  <h1 >Recommend peers for jobs, or</h1>
-  </div>
-  <div>
-  <h1 >get referred yourself... </h1>
-  </div>
- <div>
- <h1>with Shortlisted.        </h1>
-</div>
-</div>
-        
-   </>
+   <SplashPageComponent/>
        
       )}
     </>

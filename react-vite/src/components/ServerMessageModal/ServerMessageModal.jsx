@@ -5,13 +5,13 @@ function ServerMessageModal({message}){
 
     const { closeModal } = useModal();
 
-
-
 return(
 <>
 <div className="server-message-modal">
             <h2>Server Message</h2>
-            <p>{message}</p>
+            <div>{Object.values(message).map(
+                msg => <p key={msg}>{msg}</p>
+            )}</div>
             <button className="server-message-ok-btn" type='button' onClick={()=> closeModal()}>Ok</button>
         </div>
 </>

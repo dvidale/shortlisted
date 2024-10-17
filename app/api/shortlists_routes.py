@@ -51,7 +51,7 @@ def save_shortlists():
         created_by = created_by
         referrals = request_data['referrals']
 
-        print(">>>>>> referrals entering save route", referrals)
+       
 
         job_title_id = db.session.scalars(db.select(Job_Title.id).where(Job_Title.job_title == job_title)).first()
 

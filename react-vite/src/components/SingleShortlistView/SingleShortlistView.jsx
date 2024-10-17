@@ -8,7 +8,7 @@ import { fetchShortlists, updateShortlist } from "../../redux/shortlists";
 import { useModal } from "../../context/Modal";
 import DeleteShortlistModal from "../DeleteShortlistModal/DeleteShortlistModal";
 
-// !BUG - the default shortlist does not load automatically
+
 function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchResults }) {
   const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchRe
     }
   }, [userId, dispatch, shortlistIdx]);
 
-  // console.log(">>>> current shortlist in singleview:", shortlist);
+  
   const [title, setTitle] = useState(shortlist ? shortlist.title : '');
   const [description, setDescription] = useState(
     shortlist ? shortlist.description : ''

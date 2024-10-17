@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+import json
 from app.models import db, Booking
 from app.forms.booking_form import BookingForm
 from dateutil import parser
@@ -17,7 +18,7 @@ def get_my_bookings(id):
 
     user_bookings = user.bookings
 
-    print("user_bookings",user_bookings)
+    
     return [booking.to_dict() for booking in user_bookings]
 
 #CREATE A NEW BOOKING
@@ -26,25 +27,68 @@ def create_booking():
     create_booking_form = BookingForm()
     create_booking_form["csrf_token"].data = request.cookies["csrf_token"]
 
-    if create_booking_form.validate_on_submit():
-        
-        user_id = create_booking_form.data['user_id']
-        shortlist_id = create_booking_form.data['shortlist_id']
-        start_date = create_booking_form.data['start_date']
-        end_date = create_booking_form.data['end_date']
-        
-        startDateParsed = parser.parse(start_date)
-        endDateParsed = parser.parse(end_date)
-
-        newBooking = Booking(
-            user_id=user_id,
-            shortlist_id= shortlist_id or None,
-            start_date=startDateParsed,
-            end_date=endDateParsed
-            )
-        db.session.add(newBooking)
-        db.session.commit()
-
-        return newBooking.to_dict(), 200
     
+
+    request_data = request.json
+      # .json turns request data into a dict
+    
+    start_date = request_data['start_date']
+    end_date = request_data['end_date']
+   
+
+    if create_booking_form.validate_on_submit():
+        try:
+            user_id = create_booking_form.data['user_id']
+            shortlist_id = create_booking_form.data['shortlist_id']
+             
+            startDateParsed = parser.parse(start_date)
+            endDateParsed = parser.parse(end_date)
+
+            newBooking = Booking(
+                user_id=user_id,
+                shortlist_id= shortlist_id or None,
+                start_date= startDateParsed,
+                end_date=endDateParsed
+                )
+            db.session.add(newBooking)
+            db.session.commit()
+
+            return newBooking.to_dict(), 200
+        except:
+            return {'error':{'error':'There was an error saving the booking'}}, 500
+    # TODO: refactor these errors to not need this object nesting
+    
+    return {'error': create_booking_form.errors}, 400
+
+# UPDATE A BOOKING
+@bookings_routes.route('/edit', methods=['PUT'])
+def update_booking():
+    update_booking_form = BookingForm()
+    update_booking_form["csrf_token"].data = request.cookies["csrf_token"]
+
+    request_data = request.json
+      # .json turns request data into a dict
+
+    if update_booking_form.validate_on_submit():
+        try:
+            user_id = create_booking_form.data['user_id']
+            shortlist_id = create_booking_form.data['shortlist_id']
+
+            startDateParsed = parser.parse(start_date)
+            endDateParsed = parser.parse(end_date)
+
+            editBooking = Booking(
+                user_id=user_id,
+                shortlist_id= shortlist_id or None,
+                start_date= startDateParsed,
+                end_date=endDateParsed
+                )
+            db.session.add(editBooking)
+            db.session.commit()
+
+            return editBooking.to_dict(), 
+        except:
+            return {'error':{'error':'There was an error saving the booking'}}, 500
+        # TODO: refactor these errors to not need this object nesting
+
     return {'error': create_booking_form.errors}, 400
