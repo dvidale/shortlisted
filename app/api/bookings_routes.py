@@ -57,5 +57,38 @@ def create_booking():
         except:
             return {'error':{'error':'There was an error saving the booking'}}, 500
     # TODO: refactor these errors to not need this object nesting
-    print ('booking_error', create_booking_form.errors)
+    
+    return {'error': create_booking_form.errors}, 400
+
+# UPDATE A BOOKING
+@bookings_routes.route('/edit', methods=['PUT'])
+def update_booking():
+    update_booking_form = BookingForm()
+    update_booking_form["csrf_token"].data = request.cookies["csrf_token"]
+
+    request_data = request.json
+      # .json turns request data into a dict
+
+    if update_booking_form.validate_on_submit():
+        try:
+            user_id = create_booking_form.data['user_id']
+            shortlist_id = create_booking_form.data['shortlist_id']
+
+            startDateParsed = parser.parse(start_date)
+            endDateParsed = parser.parse(end_date)
+
+            editBooking = Booking(
+                user_id=user_id,
+                shortlist_id= shortlist_id or None,
+                start_date= startDateParsed,
+                end_date=endDateParsed
+                )
+            db.session.add(editBooking)
+            db.session.commit()
+
+            return editBooking.to_dict(), 
+        except:
+            return {'error':{'error':'There was an error saving the booking'}}, 500
+        # TODO: refactor these errors to not need this object nesting
+
     return {'error': create_booking_form.errors}, 400
