@@ -81,7 +81,7 @@ function BookingsPanel({ user_bookings }) {
           {/* <label htmlFor="booking-start">
                 </label> */}
           {errors.booking_date && (
-            <div className="tooltip">{errors.booking_date}</div>
+            <div className="booking-error">{errors.booking_date}</div>
           )}
           <div className="booking-inputs">
             <DatePicker
@@ -117,8 +117,8 @@ function BookingsPanel({ user_bookings }) {
               <div key={booking.id} className="dates-and-buttons">
                 {dateDisplay(booking.start_date)} -{" "}
                 {dateDisplay(booking.end_date)}
-                <div className="edit-delete-list-btns">
-                  <button>Edit</button>
+                <div className="edit-delete-list-btns booking-edit-btns">
+                  <button key={ `${booking.id}` + `edit`}>Edit</button>
                   <button>Delete</button>
                 </div>
               </div>
