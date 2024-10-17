@@ -1,10 +1,12 @@
 import '../../../src/index.css'
+import './listings-calendar.css'
 import ProfileButton from '../Navigation/ProfileButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMyBookings } from '../../redux/bookings'
 import { useEffect } from 'react'
 import BookingsPanel from './BookingsPanel'
 import MyListingsPanel from './MyListingsPanel'
+
 
 function MyListings_Calendar(){
 
@@ -46,14 +48,9 @@ useEffect(()=>{
 
 <MyListingsPanel/>
 </div>
-
-<div>
-    <h2>My Busy Days</h2>
-    
       
-        <BookingsPanel user_bookings={user_bookings}/>
+    <BookingsPanel user_bookings={user_bookings}/>
     
-        </div>
 
 </>
     )

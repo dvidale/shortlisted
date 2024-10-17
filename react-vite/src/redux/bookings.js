@@ -41,19 +41,21 @@ export const getMyBookings = (userId) => async (dispatch) => {
     }
 }
 
-export const createBooking = (formData) => async (dispatch) => {
+export const createBooking = (bookingData) => async (dispatch) => {
 
     const url = `/api/bookings/new`
 
     const method = 'POST'
 
-    const headers = {'Content-Type': 'application-json'}
-
-    const body = formData;
+    const headers = {'Content-Type': 'application/json'}
+  
+    const body = bookingData;
 
     const options = {method, headers, body}
 
     const response = await fetch(url, options);
+
+
 
     if(response.ok){
 
@@ -62,8 +64,9 @@ export const createBooking = (formData) => async (dispatch) => {
         dispatch(createABooking(data))
 
     }else{
-        const serverError = await response.json()
 
+        const serverError = await response.json()
+        console.log("serverError from new Booking", serverError);
         return serverError;
     }
 }

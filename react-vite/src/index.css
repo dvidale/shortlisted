@@ -259,9 +259,16 @@ min-width: 310px;
     padding: 10px 10px;
 }
 
+
+
 .edit-delete-list-btns{
     display: flex;
     flex-direction: column;
+ 
+}
+.booking-edit-btns{
+    flex-direction: row !important;
+    column-gap: 7px;
  
 }
 
