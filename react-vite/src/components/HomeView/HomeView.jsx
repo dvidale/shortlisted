@@ -122,10 +122,13 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
               />
             </div>
            
-            <div
-              id="my-shortlists"
-              className={searchFormView ? "hide-view" : "show-view"}
-            >
+          {
+            !isTabletOrMobile &&
+
+          <div
+          id="my-shortlists"
+          className={searchFormView ? "hide-view" : "show-view"}
+          >
               <MyShortlists
                 shortlistIdx={shortlistIdx}
                 setShortlistIdx={setShortlistIdx}
@@ -134,8 +137,10 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
                 searchFormView={searchFormView}
                 setShowSearchResults={setShowSearchResults}
                 setShowShortlists={setShowShortlists}
-              />
+                />
             </div>
+              }  
+
           </div>
           <div
             id="single-shortlist-view"

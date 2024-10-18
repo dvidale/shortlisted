@@ -415,6 +415,7 @@ min-width: 310px;
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
+    cursor: pointer;
 /* border: 2px dotted yellowgreen; */
 }
 
@@ -443,9 +444,7 @@ min-width: 310px;
         overflow-y: auto;
     }
 
-    #my-shortlists{
-        display: none;
-    }
+  
 
     .mbl-btns{
         border: 1px solid pink;
