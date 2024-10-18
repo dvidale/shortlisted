@@ -1,4 +1,5 @@
 import "../../../src/index.css";
+import { useMediaQuery } from 'react-responsive'
 import SearchConnectionsForm from "../SearchConnectionsForm/SearchConnectionsForm";
 import SearchResultsView from "../SearchResultsView/SearchResultsView";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,6 +13,7 @@ import MyListings_Calendar from "../MyListings_Calendar/MyListings_Calendar";
 import { getCommentThreads } from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
+import MobileNavBtns from "../MobileNavBtnsComponent/MobileNavBtns"
 
 export const DisplayContext = createContext({displayShortlists:false})
  
@@ -19,7 +21,7 @@ export const DisplayContext = createContext({displayShortlists:false})
 function HomeView() {
 
 
-
+  const isTabletOrMobile = useMediaQuery({query: '(max-width: 1100px)'})
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
@@ -179,11 +181,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
             <MyListings_Calendar />
           </div>
 
-          <div id="mobile-nav" className="mobile-nav-container">
-            <div className="mbl-btns"> My Shortlists </div>
-            <div className="mbl-btns"> Profile </div>
-            <div className="mbl-btns"> My Calendar </div>
-          </div>
+          {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">
+            <MobileNavBtns/>
+          </div>}
 
   </>
       ) : (
