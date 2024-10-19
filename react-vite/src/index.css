@@ -71,6 +71,11 @@ button:active {
     margin: 0px;
 }
 
+.mobile-title-logo{
+    display: none;
+}
+
+
 .splash-img{
    background-image: url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/landing-page-splash-img/shortlisted_splash_09-12-2024_002.png');
    background-size: cover;
@@ -144,6 +149,8 @@ align-self: flex-start;
     }
     
 .center-panel{
+    display: flex;
+    flex-direction: column;
     /* border: 2px solid white; */
     background: var(--dark-bg-3);
     /* border: none; */
@@ -430,6 +437,10 @@ min-width: 310px;
         height: 100%;
     }
 
+    .mobile-title-logo{
+        display: block;
+        text-align: center;
+    }
 
     .recent-feed-title{
         margin: 0px;

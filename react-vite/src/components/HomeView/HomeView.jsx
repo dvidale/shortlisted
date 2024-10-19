@@ -93,7 +93,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
     <>
       {user ? (
         <>
-        
+          <div className='mobile-title-logo'>Shortlisted</div>
           <div id="search-and-my-shortlist-container">
           
             <button id="new-shortlist-btn" onClick={() => toggleFormView()}>
@@ -144,9 +144,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           </div>
           <div
             id="single-shortlist-view"
-            className={`${
-              showShortlists ? "center-panel show-view" : "center-panel hide-view "
-            }`}
+            className="center-panel"
+            
+            style={{display: `${ showShortlists ? 'flex' : 'none'}`}}
           >
             <SingleShortlistView
               setEditForm={setEditForm}
