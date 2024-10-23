@@ -20,9 +20,10 @@ const switchShortlistAndReset = (e)=>{
    
     return(
         <>
+        <h1 className='panel-heading'>My Shortlists</h1>
         { Object.keys(saved_shortlists).length > 0 ?  (
             <> 
-            <h1 className='panel-heading'>My Shortlists</h1>
+            
                 <div className='my-shortlists-list'>
                 {Object.values(saved_shortlists).reverse().map( shortlist =>{
 
@@ -56,9 +57,8 @@ const switchShortlistAndReset = (e)=>{
                 </>  
                 ):(
                 <>
-                   <h1>No Shortlists Yet?</h1> 
-                   <h1>Create one!</h1>
-                   
+                <p style={{color: `white`}}>No Shortlists saved.</p>
+                <p style={{color: `white`}}>Click the button above to create your first Shortlist.</p> 
                 </>)
         }
        

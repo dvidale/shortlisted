@@ -298,13 +298,15 @@ min-width: 310px;
   align-items: center;
   /* border: 2px solid blue; */
 }
-/*
+
 #search-results-view{
-
-     border: 5px dotted fuchsia; 
-
+    display: none;
     }
-    */
+
+#recent-activity-view{
+    display: flex;
+}
+   
 
 #my-shortlists{
   min-width: 200px;
@@ -437,6 +439,10 @@ min-width: 310px;
         height: 100%;
     }
 
+    #build-shortlist-form, #my-shortlists{
+        display:none;
+    }
+
     .mobile-title-logo{
         display: block;
         text-align: center;
@@ -448,7 +454,6 @@ min-width: 310px;
         font-size: 20px;
 
     }
-
 
     .recent-activity-feed{
         max-height: 400px;
