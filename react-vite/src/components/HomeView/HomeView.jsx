@@ -28,6 +28,9 @@ function HomeView() {
 
   const saved_shortlists = useSelector((state) => state.shortlists.saved_lists);
 
+  let showSearchForm = saved_shortlists ? false : true
+
+
   const shortlists_state = useSelector((state) => state.shortlists);
 
   let newestIdx;
@@ -39,7 +42,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
   const [editForm, setEditForm] = useState(false);
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
-  const [searchFormView, setSearchFormView] = useState(false);
+  const [searchFormView, setSearchFormView] = useState( showSearchForm || false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [searchSubmitted, setSearchSubmitted ] = useState(false)
   const [showShortlists, setShowShortlists] = useState(false)
@@ -109,7 +112,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
             <div
               id="build-shortlist-form"
-              
+              style={{display: searchFormView ? 'flex' : 'none'}}
             >
               <SearchConnectionsForm
                 user={user}
@@ -122,8 +125,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
               />
             </div>
            
-          {
-            !isTabletOrMobile &&
+         
 
           <div
           id="my-shortlists"
@@ -139,7 +141,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
                 setShowShortlists={setShowShortlists}
                 />
             </div>
-              }  
+              
 
           </div>
           <div
@@ -159,9 +161,8 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
           <div
             id="search-results-view"
-            className={`${
-              showSearchResults && searchSubmitted ? "center-panel show-view" : "center-panel hide-view"
-            }`}
+            className='center-panel'
+            style={{display: showSearchResults && searchSubmitted ? 'flex' : 'none' }}
           >
             <SearchResultsView
               user={user}
@@ -177,7 +178,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           </div>
 
             <div id="recent-activity-view"
-            className={((showSearchResults && searchSubmitted )|| showShortlists ) ? "center-panel hide-view" :"center-panel show-view"}>
+            className={'center-panel'}
+            style={{display: ((isTabletOrMobile && showSearchForm) || (showSearchResults && searchSubmitted )|| showShortlists) ? 'none' : 'flex'}}
+            >
               <RecentActivityFeed/>
             </div>
          

@@ -103,9 +103,11 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
     return(<>
     
 
-        <form id='new-shortlist-form' className={` ${
-                searchFormView ? `show-form` : `hide-view`
-              } `} method='POST' onSubmit={submitHandler}>
+        <form id='new-shortlist-form' 
+        
+        className={`show-form`} 
+              
+              method='POST' onSubmit={submitHandler}>
         <div>
         <label htmlFor="job-titles">
         <select name='job-titles' id='job-title-select' value={job_title} onChange={e => setJobTitle(e.target.value)} className='create-shortlist-dropdown'>
