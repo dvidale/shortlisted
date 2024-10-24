@@ -179,7 +179,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
             <div id="recent-activity-view"
             className={'center-panel'}
-            style={{display: ((isTabletOrMobile && showSearchForm) || (showSearchResults && searchSubmitted )|| showShortlists) ? 'none' : 'flex'}}
+            style={{display: ((showSearchResults && searchSubmitted )|| showShortlists || (isTabletOrMobile && searchFormView) ) ? 'none' : 'flex'}}
             >
               <RecentActivityFeed/>
             </div>
