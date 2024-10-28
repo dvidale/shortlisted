@@ -8,7 +8,6 @@ const { setModalContent } = useModal();
 
 // * Open MyShortlists Modal 
     const openShortlists = () => {
-
         setModalContent(
             <MyShortlistsModal />
         );

@@ -1,5 +1,5 @@
 import { useModal } from "../../context/Modal"
-import MyShortlists from "./MyShortlists"
+// import MyShortlists from "./MyShortlists"
 
 function MyShortlistsModal (){
 
@@ -7,8 +7,8 @@ function MyShortlistsModal (){
 
     return (
         <>
-        <MyShortlists/>
-        <button onClick={closeModal}>Ok</button>
+        
+        <button onClick={closeModal}>Close</button>
 
         </>
     )
