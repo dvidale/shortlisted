@@ -16,7 +16,9 @@ import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
 import MobileNavBtns from "../MobileNavBtnsComponent/MobileNavBtns"
 
 export const DisplayContext = createContext({displayShortlists:false})
- 
+
+
+
 // TODO: Write all labels to match their element ids
 function HomeView() {
 
@@ -49,6 +51,8 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [isLoading, setIsLoading] = useState(false)
 
   
+
+
   const resetSearchForm =()=> {
     return true
 

@@ -2,6 +2,13 @@
 :root{
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column-gap: 0px;
+    margin: 0px;
+    position: relative;
+
     --dark-bg: rgb(84, 46, 0);
     --dark-bg-2: rgb(0, 66, 69);
     --dark-bg-3: rgb(35, 34, 34);
@@ -24,7 +31,7 @@
     --light-hover-2: rgba(204, 204, 204, 0.5);
     background-color: var(--dark-bg-3);
     color:var(--light-txt-2);
-    
+   
 }
 
 a {
@@ -46,14 +53,7 @@ button:active {
     transform: scale(0.98);
 }
 
-#site-wide-container{
-    /* border: 2px dotted orange; */
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    grid-column-gap: 0px;
-    margin: 0px;
-}
+
 .front-login-signup-btn{
     border-radius: 30px;
     background-color: var(--light-bg);
@@ -431,12 +431,42 @@ min-width: 310px;
 /* Media Queries */
 
 @media (width <= 1100px) {
+
+    :root{
+        border: 2px dotted orange;
+        height: 100%;
+        justify-content: space-evenly;
+        overflow-y: hidden;
+    }
     
     #app-views-container{
         /* border: 2px dotted yellowgreen; */
         display:flex;
         flex-direction: column;
+        
         height: 100%;
+        /* position: relative; */
+    }
+
+   
+
+    .splash-text{
+
+        position:relative;
+        top:10px;
+        right: -10px;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        height: fit-content;
+        justify-content: center;
+        
+        /* border: 2px solid yellowgreen; */
+        /* z-index: 1; */
+    }
+
+    .splash-img{
+        display:none;
     }
 
     #build-shortlist-form, #my-shortlists{
