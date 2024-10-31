@@ -63,8 +63,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
     setToggleSymbol(!toggleSymbol);
     setSearchFormView(!searchFormView);
     setSearchSubmitted(false)
-
     setShowSearchResults(false)
+
+    
 
   };
 
@@ -116,16 +117,19 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
             <div
               id="build-shortlist-form"
-              style={{display: searchFormView ? 'flex' : 'none'}}
+              style={{display: searchFormView && !(isTabletOrMobile && showSearchResults) ? 'flex' : 'none'}}
             >
               <SearchConnectionsForm
                 user={user}
                 searchFormView={searchFormView}
+                setSearchFormView={setSearchFormView}
                 setShowSearchResults={setShowSearchResults}
                 resetSearchForm={resetSearchForm}
                 setSearchSubmitted={setSearchSubmitted}
                 setIsLoading={setIsLoading}
                 isLoading={isLoading}
+                toggleSymbol={toggleSymbol}
+                setToggleSymbol={setToggleSymbol}
               />
             </div>
            

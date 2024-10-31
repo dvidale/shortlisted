@@ -73,7 +73,7 @@ function SearchResultsView({user, searchSubmitted, toggleFormView, setShowShortl
     
     useEffect(()=>{
 
-        console.log(">>>>searchParams.start_date", searchParams.start_date);
+        // console.log(">>>>searchParams.start_date", searchParams.start_date);
 
     },[searchResults, searchParams])
 
@@ -148,7 +148,7 @@ function SearchResultsView({user, searchSubmitted, toggleFormView, setShowShortl
         <> 
         <h1 className="search-results-heading">Search Results</h1>
     <p className="error">{errors.server}</p>
-
+        <div className='mobile-results-container'>
         <form method={'POST'} onSubmit={submitHandler}>
             <div className='title-and-save-button'>
             <label htmlFor="shortlist-name"> Like these results? Save them.
@@ -188,6 +188,7 @@ function SearchResultsView({user, searchSubmitted, toggleFormView, setShowShortl
                 <div key={result.id}><SearchResultTile resultFirstName={result.first_name} resultLastName={result.last_name}/></div>
             )
         })}
+       </div>
        </div>
         
         </>

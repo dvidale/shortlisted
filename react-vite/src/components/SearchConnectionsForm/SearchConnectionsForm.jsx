@@ -1,4 +1,5 @@
 import './new-shortlist-form.css'
+import { useMediaQuery } from 'react-responsive'
 import { useEffect, useState} from 'react';
 import { useDispatch} from 'react-redux'
 import { buildShortlist } from "../../redux/shortlists";
@@ -6,11 +7,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { clearSearch } from '../../redux/shortlists';
 
-function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading, isLoading}){
+function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading, isLoading, toggleSymbol, setToggleSymbol}){
+
+    const isTabletOrMobile = useMediaQuery({query: '(max-width: 1100px)'})   
 
     const dispatch = useDispatch();
-    
-
 
     const [location, setLocation] = useState('')
     const [industry_area, setIndustryArea] = useState('')
@@ -87,6 +88,10 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
             setErrors(serverError)
             setSearchSubmitted(false)
         }else{
+            if(isTabletOrMobile){
+                setToggleSymbol(!toggleSymbol)
+            }
+            // !BUG - the mobile view search submission flickers at the transition to the search results panel. Might b mor prevalent on the production server
             setSearchSubmitted(true)     
         } })
        
