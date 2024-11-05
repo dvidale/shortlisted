@@ -1,4 +1,5 @@
 import "../../../src/index.css";
+import { useMediaQuery } from 'react-responsive'
 import SearchConnectionsForm from "../SearchConnectionsForm/SearchConnectionsForm";
 import SearchResultsView from "../SearchResultsView/SearchResultsView";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,19 +13,25 @@ import MyListings_Calendar from "../MyListings_Calendar/MyListings_Calendar";
 import { getCommentThreads } from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
+import MobileNavBtns from "../MobileNavBtnsComponent/MobileNavBtns"
 
 export const DisplayContext = createContext({displayShortlists:false})
- 
+
+
+
 // TODO: Write all labels to match their element ids
 function HomeView() {
 
 
-
+  const isTabletOrMobile = useMediaQuery({query: '(max-width: 1100px)'})
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.session.user);
 
   const saved_shortlists = useSelector((state) => state.shortlists.saved_lists);
+
+  let showSearchForm = saved_shortlists ? false : true
+
 
   const shortlists_state = useSelector((state) => state.shortlists);
 
@@ -37,13 +44,15 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
   const [editForm, setEditForm] = useState(false);
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
-  const [searchFormView, setSearchFormView] = useState(false);
+  const [searchFormView, setSearchFormView] = useState( showSearchForm || false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [searchSubmitted, setSearchSubmitted ] = useState(false)
   const [showShortlists, setShowShortlists] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
   
+
+
   const resetSearchForm =()=> {
     return true
 
@@ -54,8 +63,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
     setToggleSymbol(!toggleSymbol);
     setSearchFormView(!searchFormView);
     setSearchSubmitted(false)
-
     setShowSearchResults(false)
+
+    
 
   };
 
@@ -91,9 +101,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
     <>
       {user ? (
         <>
-        
+          <div className='mobile-title-logo'>Shortlisted</div>
           <div id="search-and-my-shortlist-container">
-          {/* <div className="shortlisted-title">Shortlisted.</div> */}
+          
             <button id="new-shortlist-btn" onClick={() => toggleFormView()}>
               <h1>
             
@@ -107,23 +117,28 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
             <div
               id="build-shortlist-form"
-              
+              style={{display: searchFormView && !(isTabletOrMobile && showSearchResults) ? 'flex' : 'none'}}
             >
               <SearchConnectionsForm
                 user={user}
                 searchFormView={searchFormView}
+                setSearchFormView={setSearchFormView}
                 setShowSearchResults={setShowSearchResults}
                 resetSearchForm={resetSearchForm}
                 setSearchSubmitted={setSearchSubmitted}
                 setIsLoading={setIsLoading}
                 isLoading={isLoading}
+                toggleSymbol={toggleSymbol}
+                setToggleSymbol={setToggleSymbol}
               />
             </div>
            
-            <div
-              id="my-shortlists"
-              className={searchFormView ? "hide-view" : "show-view"}
-            >
+         
+
+          <div
+          id="my-shortlists"
+          className={searchFormView ? "hide-view" : "show-view"}
+          >
               <MyShortlists
                 shortlistIdx={shortlistIdx}
                 setShortlistIdx={setShortlistIdx}
@@ -132,14 +147,16 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
                 searchFormView={searchFormView}
                 setShowSearchResults={setShowSearchResults}
                 setShowShortlists={setShowShortlists}
-              />
+                />
             </div>
+              
+
           </div>
           <div
             id="single-shortlist-view"
-            className={`${
-              showShortlists ? "center-panel show-view" : "center-panel hide-view "
-            }`}
+            className="center-panel"
+            
+            style={{display: `${ showShortlists ? 'flex' : 'none'}`}}
           >
             <SingleShortlistView
               setEditForm={setEditForm}
@@ -152,9 +169,8 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
           <div
             id="search-results-view"
-            className={`${
-              showSearchResults && searchSubmitted ? "center-panel show-view" : "center-panel hide-view"
-            }`}
+            className='center-panel'
+            style={{display: showSearchResults && searchSubmitted ? 'flex' : 'none' }}
           >
             <SearchResultsView
               user={user}
@@ -170,7 +186,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           </div>
 
             <div id="recent-activity-view"
-            className={((showSearchResults && searchSubmitted )|| showShortlists ) ? "center-panel hide-view" :"center-panel show-view"}>
+            className={'center-panel'}
+            style={{display: ((showSearchResults && searchSubmitted )|| showShortlists || (isTabletOrMobile && searchFormView) ) ? 'none' : 'flex'}}
+            >
               <RecentActivityFeed/>
             </div>
          
@@ -178,6 +196,11 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           <div id="my-listings-calendar-placeholder" className="right-panel">
             <MyListings_Calendar />
           </div>
+
+          {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">
+            <MobileNavBtns/>
+          </div>}
+
   </>
       ) : (
    <SplashPageComponent/>

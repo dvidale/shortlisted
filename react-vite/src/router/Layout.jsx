@@ -18,13 +18,13 @@ export default function Layout() {
   return (
     <>
       <ModalProvider>
-        <div id='site-wide-container'>
+       
         <Navigation />
         <div id='app-views-container'>
         {isLoaded && <Outlet />}
         </div>
         <Footer/>
-        </div>
+      
 
         <Modal />
       </ModalProvider>
