@@ -30,9 +30,10 @@
 }
 
 .results-box{
-height: 400px;
+height: 250px;
 overflow-y: auto;
 }
+
 .result-count{
     text-align: center;
     margin: 0px;
@@ -49,4 +50,36 @@ overflow-y: auto;
     align-items: center;
     column-gap: 10px;
     color: var(--light-text);
+}
+
+@media (width <= 1100px){
+
+    .search-results-heading{
+        padding-top: 0px;
+        padding-bottom: 0px;
+        font-size: 20px;
+    }
+
+    .save-shortlist-title{
+        font-size: 20px;
+        width: 250px;
+    }
+
+    .mobile-results-container{
+        /* border: 2px dotted purple; */
+        height: 350px;
+        overflow-y: scroll;
+        margin: 0px;
+        padding:0px;
+    }
+
+    .results-box{
+        overflow-y: visible;
+        height: fit-content;
+    }
+
+
+
+
+    
 }

@@ -2,6 +2,13 @@
 :root{
     box-sizing: border-box;
     font-family: "Open Sans", sans-serif;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column-gap: 0px;
+    margin: 0px;
+    position: relative;
+
     --dark-bg: rgb(84, 46, 0);
     --dark-bg-2: rgb(0, 66, 69);
     --dark-bg-3: rgb(35, 34, 34);
@@ -24,7 +31,7 @@
     --light-hover-2: rgba(204, 204, 204, 0.5);
     background-color: var(--dark-bg-3);
     color:var(--light-txt-2);
-    
+   
 }
 
 a {
@@ -46,14 +53,7 @@ button:active {
     transform: scale(0.98);
 }
 
-#site-wide-container{
-    /* border: 2px dotted orange; */
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    grid-column-gap: 0px;
-    margin: 0px;
-}
+
 .front-login-signup-btn{
     border-radius: 30px;
     background-color: var(--light-bg);
@@ -61,7 +61,7 @@ button:active {
 }
 
 #app-views-container{
-    /* border: 2px dotted yellowgreen; */
+    
     display:flex;
     flex-direction: row;
     justify-content: center;
@@ -70,6 +70,11 @@ button:active {
     height: 770px;
     margin: 0px;
 }
+
+.mobile-title-logo{
+    display: none;
+}
+
 
 .splash-img{
    background-image: url('https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/landing-page-splash-img/shortlisted_splash_09-12-2024_002.png');
@@ -113,14 +118,6 @@ button:active {
 align-self: flex-start;
 }
 
-/* .hide-form{
-    display: none;
-    flex-direction: column;
-    align-items:center;
-    gap: 10px;
-
-}
-*/
 
 .show-form{
     display: flex;
@@ -145,18 +142,21 @@ align-self: flex-start;
 .left-panel{
     /* border: 2px solid orange; */
     padding: 10px 20px;
-    min-width: 400px;
+    min-width: 300px;
+    max-width: 400px;
     display:flex;
     flex-direction: column;
     }
     
 .center-panel{
+    display: flex;
+    flex-direction: column;
     /* border: 2px solid white; */
     background: var(--dark-bg-3);
     /* border: none; */
     border-radius: var(--panel-border);
     padding: 10px 40px;
-    min-width: 400px;
+    min-width: 250px;
     max-width:400px;
     margin: 0px 15px;
 }
@@ -296,18 +296,20 @@ min-width: 310px;
     display: flex;
     flex-direction: column;
   align-items: center;
+  /* border: 2px solid blue; */
 }
-/*
+
 #search-results-view{
-
-     border: 5px dotted fuchsia; 
-
+    display: none;
     }
-    */
+
+#recent-activity-view{
+    display: flex;
+}
+   
 
 #my-shortlists{
-    /* border: 2px solid blue; */
-  min-width: 400px;
+  min-width: 200px;
 }
 
 
@@ -412,3 +414,101 @@ min-width: 310px;
     border-radius: 10px;
     padding: 0px 3px 0px 3px;
 }
+
+.mobile-nav-btns{
+    display: none;
+}
+
+.mobile-nav-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    cursor: pointer;
+/* border: 2px dotted yellowgreen; */
+}
+
+/* Media Queries */
+
+@media (width <= 1100px) {
+
+    :root{
+        /* border: 2px dotted orange; */
+        height: 100%;
+        justify-content: space-evenly;
+        overflow-y: hidden;
+    }
+    
+    #app-views-container{
+        /* border: 2px dotted yellowgreen; */
+        display:flex;
+        flex-direction: column;
+        
+        height: 91vh;
+        /* position: relative; */
+    }
+
+   
+
+    .splash-text{
+
+        position:relative;
+        top:10px;
+        right: -10px;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        height: fit-content;
+        justify-content: center;
+        
+        /* border: 2px solid yellowgreen; */
+        /* z-index: 1; */
+    }
+
+    .splash-img{
+        display:none;
+    }
+
+    #build-shortlist-form, #my-shortlists{
+        display:none;
+    }
+
+    .mobile-title-logo{
+        display: block;
+        text-align: center;
+    }
+
+    .recent-feed-title{
+        margin: 0px;
+        padding: 0px;
+        font-size: 20px;
+
+    }
+
+    .recent-activity-feed{
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
+  
+
+    .mbl-btns{
+        border: 1px solid pink;
+        padding: 5px;
+    }
+
+    .center-panel{
+        padding: 10px 10px;
+    }
+
+    .right-panel{
+        display: none;
+    }
+
+    .footer{
+        font-size: 10px;
+    }
+
+  }
+
+
