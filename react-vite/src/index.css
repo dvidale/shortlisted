@@ -505,6 +505,11 @@ min-width: 310px;
         display: none;
     }
 
+    #single-shortlist-view{
+        height: 91vh;
+        overflow-y: scroll;
+    }
+
     .footer{
         font-size: 10px;
     }
