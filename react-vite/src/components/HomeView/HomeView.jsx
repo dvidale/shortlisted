@@ -49,7 +49,6 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [searchSubmitted, setSearchSubmitted ] = useState(false)
   const [showShortlists, setShowShortlists] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-
   
 
 
@@ -137,7 +136,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
           <div
           id="my-shortlists"
-          className={searchFormView ? "hide-view" : "show-view"}
+          className={'left-panel'}
           >
               <MyShortlists
                 shortlistIdx={shortlistIdx}
@@ -198,7 +197,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           </div>
 
           {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">
-            <MobileNavBtns/>
+            <MobileNavBtns
+            setShowShortlists={setShowShortlists}
+            />
           </div>}
 
   </>

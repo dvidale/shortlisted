@@ -1,5 +1,6 @@
 import "../../../src/index.css";
 import "./single-shortlist.css";
+import { useMediaQuery } from 'react-responsive'
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import ShortlistCommentsFeed from "../ShortlistCommentsFeed/ShortlistCommentsFeed";
@@ -9,8 +10,10 @@ import { useModal } from "../../context/Modal";
 import DeleteShortlistModal from "../DeleteShortlistModal/DeleteShortlistModal";
 
 
-function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchResults }) {
+function SingleShortlistView({ setEditForm, editForm, shortlistIdx, setShortlistIdx, showSearchResults }) {
   const dispatch = useDispatch();
+
+  const isTabletOrMobile = useMediaQuery({query: '(max-width: 1100px)'})
 
   const { setModalContent } = useModal();
 
@@ -23,6 +26,10 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchRe
 
   const shortlist = useSelector(
     (state) => state.shortlists.saved_lists[shortlistIdx]
+  );
+
+  const saved_shortlists = useSelector(
+    (state) => state.shortlists.saved_lists
   );
 
   useEffect(() => {
@@ -45,6 +52,9 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchRe
       setDescription(shortlist.description);
     }
   }, [shortlist, shortlistIdx]);
+
+
+
 
   // * Description Validation
   useEffect(() => {
@@ -115,13 +125,43 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchRe
 // TODO: Try to remove the formBorder variable. I don't think we need it at all.
   return (
     <>
+     { !isTabletOrMobile && 
       <h2 className="single-shortlist-view-heading">Shortlist:</h2>
+     }
       {shortlist ? (
         <>
           <form id="edit-shortlist-form" onSubmit={submitHandler}>
            <div className="shortlist-title-and-edit-btns">
-            <div className={formBorder}>
-              <textarea
+             {
+               isTabletOrMobile ? (
+                 
+                <div>
+                  <label>
+                    My Shortlists
+                    <div>
+
+                    <select
+                    className={"mbl-shortlists-dropdown"}
+                    value={shortlistIdx}
+                    onChange={e => setShortlistIdx(e.target.value)}
+                    >
+                      {Object.values(saved_shortlists).map( shortlist => {
+
+                        return(
+                          <option key={shortlist.id} value={shortlist.id}>{shortlist.title}</option>
+                        )
+                      }
+
+                      )}
+                  </select>
+                    </div>
+                  </label>
+                  </div>
+                
+              ):(
+                
+                <div className={formBorder}>
+                <textarea
                 id="edit-shortlist-title"
                 className={activeFields}
                 disabled={editForm === false}
@@ -131,11 +171,19 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchRe
               />
                <p className="error">{errors.title}</p>
             </div>
+              
+              )
+
+             } 
             <div className="edit-delete-save-btns">
-{editForm && <button type="submit">Save</button>}
-            {!editForm && (
+            
+            {(!isTabletOrMobile && editForm) && <button type="submit">Save</button>}
+            {(!isTabletOrMobile && !editForm) && (
               <button type='button' onClick={editSwitch}>{`Edit`}</button>
             )}
+            { isTabletOrMobile &&
+              <button type='button' onClick={""}>{`Edit`}</button>
+            }
 
 
             <button type='button'
@@ -148,7 +196,11 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchRe
             
             </div>
 </div>
-            <div className={formBorder}>
+           {
+              isTabletOrMobile ? (<>
+              </>):
+              (
+               <div className={formBorder}>
               <textarea
                 id="edit-shortlist-desc"
                 className={activeFields}
@@ -158,6 +210,10 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, showSearchRe
                 onChange={(e) => setDescription(e.target.value)}
               />
             </div>
+              )
+
+           }
+           
           </form>
               <p className="error">{warnings.description}</p>
               

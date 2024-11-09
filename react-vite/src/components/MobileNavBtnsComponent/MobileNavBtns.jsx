@@ -1,16 +1,15 @@
 import "../../../src/index.css"
-import MyShortlistsModal from "../MyShortlists/MyShortlistsModal"
-import { useModal } from "../../context/Modal"
 
-function MobileNavBtns(){
 
-const { setModalContent } = useModal();
+function MobileNavBtns({setShowShortlists }){
+
+
 
 // * Open MyShortlists Modal 
     const openShortlists = () => {
-        setModalContent(
-            <MyShortlistsModal />
-        );
+       
+        setShowShortlists(true)
+       
     };
 
 
