@@ -7,7 +7,9 @@ import ShortlistCommentsFeed from "../ShortlistCommentsFeed/ShortlistCommentsFee
 import SearchDetails from "../SearchDetails/SearchDetails";
 import { fetchShortlists, updateShortlist } from "../../redux/shortlists";
 import { useModal } from "../../context/Modal";
+import EditShortlistModal from "../EditShortlistModal"
 import DeleteShortlistModal from "../DeleteShortlistModal/DeleteShortlistModal";
+
 
 
 function SingleShortlistView({ setEditForm, editForm, shortlistIdx, setShortlistIdx, showSearchResults }) {
@@ -114,6 +116,16 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, setShortlist
     }
   }, [editForm]);
 
+  // * EDIT Shortlist Modal
+
+  const shortlistEditorModal = (shortlistId) => {
+
+    setModalContent(
+      <EditShortlistModal shortlistId={shortlistId} title={title} setTitle={setTitle} description={description} setDescription={setDescription}/>
+    )
+
+  }
+
 
 // * DELETE Shortlist
   const handleDelete = (shortlistId) => {
@@ -182,7 +194,7 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, setShortlist
               <button type='button' onClick={editSwitch}>{`Edit`}</button>
             )}
             { isTabletOrMobile &&
-              <button type='button' onClick={""}>{`Edit`}</button>
+              <button type='button' onClick={shortlistEditorModal}>{`Edit`}</button>
             }
 
 
