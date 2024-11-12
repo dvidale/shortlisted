@@ -1,16 +1,24 @@
 import "../../../src/index.css"
 
 
-function MobileNavBtns({setShowShortlists }){
+function MobileNavBtns({setShowShortlists, setShowCalendar }){
 
 
 
-// * Open MyShortlists Modal 
+// * Open MyShortlists Panel 
     const openShortlists = () => {
        
         setShowShortlists(true)
-       
+       setShowCalendar(false)
     };
+
+
+// * Open Calendar Panel
+const openCalendar = () =>{
+    setShowCalendar(true)
+    setShowShortlists(false)
+
+}
 
 
     return(
@@ -18,7 +26,7 @@ function MobileNavBtns({setShowShortlists }){
         
         <div className="mbl-btns" onClick={openShortlists}> My Shortlists </div>
         <div className="mbl-btns"> Profile </div>
-        <div className="mbl-btns"> My Calendar </div>
+        <div className="mbl-btns" onClick={openCalendar}> My Calendar </div>
 
         </>
 
