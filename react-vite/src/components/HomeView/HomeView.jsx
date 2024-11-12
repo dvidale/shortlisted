@@ -188,11 +188,16 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
             <div id="recent-activity-view"
             className={'center-panel'}
-            style={{display: ((showSearchResults && searchSubmitted )|| showShortlists || (isTabletOrMobile && searchFormView) || (isTabletOrMobile && !showCalendar) ) ? 'none' : 'flex'}}
+            style={{display: ((showSearchResults && searchSubmitted )|| showShortlists || (isTabletOrMobile && searchFormView) || (isTabletOrMobile && showCalendar) ) ? 'none' : 'flex'}}
             >
               <RecentActivityFeed/>
             </div>
          
+            {isTabletOrMobile && showCalendar &&
+          <div>
+            <BookingsPanel setShowCalendar={setShowCalendar} user_bookings={user_bookings}/>
+          </div>
+          }
 
           <div id="my-listings-calendar-placeholder" className="right-panel">
             <MyListings_Calendar />
@@ -205,11 +210,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
             />
           </div>}
 
-            {isTabletOrMobile && showCalendar &&
-          <div>
-            <BookingsPanel setShowCalendar={setShowCalendar} user_bookings={user_bookings}/>
-          </div>
-          }
+           
 
   </>
       ) : (
