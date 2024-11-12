@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { useModal } from '../../context/Modal'
-import { useNavigate } from 'react-router-dom'
+
 import { updateShortlist } from '../../redux/shortlists'
 
 function EditShortlistModal({title, setTitle, description, setDescription, shortlistId}){
