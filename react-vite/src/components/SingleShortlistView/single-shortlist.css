@@ -307,4 +307,19 @@ margin-left: 20px;
   .edit-delete-save-btns{
     flex-direction: row ;
   }
+
+  #edit-shortlist-modal{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    row-gap: 8px;
+    background-color: var(--light-bg);
+    border: 2px solid var(--dark-border);
+    color:var(--dark-text);
+    border-radius: 20px;
+  }
+
+  #edit-shortlist-modal-title{
+    width: 100%;
+  }
 }

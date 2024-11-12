@@ -37,7 +37,7 @@ function EditShortlistModal({title, setTitle, description, setDescription, short
     }
 return (
     <>
-    Editor
+    
     <form id="edit-shortlist-modal" onSubmit={submitHandler}>
         <label htmlFor="edit-shortlist-modal-title">
             Title:
@@ -49,12 +49,12 @@ return (
         </label>
         <label htmlFor='edit-shortlist-modal-desc'>
             Description:
-            <input 
+            <textarea 
             id='edit-shortlist-modal-desc' 
             type='text'
             value={description}
             onChange={(e)=> setDescription(e.target.value)}
-            />
+            ></textarea>
         </label>
         <button id='mobile-shortlist-update' type="submit">Update</button>
     </form>
