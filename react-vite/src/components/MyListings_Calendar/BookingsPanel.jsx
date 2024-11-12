@@ -66,7 +66,7 @@ function BookingsPanel({ user_bookings }) {
     }
   };
   return (
-    <>
+    <div className="bookings-panel">
       <h2 className="booking-title-btn">My Busy Days</h2>
 
       <h3 className="start-end-title">Start - End</h3>
@@ -125,7 +125,7 @@ function BookingsPanel({ user_bookings }) {
           </>
         ))}
         </div>
-    </>
+    </div>
   );
 }
 
