@@ -289,3 +289,37 @@ padding: 0px 2px 0px 2px;
 margin-left: 20px;
 }
 
+@media (width <= 1100px){
+
+  .mbl-shortlists-dropdown{
+    width: 100%;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    font-size: 18px;
+    padding: 3px 5px;
+    margin: 5px 0px;
+  }
+
+  .shortlist-title-and-edit-btns{
+    flex-direction: column;
+  }
+
+  .edit-delete-save-btns{
+    flex-direction: row ;
+  }
+
+  #edit-shortlist-modal{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    row-gap: 8px;
+    background-color: var(--light-bg);
+    border: 2px solid var(--dark-border);
+    color:var(--dark-text);
+    border-radius: 20px;
+  }
+
+  #edit-shortlist-modal-title{
+    width: 100%;
+  }
+}

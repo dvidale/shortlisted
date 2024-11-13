@@ -1,17 +1,24 @@
 import "../../../src/index.css"
-import MyShortlistsModal from "../MyShortlists/MyShortlistsModal"
-import { useModal } from "../../context/Modal"
 
-function MobileNavBtns(){
 
-const { setModalContent } = useModal();
+function MobileNavBtns({setShowShortlists, setShowCalendar }){
 
-// * Open MyShortlists Modal 
+
+
+// * Open MyShortlists Panel 
     const openShortlists = () => {
-        setModalContent(
-            <MyShortlistsModal />
-        );
+       
+        setShowShortlists(true)
+       setShowCalendar(false)
     };
+
+
+// * Open Calendar Panel
+const openCalendar = () =>{
+    setShowCalendar(true)
+    setShowShortlists(false)
+
+}
 
 
     return(
@@ -19,7 +26,7 @@ const { setModalContent } = useModal();
         
         <div className="mbl-btns" onClick={openShortlists}> My Shortlists </div>
         <div className="mbl-btns"> Profile </div>
-        <div className="mbl-btns"> My Calendar </div>
+        <div className="mbl-btns" onClick={openCalendar}> My Calendar </div>
 
         </>
 

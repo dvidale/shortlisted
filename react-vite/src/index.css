@@ -443,8 +443,8 @@ min-width: 310px;
         /* border: 2px dotted yellowgreen; */
         display:flex;
         flex-direction: column;
-        
-        height: 91vh;
+        /* !BUG - I think the height of this div is blocking the navigation div from showing before login. Experiment with different heights  */
+        height: 81vh;
         /* position: relative; */
     }
 
@@ -503,6 +503,11 @@ min-width: 310px;
 
     .right-panel{
         display: none;
+    }
+
+    #single-shortlist-view{
+        height: 91vh;
+        overflow-y: scroll;
     }
 
     .footer{
