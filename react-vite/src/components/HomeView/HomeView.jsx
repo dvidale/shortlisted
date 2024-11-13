@@ -14,6 +14,7 @@ import { getCommentThreads } from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
 import MobileNavBtns from "../MobileNavBtnsComponent/MobileNavBtns"
+import BookingsPanel from "../MyListings_Calendar/BookingsPanel";
 
 export const DisplayContext = createContext({displayShortlists:false})
 
@@ -29,7 +30,7 @@ function HomeView() {
   const user = useSelector((state) => state.session.user);
 
   const saved_shortlists = useSelector((state) => state.shortlists.saved_lists);
-
+  const user_bookings = useSelector(state => state.bookings.user_bookings)
   let showSearchForm = saved_shortlists ? false : true
 
 
@@ -48,8 +49,8 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [searchSubmitted, setSearchSubmitted ] = useState(false)
   const [showShortlists, setShowShortlists] = useState(false)
+  const [showCalendar, setShowCalendar] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-
   
 
 
@@ -137,7 +138,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
           <div
           id="my-shortlists"
-          className={searchFormView ? "hide-view" : "show-view"}
+          className={'left-panel'}
           >
               <MyShortlists
                 shortlistIdx={shortlistIdx}
@@ -187,19 +188,29 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
             <div id="recent-activity-view"
             className={'center-panel'}
-            style={{display: ((showSearchResults && searchSubmitted )|| showShortlists || (isTabletOrMobile && searchFormView) ) ? 'none' : 'flex'}}
+            style={{display: ((showSearchResults && searchSubmitted )|| showShortlists || (isTabletOrMobile && searchFormView) || (isTabletOrMobile && showCalendar) ) ? 'none' : 'flex'}}
             >
               <RecentActivityFeed/>
             </div>
          
+            {isTabletOrMobile && showCalendar &&
+          <div>
+            <BookingsPanel setShowCalendar={setShowCalendar} user_bookings={user_bookings}/>
+          </div>
+          }
 
           <div id="my-listings-calendar-placeholder" className="right-panel">
             <MyListings_Calendar />
           </div>
 
           {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">
-            <MobileNavBtns/>
+            <MobileNavBtns
+            setShowShortlists={setShowShortlists}
+            setShowCalendar={setShowCalendar}
+            />
           </div>}
+
+           
 
   </>
       ) : (
