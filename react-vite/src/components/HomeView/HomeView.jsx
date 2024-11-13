@@ -216,7 +216,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           </div>
 
           {isTabletOrMobile && showProfile && <div>
-            <ProfileComponent/></div>}
+            <ProfileComponent user={user}/></div>}
 
           {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">
             <MobileNavBtns
