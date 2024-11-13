@@ -15,6 +15,7 @@ import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
 import MobileNavBtns from "../MobileNavBtnsComponent/MobileNavBtns"
 import BookingsPanel from "../MyListings_Calendar/BookingsPanel";
+import ProfileComponent from "../ProfileComponent/ProfileComponent";
 
 export const DisplayContext = createContext({displayShortlists:false})
 
@@ -51,6 +52,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [showShortlists, setShowShortlists] = useState(false)
   const [showCalendar, setShowCalendar] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [showProfile, setShowProfile ] = useState(false);
+
+
   
 
 
@@ -69,6 +73,12 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
     
 
   };
+
+  const viewSearchForm = () => {
+    setSearchFormView(true)
+    setSearchSubmitted(false)
+    setShowSearchResults(false)
+  }
 
 
   useEffect(()=>{},[shortlists_state])
@@ -105,6 +115,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           <div className='mobile-title-logo'>Shortlisted</div>
           <div id="search-and-my-shortlist-container">
           
+        {!isTabletOrMobile &&
             <button id="new-shortlist-btn" onClick={() => toggleFormView()}>
               <h1>
             
@@ -115,6 +126,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
              
               </h1>
             </button>
+            }
 
             <div
               id="build-shortlist-form"
@@ -188,7 +200,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
             <div id="recent-activity-view"
             className={'center-panel'}
-            style={{display: ((showSearchResults && searchSubmitted )|| showShortlists || (isTabletOrMobile && searchFormView) || (isTabletOrMobile && showCalendar) ) ? 'none' : 'flex'}}
+            style={{display: ((showSearchResults && searchSubmitted )|| showShortlists || (isTabletOrMobile && searchFormView) || (isTabletOrMobile && showCalendar) || showProfile ) ? 'none' : 'flex'}}
             >
               <RecentActivityFeed/>
             </div>
@@ -203,10 +215,18 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
             <MyListings_Calendar />
           </div>
 
+          {isTabletOrMobile && showProfile && <div>
+            <ProfileComponent/></div>}
+
           {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">
             <MobileNavBtns
+            viewSearchForm={viewSearchForm}
+            setSearchFormView={setSearchFormView}
             setShowShortlists={setShowShortlists}
             setShowCalendar={setShowCalendar}
+            setShowSearchResults={setShowSearchResults}
+            setSearchSubmitted={setSearchSubmitted}
+            setShowProfile={setShowProfile}
             />
           </div>}
 
