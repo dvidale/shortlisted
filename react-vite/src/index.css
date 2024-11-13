@@ -444,7 +444,7 @@ min-width: 310px;
         display:flex;
         flex-direction: column;
         /* !BUG - I think the height of this div is blocking the navigation div from showing before login. Experiment with different heights  */
-        height: 81vh;
+        height: 70vh;
         /* position: relative; */
     }
 
