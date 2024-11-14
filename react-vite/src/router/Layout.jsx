@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useMediaQuery } from "react-responsive";
 import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
@@ -15,6 +16,9 @@ export default function Layout() {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+
+  const isTabletOrMobile = useMediaQuery({query: '(max-width: 1100px)'})
+
   return (
     <>
       <ModalProvider>
@@ -23,7 +27,9 @@ export default function Layout() {
         <div id='app-views-container'>
         {isLoaded && <Outlet />}
         </div>
+        {!isTabletOrMobile && 
         <Footer/>
+        }
       
 
         <Modal />
