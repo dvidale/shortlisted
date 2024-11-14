@@ -2,8 +2,10 @@
     font-size: 20px;
     text-align: center;
     border-radius: 10px;
+    margin-bottom: 20px;
 }
 
 .calendar-input{
     text-align: center;
+   margin-bottom: 10px;
 }

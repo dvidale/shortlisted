@@ -13,7 +13,7 @@ function MobileNavBtns({setShowShortlists, setShowCalendar, viewSearchForm, setS
     setSearchSubmitted(false)
     setShowSearchResults(false)
     setSearchFormView(false)
-    
+    setShowProfile(false)
     };
 
 
@@ -24,9 +24,11 @@ const openCalendar = () =>{
     setSearchSubmitted(false)
     setShowSearchResults(false)
     setSearchFormView(false)
+    setShowProfile(false)
 
 }
 
+// * Open Profile Panel
 const openProfilePanel = () =>{
     
     setShowProfile(true)
