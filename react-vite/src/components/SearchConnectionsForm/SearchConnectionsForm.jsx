@@ -105,6 +105,7 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
         
 
 // TODO: Figure out why job title dropdown moves left when a server error is returned for an invalid job title choice
+// TODO: Change all errors to display through a modal instead of inline with the UI
     return(<>
     
 
@@ -121,9 +122,9 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
     <option value='Assistant Editor'>Assistant Editor</option>
     </select>
 </label>
-<div >  
+{/* <div >  
      <p className='error'>{errors.job_title}</p>
-</div>
+</div> */}
 
 </div>
         <label htmlFor="industry-area"></label>
@@ -136,12 +137,12 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
             <option value='Documentary'>Documentary</option>
             <option value='Commercial'>Commercial</option>
         </select>
-        <div >
+        {/* <div >
         
  
         <p className='error'>{errors.industry_area}
             </p>
-            </div>
+            </div> */}
 
         <label htmlFor="genre"></label>
         <select name='genres' id='genre-select' value={genre} onChange={e => setGenre(e.target.value)}
@@ -155,7 +156,7 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
             <option value='Historical'>Historical</option>
         </select>
 
-        <div className='error'></div>
+        {/* <div className='error'></div> */}
 
         <label htmlFor="location"></label>
         <select name='locations' id='location-select' value={location} onChange={e => setLocation(e.target.value)}
@@ -166,11 +167,11 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
             <option value='Atlanta'>Atlanta</option>
             <option value='Remote'>Remote</option>
         </select>
-        <div >
-        {
+        {/* <div >
+        
      
-        <p className='error'>{errors.location}</p>}
-        </div>
+        <p className='error'>{errors.location}</p>
+        </div> */}
 
        
 
@@ -179,11 +180,11 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
         <div className='calendar-input' > <label htmlFor="start_date_month">
             <DatePicker selected={start_date} onChange={ start_date => setStartDate(start_date)}  />
             </label>
-            <div >
-            {
+            {/* <div >
+            
     
-            <p className='error'>{errors.start_date}</p>}
-            </div>
+            <p className='error'>{errors.start_date}</p>
+            </div> */}
         </div>
 
         <h2 className='panel-heading'>End Date</h2>
@@ -191,11 +192,11 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
         <div className='calendar-input'><label htmlFor="end_date_month">
             <DatePicker selected={end_date} onChange={ end_date => setEndDate(end_date)}  />
                </label>         
-            <div >
+            {/* <div >
                {
   
                <p className='error'>{errors.end_date}</p>}   
-            </div>
+            </div> */}
         </div>
            
     
