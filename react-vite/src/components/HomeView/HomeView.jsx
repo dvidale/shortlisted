@@ -78,6 +78,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
     setSearchFormView(true)
     setSearchSubmitted(false)
     setShowSearchResults(false)
+    setShowShortlists(false)
+    setShowCalendar(false)
+    setShowProfile(false)
   }
 
 
@@ -114,8 +117,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
         <>
           <div className='mobile-title-logo'>Shortlisted</div>
           <div id="search-and-my-shortlist-container">
-          
-        {!isTabletOrMobile &&
+  
             <button id="new-shortlist-btn" onClick={() => toggleFormView()}>
               <h1>
             
@@ -126,7 +128,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
              
               </h1>
             </button>
-            }
+            
 
             <div
               id="build-shortlist-form"
@@ -147,10 +149,11 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
             </div>
            
          
-
+        {!isTabletOrMobile && 
           <div
           id="my-shortlists"
           className={'left-panel'}
+          style={{display: `${ searchFormView ? 'none' : 'flex'  }`}}
           >
               <MyShortlists
                 shortlistIdx={shortlistIdx}
@@ -162,6 +165,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
                 setShowShortlists={setShowShortlists}
                 />
             </div>
+            }
               
 
           </div>
