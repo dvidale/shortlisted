@@ -117,7 +117,9 @@ if (serverError) {
 <div className="bookings-list-container">
 
       {user_bookings &&
-        Object.keys(user_bookings).length > 0 &&
+        Object.keys(user_bookings).length > 0 ? ( <>
+        
+        {
         Object.values(user_bookings).map((booking) => (
             <>
               <div key={booking.id} className="dates-and-buttons">
@@ -129,7 +131,16 @@ if (serverError) {
                 </div>
               </div>
           </>
-        ))}
+        ))
+        }
+        </> ):(
+          
+          <div>No dates blocked on your calendar.    
+          </div>
+        
+        )
+      
+      }
         </div>
     </div>
   );
