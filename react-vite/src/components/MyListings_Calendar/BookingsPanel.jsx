@@ -45,7 +45,7 @@ function BookingsPanel({ user_bookings }) {
     setErrors(err);
   }, [bookingStart, bookingEnd]);
 
-  const submitHandler = async (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
 
     const bookingData = {
@@ -55,15 +55,21 @@ function BookingsPanel({ user_bookings }) {
       end_date: bookingEnd.toISOString(),
     };
 
-    const serverError = await dispatch(
+    dispatch(
       createBooking(JSON.stringify(bookingData))
-    );
-
-    if (serverError) {
-      setModalContent(<ServerMessageModal message={serverError.error} />);
+    ).then( serverError => {
+if (serverError) {
+      setModalContent(<ServerMessageModal message ={serverError.error} />);
     } else {
-      await dispatch(getMyBookings(user.id));
+      setBookingStart("");
+      setBookingEnd("");
+       dispatch(getMyBookings(user.id));
     }
+
+
+    } )
+
+    
   };
   return (
     <div className="bookings-panel">
