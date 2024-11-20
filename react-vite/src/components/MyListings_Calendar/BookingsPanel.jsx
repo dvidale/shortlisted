@@ -71,6 +71,14 @@ if (serverError) {
 
     
   };
+
+  const deleteBookingModal = (id)=>{
+
+    setModalContent(<DeleteBookingModal bookingId={id}/>);
+
+  };
+
+
   return (
     <div className="bookings-panel">
       <h2 className="booking-title-btn">My Busy Days</h2>
@@ -126,8 +134,8 @@ if (serverError) {
                 {dateDisplay(booking.start_date)} -{" "}
                 {dateDisplay(booking.end_date)}
                 <div className="edit-delete-list-btns booking-edit-btns">
-                  <button key={ `${booking.id}` + `edit`}>Edit</button>
-                  <button>Delete</button>
+                  {/* <button key={ `${booking.id}` + `edit`}>Edit</button> */}
+                  <button id="booking-delete-btn" onClick={ () => deleteBookingModal(booking.id)  }>Delete</button>
                 </div>
               </div>
           </>
