@@ -96,3 +96,17 @@ def update_booking():
         # TODO: refactor these errors to not need this object nesting
 
     return {'error': update_booking_form.errors}, 400
+
+
+#DELETE A BOOKING
+@bookings_routes.route('/<int:id>', methods=['DELETE'])
+def delete_booking(id):
+    try:
+        target_booking = Booking.query.get(id)
+
+        db.session.delete(target_booking)
+        db.session.commit()
+
+        return {'id':id}, 200
+    except:
+        return {'error':'There was an error deleting the booking'}, 500

@@ -6,24 +6,27 @@ import { getMyBookings, createBooking } from "../../redux/bookings";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import ServerMessageModal from "../ServerMessageModal/ServerMessageModal";
+import DeleteBookingsModal from "./DeleteBookingsModal";
 
 function BookingsPanel({ user_bookings }) {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
+
+  const {setModalContent} = useModal()
 
   const dateDisplay = (date) => {
     return new Intl.DateTimeFormat("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
-    }).format(new Date(date));
+    }).format(new Date(date).setHours(0, 0, 0, 0));
   };
 
   const [bookingStart, setBookingStart] = useState("");
   const [bookingEnd, setBookingEnd] = useState("");
   const [errors, setErrors] = useState({});
 
-  const { setModalContent } = useModal();
+
 
   // VALIDATIONS
   useEffect(() => {
@@ -69,16 +72,17 @@ if (serverError) {
 
     } )
 
-    
-  };
-
-  const deleteBookingModal = (id)=>{
-
-    setModalContent(<DeleteBookingModal bookingId={id}/>);
-
   };
 
 
+  // *DELETE A BOOKING
+const handleDeleteBooking = (bookingId) => {
+
+  setModalContent(
+    <DeleteBookingsModal bookingId={bookingId}/>
+  );
+  
+  }
   return (
     <div className="bookings-panel">
       <h2 className="booking-title-btn">My Busy Days</h2>
@@ -134,8 +138,8 @@ if (serverError) {
                 {dateDisplay(booking.start_date)} -{" "}
                 {dateDisplay(booking.end_date)}
                 <div className="edit-delete-list-btns booking-edit-btns">
-                  {/* <button key={ `${booking.id}` + `edit`}>Edit</button> */}
-                  <button id="booking-delete-btn" onClick={ () => deleteBookingModal(booking.id)  }>Delete</button>
+                 
+                  <button type='button' onClick={ ()=> handleDeleteBooking(booking.id)}>Delete</button>
                 </div>
               </div>
           </>
