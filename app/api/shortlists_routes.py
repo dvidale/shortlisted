@@ -115,6 +115,45 @@ def getShortlists(id):
 
     return [shortlist.single_view() for shortlist in shortlist_query]
 
+
+#  *GET MY REFERRAL THREADS
+@shortlists_routes.route('/my-referrals/<int:id>')
+def get_my_referrals(id):
+    """
+    - get shortlist title, description, search details, 
+        creator first and last name, creator photo, and
+        specific thread for the referred user for every shortlist where the current user is a referred user
+
+        SELECT Shortlist.title, Shortlist.description, etc
+        FROM Shortlists
+        JOIN Referrals ON Shortlist.id == referral.shortlist_id
+
+        SELECT User.first_name, User.last_name, User.profile_img
+        FROM Users
+        WHERE Shortlist.createdby_id == user.id
+
+        SELECT Comments
+        FROM Comments
+        WHERE Comments.referral_id == referral_id
+
+        WHERE referred_id == current_user_id
+    """
+    
+    referred_user = User.query.get(id)
+    
+    my_referrals_shortlist_ids = db.session.scalars(
+            db.select(Referral.shortlist_id).where(Referral.referred_id == referred_user.id)
+        ).all()
+    
+    stmt = db.select(Referral).join(Referral.shortlists).join(Shortlist.comments)
+    print(">>>> stmt", stmt)
+
+    
+
+    
+
+    return []
+
 ## * UPDATE A SHORTLIST
 
 @shortlists_routes.route('<int:id>', methods = ['PUT'])
