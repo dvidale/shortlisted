@@ -8,7 +8,7 @@ from app.forms.comment_form import CommentForm
 comments_routes = Blueprint('comments', __name__)
 
 
-#  * GET ALL COMMENT THREADS BY USER ID
+#  * GET ALL COMMENT THREADS FOR USER'S SHORTLISTS
 
 @comments_routes.route('/<int:id>')
 def get_comments(id):
