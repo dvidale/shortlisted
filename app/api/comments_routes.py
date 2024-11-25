@@ -2,13 +2,13 @@ from flask import Blueprint, request
 from app.models import db, Comment
 from app.models.referral import Referral
 from app.models.user import User
-from app.models.shortlist import Shortlist
+
 from app.forms.comment_form import CommentForm
 
 comments_routes = Blueprint('comments', __name__)
 
 
-#  * GET ALL COMMENT THREADS FOR USER'S SHORTLISTS
+#  * GET ALL COMMENT THREADS BY SHORTLIST CREATOR ID
 
 @comments_routes.route('/<int:id>')
 def get_comments(id):
@@ -31,6 +31,9 @@ def get_comments(id):
     nonempty_threads = list(filter(lambda thread: len(thread) > 0, threads_unpacked))
    
     return nonempty_threads
+
+
+
 
 # * CREATE A NEW COMMENT
 
