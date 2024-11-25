@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 from app.models.user import User
 
+
 class Referral(db.Model):
     __tablename__ = 'referrals'
 
@@ -28,4 +29,10 @@ class Referral(db.Model):
                 db.select(User.last_name).where(Referral.referred_id == User.id)
             ).first(),
             'date_referred': self.date_referred
+        }
+    
+    def thread_headings(self):
+        return{
+            'id':self.id,
+            'shortlist_id': self.shortlist_id
         }
