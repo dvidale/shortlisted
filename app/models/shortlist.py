@@ -101,3 +101,19 @@ class Shortlist(db.Model):
             
             
         }
+    
+    def shortlisting_details(self):
+        return{
+        'id': self.id,
+        'creator_fname': db.session.scalars(
+            db.select(User.first_name).where(User.id == self.created_by_id)
+        ),
+        'creator_lname': db.session.scalars(
+            db.select(User.last_name).where(User.id == self.created_by_id)
+        ),
+        'creator_photo': db.session.scalars(
+            db.select(User.profile_img_url).where(User.id == self.created_by_id)
+        )
+
+        }
+
