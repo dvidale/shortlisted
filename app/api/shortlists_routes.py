@@ -138,27 +138,51 @@ def get_my_referrals(id):
         WHERE Comments.referral_id == referral_id
 
         WHERE referred_id == current_user_id
+
+        referral {
+        shortlist_info: "",
+        creator_info: "",
+        comments: []
+        }
     """
     
-    referred_user = User.query.get(id)
+    current_user = User.query.get(id)
     
-    stmt = db.session.execute(db.select(Shortlist.id, Shortlist.title, User.first_name).join(Shortlist.referrals).join(Shortlist.users).where(Referral.referred_id == referred_user.id))
-
-    for row in stmt:
-        print(f'{row.id},{row.title}, {row.first_name}')
+    """
+    get shortlist title, description, search details, 
+        creator first and last name, creator photo, and
+        ALSO
+        get a comments thread array for every shortlist where the current user is a referred user
+        
+    """
+    stmt = db.select(Shortlist.id, Shortlist.title, User.first_name, User.last_name, User.profile_img_url).join(Shortlist.referrals).join(Shortlist.users).where(Referral.referred_id == current_user.id).order_by(Referral.id)
     
-    
+    print(">>>stmt", stmt)
+
+    res = db.session.execute(stmt)
+
+    cmmts = db.session.scalars(
+        db.select(Referral).where(Referral.referred_id == current_user.id)
+    ).all()
 
 
-
-    # referral_details = [referral.with_details() for referral in my_referrals]
-    
-
-    
-
-    
-
-    return {"msg":"ok"}
+    ref_lst = []
+    i=0
+    for row in res:
+        
+        ref_obj = {
+            'shortlist_id': row.id,
+            'shortlist_title': row.title,
+            'creator_fname': row.first_name,
+            'creator_lname': row.last_name,
+            'creator_photo': row.profile_img_url,
+            'comment_thread': [comment.to_dict() for comment in cmmts[i].comments]
+        }
+        if len(ref_obj['comment_thread']) > 0:
+            ref_lst.append(ref_obj)
+        i+=1
+  
+    return ref_lst, 200
 
 ## * UPDATE A SHORTLIST
 
