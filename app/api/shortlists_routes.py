@@ -117,6 +117,7 @@ def getShortlists(id):
 
 
 #  *GET MY REFERRAL THREADS
+
 @shortlists_routes.route('/my-referrals/<int:id>')
 def get_my_referrals(id):
     """
@@ -141,18 +142,23 @@ def get_my_referrals(id):
     
     referred_user = User.query.get(id)
     
-    my_referrals_shortlist_ids = db.session.scalars(
-            db.select(Referral.shortlist_id).where(Referral.referred_id == referred_user.id)
-        ).all()
+    stmt = db.session.execute(db.select(Shortlist.id, Shortlist.title, User.first_name).join(Shortlist.referrals).join(Shortlist.users).where(Referral.referred_id == referred_user.id))
+
+    for row in stmt:
+        print(f'{row.id},{row.title}, {row.first_name}')
     
-    stmt = db.select(Referral).join(Referral.shortlists).join(Shortlist.comments)
-    print(">>>> stmt", stmt)
+    
+
+
+
+    # referral_details = [referral.with_details() for referral in my_referrals]
+    
 
     
 
     
 
-    return []
+    return {"msg":"ok"}
 
 ## * UPDATE A SHORTLIST
 
