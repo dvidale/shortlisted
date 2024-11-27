@@ -1,6 +1,7 @@
 const BUILD_SHORTLIST = '/shortlists/BUILD_SHORTLIST'
 const SAVE_SHORTLIST = '/shortlists/SAVE_SHORTLIST'
 const GET_SHORTLISTS = '/shortlists/GET_SHORTLISTS'
+const GET_MY_REFERRALS = '/shortlists/GET_MY_REFERRALS'
 const UPDATE_SHORTLIST = '/shortlists/UPDATE_SHORTLIST'
 const DELETE_SHORTLIST = '/shortlists/DELETE_SHORTLIST'
 const RESET_SHORTLISTS = '/shortlists/RESET_SHORTLISTS'
@@ -31,6 +32,15 @@ export const getMyShortlists = (data) =>{
         type: GET_SHORTLISTS,
         payload: data
     }
+}
+
+export const getMyReferrals = (data) =>{
+
+    return {
+        type: GET_MY_REFERRALS,
+        payload: data
+    }
+
 }
 
 export const updateAShortlist = (data) =>{
@@ -140,6 +150,35 @@ if(response.ok){
 
 }
 
+export const getReferrals = (id) => async (dispatch) =>{
+
+    const url = `/api/shortlists/my-referrals/${id}`
+    
+    const response = await fetch(url);
+
+    if(response.ok){
+        const data = await response.json()
+
+        dispatch(getMyReferrals(data['referral_threads']))
+    }
+    else if(response.status === 404){
+        const noMessages = await response.json()
+
+        return noMessages
+    }
+    else{
+        const serverError = await response.json()
+
+        return serverError
+    }
+    
+
+
+}
+
+
+
+
 
 export const updateShortlist = (id, formData) => async (dispatch) => {
 
@@ -220,7 +259,7 @@ dispatch(resetShortlists())
       REDUCER
 ---------------------*/
 
-const initialState = { parameters: {}, results_pre_avail: [], saved_lists:{}}
+const initialState = { parameters: {}, results_pre_avail: [], saved_lists:{}, my_referrals:{}}
 
 const shortlistsReducer = (state = initialState, action) =>{
     switch(action.type){
@@ -257,6 +296,14 @@ const shortlistsReducer = (state = initialState, action) =>{
             const newState ={...state}
             const id = action.payload
             delete newState.saved_lists[id];
+            return newState;
+        }
+        case GET_MY_REFERRALS:{
+            const newState = {...state}
+            action.payload.forEach( thread =>{
+                newState.my_referrals[thread['shortlist_id']] = thread
+            })
+
             return newState;
         }
         case CLEAR_SEARCH:{

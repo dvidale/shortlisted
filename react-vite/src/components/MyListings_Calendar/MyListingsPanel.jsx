@@ -1,7 +1,23 @@
 import './listings-calendar.css'
+import { useSelector, useDispatch } from 'react-redux'
+import {useEffect} from 'react'
+import { getReferrals} from '../../redux/shortlists'
+
 
 function MyListingsPanel(){
+    
+    const my_referrals = useSelector(state => state.shortlists.my_referrals)
   
+    const user = useSelector(state => state.session.user)
+
+    const dispatch = useDispatch()
+    
+    useEffect(()=>{
+
+        dispatch(getReferrals(user.id))
+
+    },[dispatch, user.id])
+
     const names_lists =[
 
         { name:'Naina Raj' ,
@@ -30,6 +46,16 @@ function MyListingsPanel(){
                 by {shortlist.name} <button className='smaller-btn'>Comment</button>
                 </div>
         ))}
+        {
+            Object.values(my_referrals).map( referral =>(
+            <div key={referral.shortlist_id} className="listing-and-button">
+                <div>{referral.shortlist_title}</div>
+            </div>
+
+            )
+
+            )
+        }
         </div>
         </>
     )
