@@ -84,7 +84,7 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'email': self.email,
             'phone_number': self.phone_number,
-            'job_titles': [ title.job_title for title in self.job_titles],
+            'job_title': [ title.job_title for title in self.job_titles],
             'industry_areas': [name.industry_area for name in self.industry_areas ],
             'genres':[ name.genre_name for name in self.genres ],
             'locations': [name.city for name in self.locations],

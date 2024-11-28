@@ -8,6 +8,7 @@ import BookingsPanel from './BookingsPanel'
 import MyListingsPanel from './MyListingsPanel'
 
 
+
 function MyListings_Calendar(){
 
 const user = useSelector(state => state.session.user)
@@ -28,6 +29,7 @@ const bannerImgStyle = {
 useEffect(()=>{
 
     dispatch(getMyBookings(user.id))
+  
 
 },[dispatch,user.id])
 
