@@ -168,6 +168,12 @@ align-self: flex-start;
 min-width: 310px;
 }
 
+.user-avatar{
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+}
+
 #new-shortlist-btn{
     display: flex;
     justify-content: center;

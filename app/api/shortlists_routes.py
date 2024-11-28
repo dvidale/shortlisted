@@ -115,6 +115,87 @@ def getShortlists(id):
 
     return [shortlist.single_view() for shortlist in shortlist_query]
 
+
+#  *GET MY REFERRAL THREADS
+
+@shortlists_routes.route('/my-referrals/<int:id>')
+def get_my_referrals(id):
+    """
+    - get shortlist title, description, search details, 
+        creator first and last name, creator photo, and
+        specific thread for the referred user for every shortlist where the current user is a referred user
+
+        SELECT Shortlist.title, Shortlist.description, etc
+        FROM Shortlists
+        JOIN Referrals ON Shortlist.id == referral.shortlist_id
+
+        SELECT User.first_name, User.last_name, User.profile_img
+        FROM Users
+        WHERE Shortlist.createdby_id == user.id
+
+        SELECT Comments
+        FROM Comments
+        WHERE Comments.referral_id == referral_id
+
+        WHERE referred_id == current_user_id
+
+        referral {
+        shortlist_info: "",
+        creator_info: "",
+        comments: []
+        }
+    """
+    
+    current_user = User.query.get(id)
+    
+    """
+    get shortlist title, description, search details, 
+        creator first and last name, creator photo, and
+        ALSO
+        get a comments thread array for every referral where the current user is a referred user
+        
+    """
+    # TODO - This could be a single eager loaded query, but I took too long realizing I need to use SQLAlchemy v1.4 syntax instead of v2.0 to do it now
+    # TODO - Also consider rewriting as a method on a model
+    # TODO - I would much rather the comment threads be organized in an object for more performant updating
+    try:
+        stmt = db.select(Shortlist.id, Shortlist.title, User.first_name, User.last_name, User.profile_img_url).join(Shortlist.referrals).join(Shortlist.users).where(Referral.referred_id == current_user.id).order_by(Referral.id)
+        
+        results = db.session.execute(stmt)
+
+        user_referrals = db.session.scalars(
+            db.select(Referral).where(Referral.referred_id == current_user.id)
+        ).all()
+
+        ref_lst = []
+        i=0
+        for row in results:
+            
+            ref_obj = {
+                'shortlist_id': row.id,
+                'shortlist_title': row.title,
+                'createdby_fname': row.first_name,
+                'createdby_lname': row.last_name,
+                'createdby_photo': row.profile_img_url,
+                'comment_thread': [comment.to_dict() for comment in user_referrals[i].comments]
+            }
+            if len(ref_obj['comment_thread']) > 0:
+                ref_lst.append(ref_obj)
+            i+=1
+    
+        res_obj = {
+            'referral_threads': ref_lst
+        }
+
+        if len(res_obj['referral_threads']) > 0:
+            return res_obj, 200
+        else:
+            return {'error': 'No messages'}, 404
+    except:
+        return {'error': 'There was an error getting the referral messages'}, 500
+
+    
+
 ## * UPDATE A SHORTLIST
 
 @shortlists_routes.route('<int:id>', methods = ['PUT'])
