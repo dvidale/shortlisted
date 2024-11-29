@@ -36,8 +36,7 @@ const switchShortlistAndReset = (e)=>{
                             
                                 {/* if current shortlist_id in single view  matches this btn shortlist_id, change the style to .clicked */}
                             <button className={shortlist.id == shortlistIdx ? 'shortlist-btn-clicked' : 'shortlist-btn'} value={shortlist.id}
-                            onClick={ e => {
-                                switchShortlistAndReset(e)    }}
+                            onClick={ e => { switchShortlistAndReset(e) }}
                 
                             > 
                             {shortlist.title} </button>
