@@ -45,7 +45,7 @@ useEffect(()=>{
 
 <div className={'profile-img-container'} style={bannerImgStyle}> </div>
 
-<div></div>
+
 <h1>Me, Shortlisted</h1>
 
 <MyListingsPanel/>
