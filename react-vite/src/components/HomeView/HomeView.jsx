@@ -195,7 +195,6 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
               toggleFormView={toggleFormView}
               setShortlistIdx={setShortlistIdx}
               showSearchResults={showSearchResults}
-              searchSubmitted={searchSubmitted}
               setShowShortlists={setShowShortlists}
               setIsLoading={setIsLoading}
               isLoading={isLoading}

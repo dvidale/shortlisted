@@ -6,7 +6,7 @@ import './search-results.css'
 import '../SingleShortlistView/single-shortlist.css'
 import SearchResultTile from "./SearchResultTile"
 
-function SearchResultsView({user, searchSubmitted, toggleFormView, setShowShortlists, setIsLoading, setShowSearchResults}){
+function SearchResultsView({user, toggleFormView, setShowShortlists, setIsLoading, setShowSearchResults}){
 
     const dispatch = useDispatch()
 
@@ -166,23 +166,20 @@ function SearchResultsView({user, searchSubmitted, toggleFormView, setShowShortl
             <label htmlFor="description">Add a Description</label>
             <div>
             <textarea id='edit-shortlist-desc' name="description" className="save-shortlist-desc" placeholder="Add any notes about the job." value={description} 
-            maxLength={200}onChange={e => setDescription(e.target.value)}/>
+            maxLength={200} onChange={e => setDescription(e.target.value)}/>
      <p className="error">{errors.description}</p>
             </div>
         </form>
         
-        {searchSubmitted &&
-        <SearchDetails searchSubmitted={searchSubmitted} params={searchParams}/>
+        <SearchDetails params={searchParams}/>
         
-        }
-        
-        {searchSubmitted && avail_filtered_results.length === 0 && <p>Sorry, none of your connections match this search.</p>}
+        {avail_filtered_results.length === 0 && <p>Sorry, none of your connections match this search.</p>}
        
-        {searchSubmitted === false && <p>Enter job details in the search to see who is available.</p>}
+       
         {/*  Array.map of returned results tiles */}
-        { searchSubmitted && avail_filtered_results.length > 0 && <p className="result-count">{avail_filtered_results.length} of your peers are available</p>}
+        { avail_filtered_results.length > 0 && <p className="result-count">{avail_filtered_results.length} of your peers are available</p>}
         <div className="results-box">
-        {searchSubmitted && avail_filtered_results.length > 0 && avail_filtered_results.map( result =>{
+        {avail_filtered_results.length > 0 && avail_filtered_results.map( result =>{
             return (
             
                 <div key={result.id}><SearchResultTile resultFirstName={result.first_name} resultLastName={result.last_name}/></div>
