@@ -24,8 +24,10 @@ function MyListingsPanel(){
         <>
         <div className='my-listings'>
         
+        { Object.values(my_referrals).length > 0 ? (<>
         {
-            Object.values(my_referrals).map( referral =>(
+
+         Object.values(my_referrals).map( referral =>(
             <div key={referral.shortlist_id} className="listing-and-button">
                 <div className="referral-thread-tile">
                     <div> • </div>
@@ -42,7 +44,12 @@ function MyListingsPanel(){
 
             )
 
-            )
+            )        
+        }
+         </>):(<>
+         No shortlistings yet.
+         </>)
+           
         }
         </div>
         </>
