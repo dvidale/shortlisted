@@ -14,6 +14,7 @@ const switchShortlistAndReset = (e)=>{
 
     setShortlistIdx(e.target.value)
     setShowSearchResults(false)
+    
 }
 
     
