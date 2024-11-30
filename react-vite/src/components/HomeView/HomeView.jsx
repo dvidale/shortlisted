@@ -32,6 +32,7 @@ function HomeView() {
 
   const saved_shortlists = useSelector((state) => state.shortlists.saved_lists);
   const user_bookings = useSelector(state => state.bookings.user_bookings)
+  
   let showSearchForm = saved_shortlists ? false : true
 
 
@@ -54,7 +55,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [isLoading, setIsLoading] = useState(false)
   const [showProfile, setShowProfile ] = useState(false);
 
-
+  console.log("showShortlists:", showShortlists);
   
 
 
