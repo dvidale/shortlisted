@@ -185,13 +185,16 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           </div>
           }
 
+
+          <div id='user-profile'
+          className="center-panel"
+          style={{display: centerPanel === 'profile' ? 'flex' : 'none' }}>
+            <ProfileComponent user={user}/></div>
+
           <div id="my-listings-calendar-placeholder" className="right-panel">
             <MyListings_Calendar />
           </div>
-
-          {centerPanel === 'profile' && <div>
-            <ProfileComponent user={user}/></div>}
-
+          
           {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">
             <MobileNavBtns/>
           </div>}
