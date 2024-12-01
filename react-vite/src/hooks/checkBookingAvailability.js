@@ -1,10 +1,13 @@
-import { useSelector } from "react-redux";
+import { useContext } from "react"
+import { PanelViews } from "../context/PanelView"
 
-export function useAvailFilter({setShowShortlists, setIsLoading, setShowSearchResults}){
 
-    const searchResults = useSelector(state => state.shortlists.results_pre_avail)
 
-    const searchParams = useSelector(state => state.shortlists.parameters)
+export function useAvailFilter({setIsLoading, searchResults, searchParams}){
+    
+    
+    const { setCenterPanel } = useContext(PanelViews)
+    
 
     function availCheck(connection){
 
@@ -46,12 +49,15 @@ export function useAvailFilter({setShowShortlists, setIsLoading, setShowSearchRe
         return noConflict;
     }
 
-    const avail_filtered_results = searchResults.filter(connection => availCheck(connection))
-        
-    setIsLoading(false)
-    setShowSearchResults(true)
-    setShowShortlists(false)
+    let avail_filtered_results = []
     
+    if(searchResults !== null || searchResults.length > 0){
+        avail_filtered_results = searchResults.filter(connection => availCheck(connection))
+
+        setIsLoading(false)
+        setCenterPanel('search-results')
+    }
+   
 
     return avail_filtered_results
 
