@@ -1,20 +1,19 @@
 
 import '../../../src/index.css'
+import { useContext } from 'react'
+import { PanelViews } from '../../context/PanelView'
 
+function MyShortlists({shortlistIdx, setShortlistIdx, saved_shortlists, setEditForm}){
 
+    const {setCenterPanel} = useContext(PanelViews)  
 
-function MyShortlists({shortlistIdx, setShortlistIdx, saved_shortlists, setEditForm,setShowSearchResults, setShowShortlists }){
-
-    
-
+    // TODO: Replace the EditForm logic with absolute positioned form fields over the title and description areas
      
 const switchShortlistAndReset = (e)=>{
-    setShowShortlists(true)
+    setCenterPanel('single-shortlist')
     setEditForm(false)
-
     setShortlistIdx(e.target.value)
-    setShowSearchResults(false)
-    
+
 }
 
     
@@ -30,7 +29,6 @@ const switchShortlistAndReset = (e)=>{
 
                     return(
 
-                    
                         <div key={shortlist.id} 
                         
                         className={shortlist.id == shortlistIdx ?'title-and-button-pairs-clicked': 'title-and-button-pairs'}>
@@ -42,11 +40,6 @@ const switchShortlistAndReset = (e)=>{
                             > 
                             {shortlist.title} </button>
                     
-                            
-                             {/* <div className={shortlist.id != shortlistIdx ?'edit-delete-list-btns': 'edit-delete-list-btns-hidden'}>
-                                <button>EDIT</button>
-                                <button>DELETE</button>
-                            </div> */}
                         </div>
                        
         

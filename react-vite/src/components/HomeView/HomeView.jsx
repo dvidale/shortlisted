@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive'
 import SearchConnectionsForm from "../SearchConnectionsForm/SearchConnectionsForm";
 import SearchResultsView from "../SearchResultsView/SearchResultsView";
 import { useSelector, useDispatch } from "react-redux";
-import { createContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { fetchShortlists } from "../../redux/shortlists";
 import { FaPlusCircle } from "react-icons/fa";
 import { FaMinusCircle } from "react-icons/fa";
@@ -16,8 +16,9 @@ import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
 import MobileNavBtns from "../MobileNavBtnsComponent/MobileNavBtns"
 import BookingsPanel from "../MyListings_Calendar/BookingsPanel";
 import ProfileComponent from "../ProfileComponent/ProfileComponent";
+import { PanelViews } from "../../context/PanelView";
 
-export const DisplayContext = createContext({displayShortlists:false})
+
 
 
 
@@ -30,12 +31,11 @@ function HomeView() {
 
   const user = useSelector((state) => state.session.user);
 
+  const { centerPanel, setCenterPanel, leftPanel, setLeftPanel } = useContext(PanelViews)
+
   const saved_shortlists = useSelector((state) => state.shortlists.saved_lists);
   const user_bookings = useSelector(state => state.bookings.user_bookings)
   
-  let showSearchForm = saved_shortlists ? false : true
-
-
   const shortlists_state = useSelector((state) => state.shortlists);
 
   let newestIdx;
@@ -47,42 +47,26 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
   const [editForm, setEditForm] = useState(false);
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
-  const [searchFormView, setSearchFormView] = useState( showSearchForm || false);
-  const [showSearchResults, setShowSearchResults] = useState(false);
-  const [searchSubmitted, setSearchSubmitted ] = useState(false)
-  const [showShortlists, setShowShortlists] = useState(false)
-  const [showCalendar, setShowCalendar] = useState(false)
+
+ 
   const [isLoading, setIsLoading] = useState(false)
-  const [showProfile, setShowProfile ] = useState(false);
 
-  console.log("showShortlists:", showShortlists);
+
   
-
-
-  const resetSearchForm =()=> {
-    return true
-
-  }
-
-
   const toggleFormView = () => {
     setToggleSymbol(!toggleSymbol);
-    setSearchFormView(!searchFormView);
-    setSearchSubmitted(false)
-    setShowSearchResults(false)
 
-    
+    if(leftPanel === 'my-shortlists'){
+      setLeftPanel('shortlist-search')
+    }else{
+      setLeftPanel('my-shortlists')
+    }
 
+    setCenterPanel('recent-activity')
+  
   };
 
-  const viewSearchForm = () => {
-    setSearchFormView(true)
-    setSearchSubmitted(false)
-    setShowSearchResults(false)
-    setShowShortlists(false)
-    setShowCalendar(false)
-    setShowProfile(false)
-  }
+  
 
 
   useEffect(()=>{},[shortlists_state])
@@ -90,7 +74,6 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
   useEffect(() => {
     if (user) {
-      setShowShortlists(false)
       dispatch(fetchShortlists(user.id));
     }
   }, [dispatch, user]);
@@ -99,7 +82,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
     if (saved_shortlists && user) {
       dispatch(getCommentThreads(user.id));
       setShortlistIdx(newestIdx)
-    
+
     }
 
     
@@ -133,15 +116,9 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
 
             <div
               id="build-shortlist-form"
-              style={{display: searchFormView && !(isTabletOrMobile && showSearchResults) ? 'flex' : 'none'}}
+              style={{display: leftPanel === 'shortlist-search' || centerPanel === 'shortlist-search' ? 'flex' : 'none'}}
             >
               <SearchConnectionsForm
-                user={user}
-                searchFormView={searchFormView}
-                setSearchFormView={setSearchFormView}
-                setShowSearchResults={setShowSearchResults}
-                resetSearchForm={resetSearchForm}
-                setSearchSubmitted={setSearchSubmitted}
                 setIsLoading={setIsLoading}
                 isLoading={isLoading}
                 toggleSymbol={toggleSymbol}
@@ -154,16 +131,14 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           <div
           id="my-shortlists"
           className={'left-panel'}
-          style={{display: `${ searchFormView ? 'none' : 'flex'  }`}}
+          style={{display: leftPanel === 'my-shortlists' ? 'flex' : 'none'}}
+          
           >
               <MyShortlists
                 shortlistIdx={shortlistIdx}
                 setShortlistIdx={setShortlistIdx}
                 saved_shortlists={saved_shortlists}
                 setEditForm={setEditForm}
-                searchFormView={searchFormView}
-                setShowSearchResults={setShowSearchResults}
-                setShowShortlists={setShowShortlists}
                 />
             </div>
             }
@@ -173,47 +148,40 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           <div
             id="single-shortlist-view"
             className="center-panel"
-            
-            style={{display: `${ showShortlists ? 'flex' : 'none'}`}}
+            style={{display: centerPanel === 'single-shortlist' ? 'flex' : 'none'}}
           >
             <SingleShortlistView
               setEditForm={setEditForm}
               editForm={editForm}
               setShortlistIdx={setShortlistIdx}
               shortlistIdx={shortlistIdx}
-              showSearchResults={showSearchResults}
+              
             />
           </div>
 
           <div
             id="search-results-view"
             className='center-panel'
-            style={{display: showSearchResults && searchSubmitted ? 'flex' : 'none' }}
+            style={{display: centerPanel === 'search-results' ? 'flex' : 'none'}}
           >
             <SearchResultsView
               user={user}
-              setShowSearchResults={setShowSearchResults}
-              toggleFormView={toggleFormView}
-              setShortlistIdx={setShortlistIdx}
-              showSearchResults={showSearchResults}
-              setShowShortlists={setShowShortlists}
-              setIsLoading={setIsLoading}
-              isLoading={isLoading}
+              toggleSymbol={toggleSymbol}
+              setToggleSymbol={setToggleSymbol} 
             />
           </div>
 
-         
 
             <div id="recent-activity-view"
             className={'center-panel'}
-            style={{display: ((showSearchResults && searchSubmitted )|| showShortlists || (isTabletOrMobile && searchFormView) || (isTabletOrMobile && showCalendar) || showProfile ) ? 'none' : 'flex'}}
+            style={{display: centerPanel === 'recent-activity' ? 'flex' : 'none'}}
             >
               <RecentActivityFeed/>
             </div>
          
-            {isTabletOrMobile && showCalendar &&
+            {isTabletOrMobile && centerPanel === 'calendar' &&
           <div>
-            <BookingsPanel setShowCalendar={setShowCalendar} user_bookings={user_bookings}/>
+            <BookingsPanel user_bookings={user_bookings}/>
           </div>
           }
 
@@ -221,19 +189,11 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
             <MyListings_Calendar />
           </div>
 
-          {isTabletOrMobile && showProfile && <div>
+          {isTabletOrMobile && centerPanel === 'profile' && <div>
             <ProfileComponent user={user}/></div>}
 
           {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">
-            <MobileNavBtns
-            viewSearchForm={viewSearchForm}
-            setSearchFormView={setSearchFormView}
-            setShowShortlists={setShowShortlists}
-            setShowCalendar={setShowCalendar}
-            setShowSearchResults={setShowSearchResults}
-            setSearchSubmitted={setSearchSubmitted}
-            setShowProfile={setShowProfile}
-            />
+            <MobileNavBtns/>
           </div>}
 
            

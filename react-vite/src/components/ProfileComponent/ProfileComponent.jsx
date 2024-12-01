@@ -23,7 +23,7 @@ function ProfileComponent({user}){
         
         <div id="user-job-titles">
            <h2 className='profile-heading'> 
-            {user.job_titles.join(" • ")}
+            {user.job_title.join(" • ")}
             </h2> 
         </div>
         </div>
