@@ -1,13 +1,14 @@
 import './new-shortlist-form.css'
 import { useMediaQuery } from 'react-responsive'
-import { useEffect, useState} from 'react';
+import { useEffect, useState, useContext} from 'react';
 import { useDispatch} from 'react-redux'
 import { buildShortlist } from "../../redux/shortlists";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { clearSearch } from '../../redux/shortlists';
+import { PanelViews } from '../../context/PanelView';
 
-function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading, isLoading, toggleSymbol, setToggleSymbol}){
+function SearchConnectionsForm({ setIsLoading, isLoading, toggleSymbol, setToggleSymbol}){
 
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 1100px)'})   
 
@@ -22,10 +23,10 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
     
     const [errors, setErrors] = useState({})
 
-    
+    const { leftPanel, setCenterPanel } = useContext(PanelViews)
 
     useEffect(()=>{
-        if(searchFormView === false){
+        if(leftPanel !== 'shortlist-search'){
             setLocation('')
             setIndustryArea('')
             setJobTitle('')
@@ -36,7 +37,10 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
             dispatch(clearSearch())
         }
 
-    },[searchFormView, dispatch])
+    },[leftPanel, dispatch])
+
+
+
 
 
     // !BUG - if i set the job title and then switch it back to nothing, it can pass validation
@@ -86,13 +90,16 @@ function SearchConnectionsForm({setSearchSubmitted, searchFormView, setIsLoading
         .then( serverError =>{ if(serverError){
             setIsLoading(false)
             setErrors(serverError)
-            setSearchSubmitted(false)
+            
+            setCenterPanel('recent-activity')
         }else{
             if(isTabletOrMobile){
                 setToggleSymbol(!toggleSymbol)
             }
             // !BUG - the mobile view search submission flickers at the transition to the search results panel. Might b mor prevalent on the production server
-            setSearchSubmitted(true)     
+            setIsLoading(false)
+            
+            setCenterPanel('search-results')    
         } })
        
         

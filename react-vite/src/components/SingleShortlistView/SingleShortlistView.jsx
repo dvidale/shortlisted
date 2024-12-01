@@ -12,14 +12,14 @@ import DeleteShortlistModal from "../DeleteShortlistModal/DeleteShortlistModal";
 
 
 
-function SingleShortlistView({ setEditForm, editForm, shortlistIdx, setShortlistIdx, showSearchResults }) {
+function SingleShortlistView({ setEditForm, editForm, shortlistIdx, setShortlistIdx }) {
   const dispatch = useDispatch();
 
   const isTabletOrMobile = useMediaQuery({query: '(max-width: 1100px)'})
 
   const { setModalContent } = useModal();
 
-  // console.log("shortlistIdx at top of SingleShortListView", shortlistIdx);
+
 
   const [activeFields, setActiveFields] = useState("edit-off");
   const [formBorder, setFormBorder] = useState("border-off");
@@ -229,7 +229,7 @@ function SingleShortlistView({ setEditForm, editForm, shortlistIdx, setShortlist
           </form>
               <p className="error">{warnings.description}</p>
               
-          <SearchDetails params={shortlist} showSearchResults={showSearchResults} />
+          <SearchDetails params={shortlist}  />
          
           
           <div className='shortlist-comments-feed'>
