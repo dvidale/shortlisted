@@ -189,7 +189,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
             <MyListings_Calendar />
           </div>
 
-          {isTabletOrMobile && centerPanel === 'profile' && <div>
+          {centerPanel === 'profile' && <div>
             <ProfileComponent user={user}/></div>}
 
           {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">
