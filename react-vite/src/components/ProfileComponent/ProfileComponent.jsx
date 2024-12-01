@@ -11,6 +11,7 @@ function ProfileComponent({user}){
         position: 'relative', // Ensure the overlay is positioned correctly
     };
 
+   
 
     return (
         <div id='profile-container'>
@@ -44,6 +45,8 @@ function ProfileComponent({user}){
 
         <h3 id='links-title' className='profile-heading'>Links:</h3>
         <div>Resume | IMDB | Portfolio</div>
+
+  
 
         
         </div>

@@ -47,11 +47,15 @@ function ProfileButton() {
     closeMenu();
   };
 
+  const showProfile = () =>{
+    setCenterPanel('profile')
+    closeMenu();
+  }
+
   return (
     <>
       <button onClick={toggleMenu}>
-        {/* <FaUserCircle /> */}
-        <img className="user-avatar" src={user.profile_img_url}/>
+        <img className="user-avatar" src={user.profile_img_url}/> <div> My Account</div>
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
@@ -59,6 +63,7 @@ function ProfileButton() {
             <>
               <li>Hello, {user.first_name}.</li>
               <li>{user.email}</li>
+              <li><button onClick={()=>{ showProfile()}}> View Profile  </button></li>
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>
