@@ -1,13 +1,13 @@
-import { VscAccount } from "react-icons/vsc";
 
-function SearchResultTile ({resultFirstName, resultLastName}){
+
+function SearchResultTile ({resultFirstName, resultLastName, resultPhotoUrl}){
 
 
 
     return (
 
 <div className="search-result-tile">
-<VscAccount />
+<img className="user-avatar" src={resultPhotoUrl}/>
 {resultFirstName}{` `}{resultLastName}
 </div>
     )
