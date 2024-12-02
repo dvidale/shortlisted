@@ -37,7 +37,7 @@ function MyListingsPanel({setReferralListIdx}){
         {
 
          Object.values(my_referrals).map( referral =>(
-            <button key={referral.shortlist_id} className="listing-and-button"
+            <div key={referral.shortlist_id} className="listing-and-button"
             value={referral.shortlist_id}
             onClick={ (e) =>{ switchReferralList(e)  }}
             >
@@ -52,7 +52,7 @@ function MyListingsPanel({setReferralListIdx}){
                     <div className='comment-preview'>{referral.comment_thread[referral.comment_thread.length-1].text}</div>
                 </div>
                 </div>
-            </button>
+            </div>
 
             )
 

@@ -1,8 +1,10 @@
 from flask import Blueprint, request
-from app.models import User, db
+from app.forms import new_connection_form
+from app.models import User, db, Connection
 from app.forms.search_connections_form import SearchConnectionsForm
 import json
 from dateutil import parser
+from app.forms.new_connection_form import NewConnectionsForm
 
 connections_routes = Blueprint('connections', __name__)
 
@@ -68,4 +70,36 @@ def search_connections(id):
 
     # print(">>>>>0form errors:", searchForm.errors)
     return searchForm.errors, 400
-    
+
+# * CREATE CONNECTION
+@connections_routes.route('/new', methods=['POST'])
+def create_connection():
+
+    connectionForm = NewConnectionsForm()
+    connectionForm["csrf_token"].data = request.cookies["csrf_token"]
+
+    request_data = request.json
+    # .json turns request data into a dict
+
+    initiator_id = request_data['user_id']
+    invitee_id = request_data['connected_id']
+
+    connection_type = connectionForm.data['connection_type']
+    connection_context = connectionForm.data['connection_context']
+
+    if connectionForm.validate_on_submit():
+        try:
+
+            newConnection = Connection(
+                user_id = initiator_id,
+                connected_id = invitee_id,
+                connection_type = connection_type,
+                connection_context = connection_context,
+
+            )
+            db.session.add(newConnection)
+            db.session.commit()
+        except:
+            return {'error' : 'There was a problem creating the connection'}, 500
+
+    return {'error' : new_connection_form.errors}, 400

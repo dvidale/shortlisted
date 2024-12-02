@@ -1,0 +1,1 @@
+const GET_MY_REFERRALS = '/referrals/GET_MY_REFERRALS'
