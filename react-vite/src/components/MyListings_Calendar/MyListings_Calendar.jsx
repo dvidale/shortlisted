@@ -9,7 +9,7 @@ import MyListingsPanel from './MyListingsPanel'
 
 
 
-function MyListings_Calendar(){
+function MyListings_Calendar({setReferralListIdx}){
 
 const user = useSelector(state => state.session.user)
 const user_bookings = useSelector(state => state.bookings.user_bookings)
@@ -48,7 +48,7 @@ useEffect(()=>{
 
 <h1>Me, Shortlisted</h1>
 
-<MyListingsPanel/>
+<MyListingsPanel setReferralListIdx={setReferralListIdx}/>
 </div>
       
     <BookingsPanel user_bookings={user_bookings}/>

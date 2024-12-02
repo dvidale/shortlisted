@@ -16,6 +16,7 @@ import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
 import MobileNavBtns from "../MobileNavBtnsComponent/MobileNavBtns"
 import BookingsPanel from "../MyListings_Calendar/BookingsPanel";
 import ProfileComponent from "../ProfileComponent/ProfileComponent";
+import ReferralShortlistView from "../ReferralShortlistView/ReferralShortlistView";
 import { PanelViews } from "../../context/PanelView";
 
 
@@ -47,7 +48,8 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
   const [editForm, setEditForm] = useState(false);
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
-
+  const [referralListIdx, setReferralListIdx ] = useState(null)
+console.log("referral state:", referralListIdx);
  
   const [isLoading, setIsLoading] = useState(false)
 
@@ -178,6 +180,12 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
             >
               <RecentActivityFeed/>
             </div>
+
+           <div id="referral-shortlist-view"
+           className={"center-panel"}
+           style={{display: centerPanel === 'referral-shortlist' ? 'flex' : 'none'}}>
+            <ReferralShortlistView referralListIdx={referralListIdx}/>
+            </div> 
          
             {isTabletOrMobile && centerPanel === 'calendar' &&
           <div>
@@ -192,7 +200,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
             <ProfileComponent user={user}/></div>
 
           <div id="my-listings-calendar-placeholder" className="right-panel">
-            <MyListings_Calendar />
+            <MyListings_Calendar setReferralListIdx={setReferralListIdx} />
           </div>
           
           {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">

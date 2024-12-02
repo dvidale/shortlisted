@@ -159,7 +159,7 @@ def get_my_referrals(id):
     # TODO - Also consider rewriting as a method on a model
     # TODO - I would much rather the comment threads be organized in an object for more performant updating
     try:
-        stmt = db.select(Shortlist.id, Shortlist.title, User.first_name, User.last_name, User.profile_img_url).join(Shortlist.referrals).join(Shortlist.users).where(Referral.referred_id == current_user.id).order_by(Referral.id)
+        stmt = db.select(Shortlist.id, Shortlist.title, Shortlist.description, User.first_name, User.last_name, User.profile_img_url).join(Shortlist.referrals).join(Shortlist.users).where(Referral.referred_id == current_user.id).order_by(Referral.id)
         
         results = db.session.execute(stmt)
 
@@ -174,6 +174,7 @@ def get_my_referrals(id):
             ref_obj = {
                 'shortlist_id': row.id,
                 'shortlist_title': row.title,
+                'shortlist_desc': row.description,
                 'createdby_fname': row.first_name,
                 'createdby_lname': row.last_name,
                 'createdby_photo': row.profile_img_url,
