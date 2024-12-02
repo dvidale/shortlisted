@@ -1,13 +1,13 @@
 import './listings-calendar.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useContext } from 'react'
-import { getReferrals} from '../../redux/shortlists'
+import { getReferrals} from '../../redux/my-referrals'
 import { PanelViews } from '../../context/PanelView'
 
 
 function MyListingsPanel({setReferralListIdx}){
     
-    const my_referrals = useSelector(state => state.shortlists.my_referrals)
+    const my_referrals = useSelector(state => state.referrals.referral_details)
     
     const user = useSelector(state => state.session.user)
 
