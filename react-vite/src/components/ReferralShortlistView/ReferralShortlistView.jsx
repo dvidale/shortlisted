@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 
 function ReferralShortlistView({referralListIdx}){
 
-    const shortlist = useSelector( state => state.shortlists.my_referrals[referralListIdx])
+    const shortlist = useSelector( state => state.referrals.referral_details[referralListIdx])
    
 
 return (
