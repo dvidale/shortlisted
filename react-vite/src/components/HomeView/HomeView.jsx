@@ -50,7 +50,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
   const [referralListIdx, setReferralListIdx ] = useState(null)
 
-console.log("referral state:", referralListIdx);
+
  
   const [isLoading, setIsLoading] = useState(false)
 

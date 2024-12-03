@@ -104,6 +104,10 @@ color: var(--light-text);
 /* border: 1px solid blue; */
   }
 
+  .comment-thread{
+border-top: 1px solid white;
+margin-top: 10px;
+  }
   .avatar{
     /* border: 1px solid red; */
     grid-column: 1;
