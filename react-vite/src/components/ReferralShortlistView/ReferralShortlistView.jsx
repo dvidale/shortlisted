@@ -16,11 +16,12 @@ return (
     
 <>    
    
-    <div>{referral.shortlist_title}</div>
+    <div>{referral.createdby_fname} {referral.createdby_lname}{`'s`} Shortlist:</div>
+    <div> <h2 className="panel-heading">{referral.shortlist_title}</h2> </div>
+
     <div>{referral.shortlist_desc}</div>
-    
-     <div><img className="user-avatar" src={referral.createdby_photo}/></div>
-    <div>{referral.createdby_fname} {referral.createdby_lname}</div>
+
+    <div>{referral.createdby_fname}</div>
     <div className={'comment-thread'}>
         <ReferralShortlistMsgs referral={referral}/>
     </div>
