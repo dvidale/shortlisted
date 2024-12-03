@@ -49,6 +49,7 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
   const [editForm, setEditForm] = useState(false);
   const [toggleSymbol, setToggleSymbol] = useState(`+`);
   const [referralListIdx, setReferralListIdx ] = useState(null)
+
 console.log("referral state:", referralListIdx);
  
   const [isLoading, setIsLoading] = useState(false)
@@ -195,8 +196,8 @@ console.log("referral state:", referralListIdx);
 
 
           <div id='user-profile'
-          className="center-panel"
-          style={{display: centerPanel === 'profile' ? 'flex' : 'none' }}>
+          className={"center-panel"}
+          style={{display: centerPanel === 'user-profile' ? 'flex' : 'none' }}>
             <ProfileComponent user={user}/></div>
 
           <div id="my-listings-calendar-placeholder" className="right-panel">

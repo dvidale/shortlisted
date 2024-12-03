@@ -48,7 +48,7 @@ function ProfileButton() {
   };
 
   const showProfile = () =>{
-    setCenterPanel('profile')
+    setCenterPanel('user-profile')
     closeMenu();
   }
 
@@ -63,7 +63,7 @@ function ProfileButton() {
             <>
               <li>Hello, {user.first_name}.</li>
               <li>{user.email}</li>
-              <li><button onClick={()=>{ showProfile()}}> View Profile  </button></li>
+              <li><button onClick={ () => showProfile() }> View Profile </button></li>
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>
