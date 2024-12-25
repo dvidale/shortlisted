@@ -8,6 +8,7 @@ import SignupFormModal from "../SignupFormModal";
 import { resetShortlistState } from "../../redux/shortlists";
 import { resetCommentsState } from "../../redux/comments";
 import { PanelViews } from "../../context/PanelView";
+import { resetReferralThreads } from "../../redux/my-referrals";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(resetShortlistState())
     dispatch(resetCommentsState())
+    dispatch(resetReferralThreads())
     dispatch(thunkLogout())
     closeMenu();
   };

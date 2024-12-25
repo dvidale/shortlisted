@@ -1,4 +1,5 @@
 const GET_MY_REFERRALS = '/referrals/GET_MY_REFERRALS'
+const RESET_REFERRAL_THREADS = '/referrals/RESET_REFERRAL_THREADS'
 
 export const getMyReferrals = (data) =>{
 
@@ -8,6 +9,16 @@ export const getMyReferrals = (data) =>{
     }
 
 }
+
+
+export const resetReferralThreads = () =>{
+
+    return {
+        type: RESET_REFERRAL_THREADS,
+        payroll: null
+    }
+}
+
 
 /*-------------------
        THUNKS
@@ -53,6 +64,10 @@ const myReferralsReducer = (state = initialState, action) =>{
                 newState.referral_details[thread['shortlist_id']] = thread
             })
 
+            return newState;
+        }
+        case RESET_REFERRAL_THREADS:{
+            const newState = {...state, referral_details:{}}
             return newState;
         }
         default:
