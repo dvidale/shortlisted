@@ -141,7 +141,7 @@ align-self: flex-start;
     /* border: 2px solid orange; */
     padding: 10px 20px;
     flex: 1;
-    min-width: 300px;
+    width: 400px;
     display:flex;
     flex-direction: column;
     }
@@ -152,7 +152,7 @@ align-self: flex-start;
     flex-direction: column;
     /* border: 2px solid white; */
     background: var(--dark-bg-3);
-    min-width: 300px;
+    width: 400px;
     border-radius: var(--panel-border);
     padding: 10px 40px;
     
@@ -164,7 +164,7 @@ align-self: flex-start;
     background: var(--tran-bg);
     border-radius: var(--panel-border);
     padding: 10px 30px;
-    min-width: 300px;
+    width: 300px;
     /* border: 2px solid yellowgreen; */
 }
 
