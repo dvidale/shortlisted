@@ -18,6 +18,7 @@ import BookingsPanel from "../MyListings_Calendar/BookingsPanel";
 import ProfileComponent from "../ProfileComponent/ProfileComponent";
 import ReferralShortlistView from "../ReferralShortlistView/ReferralShortlistView";
 import { PanelViews } from "../../context/PanelView";
+import MyListingsPanel from "../MyListings_Calendar/MyListingsPanel";
 
 
 
@@ -187,6 +188,12 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
            style={{display: centerPanel === 'referral-shortlist' ? 'flex' : 'none'}}>
             <ReferralShortlistView referralListIdx={referralListIdx}/>
             </div> 
+
+            <div id='referral-listings-view'
+            className={'center-panel'}
+            style={{display: centerPanel === 'my-listings' ? 'flex' : 'none'}}>
+              <MyListingsPanel setReferralListIdx={setReferralListIdx}/>
+            </div>
          
             {isTabletOrMobile && centerPanel === 'calendar' &&
           <div>
