@@ -19,6 +19,7 @@ import ProfileComponent from "../ProfileComponent/ProfileComponent";
 import ReferralShortlistView from "../ReferralShortlistView/ReferralShortlistView";
 import { PanelViews } from "../../context/PanelView";
 import MyListingsPanel from "../MyListings_Calendar/MyListingsPanel";
+import { getReferrals } from "../../redux/my-referrals";
 
 
 
@@ -44,33 +45,40 @@ function HomeView() {
 if(saved_shortlists && Object.keys(saved_shortlists).length > 0){
 newestIdx = Object.keys(saved_shortlists).reverse()[0]
 }
+
+const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
+const [editForm, setEditForm] = useState(false);
+const [toggleSymbol, setToggleSymbol] = useState(`+`);
+const [referralListIdx, setReferralListIdx ] = useState(null)
+
+
+
+const [isLoading, setIsLoading] = useState(false)
+
+
+
+const toggleFormView = () => {
+  setToggleSymbol(!toggleSymbol);
   
-
-  const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
-  const [editForm, setEditForm] = useState(false);
-  const [toggleSymbol, setToggleSymbol] = useState(`+`);
-  const [referralListIdx, setReferralListIdx ] = useState(null)
-
-
- 
-  const [isLoading, setIsLoading] = useState(false)
-
-
+  if(leftPanel === 'my-shortlists'){
+    setLeftPanel('shortlist-search')
+  }else{
+    setLeftPanel('my-shortlists')
+  }
   
-  const toggleFormView = () => {
-    setToggleSymbol(!toggleSymbol);
-
-    if(leftPanel === 'my-shortlists'){
-      setLeftPanel('shortlist-search')
-    }else{
-      setLeftPanel('my-shortlists')
-    }
-
-    setCenterPanel('recent-activity')
+  setCenterPanel('recent-activity')
   
-  };
+};
 
-  
+// Periodically check for new messages for shortlist creators and referrals every 10 seconds
+useEffect(()=>{
+  setInterval(() => {
+    dispatch(getCommentThreads(user.id))
+    dispatch(getReferrals(user.id))
+    console.log(">>> last messages check", new Date())
+  }, 10*1000);
+
+}, [user.id, dispatch])
 
 
   useEffect(()=>{},[shortlists_state])
