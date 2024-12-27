@@ -85,7 +85,7 @@ function CommentsTile({ shortlist, referralIdx }) {
 
       <div className="comment-form-container">
         <CommentForm
-          shortlist={shortlist}
+          shortlistIdx={shortlist.id}
           referralIdx={referralIdx}
           user={user}
         />

@@ -4,6 +4,7 @@ import CommentEditorModal from "../CommentEditorModal/CommentEditorModal";
 
 import DeleteCommentModal from "../DeleteCommentModal/DeleteCommentModal";
 import { useModal } from "../../context/Modal";
+import CommentForm from "../CommentFormComponent/CommentForm";
 import '../SingleShortlistView/single-shortlist.css'
 
 function ReferralShortlistMsgs({referral}){
@@ -34,7 +35,7 @@ function ReferralShortlistMsgs({referral}){
 
 
     return(
-        <>
+        <div id='referral-shortlist-view'>
         
         {
             Object.values(referral_thread_sorted).map(comment => {
@@ -83,10 +84,16 @@ function ReferralShortlistMsgs({referral}){
 
 
         }
+        <div className="comment-form-container">
+        <CommentForm
+          shortlistIdx={referral.shortlist_id}
+          referralIdx={referral.referral_id}
+          user={user}
+        />
+      </div>
         
         
-        
-        </>
+        </div>
 
 
 
