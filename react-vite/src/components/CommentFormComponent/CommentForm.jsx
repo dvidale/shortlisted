@@ -6,7 +6,7 @@ import '../SingleShortlistView/single-shortlist.css'
 
 import { addComment, getCommentThreads } from "../../redux/comments";
 
-function CommentForm({ shortlist, referralIdx, user }) {
+function CommentForm({ shortlistIdx, referralIdx, user }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ function CommentForm({ shortlist, referralIdx, user }) {
 
     if (Object.keys(err).length === 0) {
       const commentData = {
-        shortlist_id: shortlist.id,
+        shortlist_id: shortlistIdx,
         commenter_id: user.id,
         referral_id: referralIdx,
         text: text,
