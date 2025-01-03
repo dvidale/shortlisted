@@ -61,6 +61,21 @@ def add_comment():
         )
 
         db.session.add(newComment)
+
+        """
+        add a function in the CREATE comment route to use the referral id to look up the referred id and look at the corresponding user's hasMessages attribute and if it is not set to True, set it to True
+        """
+
+        def checkHasMessages():
+            return db.session.scalars(
+                db.select(User.hasMessages).join(Referral.referral_id).join(Comment.referral_id).where(Referral.referred_id == User.id)
+            )
+        
+        user_hasMessages = checkHasMessages()
+
+        print('>>>>user messages status', user_hasMessages)
+
+
         db.session.commit()
 
         newCommentFromDB = db.session.scalars(
