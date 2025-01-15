@@ -15,6 +15,7 @@ from .api.shortlists_routes import shortlists_routes
 from .api.comments_routes import comments_routes
 from .api.bookings_routes import bookings_routes
 
+
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
 # Setup login manager
@@ -100,3 +101,4 @@ def react_root(path):
 @app.errorhandler(404)
 def not_found(e):
     return app.send_static_file('index.html')
+
