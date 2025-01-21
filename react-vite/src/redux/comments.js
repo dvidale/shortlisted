@@ -4,11 +4,20 @@ const EDIT_A_COMMENT = '/comments/EDIT_A_COMMENT'
 const DELETE_A_COMMENT = '/comments/DELETE_A_COMMENT'
 const CLEAR_DELETED_THREAD = '/comments/CLEAR_DELETED_THREAD'
 const RESET_COMMENTS = '/comments/RESET_COMMENTS'
+const UPDATE_RECEIVED_MSGS_COUNT = '/comments_UPDATE_RECEIVED_MSGS_COUNT'
 
 export const getAllCommentThreads = (data)=>{
     return {
         type: GET_ALL_COMMENT_THREADS,
         payload:data
+    }
+}
+
+export const updateReceivedMsgsCount = (data) =>{
+
+    return{
+        type: UPDATE_RECEIVED_MSGS_COUNT,
+        payload: data
     }
 }
 
@@ -50,6 +59,22 @@ export const resetComments = () => {
 /*-------
 THUNKS
 -------*/
+
+export const getReceivedMsgsCount = (id) => async (dispatch) => {
+
+const url = `/api/receivedmsgs/${id}`
+
+const response = await fetch(url)
+
+if(response.ok){
+
+    const data = await response.json()
+
+    dispatch(updateReceivedMsgsCount(data))
+}
+
+}
+
 
 export const getCommentThreads = (id) => async (dispatch) => {
 
@@ -141,10 +166,16 @@ dispatch(resetComments())
         REDUCER
 -------------------*/
 
-const initialState = { comment_threads: {} }
+const initialState = { receivedMsgs: 0, comment_threads: {} }
 
 const commentsReducer = (state = initialState, action ) =>{
     switch(action.type){
+        case UPDATE_RECEIVED_MSGS_COUNT:{
+            const newState = {...state}
+            newState.receivedMsgs = action.payload
+
+            return newState
+        }
 
         case GET_ALL_COMMENT_THREADS:{
             const newState = {...state}
