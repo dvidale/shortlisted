@@ -71,9 +71,12 @@ const toggleFormView = () => {
 };
 
 // Periodically check for new messages for shortlist creators and referrals every 10 seconds
-useEffect(()=>{
-  if(user){
 
+const receivedMsgsCount = useSelector( state => state.comments.receivedMsgs)
+
+
+useEffect(()=>{
+  if(user && receivedMsgsCount > 0){
 
     setInterval(() => {
       dispatch(getCommentThreads(user.id))
@@ -82,7 +85,7 @@ useEffect(()=>{
     }, 10*1000);
   }
 
-}, [user, dispatch])
+}, [user, dispatch, receivedMsgsCount])
 
 
   useEffect(()=>{},[shortlists_state])
