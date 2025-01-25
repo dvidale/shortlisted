@@ -44,6 +44,7 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(resetShortlistState())
     .then(()=> dispatch(resetCommentsState()))
+    .then(()=> dispatch(resetReferralThreads()))
     .then(()=> dispatch(thunkLogout()))
     .then(()=> closeMenu())
     
