@@ -26,6 +26,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_img_url = db.Column(db.String(255))
+    receivedMsgs = db.Column(db.Integer, server_default='0')
     createdAt = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updatedAt = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
@@ -90,7 +91,6 @@ class User(db.Model, UserMixin):
             'locations': [name.city for name in self.locations],
             'bookings': [(booking.start_date, booking.end_date) for booking in self.bookings],
             'profile_img_url': self.profile_img_url
-
         }
     
     def search_result(self):
