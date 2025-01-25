@@ -33,6 +33,13 @@ def get_comments(id):
     return nonempty_threads
 
 
+# * GET CURRENT VALUE FOR CURRENT USER'S RECEIVED MESSAGES COUNT
+@comments_routes.route('/receivedmsgs/<int:id>', methods=['GET'])
+def received_msgs_count(id):
+
+    current_user = User.query.get(id)
+    print(">>>receivedMsgs", current_user.receivedMsgs)
+    return {'receivedMsgsCount':current_user.receivedMsgs}, 200
 
 
 # * CREATE A NEW COMMENT
@@ -62,6 +69,20 @@ def add_comment():
 
         db.session.add(newComment)
         db.session.commit()
+        
+        def setUserHasMessages():
+
+            commentRecipient = db.session.scalars(
+                db.select(User).join(Referral).where(Referral.id == referral_id)
+            ).one()
+
+            commentRecipient.receivedMsgs += 1
+
+            db.session.commit()
+
+            return None
+           
+        setUserHasMessages()
 
         newCommentFromDB = db.session.scalars(
             db.select(Comment).filter(Comment.commenter_id == commenter_id).where(Comment.referral_id == referral_id).order_by(Comment.createdAt.desc())
@@ -70,6 +91,8 @@ def add_comment():
         return newCommentFromDB.to_dict()
     
     return {"error": comment_form.errors}, 400
+
+
 
 
 # * UPDATE A COMMENT
