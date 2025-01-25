@@ -10,7 +10,9 @@ import { FaMinusCircle } from "react-icons/fa";
 import SplashPageComponent from "../SplashPageComponent/SplashPageComponent";
 import MyShortlists from "../MyShortlists/MyShortlists";
 import MyListings_Calendar from "../MyListings_Calendar/MyListings_Calendar";
-import { getCommentThreads } from "../../redux/comments";
+import { getCommentThreads, 
+  getReceivedMsgsCount 
+} from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
 import MobileNavBtns from "../MobileNavBtnsComponent/MobileNavBtns"
@@ -70,22 +72,46 @@ const toggleFormView = () => {
   
 };
 
-// Periodically check for new messages for shortlist creators and referrals every 10 seconds
+const currentCommentThreads = useSelector(state => state.comments.comment_threads)
 
-const receivedMsgsCount = useSelector( state => state.comments.receivedMsgs)
+
+// Periodically check for new messages for shortlist creators and referrals every 10 seconds
 
 
 useEffect(()=>{
-  if(user && receivedMsgsCount > 0){
-
+  if(user){
+// as a referral, check if new messages have been received from a shortlist creator
     setInterval(() => {
-      dispatch(getCommentThreads(user.id))
-      dispatch(getReferrals(user.id))
-      console.log(">>> last messages check", new Date())
+
+      dispatch(getReceivedMsgsCount(user.id)).then( (receivedMsgsCount )=> {
+        
+        if (receivedMsgsCount > 0){
+          dispatch(getReferrals(user.id))
+          console.log(">>> last messages check", new Date())
+        }
+      })
+
     }, 10*1000);
   }
+}, [user, dispatch ])
 
-}, [user, dispatch, receivedMsgsCount])
+
+
+// as a shortlist creator, check if new messages have been received from a referral
+useEffect(()=>{
+ 
+  const threadHasComments = Object.keys(currentCommentThreads).length > 0
+  
+  if(user && threadHasComments){
+
+    setInterval(() => {
+      
+      dispatch(getCommentThreads(user.id))
+      
+    }, 10*1000);
+  }
+},[user, dispatch, currentCommentThreads])
+
 
 
   useEffect(()=>{},[shortlists_state])

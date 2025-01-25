@@ -34,11 +34,12 @@ def get_comments(id):
 
 
 # * GET CURRENT VALUE FOR CURRENT USER'S RECEIVED MESSAGES COUNT
-@comments_routes.route('/receivedmsgs', methods=['GET'])
+@comments_routes.route('/receivedmsgs/<int:id>', methods=['GET'])
 def received_msgs_count(id):
 
     current_user = User.query.get(id)
-    return current_user.receivedMsgs, 200
+    print(">>>receivedMsgs", current_user.receivedMsgs)
+    return {'receivedMsgsCount':current_user.receivedMsgs}, 200
 
 
 # * CREATE A NEW COMMENT
@@ -76,8 +77,6 @@ def add_comment():
             ).one()
 
             commentRecipient.receivedMsgs += 1
-
-            print(">>>received msgs", commentRecipient.first_name, ",", commentRecipient.receivedMsgs)
 
             db.session.commit()
 
