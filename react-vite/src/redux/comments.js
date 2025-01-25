@@ -62,15 +62,16 @@ THUNKS
 
 export const getReceivedMsgsCount = (id) => async (dispatch) => {
 
-const url = `/api/receivedmsgs/${id}`
+const url = `/api/comments/receivedmsgs/${id}`
 
 const response = await fetch(url)
 
 if(response.ok){
 
     const data = await response.json()
+    dispatch(updateReceivedMsgsCount(data.receivedMsgsCount))
 
-    dispatch(updateReceivedMsgsCount(data))
+    return data.receivedMsgsCount;
 }
 
 }

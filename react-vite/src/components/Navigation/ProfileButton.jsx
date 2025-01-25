@@ -42,9 +42,10 @@ function ProfileButton() {
   const logout = (e) => {
     e.preventDefault();
     dispatch(resetShortlistState())
-    dispatch(resetCommentsState())
-    dispatch(thunkLogout())
-    closeMenu();
+    .then(()=> dispatch(resetCommentsState()))
+    .then(()=> dispatch(thunkLogout()))
+    .then(()=> closeMenu())
+    
   };
 
   const showProfile = () =>{
