@@ -86,7 +86,7 @@ useEffect(()=>{
         
         if (receivedMsgsCount > 0){
           dispatch(getReferrals(user.id))
-          console.log(">>> last messages check", new Date())
+          // console.log(">>> last messages check", new Date())
         }
       })
 
@@ -97,6 +97,19 @@ useEffect(()=>{
 
 
 // as a shortlist creator, check if new messages have been received from a referral
+
+useEffect(()=>{
+
+if(user){
+
+  dispatch(getCommentThreads(user.id))
+
+}
+
+
+}, [dispatch, user])
+
+
 useEffect(()=>{
  
   const threadHasComments = Object.keys(currentCommentThreads).length > 0
