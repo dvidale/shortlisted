@@ -9,7 +9,7 @@ function Footer(){
         <>
         <div className='footer-wrapper'>
 
-        <p className='footer'>Shortlisted is an application developed by DeAndré Vidale.
+        <p className='footer'>Sign up for updates on Shortlisted at <a href="https://deandrevidale.com/shortlisted">DeAndreVidale.com/shortlisted</a>
         </p>
         <div className='footer'>
 
