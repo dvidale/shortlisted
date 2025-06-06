@@ -67,9 +67,9 @@ function LoginFormModal() {
     <>
     <div className="heading-and-form">
       <h1>Log In</h1>
-
       <form className='login-form' onSubmit={handleSubmit}>
         <div className="login-fields">
+{/* 
           <div className="field-and-error">
         <label>
           Email
@@ -103,7 +103,7 @@ function LoginFormModal() {
 </div>
 
       <div className="login-buttons">
-        <button className='login-btn' type="submit">Log In</button>
+        <button className='login-btn' type="submit">Log In</button> */}
         
 				<button
 					className='login-btn'
