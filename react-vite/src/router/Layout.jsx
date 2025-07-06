@@ -35,9 +35,8 @@ export default function Layout() {
         <div id='app-views-container'>
         {isLoaded && <Outlet />}
         </div>
-        {!isTabletOrMobile && 
         <Footer/>
-        }
+        
       
 
         <Modal />
