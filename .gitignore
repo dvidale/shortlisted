@@ -6,6 +6,9 @@ __pycache__/
 .vscode/
 __pycache__
 instance/dev.db
+node_modules
+dev.Dockerfile
+docker-compose.yml
 # comment these out if you're using dev containers or GH actions
 # # .github
 # .docker

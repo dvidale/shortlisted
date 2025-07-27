@@ -10,13 +10,18 @@ import { FaMinusCircle } from "react-icons/fa";
 import SplashPageComponent from "../SplashPageComponent/SplashPageComponent";
 import MyShortlists from "../MyShortlists/MyShortlists";
 import MyListings_Calendar from "../MyListings_Calendar/MyListings_Calendar";
-import { getCommentThreads } from "../../redux/comments";
+import { getCommentThreads, 
+  getReceivedMsgsCount 
+} from "../../redux/comments";
 import SingleShortlistView from "../SingleShortlistView/SingleShortlistView";
 import RecentActivityFeed from "../RecentActivityFeed/RecentActivityFeed";
 import MobileNavBtns from "../MobileNavBtnsComponent/MobileNavBtns"
 import BookingsPanel from "../MyListings_Calendar/BookingsPanel";
 import ProfileComponent from "../ProfileComponent/ProfileComponent";
+import ReferralShortlistView from "../ReferralShortlistView/ReferralShortlistView";
 import { PanelViews } from "../../context/PanelView";
+import MyListingsPanel from "../MyListings_Calendar/MyListingsPanel";
+import { getReferrals } from "../../redux/my-referrals";
 
 
 
@@ -42,31 +47,70 @@ function HomeView() {
 if(saved_shortlists && Object.keys(saved_shortlists).length > 0){
 newestIdx = Object.keys(saved_shortlists).reverse()[0]
 }
+
+const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
+const [editForm, setEditForm] = useState(false);
+const [toggleSymbol, setToggleSymbol] = useState(`+`);
+const [referralListIdx, setReferralListIdx ] = useState(null)
+
+
+
+const [isLoading, setIsLoading] = useState(false)
+
+
+
+const toggleFormView = () => {
+  setToggleSymbol(!toggleSymbol);
   
+  if(leftPanel === 'my-shortlists'){
+    setLeftPanel('shortlist-search')
+  }else{
+    setLeftPanel('my-shortlists')
+  }
+  
+  setCenterPanel('recent-activity')
+  
+};
 
-  const [shortlistIdx, setShortlistIdx] = useState(newestIdx || null);
-  const [editForm, setEditForm] = useState(false);
-  const [toggleSymbol, setToggleSymbol] = useState(`+`);
+const currentCommentThreads = useSelector(state => state.comments.comment_threads)
 
+
+// Periodically check for new messages for shortlist creators and referrals every 10 seconds
+
+useEffect(()=>{
+  if(user){
+// as a referral, check if new messages have been received from a shortlist creator
+    setInterval(() => {
+
+      dispatch(getReceivedMsgsCount(user.id)).then( (receivedMsgsCount )=> {
+        
+        if (receivedMsgsCount > 0){
+          dispatch(getReferrals(user.id))
+          console.log(">>> last messages check", new Date())
+        }
+      })
+
+    }, 10*1000);
+  }
+}, [user, dispatch ])
+
+
+
+// as a shortlist creator, check if new messages have been received from a referral
+useEffect(()=>{
  
-  const [isLoading, setIsLoading] = useState(false)
-
-
+  const threadHasComments = Object.keys(currentCommentThreads).length > 0
   
-  const toggleFormView = () => {
-    setToggleSymbol(!toggleSymbol);
+  if(user && threadHasComments){
 
-    if(leftPanel === 'my-shortlists'){
-      setLeftPanel('shortlist-search')
-    }else{
-      setLeftPanel('my-shortlists')
-    }
+    setInterval(() => {
+      
+      dispatch(getCommentThreads(user.id))
+      
+    }, 10*1000);
+  }
+},[user, dispatch, currentCommentThreads])
 
-    setCenterPanel('recent-activity')
-  
-  };
-
-  
 
 
   useEffect(()=>{},[shortlists_state])
@@ -178,6 +222,18 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
             >
               <RecentActivityFeed/>
             </div>
+
+           <div id="referral-shortlist-view"
+           className={"center-panel"}
+           style={{display: centerPanel === 'referral-shortlist' ? 'flex' : 'none'}}>
+            <ReferralShortlistView referralListIdx={referralListIdx}/>
+            </div> 
+
+            <div id='referral-listings-view'
+            className={'center-panel'}
+            style={{display: centerPanel === 'my-listings' ? 'flex' : 'none'}}>
+              <MyListingsPanel setReferralListIdx={setReferralListIdx}/>
+            </div>
          
             {isTabletOrMobile && centerPanel === 'calendar' &&
           <div>
@@ -185,13 +241,16 @@ newestIdx = Object.keys(saved_shortlists).reverse()[0]
           </div>
           }
 
+
+          <div id='user-profile'
+          className={"center-panel"}
+          style={{display: centerPanel === 'user-profile' ? 'flex' : 'none' }}>
+            <ProfileComponent user={user}/></div>
+
           <div id="my-listings-calendar-placeholder" className="right-panel">
-            <MyListings_Calendar />
+            <MyListings_Calendar setReferralListIdx={setReferralListIdx} />
           </div>
-
-          {isTabletOrMobile && centerPanel === 'profile' && <div>
-            <ProfileComponent user={user}/></div>}
-
+          
           {isTabletOrMobile && <div id="mobile-nav" className="mobile-nav-container">
             <MobileNavBtns/>
           </div>}

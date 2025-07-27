@@ -10,13 +10,15 @@ import imgReducer from "./img-test";
 import shortlistsReducer from "./shortlists";
 import commentsReducer from "./comments";
 import bookingsReducer from "./bookings";
+import myReferralsReducer from "./my-referrals";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   img:imgReducer,
   shortlists: shortlistsReducer,
   comments: commentsReducer,
-  bookings: bookingsReducer
+  bookings: bookingsReducer,
+  referrals: myReferralsReducer
 });
 
 let enhancer;

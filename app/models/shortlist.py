@@ -75,6 +75,7 @@ class Shortlist(db.Model):
     def single_view(self):
         return {
             "id": self.id,
+            "created_by_id": self.created_by_id,
             "title": self.title,
             "description": self.description,
             "industry_area": db.session.scalars(

@@ -9,7 +9,7 @@ import { useState } from "react";
 
 function ShortlistCommentsFeed({ shortlist }) {
 
-    const [currentReferral, setCurrentReferral ] = useState(null)
+  const [currentReferral, setCurrentReferral ] = useState(null)
 
   const { setModalContent } = useModal();
 

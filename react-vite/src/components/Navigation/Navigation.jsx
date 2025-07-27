@@ -32,7 +32,7 @@ function Navigation() {
        </>):(<>   
         <div className="landing-page-site-title">Shortlisted.</div>
        <div className="login-signup-homepage-btns">
-       <button className='front-login-signup-btn' onClick={handleLogin}>Login</button>   
+       <button className='front-login-signup-btn' onClick={handleLogin}>Demo Login</button>   
        {/* or   
        <button className='front-login-signup-btn' onClick={handleSignUp}>Sign Up</button> */}
        </div>

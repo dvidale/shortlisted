@@ -9,7 +9,7 @@ import MyListingsPanel from './MyListingsPanel'
 
 
 
-function MyListings_Calendar(){
+function MyListings_Calendar({setReferralListIdx}){
 
 const user = useSelector(state => state.session.user)
 const user_bookings = useSelector(state => state.bookings.user_bookings)
@@ -17,13 +17,13 @@ const user_bookings = useSelector(state => state.bookings.user_bookings)
 const dispatch = useDispatch()
 
 
-const bannerImgStyle = {
-    width: '100%',
-    backgroundImage: `url(${user.profile_img_url})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    position: 'relative', // Ensure the overlay is positioned correctly
-};
+// const bannerImgStyle = {
+//     width: '100%',
+//     backgroundImage: `url(${user.profile_img_url})`,
+//     backgroundSize: 'cover',
+//     backgroundPosition: 'center',
+//     position: 'relative', // Ensure the overlay is positioned correctly
+// };
 
 
 useEffect(()=>{
@@ -43,12 +43,12 @@ useEffect(()=>{
 
 {user.profile_img_url}/> */}
 
-<div className={'profile-img-container'} style={bannerImgStyle}> </div>
+{/* <div className={'profile-img-container'} style={bannerImgStyle}> </div> */}
 
 
 <h1>Me, Shortlisted</h1>
 
-<MyListingsPanel/>
+<MyListingsPanel setReferralListIdx={setReferralListIdx}/>
 </div>
       
     <BookingsPanel user_bookings={user_bookings}/>

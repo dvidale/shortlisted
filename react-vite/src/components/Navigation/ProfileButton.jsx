@@ -1,18 +1,23 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaUserCircle } from 'react-icons/fa';
+// import { FaUserCircle } from 'react-icons/fa';
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import { resetShortlistState } from "../../redux/shortlists";
 import { resetCommentsState } from "../../redux/comments";
+import { PanelViews } from "../../context/PanelView";
+import { resetReferralThreads } from "../../redux/my-referrals";
 
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
+
+  const { setCenterPanel } = useContext(PanelViews)
+
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -38,15 +43,22 @@ function ProfileButton() {
   const logout = (e) => {
     e.preventDefault();
     dispatch(resetShortlistState())
-    dispatch(resetCommentsState())
-    dispatch(thunkLogout())
-    closeMenu();
+    .then(()=> dispatch(resetCommentsState()))
+    .then(()=> dispatch(resetReferralThreads()))
+    .then(()=> dispatch(thunkLogout()))
+    .then(()=> closeMenu())
+    
   };
+
+  const showProfile = () =>{
+    setCenterPanel('user-profile')
+    closeMenu();
+  }
 
   return (
     <>
       <button onClick={toggleMenu}>
-        <FaUserCircle />
+        <img className="user-avatar" src={user.profile_img_url}/> <div> My Account</div>
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
@@ -54,6 +66,7 @@ function ProfileButton() {
             <>
               <li>Hello, {user.first_name}.</li>
               <li>{user.email}</li>
+              <li><button onClick={ () => showProfile() }> View Profile </button></li>
               <li>
                 <button onClick={logout}>Log Out</button>
               </li>
