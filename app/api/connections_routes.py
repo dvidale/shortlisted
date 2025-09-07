@@ -1,3 +1,5 @@
+import re
+from unittest import result
 from flask import Blueprint, request
 from app.forms import new_connection_form
 from app.models import User, db, Connection
@@ -5,6 +7,7 @@ from app.forms.search_connections_form import SearchConnectionsForm
 import json
 from dateutil import parser
 from app.forms.new_connection_form import NewConnectionsForm
+from sqlalchemy import text
 
 connections_routes = Blueprint("connections", __name__)
 
@@ -36,6 +39,35 @@ def search_connections(id):
     # end_date = searchForm.data['end_date']
 
     if searchForm.validate_on_submit():
+
+        sql = text(f"""SELECT users.id, users.first_name, users.last_name, users.email, users.phone_number, job_titles.job_title, industry_areas.industry_area,locations.city, bookings.start_date, bookings.end_date, users.profile_img_url
+                   FROM users
+                   JOIN connections on connections.connected_id = users.id 
+                   JOIN user_job_titles ON user_job_titles.user_id = users.id 
+                   JOIN job_titles ON job_titles.id = user_job_titles.job_title_id 
+                   JOIN user_industries ON user_industries.user_id = users.id 
+                   JOIN industry_areas ON industry_areas.id = user_industries.industry_area_id
+                   JOIN user_locations ON user_locations.user_id = users.id 
+                   JOIN locations ON locations.id = user_locations.location_id
+                   JOIN bookings ON bookings.user_id = users.id
+                   WHERE (connections.user_id = {id} OR connections.connected_id = {id}) 
+                   AND job_titles.job_title = '{job_title[0]}' 
+                   AND user_industries.industry_area_id = 2 
+                   AND user_locations.location_id = 2
+                   AND NOT users.id = 1""")
+
+        result = db.session.execute(sql)
+        query_results = result.all()
+        """
+        query results output:
+        [(41, 'Elena', 'Santos', 'https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/seed-profile-images/lat-w/Slice+2.jpg'), (43, 'Gabriela', 'Uribe', 'https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/seed-profile-images/lat-w/Slice+7.jpg')]
+        """
+        print(">>>>>> query_results:", query_results)
+        search_results = [{"id": user_id, "first_name": first_name, "last_name": last_name, "profile_img_url": profile_img_url} for user_id, first_name, last_name, profile_img_url in query_results]
+        
+        return search_results, 200
+        """
+        
         user = User.query.get(id)
         user_network = user.my_connections()
         # user_network are all the users the current user is connected to, whether by invitation sent or received
@@ -83,12 +115,15 @@ def search_connections(id):
         if len(search_results) == 0:
             return {"errors": "Sorry, none of your connections match this search."}, 404
 
+        
         return search_results, 200
         # ? Moved availability check to frontend for easier date object comparisons
 
     # print(">>>>>0form errors:", searchForm.errors)
+    
     return searchForm.errors, 400
-
+    """
+    
 
 # * CREATE CONNECTION
 @connections_routes.route("/new", methods=["POST"])
