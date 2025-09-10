@@ -2,7 +2,8 @@ import re
 from unittest import result
 from flask import Blueprint, g, request
 from app.forms import new_connection_form
-from app.models import User, db, Connection, add_prefix_for_prod
+from app.models import User, db, Connection
+from app.models.db import add_prefix_for_prod
 from app.forms.search_connections_form import SearchConnectionsForm
 import json
 from dateutil import parser
