@@ -1,10 +1,13 @@
-from flask import Blueprint, request
+import re
+from unittest import result
+from flask import Blueprint, g, request
 from app.forms import new_connection_form
 from app.models import User, db, Connection
 from app.forms.search_connections_form import SearchConnectionsForm
 import json
 from dateutil import parser
 from app.forms.new_connection_form import NewConnectionsForm
+from sqlalchemy import text
 
 connections_routes = Blueprint("connections", __name__)
 
@@ -36,6 +39,69 @@ def search_connections(id):
     # end_date = searchForm.data['end_date']
 
     if searchForm.validate_on_submit():
+
+        if genre[0] == "None":
+            sql = text(f"""SELECT users.id
+                    FROM users
+                    JOIN connections on connections.connected_id = users.id 
+                    JOIN user_job_titles ON user_job_titles.user_id = users.id 
+                    JOIN job_titles ON job_titles.id = user_job_titles.job_title_id 
+                    JOIN user_industries ON user_industries.user_id = users.id 
+                    JOIN industry_areas ON industry_areas.id = user_industries.industry_area_id
+                    JOIN user_locations ON user_locations.user_id = users.id 
+                    JOIN locations ON locations.id = user_locations.location_id
+                    WHERE (connections.user_id = {id} OR connections.connected_id = {id}) 
+                    AND job_titles.job_title = '{job_title[0]}' 
+                    AND industry_areas.industry_area = '{industry_area[0]}' 
+                    AND locations.city = '{location[0]}'
+                    AND NOT users.id = {id}""")
+        else:
+            sql = text(f"""SELECT users.id
+                    FROM users
+                    JOIN connections on connections.connected_id = users.id 
+                    JOIN user_job_titles ON user_job_titles.user_id = users.id 
+                    JOIN job_titles ON job_titles.id = user_job_titles.job_title_id 
+                    JOIN user_industries ON user_industries.user_id = users.id 
+                    JOIN industry_areas ON industry_areas.id = user_industries.industry_area_id
+                    JOIN user_locations ON user_locations.user_id = users.id 
+                    JOIN locations ON locations.id = user_locations.location_id
+                    JOIN user_genres ON user_genres.user_id = users.id
+                    JOIN genres ON genres.id = user_genres.genre_id
+                    WHERE (connections.user_id = {id} OR connections.connected_id = {id}) 
+                    AND job_titles.job_title = '{job_title[0]}' 
+                    AND industry_areas.industry_area = '{industry_area[0]}' 
+                    AND locations.city = '{location[0]}'
+                    AND (genres.genre_name = '{genre[0]}')
+                    AND NOT users.id = {id}""")
+
+        result = db.session.execute(sql)
+        query_results = result.all()
+        """
+        query results output:
+        [(41, 'Elena', 'Santos', 'https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/seed-profile-images/lat-w/Slice+2.jpg'), (43, 'Gabriela', 'Uribe', 'https://aa-portfolio-08-2024.s3.us-east-2.amazonaws.com/shortlisted-app/seed-profile-images/lat-w/Slice+7.jpg')]
+        """
+
+        """
+        search_results = [{"id": user_id, "first_name": first_name, "last_name": last_name, "profile_img_url": profile_img_url} for user_id, first_name, last_name, profile_img_url in query_results]
+        """
+        search_results = []
+
+        for idx in query_results:
+            user = User.query.get(idx[0])
+            search_results.append({
+                "id": user.id,
+                "first_name": user.first_name,
+                "last_name": user.last_name,
+                "profile_img_url": user.profile_img_url,
+                "bookings": [(booking.start_date, booking.end_date) for booking in user.bookings]
+            })
+
+        if len(search_results) == 0:
+            return {"errors": "Sorry, none of your connections match this search."}, 404
+        
+        return search_results, 200
+        """
+        
         user = User.query.get(id)
         user_network = user.my_connections()
         # user_network are all the users the current user is connected to, whether by invitation sent or received
@@ -83,12 +149,15 @@ def search_connections(id):
         if len(search_results) == 0:
             return {"errors": "Sorry, none of your connections match this search."}, 404
 
+        
         return search_results, 200
         # ? Moved availability check to frontend for easier date object comparisons
 
     # print(">>>>>0form errors:", searchForm.errors)
+    
     return searchForm.errors, 400
-
+    """
+    
 
 # * CREATE CONNECTION
 @connections_routes.route("/new", methods=["POST"])
