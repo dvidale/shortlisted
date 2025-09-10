@@ -2,7 +2,7 @@ import re
 from unittest import result
 from flask import Blueprint, g, request
 from app.forms import new_connection_form
-from app.models import User, db, Connection
+from app.models import User, db, Connection, add_prefix_for_prod
 from app.forms.search_connections_form import SearchConnectionsForm
 import json
 from dateutil import parser
@@ -42,7 +42,7 @@ def search_connections(id):
 
         if genre[0] == "None":
             sql = text(f"""SELECT users.id
-                    FROM users
+                    FROM {add_prefix_for_prod('users')}
                     JOIN connections on connections.connected_id = users.id 
                     JOIN user_job_titles ON user_job_titles.user_id = users.id 
                     JOIN job_titles ON job_titles.id = user_job_titles.job_title_id 
