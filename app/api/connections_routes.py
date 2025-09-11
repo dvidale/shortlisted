@@ -44,13 +44,13 @@ def search_connections(id):
         if genre[0] == "None":
             sql = text(f"""SELECT users.id
                     FROM {add_prefix_for_prod('users')}
-                    JOIN connections on connections.connected_id = users.id 
-                    JOIN user_job_titles ON user_job_titles.user_id = users.id 
-                    JOIN job_titles ON job_titles.id = user_job_titles.job_title_id 
-                    JOIN user_industries ON user_industries.user_id = users.id 
-                    JOIN industry_areas ON industry_areas.id = user_industries.industry_area_id
-                    JOIN user_locations ON user_locations.user_id = users.id 
-                    JOIN locations ON locations.id = user_locations.location_id
+                    JOIN {add_prefix_for_prod('connections')} on connections.connected_id = users.id 
+                    JOIN {add_prefix_for_prod('user_job_titles')} ON user_job_titles.user_id = users.id 
+                    JOIN {add_prefix_for_prod('job_titles')} ON job_titles.id = user_job_titles.job_title_id 
+                    JOIN {add_prefix_for_prod('user_industries')} ON user_industries.user_id = users.id 
+                    JOIN {add_prefix_for_prod('industry_areas')} ON industry_areas.id = user_industries.industry_area_id
+                    JOIN {add_prefix_for_prod('user_locations')} ON user_locations.user_id = users.id 
+                    JOIN {add_prefix_for_prod('locations')} ON locations.id = user_locations.location_id
                     WHERE (connections.user_id = {id} OR connections.connected_id = {id}) 
                     AND job_titles.job_title = '{job_title[0]}' 
                     AND industry_areas.industry_area = '{industry_area[0]}' 
@@ -58,16 +58,16 @@ def search_connections(id):
                     AND NOT users.id = {id}""")
         else:
             sql = text(f"""SELECT users.id
-                    FROM users
-                    JOIN connections on connections.connected_id = users.id 
-                    JOIN user_job_titles ON user_job_titles.user_id = users.id 
-                    JOIN job_titles ON job_titles.id = user_job_titles.job_title_id 
-                    JOIN user_industries ON user_industries.user_id = users.id 
-                    JOIN industry_areas ON industry_areas.id = user_industries.industry_area_id
-                    JOIN user_locations ON user_locations.user_id = users.id 
-                    JOIN locations ON locations.id = user_locations.location_id
-                    JOIN user_genres ON user_genres.user_id = users.id
-                    JOIN genres ON genres.id = user_genres.genre_id
+                    FROM {add_prefix_for_prod('users')}
+                    JOIN {add_prefix_for_prod('connections')} on connections.connected_id = users.id 
+                    JOIN {add_prefix_for_prod('user_job_titles')} ON user_job_titles.user_id = users.id 
+                    JOIN {add_prefix_for_prod('job_titles')}  ON job_titles.id = user_job_titles.job_title_id 
+                    JOIN {add_prefix_for_prod('user_industries')}  ON user_industries.user_id = users.id 
+                    JOIN {add_prefix_for_prod('industry_areas')}  ON industry_areas.id = user_industries.industry_area_id
+                    JOIN {add_prefix_for_prod('user_locations')}  ON user_locations.user_id = users.id 
+                    JOIN {add_prefix_for_prod('locations')}  ON locations.id = user_locations.location_id
+                    JOIN {add_prefix_for_prod('user_genres')} ON user_genres.user_id = users.id
+                    JOIN {add_prefix_for_prod('genres')} ON genres.id = user_genres.genre_id
                     WHERE (connections.user_id = {id} OR connections.connected_id = {id}) 
                     AND job_titles.job_title = '{job_title[0]}' 
                     AND industry_areas.industry_area = '{industry_area[0]}' 
