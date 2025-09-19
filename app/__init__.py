@@ -14,6 +14,7 @@ from .api.connections_routes import connections_routes
 from .api.shortlists_routes import shortlists_routes
 from .api.comments_routes import comments_routes
 from .api.bookings_routes import bookings_routes
+from .api.email_routes import email_routes
 
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
@@ -39,6 +40,7 @@ app.register_blueprint(connections_routes, url_prefix='/api/connections')
 app.register_blueprint(shortlists_routes, url_prefix='/api/shortlists')
 app.register_blueprint(comments_routes, url_prefix='/api/comments')
 app.register_blueprint(bookings_routes, url_prefix='/api/bookings')
+app.register_blueprint(email_routes, url_prefix='/api/emails')
 
 db.init_app(app)
 Migrate(app, db, render_as_batch=True)
