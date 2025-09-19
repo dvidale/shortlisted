@@ -4,16 +4,17 @@ import "../SingleShortlistView/single-shortlist.css";
 import { useSelector } from "react-redux";
 import CommentForm from "../CommentFormComponent/CommentForm";
 import DeleteCommentModal from "../DeleteCommentModal/DeleteCommentModal";
+
 import { VscAccount } from "react-icons/vsc";
 import { useModal } from "../../context/Modal";
 import CommentEditorModal from "../CommentEditorModal/CommentEditorModal";
 
 
 function CommentsTile({ shortlist, referralIdx }) {
+
   const current_thread = useSelector(
     (state) => state.comments.comment_threads[referralIdx]
   );
-// *TODO Try adding a custom hook in here to fetch new comments on an interval
 
 
 
@@ -43,6 +44,8 @@ const commentEditor = (currentComment, commentId) => {
     current_thread_sorted = Object.values(current_thread).sort(
       (comment) => comment["createdAt"]
     );
+
+    
   }
 
 
