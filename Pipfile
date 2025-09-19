@@ -31,6 +31,7 @@ boto3 = "*"
 pytz = "==2024.1"
 email-validator = "==2.2.0"
 psycopg2 = "*"
+resend = "*"
 
 [dev-packages]
 

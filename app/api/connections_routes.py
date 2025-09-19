@@ -188,9 +188,8 @@ def create_connection():
             db.session.add(newConnection)
             db.session.commit()
             return {"message": "connection created successfully"}, 200
-        
+
         except:
             return {"error": "There was a problem creating the connection"}, 500
-
 
     return {"error": new_connection_form.errors}, 400
