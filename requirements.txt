@@ -27,3 +27,4 @@ wtforms==3.0.1; python_version >= '3.7'
 zipp==3.17.0; python_version >= '3.8'
 boto3 # If using AWS
 email_validator==2.2.0
+resend >= '2.13.1'
