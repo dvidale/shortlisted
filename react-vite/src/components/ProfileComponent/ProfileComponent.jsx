@@ -9,6 +9,7 @@ import { useDispatch} from 'react-redux';
 
 function ProfileComponent({user}){
 
+    const dispatch = useDispatch();
     const isTabletOrMobile = useMediaQuery({query: '(max-width: 1100px)'})
 
     const bannerImgStyle = {
@@ -19,7 +20,15 @@ function ProfileComponent({user}){
         position: 'relative', // Ensure the overlay is positioned correctly
     };
 
+    const logout = (e) => {
+    e.preventDefault();
+    dispatch(resetShortlistState())
+    .then(()=> dispatch(resetCommentsState()))
+    .then(()=> dispatch(resetReferralThreads()))
+    .then(()=> dispatch(thunkLogout()))
+    .then(()=> closeMenu())
     
+  };
 
    
 
@@ -56,7 +65,7 @@ function ProfileComponent({user}){
         <h3 id='links-title' className='profile-heading'>Links:</h3>
         <div>Resume | IMDB | Portfolio</div>
         
-        {isTabletOrMobile && <div>hello</div>}
+        {isTabletOrMobile && <div><button onClick={logout}>Log Out</button></div>}
         </div>
         
     )
