@@ -1,7 +1,16 @@
 import './profile-panel.css'
+import {useMediaQuery} from 'react-responsive';
+import { resetShortlistState } from '../../redux/shortlists';
+import { resetCommentsState } from '../../redux/comments';
+import { resetReferralThreads } from '../../redux/my-referrals';
+import { thunkLogout } from '../../redux/session';
+import { useDispatch} from 'react-redux';
 
 
 function ProfileComponent({user}){
+
+    const dispatch = useDispatch();
+    const isTabletOrMobile = useMediaQuery({query: '(max-width: 1100px)'})
 
     const bannerImgStyle = {
         width: '100%',
@@ -11,15 +20,25 @@ function ProfileComponent({user}){
         position: 'relative', // Ensure the overlay is positioned correctly
     };
 
+    const logout = (e) => {
+    e.preventDefault();
+    dispatch(resetShortlistState())
+    .then(()=> dispatch(resetCommentsState()))
+    .then(()=> dispatch(resetReferralThreads()))
+    .then(()=> dispatch(thunkLogout()))
+    .then(()=> closeMenu())
+    
+  };
+
    
 
     return (
         <div id='profile-container'>
-        <div className={'profile-img-container'} style={bannerImgStyle}> </div>
-        <div id='user-name-and-title'>
+            <div className={'profile-img-container'} style={bannerImgStyle}> </div>
+            <div id='user-name-and-title'>
 
-        <h1 id="user-name" className='profile-heading'>
-        {user.first_name} {user.last_name}
+            <h1 id="user-name" className='profile-heading'>
+             {user.first_name} {user.last_name}
         </h1>
         
         <div id="user-job-titles">
@@ -45,11 +64,10 @@ function ProfileComponent({user}){
 
         <h3 id='links-title' className='profile-heading'>Links:</h3>
         <div>Resume | IMDB | Portfolio</div>
-
-  
-
         
+        {isTabletOrMobile && <div><button onClick={logout}>Log Out</button></div>}
         </div>
+        
     )
 }
 
