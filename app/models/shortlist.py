@@ -98,7 +98,8 @@ class Shortlist(db.Model):
             'referral_name':[(user.first_name, user.last_name) for user in self.shortlist_referrals],
             'referral_idxs':db.session.scalars(
                 db.select(Referral.id).where(Referral.shortlist_id == self.id)
-            ).all()
+            ).all(),
+            'referral_photos': [user.profile_img_url for user in self.shortlist_referrals]
             
             
         }

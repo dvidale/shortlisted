@@ -1,12 +1,12 @@
 import { VscAccount } from "react-icons/vsc";
 import { FaRegComments } from "react-icons/fa";
 
-function CommentThreadButton({fullName}){
+function CommentThreadButton({fullName, referral_photo_url}){
 
 
     return(
 <>
-<span className='avatar'><VscAccount /> </span>
+{referral_photo_url ? <img className='user-avatar' src={referral_photo_url} alt={<VscAccount />} /> : <span className="user-avatar-fallback"><VscAccount /></span>}
 <span className='referral-fullName'>{fullName}</span>
 <FaRegComments />
 </>

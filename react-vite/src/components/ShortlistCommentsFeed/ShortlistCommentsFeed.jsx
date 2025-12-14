@@ -53,12 +53,11 @@ const toggleOpenThread = (clickedIdx) =>{
  
       {/* For every referral, return a comments tile */}
       {Object.keys(referralInfoObj).length > 0 &&
-        Object.entries(referralInfoObj).map(([referralIdx, fullName]) => {
+        Object.entries(referralInfoObj).map(([referralIdx, fullName, photo_url]) => {
           return (
             <div key={referralIdx} className="comment-tile">
               <div className="comment-thread-btn" onClick={()=> toggleOpenThread(referralIdx)} >
-                <CommentThreadButton fullName={fullName} />
-
+                <CommentThreadButton fullName={fullName} referral_photo_url={photo_url} />
               
                   <button
                     className="delete-referral-btn"
