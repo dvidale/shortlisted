@@ -95,7 +95,7 @@ class Shortlist(db.Model):
             "location": db.session.scalars(
                 db.select(Location.city).where(Location.id == self.location_id)
             ).first(),
-            'referral_name':[(user.first_name, user.last_name) for user in self.shortlist_referrals],
+            'referral_names':[(user.first_name, user.last_name) for user in self.shortlist_referrals],
             'referral_idxs':db.session.scalars(
                 db.select(Referral.id).where(Referral.shortlist_id == self.id)
             ).all(),
