@@ -36,9 +36,9 @@ const toggleOpenThread = (clickedIdx) =>{
   const referralInfoObj = {};
   let i = 0;
 
-  for (let name of shortlist.referral_name) {
+  for (let name of shortlist.referral_names) {
     const referral_id = shortlist.referral_idxs[i];
-    referralInfoObj[referral_id] = `${name[0]} ${name[1]}`;
+    referralInfoObj[referral_id] = [[`${name[0]} ${name[1]}`], [shortlist.referral_photos[i]]];
     i++;
   }
 
@@ -53,12 +53,13 @@ const toggleOpenThread = (clickedIdx) =>{
  
       {/* For every referral, return a comments tile */}
       {Object.keys(referralInfoObj).length > 0 &&
-        Object.entries(referralInfoObj).map(([referralIdx, fullName]) => {
+        Object.entries(referralInfoObj).map(([referralIdx, name_photo_pair]) => {
+          const fullName = name_photo_pair[0][0];
+          const photo_url = name_photo_pair[1][0];
           return (
             <div key={referralIdx} className="comment-tile">
               <div className="comment-thread-btn" onClick={()=> toggleOpenThread(referralIdx)} >
-                <CommentThreadButton fullName={fullName} />
-
+                <CommentThreadButton fullName={fullName} referral_photo_url={photo_url} />
               
                   <button
                     className="delete-referral-btn"
