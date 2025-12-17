@@ -394,12 +394,14 @@ align-self: flex-start;
 .footer-wrapper{
    width: 100%;
    padding: 0px 0px;
+ 
 }
 
 .footer{
     text-align: center;
     color: var(--light-text);
     margin-bottom: 10px;
+    border: 1px solid yellowgreen
 }
 
 .footer a{
