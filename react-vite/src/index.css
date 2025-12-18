@@ -398,10 +398,13 @@ align-self: flex-start;
 }
 
 .footer{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     color: var(--light-text);
     margin-bottom: 10px;
-    border: 1px solid yellowgreen
 }
 
 .footer a{
@@ -414,6 +417,7 @@ align-self: flex-start;
     border-radius: 10px;
     padding: 0px 3px 0px 3px;
 }
+
 
 .mobile-nav-btns, .mobile-nav-container{
     display: none;

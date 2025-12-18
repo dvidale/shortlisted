@@ -12,19 +12,19 @@ function Footer() {
         <div className="footer">
           <div >
             Join the Beta Waitlist
-            <div>
+            <div id="beta-signup-form">
               <HubspotBetaMailingListComponent
                 portalId="44563358"
                 formId="83586d74-fd5f-4874-a100-4deaecf185a4"
               />
             </div>
           </div>
-          <a href="https://github.com/dvidale">
+          {/* <a href="https://github.com/dvidale">
             Github <FaGithub />
           </a>
           <a href="https://www.linkedin.com/in/deandrevidale">
             LinkedIn <FaLinkedin />
-          </a>
+          </a> */}
         </div>
       </div>
     </>
