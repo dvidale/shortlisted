@@ -4,6 +4,8 @@ import "./Navigation.css";
 import { useModal } from "../../context/Modal";
 import { useSelector } from "react-redux";
 import LoginFormModal from "../LoginFormModal";
+import TypeformBetaSignupComponent from "../TypeformForms/TypeformBetaSignup/TypeformBetaSignupComponent";
+import "../TypeformForms/TypeformBetaSignup/typeform-beta-signup.css";
 
 // import SignupFormModal from "../SignupFormModal";
 
@@ -28,9 +30,14 @@ function Navigation() {
  
     <div className="navigation-bar">
     
-      { user ? (<>     
-
+      { user ? (<>  
+      <div className='typeform-button-wrapper'>
+<TypeformBetaSignupComponent typeformId="bvWLgIBe" />
+        </div>   
        </>):(<>   
+       <div className='typeform-button-wrapper'>
+<TypeformBetaSignupComponent typeformId="bvWLgIBe" />
+        </div>
         <div className="landing-page-site-title">Shortlisted.</div>
        <div className="login-signup-homepage-btns">
        <button className='front-login-signup-btn' onClick={handleLogin}>Demo Login</button>   
