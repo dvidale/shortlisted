@@ -20,6 +20,7 @@ import ReferralShortlistView from "../ReferralShortlistView/ReferralShortlistVie
 import { PanelViews } from "../../context/PanelView";
 import MyListingsPanel from "../MyListings_Calendar/MyListingsPanel";
 import { getReferrals } from "../../redux/my-referrals";
+import MobileSplashPageComponent from "../SplashPageComponent/MobileSplashPageComponent";
 
 // TODO: Write all labels to match their element ids
 function HomeView() {
@@ -241,7 +242,8 @@ function HomeView() {
           )}
         </>
       ) : (
-        <SplashPageComponent />
+
+        isTabletOrMobile ? <MobileSplashPageComponent /> : <SplashPageComponent />
       )}
     </>
   );

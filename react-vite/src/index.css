@@ -457,6 +457,8 @@ align-self: flex-start;
    
 }
 
+
+
 .mobile-nav-container{
     position:fixed;
     bottom: 0;
@@ -497,7 +499,24 @@ align-self: flex-start;
         /* position: relative; */ 
     }
 
+   .mobile-splash-container{
    
+display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    
+   }
+
+   .mobile-splash-img{
+   margin: 20px
+   }
+
+   .mobile-splash-text{
+    text-align: center;
+   }
 
     .splash-text{
 
