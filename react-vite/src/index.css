@@ -464,16 +464,22 @@ align-self: flex-start;
     display:flex;
     flex-direction: row;
     justify-content: space-around;
-   
-    height: 50px;
+    background-color: var(--light-bg);
+    height: 30px;
     width: 100%;
-    /* border: 2px dotted yellowgreen; */
 }
 
+.mbl-btns-row{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    background-color: var(--light-bg);
+    /* border: 2px solid white; */
+}
 .mbl-btns{
     color:var(--dark-text);
-    background-color: var(--light-bg);
-    border-left: var(--dark-border);
+    background-color: none;
     flex-grow: 1;
     padding:5px;
     cursor: pointer;

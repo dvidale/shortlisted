@@ -16,11 +16,13 @@ const {setCenterPanel} = useContext(PanelViews)
 
     return(
         <>
+        
         <div className="mbl-btns" onClick={ () => setCenterPanel('shortlist-search')}> New Shortlist</div>
         <div className="mbl-btns" onClick={() => setCenterPanel('single-shortlist')}> My Shortlists </div>
         <div className="mbl-btns" onClick={() => setCenterPanel('user-profile')}>  Profile </div>
         <div className="mbl-btns" onClick={() => setCenterPanel('my-listings')}> Messages </div>
         <div className="mbl-btns" onClick={() => setCenterPanel('calendar')}> Calendar </div>
+        
 
         </>
 
