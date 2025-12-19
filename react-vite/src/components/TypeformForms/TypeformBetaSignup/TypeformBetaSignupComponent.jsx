@@ -5,8 +5,11 @@ function TypeformBetaSignupComponent({typeformId}) {
     <div className="typeform-beta-signup-component">
       <PopupButton
         id={typeformId}
-        className="typeform-button"
-        style={{ fontSize: 20 }}
+        className="typeform-button front-login-signup-btn"
+        style={{ 
+          fontSize: 20, 
+          border: "2px solid white",
+          boxShadow: "0 0 10px gold, 0 0 20px gold, 0 0 30px gold" }}
         size={60}
       >
         Sign Up for Beta

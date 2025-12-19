@@ -38,9 +38,11 @@ function Navigation() {
        <div className='typeform-button-wrapper'>
 <TypeformBetaSignupComponent typeformId="bvWLgIBe" />
         </div>
+        <div className='site-title-and-login-signup-btns'>
         <div className="landing-page-site-title">Shortlisted.</div>
        <div className="login-signup-homepage-btns">
        <button className='front-login-signup-btn' onClick={handleLogin}>Demo Login</button>   
+          </div>
        {/* or   
        <button className='front-login-signup-btn' onClick={handleSignUp}>Sign Up</button> */}
        </div>
