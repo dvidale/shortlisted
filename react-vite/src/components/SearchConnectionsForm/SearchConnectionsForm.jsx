@@ -91,12 +91,12 @@ function SearchConnectionsForm({ setIsLoading, isLoading, toggleSymbol, setToggl
             setIsLoading(false)
             setErrors(serverError)
             
-            setCenterPanel('recent-activity')
+            isTabletOrMobile ? setCenterPanel('shortlist-search') : setCenterPanel('recent-activity')
         }else{
             if(isTabletOrMobile){
                 setToggleSymbol(!toggleSymbol)
             }
-            // !BUG - the mobile view search submission flickers at the transition to the search results panel. Might b mor prevalent on the production server
+            // !BUG - the mobile view search submission flickers at the transition to the search results panel. Might be more prevalent on the production server
             setIsLoading(false)
             
             setCenterPanel('search-results')    
